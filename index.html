@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>アートメイクまなみ | ゆみこ皮フ科クリニック予約フォーム</title>
+
+<meta name="theme-color" content="#C68F5B">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="top-bar">
+
+<div class="top-bar-inner">
+
+<h1>アートメイクまなみ予約システム</h1>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<img src="images/header.png" alt="アートメイクまなみ">
+
+</section>
+
+<main class="container">
+
+<section class="card title-card">
+
+    <h2 class="main-title">
+
+        アートメイクまなみ | ゆみこ皮フ科クリニック
+
+    </h2>
+
+    <p class="sub-title">
+
+        RESERVATION
+
+    </p>
+
+</section>
+
+<section class="card notice">
+
+<h3>ご予約前にご確認ください</h3>
+
+<div class="notice-box">
+
+<h4>▶ アートメイクをご希望の方</h4>
+
+<p>
+
+令和8年4月以降に当院でアートメイク施術歴がある方は「再診」を選択してください。
+
+</p>
+
+</div>
+
+<div class="notice-box">
+
+<h4>▶ ご予約変更・キャンセル</h4>
+
+<p>
+
+変更・キャンセルはLINEトークよりお願いいたします。
+
+</p>
+
+</div>
+
+</section>
+
+<section class="card">
+
+<h3>施術メニュー（最大2つ）</h3>
+
+<p class="caption">
+ご希望のメニューを選択してください。
+</p>
+
+<p class="price-note">
+※初回・2回目・メンテナンス料金などの詳細は、LINEメニューの「料金表」をご確認ください。
+</p>
+
+<div class="menu-list">
+
+<label class="menu-item">
+
+<input type="checkbox" name="menu" value="眉">
+
+<span>眉</span>
+
+</label>
+
+<label class="menu-item">
+
+<input type="checkbox" name="menu" value="アイライン上">
+
+<span>アイライン上</span>
+
+</label>
+
+<label class="menu-item">
+
+<input type="checkbox" name="menu" value="アイライン下">
+
+<span>アイライン下</span>
+
+</label>
+
+<label class="menu-item">
+
+<input type="checkbox" name="menu" value="アイライン上下セット">
+
+<span>アイライン上下セット</span>
+
+</label>
+
+<label class="menu-item">
+
+<input type="checkbox" name="menu" value="ヘアライン（M字 or 分け目）">
+
+<span>ヘアライン（M字 or 分け目）</span>
+
+</label>
+
+<label class="menu-item">
+
+<input type="checkbox" name="menu" value="ヘアライン全体">
+
+<span>ヘアライン全体</span>
+
+</label>
+
+</div>
+
+</section>
+
+<section class="card">
+
+<h3>初診・再診</h3>
+
+<div class="visit-type">
+
+<label>
+
+<input type="radio" name="visit" value="初診">
+
+初診
+
+</label>
+
+<label>
+
+<input type="radio" name="visit" value="再診">
+
+再診
+
+</label>
+
+</div>
+
+</section>
+
+<section class="card">
+
+    <button id="nextButton">
+
+        予約に進む
+
+    </button>
+
+</section>
+
+<!-- STEP2 カレンダー -->
+
+<section class="card" id="calendarSection" style="display:none;">
+
+    <h3>予約日時</h3>
+
+    <p class="caption">
+
+        ご希望の日付を選択してください。
+
+    </p>
+
+    <div class="calendar-header">
+
+        <button type="button" id="prevMonth">
+
+            ←
+
+        </button>
+
+        <h4 id="calendarTitle"></h4>
+
+        <button type="button" id="nextMonth">
+
+            →
+
+        </button>
+
+    </div>
+
+    <div id="calendar"></div>
+
+    <div id="timeArea"></div>
+
+</section>
+
+<!-- STEP3 お客様情報 -->
+
+<section class="card" id="customerSection" style="display:none;">
+
+    <h3>お客様情報</h3>
+
+    <div id="customerForm"></div>
+
+</section>
+
+<!-- STEP4 確認 -->
+
+<section class="card" id="confirmSection" style="display:none;">
+
+    <h3>予約内容確認</h3>
+
+    <div id="confirmArea"></div>
+
+</section>
+
+</main>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script src="script.js"></script>
+<script src="calendar.js"></script>
+
+</body>
+
+</html>

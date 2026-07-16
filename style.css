@@ -1,0 +1,524 @@
+/* ==========================================
+   RESET
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:#F8F6F3;
+
+    color:#4A403A;
+
+    font-family:
+    "Hiragino Mincho ProN",
+    "Yu Mincho",
+    serif;
+
+    line-height:1.8;
+
+}
+
+/* ==========================================
+   TOP BAR
+========================================== */
+
+.top-bar{
+
+    background:#C68F5B;
+
+    color:#fff;
+
+    padding:16px;
+
+    text-align:center;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+
+}
+
+.top-bar h1{
+
+    font-size:22px;
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   HERO
+========================================== */
+
+.hero img{
+
+    width:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+}
+
+/* ==========================================
+   CONTAINER
+========================================== */
+
+.container{
+
+    width:92%;
+
+    max-width:650px;
+
+    margin:30px auto;
+
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    margin-bottom:24px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.card h2{
+
+    font-size:30px;
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+}
+
+.clinic-name{
+
+    text-align:center;
+
+    color:#8B735F;
+
+    margin-bottom:8px;
+
+}
+
+.page-title{
+
+    text-align:center;
+
+    font-size:18px;
+
+    letter-spacing:2px;
+
+}
+
+/* ==========================================
+   NOTICE
+========================================== */
+
+.notice h3{
+
+    margin-bottom:18px;
+
+}
+
+.notice-box{
+
+    background:#F9F5F1;
+
+    border-left:5px solid #C68F5B;
+
+    padding:16px;
+
+    border-radius:10px;
+
+    margin-top:15px;
+
+}
+
+.notice-box h4{
+
+    margin-bottom:8px;
+
+}
+
+/* ==========================================
+   MENU
+========================================== */
+
+.menu-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+    margin-top:20px;
+
+}
+
+.menu-item{
+
+    background:#FAFAFA;
+
+    border:1px solid #E5DDD5;
+
+    border-radius:12px;
+
+    padding:16px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.menu-item:hover{
+
+    background:#F3ECE6;
+
+}
+
+/* ==========================================
+   RADIO
+========================================== */
+
+.visit-type{
+
+    display:flex;
+
+    justify-content:space-around;
+
+    margin-top:18px;
+
+}
+
+.visit-type label{
+
+    font-size:18px;
+
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+#nextButton{
+
+    width:100%;
+
+    border:none;
+
+    background:#C68F5B;
+
+    color:#fff;
+
+    font-size:18px;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+#nextButton:hover{
+
+    opacity:.9;
+
+}
+/* ===============================
+   タイトル
+================================ */
+
+.title-card{
+
+    text-align:center;
+
+    padding-top:35px;
+
+    padding-bottom:35px;
+
+}
+
+.title-card .main-title{
+
+    font-size:15px !important;
+
+    font-weight:400;
+
+    color:#75675D;
+
+    letter-spacing:1px;
+
+    text-align:center;
+
+    margin-bottom:6px;
+
+}
+
+.sub-title{
+
+    font-size:11px;
+
+    letter-spacing:7px;
+
+    color:#B79A7A;
+
+}
+
+/* ===========================
+   カレンダー
+=========================== */
+
+.calendar-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:8px;
+
+    margin-top:20px;
+
+}
+
+.calendar-grid div{
+
+    text-align:center;
+
+    font-weight:600;
+
+    color:#9A887A;
+
+}
+
+.day-button{
+
+    aspect-ratio:1;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#F6F3F0;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+.day-button:hover{
+
+    background:#C68F5B;
+
+    color:white;
+
+}
+
+.day-button.selected{
+
+    background:#C68F5B;
+
+    color:white;
+
+}
+
+.time-button{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:10px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:white;
+
+    border:1px solid #D7C7BA;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+.time-button:hover{
+
+    background:#C68F5B;
+
+    color:white;
+
+}
+
+.calendar-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:15px;
+
+}
+
+.calendar-header button{
+
+    border:none;
+
+    background:white;
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.day-button:disabled{
+
+    background:#ECE8E4;
+
+    color:#B5B5B5;
+
+    cursor:not-allowed;
+
+}
+
+.disabled-day{
+
+    opacity:0.45;
+
+}
+
+.form-group{
+
+    margin-top:18px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    color:#8A7768;
+
+    font-size:14px;
+
+}
+
+.form-group input{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #D8CDC3;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    box-sizing:border-box;
+
+}
+
+.next-form{
+
+    width:100%;
+
+    margin-top:24px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#C68F5B;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+.radio-group {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.radio-group input[type="radio"] {
+    margin: 0;
+}
+
+textarea{
+
+    width:100%;
+
+    min-height:120px;
+
+    padding:14px 16px;
+
+    border:1px solid #ddd;
+
+    border-radius:16px;
+
+    font-size:16px;
+
+    box-sizing:border-box;
+
+    resize:vertical;
+
+}
+
+.price-note{
+    font-size:13px;
+    color:#8A7768;
+    margin:8px 0 18px;
+    line-height:1.6;
+}
