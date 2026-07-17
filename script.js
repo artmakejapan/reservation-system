@@ -18,6 +18,8 @@ async function initLiff() {
         const profile = await liff.getProfile();
         lineUserId = profile.userId;
 
+        console.log("LINE User ID:", lineUserId);
+
     } else {
 
         liff.login();
