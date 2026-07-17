@@ -3,29 +3,24 @@
 // Ver1.0
 // ================================
 
-const LIFF_ID = "2010613933-ytGpEGQF";
+const LIFF_ID = "2010613933-uBqu1yDz";
 
 let lineUserId = "";
 
 async function initLiff() {
-
     await liff.init({
         liffId: LIFF_ID
     });
 
-    if (liff.isLoggedIn()) {
+    alert("isInClient = " + liff.isInClient());
+    alert("isLoggedIn = " + liff.isLoggedIn());
 
+    if (liff.isLoggedIn()) {
         const profile = await liff.getProfile();
         lineUserId = profile.userId;
-
-        console.log("LINE User ID:", lineUserId);
-
     } else {
-
         liff.login();
-
     }
-
 }
 
 initLiff();
