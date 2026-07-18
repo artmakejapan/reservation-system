@@ -697,6 +697,11 @@ data.lineUserId = lineUserId;
 
         });
 
+        alert(response.status);
+        alert(await response.text());
+
+        return;
+
         const result = await response.json();
 
         if (result.result === "success") {
