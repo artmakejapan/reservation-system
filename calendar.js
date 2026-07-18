@@ -681,6 +681,7 @@ document.getElementById("reserveButton").addEventListener("click", async () => {
 data.lineUserId = lineUserId;
 
     try {
+        alert("送信開始");
 
         const response = await fetch("https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec", {
 
