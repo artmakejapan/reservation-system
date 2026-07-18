@@ -132,9 +132,6 @@ const reservable =
     (day === 1 || day === 2 || day === 5) &&
     !holiday;
 
-    const dateString =
-`${year}-${String(month + 1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-
 let times = [];
 
 if(reservable){
