@@ -29,7 +29,7 @@ body{
 
 .top-bar{
 
-    background:#C68F5B;
+    background:#D1A78E;
 
     color:#fff;
 
@@ -109,7 +109,7 @@ body{
 
     text-align:center;
 
-    color:#8B735F;
+    color:#A18470;
 
     margin-bottom:8px;
 
@@ -139,7 +139,7 @@ body{
 
     background:#F9F5F1;
 
-    border-left:5px solid #C68F5B;
+    border-left:5px solid #D1A78E;
 
     padding:16px;
 
@@ -223,7 +223,7 @@ body{
 
     border:none;
 
-    background:#C68F5B;
+    background:#D1A78E;
 
     color:#fff;
 
@@ -280,7 +280,7 @@ body{
 
     letter-spacing:7px;
 
-    color:#B79A7A;
+    color:#D1A78E;
 
 }
 
@@ -318,7 +318,9 @@ body{
 
     border-radius:16px;
 
-    background:#F6F3F0;
+    background:#D1A78E;
+
+    color:white;
 
     cursor:pointer;
 
@@ -330,7 +332,7 @@ body{
 
 .day-button:hover{
 
-    background:#C68F5B;
+    background:#B88666;
 
     color:white;
 
@@ -338,9 +340,19 @@ body{
 
 .day-button.selected{
 
-    background:#C68F5B;
+    background:#B88666;
 
     color:white;
+
+}
+
+.day-button.full{
+
+    background:#D9D9D9;
+
+    color:#777;
+
+    cursor:not-allowed;
 
 }
 
@@ -358,7 +370,7 @@ body{
 
     background:white;
 
-    border:1px solid #D7C7BA;
+    border:1px solid #D1A78E;
 
     cursor:pointer;
 
@@ -370,7 +382,7 @@ body{
 
 .time-button:hover{
 
-    background:#C68F5B;
+    background:#B88666;
 
     color:white;
 
@@ -408,11 +420,32 @@ body{
 
 .day-button:disabled{
 
-    background:#ECE8E4;
+    background:#F3F1EF;
 
-    color:#B5B5B5;
+    color:#D2CDC8;
 
     cursor:not-allowed;
+
+}
+
+.day-button{
+
+    background:#D1A78E;
+    color:white;
+
+}
+
+.day-button.full{
+
+    background:#D9D9D9;
+    color:#7A7A7A;
+
+}
+
+.day-button.selected{
+
+    background:#B88666;
+    color:white;
 
 }
 
@@ -468,7 +501,7 @@ body{
 
     border-radius:12px;
 
-    background:#C68F5B;
+    background:#D1A78E;
 
     color:white;
 
@@ -478,22 +511,40 @@ body{
 
 }
 
-.radio-group {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    margin-top: 10px;
+.radio-group{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:40px;
+
+    margin-top:18px;
+
 }
 
-.radio-group label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
+.radio-group label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
 }
 
-.radio-group input[type="radio"] {
-    margin: 0;
+.radio-group input[type=radio]{
+
+    accent-color:#D1A78E;
+
+    width:18px;
+
+    height:18px;
+
 }
 
 textarea{

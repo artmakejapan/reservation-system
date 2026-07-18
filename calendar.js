@@ -132,30 +132,81 @@ const reservable =
     (day === 1 || day === 2 || day === 5) &&
     !holiday;
 
-    if (reservable && future) {
+    const dateString =
+`${year}-${String(month + 1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
 
-        html += `
-            <button
-    class="day-button"
-    data-date="${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}"
->
+let times = [];
 
-    ${d}
+if(reservable){
 
-</button>
-        `;
+    const weekdayMap={
+        1:"月",
+        2:"火",
+        5:"金"
+    };
 
-    } else {
+    const row=businessHours.find(item=>item.weekday===weekdayMap[day]);
 
-        html += `
-            <button class="day-button disabled-day" disabled>
+    if(row){
 
-                ${d}
+        const source=data.visit==="初診"
+            ? row.first
+            : row.repeat;
 
-            </button>
-        `;
+        times=source.split(",").map(t=>t.trim());
 
     }
+
+}
+
+const full =
+reservable &&
+future &&
+times.length>0 &&
+times.every(time=>
+
+reservedSlots.some(item=>
+
+item.date===dateString &&
+item.time===time
+
+)
+
+);
+
+if(reservable && future && !full){
+
+    html+=`
+    <button
+    class="day-button"
+    data-date="${dateString}">
+    ${d}
+    </button>
+    `;
+
+}
+else if(full){
+
+    html+=`
+    <button
+    class="day-button full"
+    disabled>
+    ${d}
+    </button>
+    `;
+
+}
+else{
+
+    html+=`
+    <button
+    class="day-button"
+    disabled>
+    ${d}
+    </button>
+    `;
+
+}
 
 }
 
