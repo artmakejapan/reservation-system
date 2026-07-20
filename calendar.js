@@ -694,11 +694,24 @@ document.getElementById("reserveButton").addEventListener("click", async () => {
             reserveButton.textContent = "予約完了";
 
             document.getElementById("confirmSection").innerHTML = `
-                <div style="text-align:center;padding:40px;">
-                    <h2>予約が完了しました😊</h2>
-                    <p>LINEへ予約内容を送信しました。</p>
-                </div>
-            `;
+
+<div class="complete-box">
+
+    <p class="complete-title-small">
+        ご予約ありがとうございます
+    </p>
+
+    <h2 class="complete-title">
+        予約が完了しました😊
+    </h2>
+
+    <p class="complete-text">
+        LINEへ予約内容を送信しました。
+    </p>
+
+</div>
+
+`;
 
         } else {
 

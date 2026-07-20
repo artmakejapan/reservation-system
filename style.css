@@ -573,3 +573,53 @@ textarea{
     margin:8px 0 18px;
     line-height:1.6;
 }
+
+/* ===== 予約完了画面 ===== */
+
+.complete-box{
+
+    text-align:center;
+
+    padding:60px 40px;
+
+}
+
+.complete-title-small{
+
+    font-size:26px;
+
+    color:#7b675c;
+
+    margin-bottom:24px;
+
+    font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+
+}
+
+.complete-title{
+
+    font-size:52px;
+
+    font-weight:700;
+
+    color:#3d342f;
+
+    line-height:1.4;
+
+    margin-bottom:30px;
+
+    font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+
+}
+
+.complete-text{
+
+    font-size:26px;
+
+    color:#6d625c;
+
+    line-height:1.8;
+
+    font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+
+}
