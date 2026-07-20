@@ -712,12 +712,14 @@ document.getElementById("reserveButton").addEventListener("click", async () => {
 
     } catch (err) {
 
-        reserveButton.disabled = false;
-        reserveButton.textContent = "予約を確定する";
+    console.error(err);
 
-        alert("通信エラー：" + err);
+    alert(err.stack || err);
 
-    }
+    reserveButton.disabled = false;
+    reserveButton.textContent = "予約を確定する";
+
+}
 
 });
 
