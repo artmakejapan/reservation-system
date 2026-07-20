@@ -648,56 +648,63 @@ function showConfirm() {
 
 document.getElementById("reserveButton").addEventListener("click", async () => {
 
+    const reserveButton = document.getElementById("reserveButton");
+
     const data = {
 
         date: selectedDate,
-
         time: selectedTime,
-
         visit: reservationData.visit,
-
         menu1: reservationData.menus[0] || "",
-
         menu2: reservationData.menus[1] || "",
-
         name: customerData.name,
-
         gender: customerData.gender,
-
         age: customerData.age,
-
         referrer: customerData.referrer,
-
         tel: customerData.tel,
-
         history: customerData.history,
-
         medicalHistory: customerData.medicalHistory,
-
         pregnancy: customerData.pregnancy
 
     };
 
-data.lineUserId = lineUserId;
+    data.lineUserId = lineUserId;
 
     try {
-        alert("送信開始");
+
+        reserveButton.disabled = true;
+        reserveButton.textContent = "送信中...";
 
         const response = await fetch(
-  "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
-  {
-    method: "POST",
-    body: JSON.stringify(data)
-  }
-);
+            "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
+            {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        );
 
         const result = JSON.parse(await response.text());
 
         if (result.result === "success") {
 
-            alert("予約が完了しました！");
+            reserveButton.disabled = true;
+            reserveButton.textContent = "予約完了";
+
+            document.getElementById("confirmSection").innerHTML = `
+                <div style="text-align:center;padding:40px;">
+                    <h2>予約が完了しました😊</h2>
+                    <p>LINEへ予約内容を送信しました。</p>
+                </div>
+            `;
 
         } else {
+
+            reserveButton.disabled = false;
+            reserveButton.textContent = "予約を確定する";
 
             alert("保存エラー：" + result.message);
 
@@ -705,11 +712,12 @@ data.lineUserId = lineUserId;
 
     } catch (err) {
 
+        reserveButton.disabled = false;
+        reserveButton.textContent = "予約を確定する";
+
         alert("通信エラー：" + err);
 
     }
 
 });
-
-}
 
