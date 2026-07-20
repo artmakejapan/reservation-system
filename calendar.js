@@ -691,12 +691,7 @@ data.lineUserId = lineUserId;
   }
 );
 
-        alert(response.status);
-        alert(await response.text());
-
-        return;
-
-        const result = await response.json();
+        const result = JSON.parse(await response.text());
 
         if (result.result === "success") {
 
