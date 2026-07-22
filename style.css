@@ -268,7 +268,7 @@ body{
 
 }
 
-.title-card .main-title{
+.main-title{
 
     font-family: "Yu Mincho","Hiragino Mincho ProN",serif;
 
@@ -281,6 +281,8 @@ body{
     text-align: center;
 
     line-height: 1.4;
+
+    white-space: nowrap;
 
     letter-spacing: 0.02em;
 
