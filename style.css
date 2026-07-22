@@ -29,23 +29,31 @@ body{
 
 .top-bar{
 
-    background:#D1A78E;
+    background:#D6AA8D;
 
-    color:#fff;
+    height:50px;
 
-    padding:16px;
+    display:flex;
 
-    text-align:center;
+    align-items:center;
 
-    box-shadow:0 2px 8px rgba(0,0,0,.12);
+    justify-content:center;
 
 }
 
 .top-bar h1{
 
-    font-size:22px;
+    color:#2F2A27;
+
+    font-size:28px;
 
     font-weight:600;
+
+    letter-spacing:0.06em;
+
+    margin:0;
+
+    line-height:1;
 
 }
 
@@ -260,17 +268,21 @@ body{
 
 .title-card .main-title{
 
-    font-size:15px !important;
+    font-family: "Yu Mincho","Hiragino Mincho ProN",serif;
 
-    font-weight:400;
+    font-size: 24px;
 
-    color:#75675D;
+    font-weight: 500;
 
-    letter-spacing:1px;
+    color: #6B5A50;
 
-    text-align:center;
+    text-align: center;
 
-    margin-bottom:6px;
+    line-height: 1.4;
+
+    white-space: nowrap;
+
+    letter-spacing: 0.02em;
 
 }
 
