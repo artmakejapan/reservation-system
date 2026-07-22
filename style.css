@@ -43,13 +43,15 @@ body{
 
 .top-bar h1{
 
-    color:#ffffff;
+    font-family: 'Allura', cursive;
+
+    color:#2F2A27;
 
     font-size:18px;
 
-    font-weight:600;
+    font-weight:400;
 
-    letter-spacing:0.06em;
+    letter-spacing:0.02em;
 
     margin:0;
 
