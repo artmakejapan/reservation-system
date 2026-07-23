@@ -636,3 +636,32 @@ textarea{
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 
 }
+
+.confirm-title{
+    font-size:30px;
+    font-weight:700;
+    color:#2F2A27;
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.confirm-item{
+    padding:18px 0;
+    border-bottom:1px solid #ECE6E0;
+}
+
+.confirm-item .label{
+    display:block;
+    font-size:14px;
+    color:#9B8D83;
+    margin-bottom:8px;
+    letter-spacing:.05em;
+}
+
+.confirm-item .value{
+    display:block;
+    font-size:20px;
+    color:#2F2A27;
+    line-height:1.7;
+    word-break:break-word;
+}

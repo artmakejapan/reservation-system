@@ -612,36 +612,72 @@ function showConfirm() {
 
     area.innerHTML = `
 
-<p><strong>施術メニュー</strong><br>${reservationData.menus.join("・")}</p>
+<h2 class="confirm-title">予約内容確認</h2>
 
-<p><strong>初診・再診</strong><br>${reservationData.visit}</p>
+<div class="confirm-item">
+<span class="label">施術メニュー</span>
+<span class="value">${reservationData.menus.join("・")}</span>
+</div>
 
-<p><strong>予約日</strong><br>${selectedDate}</p>
+<div class="confirm-item">
+<span class="label">初診・再診</span>
+<span class="value">${reservationData.visit}</span>
+</div>
 
-<p><strong>予約時間</strong><br>${selectedTime}</p>
+<div class="confirm-item">
+<span class="label">予約日</span>
+<span class="value">${selectedDate}</span>
+</div>
 
-<p><strong>お名前</strong><br>${customerData.name}</p>
+<div class="confirm-item">
+<span class="label">予約時間</span>
+<span class="value">${selectedTime}</span>
+</div>
 
-<p><strong>電話番号</strong><br>${customerData.tel}</p>
+<div class="confirm-item">
+<span class="label">お名前</span>
+<span class="value">${customerData.name}</span>
+</div>
 
-<p><strong>性別</strong><br>${customerData.gender}</p>
+<div class="confirm-item">
+<span class="label">電話番号</span>
+<span class="value">${customerData.tel}</span>
+</div>
 
-<p><strong>年齢</strong><br>${customerData.age}歳</p>
+<div class="confirm-item">
+<span class="label">性別</span>
+<span class="value">${customerData.gender}</span>
+</div>
 
-<p><strong>紹介者</strong><br>${customerData.referrer || "なし"}</p>
+<div class="confirm-item">
+<span class="label">年齢</span>
+<span class="value">${customerData.age}歳</span>
+</div>
 
-<p><strong>アートメイク施術歴</strong><br>${customerData.history}</p>
+<div class="confirm-item">
+<span class="label">紹介者</span>
+<span class="value">${customerData.referrer || "なし"}</span>
+</div>
 
-<p><strong>既往歴・服薬中のお薬</strong><br>${customerData.medicalHistory || "なし"}</p>
+<div class="confirm-item">
+<span class="label">アートメイク施術歴</span>
+<span class="value">${customerData.history}</span>
+</div>
 
-<p><strong>妊娠・授乳中</strong><br>${customerData.pregnancy}</p>
+<div class="confirm-item">
+<span class="label">既往歴・服薬中のお薬</span>
+<span class="value">${customerData.medicalHistory || "なし"}</span>
+</div>
+
+<div class="confirm-item">
+<span class="label">妊娠・授乳中</span>
+<span class="value">${customerData.pregnancy}</span>
+</div>
 
 <br>
 
 <button class="next-form" id="reserveButton">
-
 予約を確定する
-
 </button>
 
 `;
