@@ -677,7 +677,7 @@ function showConfirm() {
 </div>
 
 <div class="confirm-item">
-<span class="label">氏名</span>
+<span class="label">氏名（フルネーム）</span>
 <span class="value">${customerData.name}</span>
 </div>
 
