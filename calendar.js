@@ -418,7 +418,7 @@ function showCustomerForm() {
 </div>
 
 <div class="form-group">
-<label>氏名 <span style="color:red;">*</span></label>
+<label>氏名（フルネーム） <span style="color:red;">*</span></label>
 <input type="text" id="customerName">
 </div>
 
@@ -677,7 +677,7 @@ function showConfirm() {
 </div>
 
 <div class="confirm-item">
-<span class="label">氏名（フルネーム）</span>
+<span class="label">氏名</span>
 <span class="value">${customerData.name}</span>
 </div>
 
