@@ -403,6 +403,51 @@ function showCustomerForm() {
 
     });
 
+    if (reservationData.visit === "再診") {
+
+    form.innerHTML = `
+
+<div class="form-group">
+<label>予約日</label>
+<input type="text" value="${selectedDate}" readonly>
+</div>
+
+<div class="form-group">
+<label>予約時間</label>
+<input type="text" value="${selectedTime}" readonly>
+</div>
+
+<div class="form-group">
+<label>氏名 <span style="color:red;">*</span></label>
+<input type="text" id="customerName">
+</div>
+
+<button class="next-form">
+確認画面へ
+</button>
+
+`;
+
+    document.querySelector(".next-form").addEventListener("click", () => {
+
+        const name = document.getElementById("customerName").value.trim();
+
+        if (name === "") {
+            alert("お名前を入力してください。");
+            return;
+        }
+
+        customerData = {
+            name: name
+        };
+
+        showConfirm();
+
+    });
+
+    return;
+}
+
 form.innerHTML = `
 
 <div class="form-group">
@@ -609,6 +654,50 @@ function showConfirm() {
         behavior: "smooth"
 
     });
+
+    if (reservationData.visit === "再診") {
+
+    area.innerHTML = `
+
+<h2 class="confirm-title">予約内容確認</h2>
+
+<div class="confirm-item">
+<span class="label">施術メニュー</span>
+<span class="value">${reservationData.menus.join("・")}</span>
+</div>
+
+<div class="confirm-item">
+<span class="label">予約日</span>
+<span class="value">${selectedDate}</span>
+</div>
+
+<div class="confirm-item">
+<span class="label">予約時間</span>
+<span class="value">${selectedTime}</span>
+</div>
+
+<div class="confirm-item">
+<span class="label">氏名</span>
+<span class="value">${customerData.name}</span>
+</div>
+
+<br>
+
+<button class="next-form" id="reserveButton">
+予約を確定する
+</button>
+
+`;
+
+    customerData.gender = "";
+    customerData.age = "";
+    customerData.referrer = "";
+    customerData.tel = "";
+    customerData.history = "";
+    customerData.medicalHistory = "";
+    customerData.pregnancy = "";
+
+}
 
     area.innerHTML = `
 
