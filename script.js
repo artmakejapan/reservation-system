@@ -15,6 +15,8 @@ async function initLiff() {
     if (liff.isLoggedIn()) {
         const profile = await liff.getProfile();
         lineUserId = profile.userId;
+        
+        alert(profile.userId);
     } else {
         liff.login();
     }
