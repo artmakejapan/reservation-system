@@ -771,6 +771,18 @@ function showConfirm() {
 
 `;
 
+if (reservationData.visit === "再診") {
+
+    customerData.gender = "";
+    customerData.age = "";
+    customerData.referrer = "";
+    customerData.tel = "";
+    customerData.history = "";
+    customerData.medicalHistory = "";
+    customerData.pregnancy = "";
+
+}
+
 document.getElementById("reserveButton").addEventListener("click", async () => {
 
     const reserveButton = document.getElementById("reserveButton");
