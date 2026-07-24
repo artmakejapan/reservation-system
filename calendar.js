@@ -644,20 +644,20 @@ if (age === "") {
 function showConfirm() {
 
     const section = document.getElementById("confirmSection");
-
     const area = document.getElementById("confirmArea");
 
     section.style.display = "block";
 
     section.scrollIntoView({
-
         behavior: "smooth"
-
     });
 
+    // ==========================
+    // 再診
+    // ==========================
     if (reservationData.visit === "再診") {
 
-    area.innerHTML = `
+        area.innerHTML = `
 
 <h2 class="confirm-title">予約内容確認</h2>
 
@@ -689,17 +689,23 @@ function showConfirm() {
 
 `;
 
-    customerData.gender = "";
-    customerData.age = "";
-    customerData.referrer = "";
-    customerData.tel = "";
-    customerData.history = "";
-    customerData.medicalHistory = "";
-    customerData.pregnancy = "";
+        customerData.gender = "";
+        customerData.age = "";
+        customerData.referrer = "";
+        customerData.tel = "";
+        customerData.history = "";
+        customerData.medicalHistory = "";
+        customerData.pregnancy = "";
 
-}
+    }
 
-    area.innerHTML = `
+    // ==========================
+    // 初診
+    // ==========================
+
+    else {
+
+        area.innerHTML = `
 
 <h2 class="confirm-title">予約内容確認</h2>
 
@@ -771,106 +777,96 @@ function showConfirm() {
 
 `;
 
-if (reservationData.visit === "再診") {
-
-    customerData.gender = "";
-    customerData.age = "";
-    customerData.referrer = "";
-    customerData.tel = "";
-    customerData.history = "";
-    customerData.medicalHistory = "";
-    customerData.pregnancy = "";
-
-}
-
-document.getElementById("reserveButton").addEventListener("click", async () => {
-
-    const reserveButton = document.getElementById("reserveButton");
-
-    const data = {
-
-        date: selectedDate,
-        time: selectedTime,
-        visit: reservationData.visit,
-        menu1: reservationData.menus[0] || "",
-        menu2: reservationData.menus[1] || "",
-        name: customerData.name,
-        gender: customerData.gender,
-        age: customerData.age,
-        referrer: customerData.referrer,
-        tel: customerData.tel,
-        history: customerData.history,
-        medicalHistory: customerData.medicalHistory,
-        pregnancy: customerData.pregnancy
-
-    };
-
-    data.lineUserId = lineUserId;
-
-    try {
-
-        reserveButton.disabled = true;
-        reserveButton.textContent = "送信中...";
-
-        const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(data)
     }
-);
 
-        const result = JSON.parse(await response.text());
+        document.getElementById("reserveButton").addEventListener("click", async () => {
 
-        if (result.result === "success") {
+        const reserveButton = document.getElementById("reserveButton");
+
+        const data = {
+
+    date: selectedDate,
+    time: selectedTime,
+    visit: reservationData.visit,
+    menu1: reservationData.menus[0] || "",
+    menu2: reservationData.menus[1] || "",
+    name: customerData.name,
+
+    gender: reservationData.visit === "再診" ? "" : customerData.gender,
+    age: reservationData.visit === "再診" ? "" : customerData.age,
+    referrer: reservationData.visit === "再診" ? "" : customerData.referrer,
+    tel: reservationData.visit === "再診" ? "" : customerData.tel,
+    history: reservationData.visit === "再診" ? "" : customerData.history,
+    medicalHistory: reservationData.visit === "再診" ? "" : customerData.medicalHistory,
+    pregnancy: reservationData.visit === "再診" ? "" : customerData.pregnancy
+
+};
+
+        data.lineUserId = lineUserId;
+
+        try {
 
             reserveButton.disabled = true;
-            reserveButton.textContent = "予約完了";
+            reserveButton.textContent = "送信中...";
 
-            document.getElementById("confirmSection").innerHTML = `
+            const response = await fetch(
+                "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "text/plain;charset=utf-8"
+                    },
+                    body: JSON.stringify(data)
+                }
+            );
+
+            const result = JSON.parse(await response.text());
+
+            if (result.result === "success") {
+
+                reserveButton.disabled = true;
+                reserveButton.textContent = "予約完了";
+
+                document.getElementById("confirmSection").innerHTML = `
 
 <div class="complete-box">
 
-    <p class="complete-title-small">
-        ご予約ありがとうございます
-    </p>
+<p class="complete-title-small">
+ご予約ありがとうございます
+</p>
 
-    <h2 class="complete-title">
-        予約が完了しました😊
-    </h2>
+<h2 class="complete-title">
+予約が完了しました😊
+</h2>
 
-    <p class="complete-text">
-        LINEへ予約内容を送信しました。
-    </p>
+<p class="complete-text">
+LINEへ予約内容を送信しました。
+</p>
 
 </div>
 
 `;
 
-        } else {
+            } else {
+
+                reserveButton.disabled = false;
+                reserveButton.textContent = "予約を確定する";
+
+                alert("保存エラー：" + result.message);
+
+            }
+
+        } catch (err) {
+
+            console.error(err);
+
+            alert(err.stack || err);
 
             reserveButton.disabled = false;
             reserveButton.textContent = "予約を確定する";
 
-            alert("保存エラー：" + result.message);
-
         }
 
-    } catch (err) {
-
-    console.error(err);
-
-    alert(err.stack || err);
-
-    reserveButton.disabled = false;
-    reserveButton.textContent = "予約を確定する";
+    });
 
 }
-
-});
-
-}
-
