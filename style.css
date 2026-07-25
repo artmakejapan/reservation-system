@@ -665,3 +665,19 @@ textarea{
     line-height:1.7;
     word-break:break-word;
 }
+
+.day-button.two-left{
+
+    background:#E8C6A3 !important;
+
+    color:#5F4A3A;
+
+}
+
+.day-button.one-left{
+
+    background:#E7B7BE !important;
+
+    color:#5F4A3A;
+
+}

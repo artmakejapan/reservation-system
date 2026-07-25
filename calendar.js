@@ -171,17 +171,37 @@ item.time===time
 
 );
 
+const remain = times.filter(time =>
+    !reservedSlots.some(item =>
+        item.date === dateString &&
+        item.time === time
+    )
+).length;
+
 if(reservable && future && !full){
+
+    let colorClass = "";
+
+    if(remain === 2){
+
+        colorClass = "two-left";
+
+    }else if(remain === 1){
+
+        colorClass = "one-left";
+
+    }
 
     html+=`
     <button
-    class="day-button"
+    class="day-button ${colorClass}"
     data-date="${dateString}">
     ${d}
     </button>
     `;
 
 }
+
 else if(full){
 
     html+=`

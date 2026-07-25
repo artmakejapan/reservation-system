@@ -1,0 +1,52 @@
+body{
+
+    margin:0;
+    padding:40px;
+
+    background:#F7F3EF;
+
+    font-family:"Yu Gothic",sans-serif;
+
+}
+
+h1{
+
+    text-align:center;
+
+    color:#8A6F5A;
+
+    font-size:30px;
+
+}
+
+#reservationList{
+
+    max-width:700px;
+
+    margin:40px auto;
+
+}
+
+.reservation-card{
+
+    background:#FFFFFF;
+
+    border-radius:16px;
+
+    padding:24px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    border:1px solid #EFE8E2;
+
+}
+
+.reservation-card strong{
+
+    color:#8A6F5A;
+
+    font-size:15px;
+
+}
