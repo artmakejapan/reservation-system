@@ -687,15 +687,15 @@ textarea{
 
 .day-button.two-left{
 
-    background:#C9A18B !important;
+    background:#F5D547 !important;
 
-    color:white;
+    color:#5F4A3A;
 
 }
 
 .day-button.one-left{
 
-    background:#BD937E !important;
+    background:#D96A6A !important;
 
     color:white;
 
@@ -703,15 +703,15 @@ textarea{
 
 .day-button.two-left.selected{
 
-    background:#B38269 !important;
+    background:#E3C133 !important;
 
-    color:white;
+    color:#5F4A3A;
 
 }
 
 .day-button.one-left.selected{
 
-    background:#A97761 !important;
+    background:#C95858 !important;
 
     color:white;
 
