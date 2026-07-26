@@ -444,7 +444,10 @@ body{
 .day-button{
 
     background:#D1A78E;
+
     color:white;
+
+    transition:all .2s ease;
 
 }
 
@@ -459,6 +462,22 @@ body{
 
     background:#B88666;
     color:white;
+
+}
+
+.day-button.two-left.selected{
+
+    background:#E3C5AA !important;
+
+    color:#5F4A3A;
+
+}
+
+.day-button.one-left.selected{
+
+    background:#E3BEC4 !important;
+
+    color:#5F4A3A;
 
 }
 
@@ -668,7 +687,7 @@ textarea{
 
 .day-button.two-left{
 
-    background:#E8C6A3 !important;
+    background:#F2E2D2 !important;
 
     color:#5F4A3A;
 
@@ -676,7 +695,23 @@ textarea{
 
 .day-button.one-left{
 
-    background:#E7B7BE !important;
+    background:#F3DCDD !important;
+
+    color:#5F4A3A;
+
+}
+
+.day-button.two-left.selected{
+
+    background:#E4CDB7 !important;
+
+    color:#5F4A3A;
+
+}
+
+.day-button.one-left.selected{
+
+    background:#E7C9CE !important;
 
     color:#5F4A3A;
 
