@@ -687,32 +687,32 @@ textarea{
 
 .day-button.two-left{
 
-    background:#F2E2D2 !important;
+    background:#C9A18B !important;
 
-    color:#5F4A3A;
+    color:white;
 
 }
 
 .day-button.one-left{
 
-    background:#F3DCDD !important;
+    background:#BD937E !important;
 
-    color:#5F4A3A;
+    color:white;
 
 }
 
 .day-button.two-left.selected{
 
-    background:#E4CDB7 !important;
+    background:#B38269 !important;
 
-    color:#5F4A3A;
+    color:white;
 
 }
 
 .day-button.one-left.selected{
 
-    background:#E7C9CE !important;
+    background:#A97761 !important;
 
-    color:#5F4A3A;
+    color:white;
 
 }
