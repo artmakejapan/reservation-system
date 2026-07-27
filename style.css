@@ -447,7 +447,11 @@ body{
 
     color:white;
 
-    transition:all .2s ease;
+    transition:
+    background .2s ease,
+    transform .18s ease,
+    box-shadow .18s ease,
+    border .18s ease;
 
 }
 
@@ -461,23 +465,16 @@ body{
 .day-button.selected{
 
     background:#B88666;
+
     color:white;
 
-}
+    transform:scale(1.08);
 
-.day-button.two-left.selected{
+    border:3px solid rgba(255,255,255,.95);
 
-    background:#E3C5AA !important;
+    box-shadow:0 6px 16px rgba(0,0,0,.18);
 
-    color:#5F4A3A;
-
-}
-
-.day-button.one-left.selected{
-
-    background:#E3BEC4 !important;
-
-    color:#5F4A3A;
+    z-index:2;
 
 }
 
@@ -707,6 +704,12 @@ textarea{
 
     color:white;
 
+    transform:scale(1.05);
+
+    border:3px solid rgba(255,255,255,.95);
+
+    box-shadow:0 6px 16px rgba(0,0,0,.18);
+
 }
 
 .day-button.one-left.selected{
@@ -714,5 +717,11 @@ textarea{
     background:#C95858 !important;
 
     color:white;
+
+    transform:scale(1.05);
+
+    border:3px solid rgba(255,255,255,.95);
+
+    box-shadow:0 6px 16px rgba(0,0,0,.18);
 
 }
