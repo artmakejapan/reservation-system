@@ -704,12 +704,6 @@ textarea{
 
     color:white;
 
-    transform:scale(1.05);
-
-    border:3px solid rgba(255,255,255,.95);
-
-    box-shadow:0 6px 16px rgba(0,0,0,.18);
-
 }
 
 .day-button.one-left.selected{
@@ -718,10 +712,23 @@ textarea{
 
     color:white;
 
-    transform:scale(1.05);
+}
 
-    border:3px solid rgba(255,255,255,.95);
+.next-form.loading{
 
-    box-shadow:0 6px 16px rgba(0,0,0,.18);
+    background:#9E775D;
+
+    color:#fff;
+
+    opacity:.95;
+
+    cursor:not-allowed;
+
+    transform:scale(.98);
+
+    box-shadow:0 8px 18px rgba(90,60,40,.25);
+
+    transition:all .25s ease;
 
 }
+
