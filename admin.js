@@ -66,13 +66,43 @@ data-id="${item.id}">
 
 document.querySelectorAll(".cancelButton").forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
 
-        const id = button.dataset.id;
+    const id = button.dataset.id;
 
-        alert("予約ID：" + id);
+    if(!confirm("この予約をキャンセルしますか？")){
+        return;
+    }
 
-    });
+    const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                action:"cancel",
+                reservationId:id
+            })
+        }
+    );
+
+    const result = await response.json();
+
+    if(result.result==="success"){
+
+        alert("キャンセルしました");
+
+        loadReservations();
+
+    }else{
+
+        alert("キャンセルできませんでした");
+
+    }
+
+});
 
 });
 
