@@ -50,3 +50,21 @@ h1{
     font-size:15px;
 
 }
+
+.today-header{
+
+    margin:24px 0 16px;
+
+    padding:12px 18px;
+
+    background:#F5EFE9;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#6D5A4D;
+
+}

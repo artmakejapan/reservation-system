@@ -26,11 +26,63 @@ async function loadReservations() {
 
     const list = await response.json();
 
+    const today = new Date().toISOString().slice(0,10);
+
+const todayReservations = list.filter(item => item.date === today);
+
+const otherReservations = list.filter(item => item.date !== today);
+
 const area = document.getElementById("reservationList");
 
 area.innerHTML = "";
 
-list.forEach(item => {
+const today = new Date().toISOString().slice(0,10);
+
+// 今日の予約
+list
+.filter(item => item.date === today)
+.forEach(item => {
+
+    area.innerHTML += `
+
+<div class="today-header">
+📅 本日の予約
+</div>
+
+<div class="reservation-card">
+
+    <div><strong>📅 予約日</strong><br>${item.date}</div>
+
+    <br>
+
+    <div><strong>🕘 時間</strong><br>${item.time}</div>
+
+    <br>
+
+    <div><strong>👤 お名前</strong><br>${item.name}</div>
+
+    <br>
+
+    <div><strong>🖋️ メニュー</strong><br>${item.menu}</div>
+
+<br>
+
+<button
+class="cancelButton"
+data-id="${item.id}">
+キャンセル
+</button>
+
+</div>
+
+`;
+
+});
+
+// 今日以外
+list
+.filter(item => item.date !== today)
+.forEach(item => {
 
     area.innerHTML += `
 
