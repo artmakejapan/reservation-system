@@ -28,15 +28,9 @@ async function loadReservations() {
 
     const today = new Date().toISOString().slice(0,10);
 
-const todayReservations = list.filter(item => item.date === today);
-
-const otherReservations = list.filter(item => item.date !== today);
-
 const area = document.getElementById("reservationList");
 
 area.innerHTML = "";
-
-const today = new Date().toISOString().slice(0,10);
 
 // 今日の予約
 list
