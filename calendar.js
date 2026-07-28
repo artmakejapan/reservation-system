@@ -827,6 +827,7 @@ function showConfirm() {
         try {
 
             reserveButton.disabled = true;
+            reserveButton.classList.add("loading");
             reserveButton.textContent = "送信中...";
 
             const response = await fetch(
@@ -845,6 +846,7 @@ function showConfirm() {
             if (result.result === "success") {
 
                 reserveButton.disabled = true;
+                reserveButton.classList.remove("loading");
                 reserveButton.textContent = "予約完了";
 
                 document.getElementById("confirmSection").innerHTML = `
@@ -870,6 +872,7 @@ LINEへ予約内容を送信しました。
             } else {
 
                 reserveButton.disabled = false;
+                reserveButton.classList.remove("loading");
                 reserveButton.textContent = "予約を確定する";
 
                 alert("保存エラー：" + result.message);

@@ -716,19 +716,18 @@ textarea{
 
 .next-form.loading{
 
-    background:#9E775D;
+    background:#8B6752;
 
     color:#fff;
 
-    opacity:.95;
-
     cursor:not-allowed;
 
-    transform:scale(.98);
+    transform:scale(.97);
 
-    box-shadow:0 8px 18px rgba(90,60,40,.25);
+    opacity:.88;
 
-    transition:all .25s ease;
+    box-shadow:
+        inset 0 3px 10px rgba(0,0,0,.12),
+        0 2px 8px rgba(0,0,0,.12);
 
 }
-
