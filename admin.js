@@ -49,15 +49,15 @@ list
     <div><strong>📅 予約日</strong><br>${item.date}</div>
 
     <br>
-    
+
     <div class="time-box">${item.time}</div>
 
     <br>
 
-    <div><strong>👤 お名前</strong><br>${item.name}</div>
+    <div class="customer-name">${item.name} 様</div>
 
     <br>
-
+    <div class="visit-tag">${item.visit}</div>
     <div><strong>🖋️ メニュー</strong><br>${item.menu}</div>
 
 <br>
@@ -87,14 +87,14 @@ list
 
     <br>
 
-    <div><strong>🕘 時間</strong><br>${item.time}</div>
+    <div class="time-box">${item.time}</div>
 
     <br>
 
-    <div><strong>👤 お名前</strong><br>${item.name}</div>
+    <div class="customer-name">${item.name} 様</div>
 
     <br>
-
+    <div class="visit-tag">${item.visit}</div>
     <div><strong>🖋️ メニュー</strong><br>${item.menu}</div>
 
 <br>
