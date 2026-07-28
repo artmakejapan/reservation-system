@@ -54,10 +54,13 @@ list
 
     <br>
 
-    <div class="customer-name">${item.name} 様</div>
+    <div><strong>👤 お名前</strong><br>${item.name}</div>
 
     <br>
-    <div class="visit-tag">${item.visit}</div>
+    <div><strong>🩺 初診・再診</strong><br>${item.visit}</div>
+    
+    <br>
+
     <div><strong>🖋️ メニュー</strong><br>${item.menu}</div>
 
 <br>
@@ -91,10 +94,14 @@ list
 
     <br>
 
-    <div class="customer-name">${item.name} 様</div>
+    <div><strong>👤 お名前</strong><br>${item.name}</div>
 
     <br>
-    <div class="visit-tag">${item.visit}</div>
+
+    <div><strong>🩺 初診・再診</strong><br>${item.visit}</div>
+    
+    <br>
+    
     <div><strong>🖋️ メニュー</strong><br>${item.menu}</div>
 
 <br>
