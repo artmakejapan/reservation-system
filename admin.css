@@ -31,15 +31,25 @@ h1{
 
     background:#FFFFFF;
 
-    border-radius:16px;
+    border-radius:18px;
 
-    padding:24px;
+    padding:22px;
 
-    margin-bottom:20px;
+    margin-bottom:18px;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
 
-    border:1px solid #EFE8E2;
+    border:1px solid #EFE7E1;
+
+    transition:.2s ease;
+
+}
+
+.reservation-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 24px rgba(0,0,0,.10);
 
 }
 
@@ -66,5 +76,19 @@ h1{
     font-weight:700;
 
     color:#6D5A4D;
+
+}
+
+.time-box{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:#8B6752;
+
+    margin-bottom:18px;
+
+    font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 
 }

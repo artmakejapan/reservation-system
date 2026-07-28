@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function loadReservations() {
+    document.getElementById("loginArea").style.display = "none";
 
     const response = await fetch(
         "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=getReservationList"
@@ -48,8 +49,8 @@ list
     <div><strong>📅 予約日</strong><br>${item.date}</div>
 
     <br>
-
-    <div><strong>🕘 時間</strong><br>${item.time}</div>
+    
+    <div class="time-box">${item.time}</div>
 
     <br>
 
