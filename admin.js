@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadReservations() {
     document.getElementById("loginArea").style.display = "none";
-
+    document.getElementById("adminArea").style.display = "block";
+    
     const response = await fetch(
         "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=getReservationList"
     );
