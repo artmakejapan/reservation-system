@@ -27,6 +27,32 @@ async function loadReservations() {
     );
 
     const list = await response.json();
+    const keyword = document
+    .getElementById("searchName")
+    .value
+    .trim();
+
+const searchDate = document
+    .getElementById("searchDate")
+    .value;
+
+let filteredList = list;
+
+if (keyword) {
+
+    filteredList = filteredList.filter(item =>
+        item.name.includes(keyword)
+    );
+
+}
+
+if (searchDate) {
+
+    filteredList = filteredList.filter(item =>
+        item.date === searchDate
+    );
+
+}
 
     const today = new Date().toISOString().slice(0,10);
 
@@ -35,7 +61,7 @@ const area = document.getElementById("reservationList");
 area.innerHTML = "";
 
 // 今日の予約
-list
+filteredList
 .filter(item => item.date === today)
 .forEach(item => {
 
@@ -79,7 +105,7 @@ data-id="${item.id}">
 });
 
 // 今日以外
-list
+filteredList
 .filter(item => item.date !== today)
 .forEach(item => {
 
@@ -162,3 +188,11 @@ document.querySelectorAll(".cancelButton").forEach(button => {
 });
 
 }
+
+document
+.getElementById("searchName")
+.addEventListener("input", loadReservations);
+
+document
+.getElementById("searchDate")
+.addEventListener("change", loadReservations);
