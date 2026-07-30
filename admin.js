@@ -60,16 +60,23 @@ const area = document.getElementById("reservationList");
 
 area.innerHTML = "";
 
-// 今日の予約
-filteredList
-.filter(item => item.date === today)
-.forEach(item => {
+const todayList = filteredList.filter(item => item.date === today);
+
+const otherList = filteredList.filter(item => item.date !== today);
+
+if (todayList.length > 0) {
 
     area.innerHTML += `
-
 <div class="today-header">
 📅 本日の予約
 </div>
+`;
+
+}
+
+todayList.forEach(item => {
+
+    area.innerHTML += `
 
 <div class="reservation-card">
 
@@ -104,11 +111,18 @@ data-id="${item.id}">
 
 });
 
-// 今日以外
-filteredList
-.filter(item => item.date !== today)
-.forEach(item => {
+if (otherList.length > 0) {
 
+    area.innerHTML += `
+<div class="today-header">
+📖 その他の予約
+</div>
+`;
+
+}
+
+otherList.forEach(item => {
+    
     area.innerHTML += `
 
 <div class="reservation-card">
