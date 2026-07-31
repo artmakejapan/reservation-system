@@ -120,3 +120,41 @@ h1{
     box-sizing:border-box;
 
 }
+
+.button-row{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+.editButton{
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#C7B299;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+.cancelButton{
+
+    flex:1;
+
+}

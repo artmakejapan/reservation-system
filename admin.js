@@ -60,9 +60,23 @@ const area = document.getElementById("reservationList");
 
 area.innerHTML = "";
 
-const todayList = filteredList.filter(item => item.date === today);
+const todayList = filteredList
+.filter(item => item.date === today)
+.sort((a,b)=>a.time.localeCompare(b.time));
 
-const otherList = filteredList.filter(item => item.date !== today);
+const otherList = filteredList
+.filter(item => item.date !== today)
+.sort((a,b)=>{
+
+    if(a.date===b.date){
+
+        return a.time.localeCompare(b.time);
+
+    }
+
+    return a.date.localeCompare(b.date);
+
+});
 
 if (todayList.length > 0) {
 
@@ -99,11 +113,21 @@ todayList.forEach(item => {
 
 <br>
 
+<div class="button-row">
+
+<button
+class="editButton"
+data-id="${item.id}">
+変更
+</button>
+
 <button
 class="cancelButton"
 data-id="${item.id}">
 キャンセル
 </button>
+
+</div>
 
 </div>
 
@@ -147,11 +171,21 @@ otherList.forEach(item => {
 
 <br>
 
+<div class="button-row">
+
+<button
+class="editButton"
+data-id="${item.id}">
+変更
+</button>
+
 <button
 class="cancelButton"
 data-id="${item.id}">
 キャンセル
 </button>
+
+</div>
 
 </div>
 
