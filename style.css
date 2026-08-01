@@ -615,7 +615,7 @@ textarea{
 
 .complete-title-small{
 
-    font-size:26px;
+    font-size:20px;
 
     color:#7b675c;
 
@@ -627,9 +627,7 @@ textarea{
 
 .complete-title{
 
-    font-size:34px;
-    
-    white-space:nowrap;
+    font-size:28px;
 
     font-weight:700;
 
@@ -645,7 +643,7 @@ textarea{
 
 .complete-text{
 
-    font-size:26px;
+    font-size:20px;
 
     color:#6d625c;
 
