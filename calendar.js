@@ -854,11 +854,11 @@ function showConfirm() {
 <div class="complete-box">
 
 <p class="complete-title-small">
-ご予約ありがとうございます。
+ご予約ありがとうございます
 </p>
 
 <h2 class="complete-title">
-予約が完了しました。
+予約が完了しました😊
 </h2>
 
 <p class="complete-text">
