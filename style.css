@@ -627,21 +627,25 @@ textarea{
 
 .complete-title{
 
-    font-size:32px;
+    font-size:15px;
 
     font-weight:700;
 
-    white-space:nowrap;
+    text-align:center;
 
     color:#3d342f;
 
     line-height:1.4;
 
-    margin:0 0 56px;
-
-    text-align:center;
+    margin-bottom:56px;
 
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+
+}
+
+.complete-title .emoji{
+
+    font-family:initial;
 
 }
 

@@ -858,7 +858,7 @@ function showConfirm() {
 </p>
 
 <h2 class="complete-title">
-予約が完了しました😊
+<span>予約が完了しました</span><span class="emoji">😊</span>
 </h2>
 
 <p class="complete-text">
