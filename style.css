@@ -631,7 +631,13 @@ textarea{
 
     font-weight:700;
 
-    text-align:center;
+    white-space: nowrap;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
     color:#3d342f;
 
