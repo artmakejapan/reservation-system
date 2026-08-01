@@ -629,7 +629,7 @@ textarea{
 
     font-size:15px;
 
-    font-weight:500;
+    font-weight:700;
 
     white-space: nowrap;
 
@@ -639,7 +639,7 @@ textarea{
 
     line-height:1.4;
 
-    margin-bottom:20px;
+    margin-bottom:24px;
 
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 
@@ -652,6 +652,8 @@ textarea{
     color:#6d625c;
 
     line-height:1.8;
+
+    margin-bottom:24px;
 
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 
