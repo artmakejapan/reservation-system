@@ -615,7 +615,7 @@ textarea{
 
 .complete-title-small{
 
-    font-size:18px;
+    font-size:16px;
 
     color:#7b675c;
 
@@ -643,7 +643,7 @@ textarea{
 
     line-height:1.4;
 
-    margin-bottom:24px;
+    margin-bottom:40px;
 
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 
@@ -651,9 +651,11 @@ textarea{
 
 .complete-text{
 
-    font-size:18px;
+    font-size:16px;
 
     color:#6d625c;
+
+    line-height:1.8;
 
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 
