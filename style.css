@@ -643,7 +643,10 @@ textarea{
 
     line-height:1.4;
 
-    margin-bottom:52px;
+    margin-bottom:32px;
+
+    background:red;
+    margin-bottom:80px !important;
 
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 
