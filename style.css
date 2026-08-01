@@ -637,15 +637,19 @@ textarea{
 
     line-height:1.4;
 
-    margin-bottom:56px;
+    margin-bottom:8px;
 
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 
 }
 
-.complete-title .emoji{
+.complete-emoji{
 
-    font-family:initial;
+    font-size:34px;
+
+    text-align:center;
+
+    margin:0 0 30px;
 
 }
 

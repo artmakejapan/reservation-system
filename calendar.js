@@ -858,8 +858,10 @@ function showConfirm() {
 </p>
 
 <h2 class="complete-title">
-<span>予約が完了しました</span><span class="emoji">😊</span>
+予約が完了しました
 </h2>
+
+<p class="complete-emoji">😊</p>
 
 <p class="complete-text">
 LINEへ予約内容を送信しました。
