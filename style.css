@@ -627,23 +627,19 @@ textarea{
 
 .complete-title{
 
-    font-size:15px;
+    font-size:32px;
 
     font-weight:700;
 
-    white-space: nowrap;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
+    white-space:nowrap;
 
     color:#3d342f;
 
     line-height:1.4;
 
-    margin-bottom: 0 0 56px;
+    margin:0 0 56px;
+
+    text-align:center;
 
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 
