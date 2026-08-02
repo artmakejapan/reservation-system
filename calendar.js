@@ -351,7 +351,7 @@ if (row) {
         </h4>
     `;
 
-    const availableTimes = times.filter(time => {
+    let availableTimes = times.filter(time => {
 
     return !reservedSlots.some(item => {
 
@@ -360,6 +360,13 @@ if (row) {
     });
 
 });
+
+// 2メニュー選択時は火曜日16:15以外は表示しない
+if (reservationData.menus.length === 2 && weekday !== "火") {
+
+    availableTimes = availableTimes.filter(time => time !== "16:15");
+
+}
 
 if (availableTimes.length === 0) {
 
