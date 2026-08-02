@@ -205,8 +205,7 @@ document.querySelectorAll(".editButton").forEach(button => {
 
 });
 
-document.querySelectorAll(".cancelButton").forEach(button => {
-    document.querySelectorAll(".editButton").forEach(button => {
+document.querySelectorAll(".editButton").forEach(button => {
 
     button.addEventListener("click", () => {
 
@@ -218,13 +217,17 @@ document.querySelectorAll(".cancelButton").forEach(button => {
 
 });
 
+document.querySelectorAll(".cancelButton").forEach(button => {
+
     button.addEventListener("click", async () => {
 
-    const id = button.dataset.id;
+        const id = button.dataset.id;
 
-    if(!confirm("この予約をキャンセルしますか？")){
-        return;
-    }
+        if(!confirm("この予約をキャンセルしますか？")){
+            return;
+        }
+
+        // 以下そのまま
 
     const response = await fetch(
         "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
