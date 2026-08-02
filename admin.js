@@ -206,6 +206,17 @@ document.querySelectorAll(".editButton").forEach(button => {
 });
 
 document.querySelectorAll(".cancelButton").forEach(button => {
+    document.querySelectorAll(".editButton").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const id = button.dataset.id;
+
+        alert("変更機能開始\nID：" + id);
+
+    });
+
+});
 
     button.addEventListener("click", async () => {
 
