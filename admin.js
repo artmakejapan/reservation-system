@@ -27,6 +27,9 @@ async function loadReservations() {
     );
 
     const list = await response.json();
+
+    window.reservationList = list;
+
     const keyword = document
     .getElementById("searchName")
     .value
@@ -211,7 +214,9 @@ document.querySelectorAll(".editButton").forEach(button => {
 
         const id = button.dataset.id;
 
-        alert("変更機能開始\nID：" + id);
+        const reservation = window.reservationList.find(item => item.id == id);
+
+        console.log(reservation);
 
     });
 
