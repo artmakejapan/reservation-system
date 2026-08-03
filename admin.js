@@ -261,6 +261,8 @@ function openEditForm(reservation){
 
     console.log(reservation);
 
+    console.log(document.getElementById("editArea"));
+
     document.getElementById("editArea").style.display = "block";
 
     document.getElementById("editName").value = reservation.name;
