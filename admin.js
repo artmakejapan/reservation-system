@@ -270,15 +270,13 @@ document.querySelectorAll(".cancelButton").forEach(button => {
 
 function openEditForm(reservation){
 
-    alert(
-`変更画面
+    document.getElementById("editArea").style.display = "block";
 
-名前：${reservation.name}
+    document.getElementById("editName").value = reservation.name;
 
-日付：${reservation.date}
+    document.getElementById("editDate").value = reservation.date;
 
-時間：${reservation.time}`
-    );
+    document.getElementById("editTime").value = reservation.time;
 
 }
 
