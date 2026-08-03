@@ -216,7 +216,7 @@ document.querySelectorAll(".editButton").forEach(button => {
 
         const reservation = window.reservationList.find(item => item.id == id);
 
-        console.log(reservation);
+        openEditForm(reservation);
 
     });
 
@@ -268,6 +268,20 @@ document.querySelectorAll(".cancelButton").forEach(button => {
 
 }
 
+function openEditForm(reservation){
+
+    alert(
+`変更画面
+
+名前：${reservation.name}
+
+日付：${reservation.date}
+
+時間：${reservation.time}`
+    );
+
+}
+
 document
 .getElementById("searchName")
 .addEventListener("input", loadReservations);
@@ -275,3 +289,4 @@ document
 document
 .getElementById("searchDate")
 .addEventListener("change", loadReservations);
+
