@@ -281,9 +281,23 @@ document.getElementById("saveEditButton").onclick = async () => {
 
 };
 
-document.getElementById("closeEditButton").onclick = () => {
+document.getElementById("saveEditButton").onclick = async () => {
 
-    document.getElementById("editArea").style.display = "none";
+    const newData = {
+
+        action: "update",
+
+        reservationId: reservation.id,
+
+        name: document.getElementById("editName").value,
+
+        date: document.getElementById("editDate").value,
+
+        time: document.getElementById("editTime").value
+
+    };
+
+    console.log(newData);
 
 };
 
