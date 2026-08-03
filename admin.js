@@ -281,6 +281,12 @@ document.getElementById("saveEditButton").onclick = async () => {
 
 };
 
+document.getElementById("closeEditButton").onclick = () => {
+
+    document.getElementById("editArea").style.display = "none";
+
+};
+
 }
 
 document
