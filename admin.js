@@ -196,17 +196,6 @@ data-id="${item.id}">
 
 });
 
-document.querySelectorAll(".editButton").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const id = button.dataset.id;
-
-        alert("変更する予約ID：" + id);
-
-    });
-
-});
 
 document.querySelectorAll(".editButton").forEach(button => {
 
