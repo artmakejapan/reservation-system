@@ -271,6 +271,10 @@ function openEditForm(reservation){
 
     document.getElementById("editTime").value = reservation.time;
 
+    document.getElementById("editArea").scrollIntoView({
+    behavior:"smooth"
+});
+
 }
 
 document

@@ -158,3 +158,76 @@ h1{
     flex:1;
 
 }
+
+#editArea{
+
+    max-width:700px;
+
+    margin:30px auto;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+    border:1px solid #EFE7E1;
+
+}
+
+#editArea h2{
+
+    margin-top:0;
+
+    color:#8A6F5A;
+
+}
+
+#editArea input{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-bottom:16px;
+
+    border:1px solid #E6DED8;
+
+    border-radius:10px;
+
+    box-sizing:border-box;
+
+}
+
+#saveEditButton,
+#closeEditButton{
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+}
+
+#saveEditButton{
+
+    background:#8A6F5A;
+
+    color:#fff;
+
+}
+
+#closeEditButton{
+
+    background:#ddd;
+
+    margin-left:10px;
+
+}
