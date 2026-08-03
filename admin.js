@@ -259,6 +259,8 @@ document.querySelectorAll(".cancelButton").forEach(button => {
 
 function openEditForm(reservation){
 
+    console.log(reservation);
+
     document.getElementById("editArea").style.display = "block";
 
     document.getElementById("editName").value = reservation.name;
