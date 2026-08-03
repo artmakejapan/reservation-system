@@ -275,6 +275,12 @@ function openEditForm(reservation){
     behavior:"smooth"
 });
 
+document.getElementById("saveEditButton").onclick = async () => {
+
+    alert("保存ボタンが押されました");
+
+};
+
 }
 
 document
