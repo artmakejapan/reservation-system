@@ -353,20 +353,51 @@ if (row) {
 
     let availableTimes = times.filter(time => {
 
-    return !reservedSlots.some(item => {
+    // この時間が埋まっていたら不可
+    if (reservedSlots.some(item =>
+        item.date === selectedDate &&
+        item.time === time
+    )) {
+        return false;
+    }
 
-        return item.date === selectedDate && item.time === time;
+    // 2メニューの場合
+    if (reservationData.menus.length === 2) {
 
-    });
+        // 月・金は16:15開始不可
+        if (weekday !== "火" && time === "16:15") {
+            return false;
+        }
+
+        // 9:30なら11:45も空いている必要あり
+        if (time === "09:30") {
+
+            if (reservedSlots.some(item =>
+                item.date === selectedDate &&
+                item.time === "11:45"
+            )) {
+                return false;
+            }
+
+        }
+
+        // 11:45なら16:15も空いている必要あり
+        if (time === "11:45") {
+
+            if (reservedSlots.some(item =>
+                item.date === selectedDate &&
+                item.time === "16:15"
+            )) {
+                return false;
+            }
+
+        }
+
+    }
+
+    return true;
 
 });
-
-// 2メニュー選択時は火曜日16:15以外は表示しない
-if (reservationData.menus.length === 2 && weekday !== "火") {
-
-    availableTimes = availableTimes.filter(time => time !== "16:15");
-
-}
 
 if (availableTimes.length === 0) {
 
