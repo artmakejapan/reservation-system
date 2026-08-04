@@ -274,14 +274,14 @@ reservable &&
 future &&
 availableCount === 0;
 
-const availableCount =
-times.filter(time => {
+const availableCount = times.filter(time => {
 
-    return canReserve(
-        dateString,
-        time,
-        times
-    );
+    return !reservedSlots.some(item => {
+
+        return item.date === dateString &&
+        item.time === time;
+
+    });
 
 }).length;
 
