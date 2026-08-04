@@ -96,53 +96,79 @@ function getRequiredSlots(){
 
 
 
-function canReserve(date, time, times){
+function canReserve(date,time,times){
 
     const requiredSlots = getRequiredSlots();
 
 
-    const startIndex = times.indexOf(time);
+    // 必要時間（分）
+    const duration = requiredSlots * 120;
 
 
-    if(startIndex === -1){
-
-        return false;
-
-    }
+    const start =
+    new Date(date + " " + time);
 
 
-    // 必要枠数分、時間枠が存在するか確認
-    for(let i = 0; i < requiredSlots; i++){
+    const end =
+    new Date(start);
 
-        const targetTime = times[startIndex + i];
+    end.setMinutes(
+        end.getMinutes() + duration
+    );
 
 
-        if(!targetTime){
+    // 既存予約チェック
+
+    for(let i = 0; i < reservedSlots.length; i++){
+
+
+        const item = reservedSlots[i];
+
+
+        if(item.date !== date){
+
+            continue;
+
+        }
+
+
+        const bookedStart =
+        new Date(date + " " + item.time);
+
+
+        const bookedDuration =
+        item.slotCount ? item.slotCount * 120 : 120;
+
+
+        const bookedEnd =
+        new Date(bookedStart);
+
+
+        bookedEnd.setMinutes(
+            bookedEnd.getMinutes()
+            + bookedDuration
+        );
+
+
+
+        // 時間が重なっているか
+
+        if(
+            start < bookedEnd &&
+            end > bookedStart
+        ){
 
             return false;
 
         }
 
 
-        const reserved =
-        reservedSlots.some(item=>{
-
-            return item.date === date &&
-                   item.time === targetTime;
-
-        });
-
-
-        if(reserved){
-
-            return false;
-
-        }
-
     }
+
 
 
     return true;
+
 
 }
 
