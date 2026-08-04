@@ -269,24 +269,8 @@ if(reservable){
 
 }
 
-const full =
-reservable &&
-future &&
-times.length>0 &&
-times.every(time=>
-
-reservedSlots.some(item=>
-
-item.date===dateString &&
-item.time===time
-
-)
-
-);
-
 const remain =
 times.filter(time=>
-
 
     canReserve(
         dateString,
@@ -294,22 +278,31 @@ times.filter(time=>
         times
     )
 
-
 ).length;
+
+const full =
+reservable &&
+future &&
+remain === 0;
+
 
 if(reservable && future && !full){
 
     let colorClass = "";
 
-    if(remain === 2){
+    if(remain === 0){
 
-        colorClass = "two-left";
+    colorClass = "";
 
-    }else if(remain === 1){
+}else if(remain === 1){
 
-        colorClass = "one-left";
+    colorClass = "one-left";
 
-    }
+}else if(remain >= 2){
+
+    colorClass = "two-left";
+
+}
 
     html+=`
     <button
