@@ -272,32 +272,20 @@ if(reservable){
 const full =
 reservable &&
 future &&
-times.length>0 &&
-times.every(time=>
+availableCount === 0;
 
-reservedSlots.some(item=>
+const availableCount =
+times.filter(time => {
 
-item.date===dateString &&
-item.time===time
-
-)
-
-);
-
-const remain =
-times.filter(time=>
-
-
-    canReserve(
+    return canReserve(
         dateString,
         time,
         times
-    )
+    );
 
+}).length;
 
-).length;
-
-if(reservable && future && !full){
+if(reservable && future && availableCount > 0){
 
     let colorClass = "";
 
