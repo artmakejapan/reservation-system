@@ -297,7 +297,39 @@ document.getElementById("saveEditButton").onclick = async () => {
 
     };
 
-    console.log(newData);
+    const response = await fetch(
+
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
+
+        {
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(newData)
+
+        }
+
+    );
+
+    const result = await response.json();
+
+    if(result.result==="success"){
+
+        alert("変更しました");
+
+        document.getElementById("editArea").style.display="none";
+
+        loadReservations();
+
+    }else{
+
+        alert(result.message);
+
+    }
 
 };
 
