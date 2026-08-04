@@ -284,18 +284,20 @@ item.time===time
 
 );
 
-const availableCount =
-times.filter(time => {
+const remain =
+times.filter(time=>
 
-    return canReserve(
+
+    canReserve(
         dateString,
         time,
         times
-    );
+    )
 
-}).length;
 
-if(reservable && future && availableCount > 0){
+).length;
+
+if(reservable && future && !full){
 
     let colorClass = "";
 
