@@ -283,6 +283,7 @@ times.filter(time=>
 const full =
 reservable &&
 future &&
+times.length > 0 &&
 remain === 0;
 
 
