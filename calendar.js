@@ -6,6 +6,7 @@
 let reservedSlots = [];
 let businessHours = [];
 let holidays = [];
+let treatmentSlots = {};
 
 async function loadReservations() {
 
@@ -43,11 +44,27 @@ async function loadInitialData() {
         "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=init"
     );
 
+
     const data = await response.json();
 
+
     reservedSlots = data.reservations;
+
     businessHours = data.businessHours;
+
     holidays = data.holidays;
+
+
+    treatmentSlots = {};
+
+
+    data.treatments.forEach(item=>{
+
+        treatmentSlots[item.name] =
+        Number(item.slots);
+
+    });
+
 
 }
 let customerData = {};
@@ -58,6 +75,85 @@ const baseDate = new Date();
 
 baseDate.setDate(1);
 let reservationData = null;
+
+function getRequiredSlots(){
+
+    let total = 0;
+
+
+    reservationData.menus.forEach(menu=>{
+
+
+        total += treatmentSlots[menu] || 1;
+
+
+    });
+
+
+    return total;
+
+}
+
+
+
+function canReserve(date,time,times){
+
+
+    const needSlots = getRequiredSlots();
+
+
+    const index = times.indexOf(time);
+
+
+
+    if(index === -1){
+
+        return false;
+
+    }
+
+
+
+    for(let i=0;i<needSlots;i++){
+
+
+        const targetTime = times[index+i];
+
+
+        if(!targetTime){
+
+            return false;
+
+        }
+
+
+
+        const exists =
+        reservedSlots.some(item=>{
+
+
+            return item.date === date &&
+            item.time === targetTime;
+
+
+        });
+
+
+
+        if(exists){
+
+            return false;
+
+        }
+
+
+    }
+
+
+    return true;
+
+
+}
 
 async function generateCalendar(data) {
 
@@ -171,11 +267,17 @@ item.time===time
 
 );
 
-const remain = times.filter(time =>
-    !reservedSlots.some(item =>
-        item.date === dateString &&
-        item.time === time
+const remain =
+times.filter(time=>
+
+
+    canReserve(
+        dateString,
+        time,
+        times
     )
+
+
 ).length;
 
 if(reservable && future && !full){
@@ -351,20 +453,28 @@ if (row) {
         </h4>
     `;
 
-    let availableTimes = times.filter(time => {
+    let availableTimes =
+times.filter(time=>{
 
-    return !reservedSlots.some(item => {
 
-        return item.date === selectedDate && item.time === time;
+    return canReserve(
+        selectedDate,
+        time,
+        times
+    );
 
-    });
 
 });
 
-// 2メニュー選択時は火曜日16:15以外は表示しない
-if (reservationData.menus.length === 2 && weekday !== "火") {
+// 2枠施術は火曜日16:15のみ許可
+const requiredSlots = getRequiredSlots();
 
-    availableTimes = availableTimes.filter(time => time !== "16:15");
+if(requiredSlots >= 2 && weekday !== "火"){
+
+    availableTimes =
+    availableTimes.filter(time =>
+        time !== "16:15"
+    );
 
 }
 
