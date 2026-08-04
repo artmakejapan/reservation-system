@@ -96,26 +96,10 @@ function getRequiredSlots(){
 
 
 
-function canReserve(date,time,times){
+function canReserve(date, time, times){
 
-    const needSlots = getRequiredSlots();
+    const requiredSlots = getRequiredSlots();
 
-
-    // 1枠施術
-    if(needSlots === 1){
-
-        return !reservedSlots.some(item=>{
-
-            return item.date === date &&
-            item.time === time;
-
-        });
-
-    }
-
-
-
-    // 2枠以上の場合
 
     const startIndex = times.indexOf(time);
 
@@ -127,62 +111,35 @@ function canReserve(date,time,times){
     }
 
 
+    // 必要枠数分、時間枠が存在するか確認
+    for(let i = 0; i < requiredSlots; i++){
 
-    // 最終時間から逆算
-    const lastTime = times[times.length - 1];
-
-
-    // 16:15開始は火曜以外不可
-    if(time === "16:15"){
-
-        const day =
-        new Date(date).getDay();
+        const targetTime = times[startIndex + i];
 
 
-        if(day !== 2){
-
-            return false;
-
-        }
-
-    }
-
-
-
-    // 予約済み時間チェック
-    const targetReserved =
-    reservedSlots.filter(item=>{
-
-        return item.date === date;
-
-    });
-
-
-
-    // 開始時間より後ろの予約を確認
-    for(let i=0;i<targetReserved.length;i++){
-
-        const bookedTime =
-        targetReserved[i].time;
-
-
-        const bookedIndex =
-        times.indexOf(bookedTime);
-
-
-
-        if(
-            bookedIndex > startIndex &&
-            bookedIndex <= startIndex + needSlots -1
-        ){
+        if(!targetTime){
 
             return false;
 
         }
 
 
-    }
+        const reserved =
+        reservedSlots.some(item=>{
 
+            return item.date === date &&
+                   item.time === targetTime;
+
+        });
+
+
+        if(reserved){
+
+            return false;
+
+        }
+
+    }
 
 
     return true;
