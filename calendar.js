@@ -272,16 +272,26 @@ if(reservable){
 const full =
 reservable &&
 future &&
-availableCount === 0;
+times.length>0 &&
+times.every(time=>
 
-const availableCount = times.filter(time => {
+reservedSlots.some(item=>
 
-    return !reservedSlots.some(item => {
+item.date===dateString &&
+item.time===time
 
-        return item.date === dateString &&
-        item.time === time;
+)
 
-    });
+);
+
+const availableCount =
+times.filter(time => {
+
+    return canReserve(
+        dateString,
+        time,
+        times
+    );
 
 }).length;
 
