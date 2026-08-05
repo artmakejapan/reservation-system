@@ -986,7 +986,18 @@ function showConfirm() {
 
 console.log("GAS response:", text);
 
-const result = JSON.parse(text);
+let result;
+
+try {
+
+    result = JSON.parse(text);
+
+} catch(e) {
+
+    alert("返答エラー\n" + text);
+    return;
+
+}
 
             if (result.result === "success") {
 
