@@ -176,11 +176,16 @@ async function generateCalendar(data) {
 
     reservationData = data;
 
-    if (reservedSlots.length === 0) {
-    await loadInitialData();
-}
+    if(
+        reservedSlots.length === 0 ||
+        businessHours.length === 0
+    ){
 
-drawCalendar(currentDate, reservationData);
+        await loadInitialData();
+
+    }
+
+    drawCalendar(currentDate, reservationData);
 
 }
 
