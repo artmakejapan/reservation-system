@@ -172,9 +172,18 @@ function canReserve(date,time,times){
 
 }
 
-function generateCalendar(data) {
+async function generateCalendar(data) {
 
     reservationData = data;
+
+    if(
+        reservedSlots.length === 0 ||
+        businessHours.length === 0
+    ){
+
+        await loadInitialData();
+
+    }
 
     drawCalendar(currentDate, reservationData);
 
