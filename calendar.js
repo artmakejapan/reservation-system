@@ -289,6 +289,13 @@ if(requiredSlots >= 2 && weekdayName !== "火"){
 
 }
 
+console.log(
+    dateString,
+    reservationData.menus,
+    getRequiredSlots(),
+    times
+);
+
 
 const remain =
 checkTimes.filter(time =>
