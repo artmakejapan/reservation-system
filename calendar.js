@@ -269,13 +269,34 @@ if(reservable){
 
 }
 
+let checkTimes = [...times];
+
+const requiredSlots = getRequiredSlots();
+
+const weekdayName = {
+    1:"月",
+    2:"火",
+    5:"金"
+}[day];
+
+
+// 2メニューは火曜16:15のみ
+if(requiredSlots >= 2 && weekdayName !== "火"){
+
+    checkTimes = checkTimes.filter(time =>
+        time !== "16:15"
+    );
+
+}
+
+
 const remain =
-times.filter(time=>
+checkTimes.filter(time =>
 
     canReserve(
         dateString,
         time,
-        times
+        checkTimes
     )
 
 ).length;
