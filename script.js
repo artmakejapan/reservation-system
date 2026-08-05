@@ -22,13 +22,13 @@ async function initLiff() {
 
 initLiff();
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
     const menuCheckboxes = document.querySelectorAll('input[name="menu"]');
     const visitRadios = document.querySelectorAll('input[name="visit"]');
     const nextButton = document.getElementById("nextButton");
 
-    loadInitialData();
+    await loadInitialData();
     // 同時選択不可ルール
 const exclusiveRules = {
     "アイライン上": ["アイライン上下セット"],
