@@ -991,7 +991,11 @@ function showConfirm() {
                 }
             );
 
-            const result = JSON.parse(await response.text());
+            const text = await response.text();
+
+console.log("GAS response:", text);
+
+const result = JSON.parse(text);
 
             if (result.result === "success") {
 
