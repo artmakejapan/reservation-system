@@ -286,6 +286,7 @@ future &&
 times.length > 0 &&
 remain === 0;
 
+console.log(dateString, remain, full);
 
 if(reservable && future && !full){
 
