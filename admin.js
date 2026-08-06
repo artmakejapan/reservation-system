@@ -273,6 +273,10 @@ function openEditForm(reservation){
 
     document.getElementById("editVisit").value = reservation.visit;
 
+    document.getElementById("editMenu1").value = reservation.menu1 || "";
+
+    document.getElementById("editMenu2").value = reservation.menu2 || "";
+
     document.getElementById("editArea").scrollIntoView({
     behavior:"smooth"
 });
@@ -297,8 +301,11 @@ document.getElementById("saveEditButton").onclick = async () => {
 
         time: document.getElementById("editTime").value,
 
-        visit: document.getElementById("editVisit").value
+        visit: document.getElementById("editVisit").value,
         
+        menu1: document.getElementById("editMenu1").value,
+
+        menu2: document.getElementById("editMenu2").value
         
 
     };
