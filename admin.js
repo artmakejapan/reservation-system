@@ -271,6 +271,8 @@ function openEditForm(reservation){
 
     document.getElementById("editTime").value = reservation.time;
 
+    document.getElementById("editVisit").value = reservation.visit;
+
     document.getElementById("editArea").scrollIntoView({
     behavior:"smooth"
 });
@@ -293,7 +295,11 @@ document.getElementById("saveEditButton").onclick = async () => {
 
         date: document.getElementById("editDate").value,
 
-        time: document.getElementById("editTime").value
+        time: document.getElementById("editTime").value,
+
+        visit: document.getElementById("editVisit").value
+        
+        
 
     };
 
