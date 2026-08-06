@@ -1,7 +1,7 @@
 body{
 
     margin:0;
-    padding:40px;
+    padding:20px;
 
     background:#F7F3EF;
 
@@ -157,6 +157,22 @@ h1{
 
     flex:1;
 
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#C98F8F;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:700;
+
 }
 
 #editArea{
@@ -229,6 +245,99 @@ h1{
     background:#ddd;
 
     margin-left:10px;
+
+}
+
+@media(max-width:600px){
+
+    body{
+
+        padding:16px 12px;
+
+    }
+
+
+    h1{
+
+        font-size:24px;
+
+    }
+
+
+    .search-area{
+
+        flex-direction:column;
+
+        gap:10px;
+
+    }
+
+
+    .search-area input{
+
+        width:100%;
+
+        font-size:16px;
+
+    }
+
+
+    #reservationList{
+
+        margin:25px auto;
+
+    }
+
+
+    .reservation-card{
+
+        padding:18px;
+
+        border-radius:16px;
+
+    }
+
+
+    .time-box{
+
+        font-size:26px;
+
+    }
+
+
+    .button-row{
+
+        gap:8px;
+
+    }
+
+
+    .button-row button{
+
+        padding:14px 8px;
+
+        font-size:15px;
+
+    }
+
+
+    #editArea{
+
+        padding:18px;
+
+        border-radius:16px;
+
+    }
+
+
+    #saveEditButton,
+    #closeEditButton{
+
+        width:100%;
+
+        margin:5px 0;
+
+    }
 
 }
 
