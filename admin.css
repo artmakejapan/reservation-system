@@ -231,3 +231,28 @@ h1{
     margin-left:10px;
 
 }
+
+#editArea label{
+    display:block;
+    margin-top:14px;
+    margin-bottom:6px;
+    color:#8A6F5A;
+    font-weight:700;
+}
+
+#editArea select{
+
+    width:100%;
+    padding:12px;
+
+    margin-bottom:16px;
+
+    border:1px solid #E6DED8;
+
+    border-radius:10px;
+
+    box-sizing:border-box;
+
+    background:#fff;
+
+}
