@@ -365,3 +365,13 @@ h1{
     background:#fff;
 
 }
+
+.search-area input[type="date"],
+#editArea input[type="date"]{
+
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0;
+    box-sizing:border-box;
+
+}
