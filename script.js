@@ -28,7 +28,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     const visitRadios = document.querySelectorAll('input[name="visit"]');
     const nextButton = document.getElementById("nextButton");
 
-    await loadInitialData();
+    nextButton.disabled = true;
+    nextButton.textContent = "読み込み中...";
+
+    loadInitialData().then(() => {
+
+    nextButton.disabled = false;
+
+    nextButton.textContent = "空き状況を見る";
+
+}).catch(() => {
+
+    alert("初期データの読み込みに失敗しました。");
+
+});
     // 同時選択不可ルール
 const exclusiveRules = {
     "アイライン上": ["アイライン上下セット"],
