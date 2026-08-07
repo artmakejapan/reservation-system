@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const password = document.getElementById("adminPassword").value;
 
-        if (password === "1234") {
+        if (password === "0918") {
 
             loadReservations();
 
