@@ -230,8 +230,8 @@ document.querySelectorAll(".cancelButton").forEach(button => {
         {
             method:"POST",
             headers:{
-                "Content-Type":"application/json"
-            },
+    "Content-Type":"text/plain"
+},
             body:JSON.stringify({
                 action:"cancel",
                 reservationId:id
@@ -325,8 +325,8 @@ document.getElementById("saveEditButton").onclick = async () => {
             method:"POST",
 
             headers:{
-                "Content-Type":"application/json"
-            },
+    "Content-Type":"text/plain"
+},
 
             body:JSON.stringify(newData)
 
