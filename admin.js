@@ -76,7 +76,7 @@ const todayList = filteredList
 .sort((a,b)=>a.time.localeCompare(b.time));
 
 const otherList = filteredList
-.filter(item => item.date !== today)
+.filter(item => item.date > today)
 .sort((a,b)=>{
 
     if(a.date===b.date){
