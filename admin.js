@@ -47,6 +47,9 @@ const searchDate = document
     .getElementById("searchDate")
     .value;
 
+    const showPast =
+document.getElementById("showPast").checked;
+
 let filteredList = list;
 
 if (keyword) {
@@ -76,7 +79,19 @@ const todayList = filteredList
 .sort((a,b)=>a.time.localeCompare(b.time));
 
 const otherList = filteredList
-.filter(item => item.date > today)
+.filter(item => {
+
+    if(item.date === today) return false;
+
+    if(showPast){
+
+        return true;
+
+    }
+
+    return item.date > today;
+
+})
 .sort((a,b)=>{
 
     if(a.date===b.date){
@@ -394,5 +409,9 @@ document
 
 document
 .getElementById("searchDate")
+.addEventListener("change", loadReservations);
+
+document
+.getElementById("showPast")
 .addEventListener("change", loadReservations);
 
