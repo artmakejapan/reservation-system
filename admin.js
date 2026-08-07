@@ -1,3 +1,5 @@
+let treatmentMenus = [];
+
 document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("loginButton").addEventListener("click", () => {
@@ -27,6 +29,12 @@ async function loadReservations() {
     );
 
     const list = await response.json();
+
+    const treatmentResponse = await fetch(
+"https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=treatments"
+);
+
+treatmentMenus = await treatmentResponse.json();
 
     window.reservationList = list;
 
@@ -274,6 +282,26 @@ function openEditForm(reservation){
     document.getElementById("editTime").value = reservation.time;
 
     document.getElementById("editVisit").value = reservation.visit;
+
+    const menu1 = document.getElementById("editMenu1");
+const menu2 = document.getElementById("editMenu2");
+
+menu1.innerHTML = '<option value="">選択してください</option>';
+menu2.innerHTML = '<option value="">選択してください</option>';
+
+treatmentMenus.forEach(item => {
+
+    menu1.innerHTML += `
+    <option value="${item.name}">
+    ${item.name}
+    </option>`;
+
+    menu2.innerHTML += `
+    <option value="${item.name}">
+    ${item.name}
+    </option>`;
+
+});
 
     document.getElementById("editMenu1").value = reservation.menu1 || "";
 
