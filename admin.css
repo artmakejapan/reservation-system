@@ -375,3 +375,13 @@ h1{
     box-sizing:border-box;
 
 }
+
+.search-area input[type="time"],
+#editArea input[type="time"]{
+
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0;
+    box-sizing:border-box;
+
+}
