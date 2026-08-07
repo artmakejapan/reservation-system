@@ -385,3 +385,19 @@ h1{
     box-sizing:border-box;
 
 }
+
+input[type="date"],
+input[type="time"]{
+
+    width:100%;
+    max-width:100%;
+    min-width:0;
+
+    display:block;
+
+    box-sizing:border-box;
+
+    -webkit-appearance:none;
+    appearance:none;
+
+}
