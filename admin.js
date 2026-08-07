@@ -217,6 +217,8 @@ document.querySelectorAll(".cancelButton").forEach(button => {
 
         const id = button.dataset.id;
 
+        console.log("キャンセルID:", id);
+
         if(!confirm("この予約をキャンセルしますか？")){
             return;
         }
