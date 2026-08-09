@@ -749,3 +749,32 @@ textarea{
         0 2px 8px rgba(0,0,0,.12);
 
 }
+
+/* =========================
+   メニュー別カラー
+========================= */
+
+/* 眉 → 薄いひまわり色 */
+.menu-item:has(input[value="眉"]),
+.menu-item:has(input[value="眉＋リップセット"]){
+    background: #F8E8A8;
+}
+
+/* リップ → 薄いピンク */
+.menu-item:has(input[value="リップ"]),
+.menu-item:has(input[value="リップ2回セット"]) {
+    background: #F6D9DC;
+}
+
+/* アイライン → 薄い空色 */
+.menu-item:has(input[value="アイライン上"]),
+.menu-item:has(input[value="アイライン下"]),
+.menu-item:has(input[value="アイライン上下セット"]) {
+    background: #DCEBF2;
+}
+
+/* ヘアライン → 薄い葉っぱ色 */
+.menu-item:has(input[value="ヘアライン（M字 or 分け目）"]),
+.menu-item:has(input[value="ヘアライン全体"]) {
+    background: #DDE8D2;
+}
