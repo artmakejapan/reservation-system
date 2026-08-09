@@ -44,9 +44,7 @@ async function loadInitialData() {
         "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=init"
     );
 
-
     const data = await response.json();
-
 
     reservedSlots = data.reservations;
 
@@ -54,19 +52,83 @@ async function loadInitialData() {
 
     holidays = data.holidays;
 
+    const treatmentData = data.treatments;
 
-    treatmentSlots = {};
+treatmentSlots = {};
 
+// 必要枠数を登録
+treatmentData.forEach(item => {
 
-    data.treatments.forEach(item=>{
-
-        treatmentSlots[item.name] =
+    treatmentSlots[item.name] =
         Number(item.slots);
+
+});
+
+
+// ================================
+// 同時選択不可ルール
+// Treatmentsシートから取得
+// ================================
+
+exclusiveRules = {};
+
+treatmentData.forEach(item => {
+
+    if (!item.exclusive) return;
+
+    const ngList = item.exclusive
+        .split(",")
+        .map(name => name.trim())
+        .filter(name => name);
+
+    exclusiveRules[item.name] = ngList;
+
+});
+
+
+// ================================
+// メニュー表示
+// Enabled = TRUE のものだけ
+// ================================
+
+const menuList =
+    document.getElementById("menuList");
+
+menuList.innerHTML = "";
+
+treatmentData
+    .filter(item => item.enabled)
+    .forEach(item => {
+
+        const label =
+            document.createElement("label");
+
+        label.className = "menu-item";
+
+
+        const checkbox =
+            document.createElement("input");
+
+        checkbox.type = "checkbox";
+        checkbox.name = "menu";
+        checkbox.value = item.name;
+
+
+        const span =
+            document.createElement("span");
+
+        span.textContent = item.name;
+
+
+        label.appendChild(checkbox);
+        label.appendChild(span);
+
+        menuList.appendChild(label);
 
     });
 
-
 }
+
 let customerData = {};
 let selectedTime = null;
 let selectedDate = null;
@@ -75,6 +137,8 @@ const baseDate = new Date();
 
 baseDate.setDate(1);
 let reservationData = null;
+
+let exclusiveRules = {};
 
 function getRequiredSlots(){
 

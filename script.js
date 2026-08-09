@@ -24,34 +24,21 @@ initLiff();
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const menuCheckboxes = document.querySelectorAll('input[name="menu"]');
     const visitRadios = document.querySelectorAll('input[name="visit"]');
     const nextButton = document.getElementById("nextButton");
 
     nextButton.disabled = true;
-    nextButton.textContent = "読み込み中...";
+nextButton.textContent = "読み込み中...";
 
-    await loadInitialData();
+await loadInitialData();
+
+const menuCheckboxes =
+    document.querySelectorAll('input[name="menu"]');
 
 nextButton.disabled = false;
 
 nextButton.textContent = "空き状況を見る";
 
-    // 同時選択不可ルール
-const exclusiveRules = {
-  "眉": ["眉＋リップセット"],
-
-  "アイライン上": ["アイライン上下セット"],
-  "アイライン下": ["アイライン上下セット"],
-  "アイライン上下セット": ["アイライン上", "アイライン下"],
-
-  "ヘアライン（M字 or 分け目）": ["ヘアライン全体"],
-  "ヘアライン全体": ["ヘアライン（M字 or 分け目）"],
-
-  "リップ": ["リップ2回セット", "眉＋リップセット"],
-  "リップ2回セット": ["リップ", "眉＋リップセット"],
-  "眉＋リップセット": ["眉", "リップ", "リップ2回セット"]
-};
 
     // メニューは2つまで
     menuCheckboxes.forEach(box => {
