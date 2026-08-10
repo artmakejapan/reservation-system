@@ -481,7 +481,7 @@ next.setMonth(next.getMonth() + 1);
 
 const limit = new Date(baseDate);
 
-limit.setMonth(limit.getMonth() + 1);
+limit.setMonth(limit.getMonth() + 2);
 
 if (
     next.getFullYear() > limit.getFullYear() ||
