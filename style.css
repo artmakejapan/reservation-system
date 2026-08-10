@@ -25,17 +25,12 @@ body{
 ========================================== */
 
 .top-bar{
-
     background:#D6AA8D;
-
     height:50px;
-
     display:flex;
-
     align-items:center;
-
-    justify-content:center;
-
+    justify-content:flex-start;
+    padding-left:15px;
 }
 
 .top-bar h1 {
