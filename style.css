@@ -38,22 +38,15 @@ body{
 
 }
 
-.top-bar h1{
-
+.top-bar h1 {
     font-family: 'Nunito', sans-serif;
-
-    color:#050505;
-
-    font-size:15px;
-
-    font-weight:400;
-
-    letter-spacing:0.02em;
-
-    margin:0;
-
-    line-height:1;
-
+    color: #050505;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin: 0;
+    line-height: 1;
+    text-align: left;
 }
 
 /* ==========================================
