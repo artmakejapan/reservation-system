@@ -372,11 +372,11 @@ if(reservable && future && !full){
 
     let colorClass = "";
 
-    if(remain === 1){
+if (remain === 1 || remain === 2) {
 
     colorClass = "one-left";
 
-}else if(remain === 2){
+} else if (remain === 3) {
 
     colorClass = "two-left";
 
