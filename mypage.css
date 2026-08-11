@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #F8F6F3;
+    color: #4A403A;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    line-height: 1.8;
+}
+
+.top-bar {
+    background: #D6AA8D;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    font-size: 13px;
+}
+
+.container {
+    width: 92%;
+    max-width: 650px;
+    margin: 30px auto;
+}
+
+h1 {
+    text-align: center;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: 24px;
+    color: #6B5A50;
+    margin-bottom: 10px;
+}
+
+#userName {
+    text-align: center;
+    color: #8A7768;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.card h2 {
+    font-size: 20px;
+    color: #6B5A50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.reservation-item p,
+.history-item p {
+    padding: 12px 0;
+    border-bottom: 1px solid #ECE6E0;
+}
+
+.reservation-item span {
+    display: block;
+    font-size: 13px;
+    color: #9B8D83;
+}
+
+.history-item {
+    padding: 5px 0;
+}
+
+.history-item p:first-child {
+    color: #9B8D83;
+    font-size: 13px;
+}
+
+.history-item p:last-child {
+    font-size: 16px;
+    color: #4A403A;
+}
