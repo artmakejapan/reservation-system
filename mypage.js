@@ -1,7 +1,7 @@
 const LIFF_ID = "2010613933-uBqu1yDz";
 
 const GAS_URL =
-"https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXCfZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
+"https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
 
 
 async function initMyPage() {
