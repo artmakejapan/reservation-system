@@ -34,7 +34,7 @@ nextButton.textContent = "読み込み中...";
 await loadInitialData();
 
 const menuCheckboxes =
-    document.querySelectorAll('input[name="menu"]');
+document.querySelectorAll('input[name="menu"]');
 
 nextButton.disabled = false;
 

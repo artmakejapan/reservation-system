@@ -46,8 +46,6 @@ async function loadInitialData() {
 
     const data = await response.json();
 
-    console.log("INIT DATA:", data);
-
     reservedSlots = data.reservations || [];
     businessHours = data.businessHours || [];
     holidays = data.holidays || [];
@@ -58,8 +56,7 @@ async function loadInitialData() {
 
     treatmentData.forEach(item => {
 
-        treatmentSlots[item.name] =
-            Number(item.slots);
+        treatmentSlots[item.name] = Number(item.slots);
 
     });
 
@@ -78,8 +75,8 @@ async function loadInitialData() {
 
     });
 
-    const menuList =
-        document.getElementById("menuList");
+    // メニュー表示
+    const menuList = document.getElementById("menuList");
 
     menuList.innerHTML = "";
 
@@ -88,20 +85,17 @@ async function loadInitialData() {
         .sort((a, b) => a.displayOrder - b.displayOrder)
         .forEach(item => {
 
-            const label =
-                document.createElement("label");
+            const label = document.createElement("label");
 
             label.className = "menu-item";
 
-            const checkbox =
-                document.createElement("input");
+            const checkbox = document.createElement("input");
 
             checkbox.type = "checkbox";
             checkbox.name = "menu";
             checkbox.value = item.name;
 
-            const span =
-                document.createElement("span");
+            const span = document.createElement("span");
 
             span.textContent = item.name;
 
@@ -111,8 +105,6 @@ async function loadInitialData() {
             menuList.appendChild(label);
 
         });
-
-    console.log("MENU CREATED:", treatmentData);
 
 }
 
