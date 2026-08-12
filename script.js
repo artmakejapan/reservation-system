@@ -6,64 +6,6 @@
 const LIFF_ID = "2010613933-uBqu1yDz";
 
 let lineUserId = "";
-let treatmentData = [];
-let exclusiveRules = {};
-
-async function loadInitialData() {
-
-    const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXCfZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=init"
-    );
-
-    const data = await response.json();
-
-    // 施術メニューデータ
-    treatmentData = data.treatments || [];
-
-    // メニュー表示
-    const menuList = document.getElementById("menuList");
-
-    menuList.innerHTML = "";
-
-    treatmentData
-        .filter(item => item.enabled)
-        .sort((a, b) => a.displayOrder - b.displayOrder)
-        .forEach(item => {
-
-            const label = document.createElement("label");
-
-            label.className = "menu-item";
-
-            label.innerHTML = `
-                <input
-                    type="checkbox"
-                    name="menu"
-                    value="${item.name}"
-                >
-                ${item.name}
-            `;
-
-            menuList.appendChild(label);
-
-        });
-
-    // 同時選択不可ルール作成
-    exclusiveRules = {};
-
-    treatmentData.forEach(item => {
-
-        if (!item.exclusive) return;
-
-        const ngList = item.exclusive
-            .split(",")
-            .map(name => name.trim())
-            .filter(name => name);
-
-        exclusiveRules[item.name] = ngList;
-
-    });
-
-}
 
 async function initLiff() {
     await liff.init({
