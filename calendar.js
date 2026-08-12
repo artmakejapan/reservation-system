@@ -8,6 +8,74 @@ let businessHours = [];
 let holidays = [];
 let treatmentSlots = {};
 
+async function loadTreatments() {
+
+    const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXCfZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=treatments"
+    );
+
+    const treatmentData = await response.json();
+
+    treatmentSlots = {};
+
+    treatmentData.forEach(item => {
+
+        treatmentSlots[item.name] =
+            Number(item.slots);
+
+    });
+
+    // 同時選択不可ルール
+    exclusiveRules = {};
+
+    treatmentData.forEach(item => {
+
+        if (!item.exclusive) return;
+
+        exclusiveRules[item.name] =
+            item.exclusive
+                .split(",")
+                .map(name => name.trim())
+                .filter(name => name);
+
+    });
+
+    // メニュー表示
+    const menuList =
+        document.getElementById("menuList");
+
+    menuList.innerHTML = "";
+
+    treatmentData
+        .filter(item => item.enabled)
+        .sort((a, b) => a.displayOrder - b.displayOrder)
+        .forEach(item => {
+
+            const label =
+                document.createElement("label");
+
+            label.className = "menu-item";
+
+            const checkbox =
+                document.createElement("input");
+
+            checkbox.type = "checkbox";
+            checkbox.name = "menu";
+            checkbox.value = item.name;
+
+            const span =
+                document.createElement("span");
+
+            span.textContent = item.name;
+
+            label.appendChild(checkbox);
+            label.appendChild(span);
+
+            menuList.appendChild(label);
+
+        });
+}
+
 async function loadReservations() {
 
     const response = await fetch(
@@ -41,91 +109,14 @@ async function loadHolidays() {
 async function loadInitialData() {
 
     const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=init"
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXCfZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=init"
     );
 
     const data = await response.json();
 
-    reservedSlots = data.reservations;
-
-    businessHours = data.businessHours;
-
-    holidays = data.holidays;
-
-    const treatmentData = data.treatments;
-
-treatmentSlots = {};
-
-// 必要枠数を登録
-treatmentData.forEach(item => {
-
-    treatmentSlots[item.name] =
-        Number(item.slots);
-
-});
-
-
-// ================================
-// 同時選択不可ルール
-// Treatmentsシートから取得
-// ================================
-
-exclusiveRules = {};
-
-treatmentData.forEach(item => {
-
-    if (!item.exclusive) return;
-
-    const ngList = item.exclusive
-        .split(",")
-        .map(name => name.trim())
-        .filter(name => name);
-
-    exclusiveRules[item.name] = ngList;
-
-});
-
-
-// ================================
-// メニュー表示
-// Enabled = TRUE のものだけ
-// ================================
-
-const menuList =
-    document.getElementById("menuList");
-
-menuList.innerHTML = "";
-
-treatmentData
-    .filter(item => item.enabled)
-    .forEach(item => {
-
-        const label =
-            document.createElement("label");
-
-        label.className = "menu-item";
-
-
-        const checkbox =
-            document.createElement("input");
-
-        checkbox.type = "checkbox";
-        checkbox.name = "menu";
-        checkbox.value = item.name;
-
-
-        const span =
-            document.createElement("span");
-
-        span.textContent = item.name;
-
-
-        label.appendChild(checkbox);
-        label.appendChild(span);
-
-        menuList.appendChild(label);
-
-    });
+    reservedSlots = data.reservations || [];
+    businessHours = data.businessHours || [];
+    holidays = data.holidays || [];
 
 }
 

@@ -28,16 +28,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nextButton = document.getElementById("nextButton");
 
     nextButton.disabled = true;
+
 nextButton.textContent = "読み込み中...";
 
-await loadInitialData();
+// メニューだけ先に読み込む
+await loadTreatments();
 
 const menuCheckboxes =
-    document.querySelectorAll('input[name="menu"]');
+document.querySelectorAll('input[name="menu"]');
 
+// メニューが表示されたら操作可能
 nextButton.disabled = false;
 
 nextButton.textContent = "空き状況を見る";
+
+// 予約データは裏で読み込む
+loadInitialData();
 
 
     // メニューは2つまで
