@@ -46,13 +46,13 @@ async function loadInitialData() {
 
     const data = await response.json();
 
-    reservedSlots = data.reservations;
+    console.log("INIT DATA:", data);
 
-    businessHours = data.businessHours;
+    reservedSlots = data.reservations || [];
+    businessHours = data.businessHours || [];
+    holidays = data.holidays || [];
 
-    holidays = data.holidays;
-
-    const treatmentData = data.treatments;
+    const treatmentData = data.treatments || [];
 
     treatmentSlots = {};
 
@@ -85,6 +85,7 @@ async function loadInitialData() {
 
     treatmentData
         .filter(item => item.enabled)
+        .sort((a, b) => a.displayOrder - b.displayOrder)
         .forEach(item => {
 
             const label =
@@ -110,6 +111,8 @@ async function loadInitialData() {
             menuList.appendChild(label);
 
         });
+
+    console.log("MENU CREATED:", treatmentData);
 
 }
 
