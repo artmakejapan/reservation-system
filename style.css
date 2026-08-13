@@ -766,3 +766,47 @@ textarea{
 .menu-item:has(input[value="ヘアライン全体"]) {
     background: #DDE8D2;
 }
+
+/* ================================
+   予約方法ガイド
+================================ */
+
+.reservation-guide {
+    text-align: center;
+    padding: 40px 30px;
+    border: 1px solid #b86b78;
+}
+
+.guide-title {
+    margin: 0 0 24px;
+    color: #b86b78;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.guide-steps p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #3f3935;
+}
+
+.guide-steps span {
+    display: block;
+    margin: 4px 0;
+    font-size: 18px;
+    color: #6f625a;
+}
+
+.guide-divider {
+    width: 85%;
+    margin: 28px auto;
+    border-top: 1px dashed #d9aaa9;
+}
+
+.guide-contact {
+    margin: 32px 0 0;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #4f4742;
+}
