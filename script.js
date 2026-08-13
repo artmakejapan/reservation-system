@@ -6,18 +6,42 @@
 const LIFF_ID = "2010613933-uBqu1yDz";
 
 let lineUserId = "";
+let liffReady = false;
 
 async function initLiff() {
-    await liff.init({
-        liffId: LIFF_ID
-    });
 
-    if (liff.isLoggedIn()) {
-        const profile = await liff.getProfile();
-        lineUserId = profile.userId;
-    } else {
-        liff.login();
+    try {
+
+        await liff.init({
+            liffId: LIFF_ID
+        });
+
+        if (liff.isLoggedIn()) {
+
+            const profile = await liff.getProfile();
+
+            lineUserId = profile.userId;
+
+            liffReady = true;
+
+        } else {
+
+            liff.login();
+
+            return;
+
+        }
+
+    } catch (error) {
+
+        console.error("LIFF初期化エラー:", error);
+
+        alert("予約システムの読み込みに失敗しました。LINEからもう一度お試しください。");
+
+        return;
+
     }
+
 }
 
 initLiff();
@@ -30,6 +54,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     nextButton.disabled = true;
 
 nextButton.textContent = "読み込み中...";
+
+// LIFF初期化完了を待つ
+while (!liffReady) {
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+}
 
 await loadInitialData();
 
