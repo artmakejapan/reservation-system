@@ -784,6 +784,12 @@ textarea{
     font-weight: 700;
 }
 
+.guide-steps {
+    text-align: left;
+    max-width: 330px;
+    margin: 0 auto;
+}
+
 .guide-steps p {
     margin: 0;
     font-size: 17px;
