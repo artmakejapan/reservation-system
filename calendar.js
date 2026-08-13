@@ -119,6 +119,22 @@ let reservationData = null;
 
 let exclusiveRules = {};
 
+function createLocalDate(date, time) {
+
+    const [year, month, day] = date.split("-").map(Number);
+    const [hour, minute] = time.split(":").map(Number);
+
+    return new Date(
+        year,
+        month - 1,
+        day,
+        hour,
+        minute,
+        0
+    );
+
+}
+
 function getRequiredSlots(){
 
     let total = 0;
@@ -149,7 +165,7 @@ function canReserve(date,time,times){
 
 
     const start =
-    new Date(date + " " + time);
+    createLocalDate(date, time);
 
 
     const end =
@@ -176,7 +192,7 @@ function canReserve(date,time,times){
 
 
         const bookedStart =
-        new Date(date + " " + item.time);
+        createLocalDate(date, item.time);
 
 
         const bookedDuration =
@@ -784,7 +800,7 @@ placeholder="既往歴・服薬中のお薬をご入力ください。
 
 document.querySelector(".next-form").addEventListener("click", () => {
 
-    const name = document.getElementById("customerName").value.trim();
+const name = document.getElementById("customerName").value.trim();
 
 const gender = document.querySelector('input[name="gender"]:checked');
 
