@@ -315,12 +315,6 @@ treatmentMenus.forEach(item => {
 
 document.getElementById("saveEditButton").onclick = async () => {
 
-    alert("保存ボタンが押されました");
-
-};
-
-document.getElementById("saveEditButton").onclick = async () => {
-
     const newData = {
 
         action: "update",
