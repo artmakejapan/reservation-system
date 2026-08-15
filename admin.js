@@ -527,67 +527,38 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
 
 
     // ================================
-    // 時間候補を作成
+    // 初診・再診によって
+    // 使用する列を切り替える
     // ================================
 
-    let times = [];
+    let sourceTimes = "";
 
+    if (visit === "再診") {
 
-    // 初診側の時間
-    if (business.first) {
+        sourceTimes = business.repeat;
 
-        times.push(
-            String(business.first).trim()
-        );
+    } else {
 
-    }
-
-
-    // repeatを分解
-    if (business.repeat) {
-
-        let repeatTimes = [];
-
-        if (Array.isArray(business.repeat)) {
-
-            repeatTimes = business.repeat;
-
-        } else {
-
-            repeatTimes =
-                String(business.repeat)
-                    .split(/[,、]/)
-                    .map(time => time.trim())
-                    .filter(Boolean);
-
-        }
-
-        times.push(...repeatTimes);
+        sourceTimes = business.first;
 
     }
+
+
+    // ================================
+    // カンマ区切りを時間に分解
+    // ================================
+
+    let times = String(sourceTimes || "")
+        .split(/[,、]/)
+        .map(time => time.trim())
+        .filter(Boolean);
 
 
     // ================================
     // 重複削除
     // ================================
 
-    times = [
-        ...new Set(times)
-    ];
-
-
-    // ================================
-    // 14:00は再診のみ
-    // ================================
-
-    if (
-        visit === "再診" &&
-        !times.includes("14:00")
-    ) {
-
-        times.push("14:00");
-
-    }
+    times = [...new Set(times)];
 
 
     // ================================
@@ -598,7 +569,7 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
 
 
     // ================================
-    // 選択肢を作成
+    // 選択肢生成
     // ================================
 
     times.forEach(time => {
@@ -607,6 +578,7 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
             document.createElement("option");
 
         option.value = time;
+
         option.textContent = time;
 
         timeSelect.appendChild(option);
