@@ -462,6 +462,7 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
         return;
     }
 
+
     // ================================
     // 休日チェック
     // ================================
@@ -486,12 +487,9 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
     // 曜日取得
     // ================================
 
-    const day = new Date(date + "T00:00:00").getDay();
+    const day =
+        new Date(date + "T00:00:00").getDay();
 
-
-    // ================================
-    // BusinessHoursから該当曜日を取得
-    // ================================
 
     const weekdayMap = {
         0: "日",
@@ -505,11 +503,16 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
 
     const weekday = weekdayMap[day];
 
-    const business = (window.businessHours || [])
-        .find(item => item.weekday === weekday);
+
+    // ================================
+    // BusinessHours取得
+    // ================================
+
+    const business =
+        (window.businessHours || [])
+            .find(item => item.weekday === weekday);
 
 
-    // 営業設定がない場合
     if (!business) {
 
         const option = document.createElement("option");
@@ -524,22 +527,40 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
 
 
     // ================================
-    // 通常の時間候補
+    // 時間候補を作成
     // ================================
 
     let times = [];
 
+
+    // 初診側の時間
     if (business.first) {
-        times.push(business.first);
+
+        times.push(
+            String(business.first).trim()
+        );
+
     }
 
+
+    // repeatを分解
     if (business.repeat) {
 
-        const repeatTimes =
-            String(business.repeat)
-                .split(",")
-                .map(time => time.trim())
-                .filter(Boolean);
+        let repeatTimes = [];
+
+        if (Array.isArray(business.repeat)) {
+
+            repeatTimes = business.repeat;
+
+        } else {
+
+            repeatTimes =
+                String(business.repeat)
+                    .split(/[,、]/)
+                    .map(time => time.trim())
+                    .filter(Boolean);
+
+        }
 
         times.push(...repeatTimes);
 
@@ -550,7 +571,9 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
     // 重複削除
     // ================================
 
-    times = [...new Set(times)];
+    times = [
+        ...new Set(times)
+    ];
 
 
     // ================================
@@ -575,7 +598,7 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
 
 
     // ================================
-    // 選択肢生成
+    // 選択肢を作成
     // ================================
 
     times.forEach(time => {
