@@ -18,6 +18,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+
+    // ================================
+    // 変更日を変えたとき
+    // ================================
+
+    document.getElementById("editDate").addEventListener("change", () => {
+
+        const visit =
+            document.getElementById("editVisit").value;
+
+        updateEditTimeOptions(
+            document.getElementById("editDate").value,
+            visit
+        );
+
+    });
+
+
+    // ================================
+    // 初診・再診を変えたとき
+    // ================================
+
+    document.getElementById("editVisit").addEventListener("change", () => {
+
+        const visit =
+            document.getElementById("editVisit").value;
+
+        updateEditTimeOptions(
+            document.getElementById("editDate").value,
+            visit
+        );
+
+    });
+
 });
 
 async function loadReservations() {
@@ -30,11 +64,31 @@ async function loadReservations() {
 
     const list = await response.json();
 
-    const treatmentResponse = await fetch(
-"https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=treatments"
+const treatmentResponse = await fetch(
+    "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=treatments"
 );
 
 treatmentMenus = await treatmentResponse.json();
+
+
+// ================================
+// BusinessHours・Holidays取得
+// ================================
+
+const businessResponse = await fetch(
+    "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=businesshours"
+);
+
+const businessHours = await businessResponse.json();
+
+const holidayResponse = await fetch(
+    "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=holidays"
+);
+
+const holidays = await holidayResponse.json();
+
+window.businessHours = businessHours;
+window.holidays = holidays;
 
     window.reservationList = list;
 
@@ -279,9 +333,17 @@ function openEditForm(reservation){
 
     document.getElementById("editDate").value = reservation.date;
 
-    document.getElementById("editTime").value = reservation.time;
+document.getElementById("editVisit").value = reservation.visit;
 
-    document.getElementById("editVisit").value = reservation.visit;
+// ================================
+// 変更日時の時間候補を更新
+// ================================
+
+updateEditTimeOptions(
+    reservation.date,
+    reservation.visit,
+    reservation.time
+);
 
     const menu1 = document.getElementById("editMenu1");
 const menu2 = document.getElementById("editMenu2");
@@ -390,3 +452,153 @@ document
 .getElementById("searchDate")
 .addEventListener("change", loadReservations);
 
+function updateEditTimeOptions(date, visit, currentTime = "") {
+
+    const timeSelect = document.getElementById("editTime");
+
+    timeSelect.innerHTML = "";
+
+    if (!date) {
+        return;
+    }
+
+    // ================================
+    // 休日チェック
+    // ================================
+
+    if (
+        window.holidays &&
+        window.holidays.includes(date)
+    ) {
+
+        const option = document.createElement("option");
+
+        option.value = "";
+        option.textContent = "休診日";
+
+        timeSelect.appendChild(option);
+
+        return;
+    }
+
+
+    // ================================
+    // 曜日取得
+    // ================================
+
+    const day = new Date(date + "T00:00:00").getDay();
+
+
+    // ================================
+    // BusinessHoursから該当曜日を取得
+    // ================================
+
+    const weekdayMap = {
+        0: "日",
+        1: "月",
+        2: "火",
+        3: "水",
+        4: "木",
+        5: "金",
+        6: "土"
+    };
+
+    const weekday = weekdayMap[day];
+
+    const business = (window.businessHours || [])
+        .find(item => item.weekday === weekday);
+
+
+    // 営業設定がない場合
+    if (!business) {
+
+        const option = document.createElement("option");
+
+        option.value = "";
+        option.textContent = "予約不可";
+
+        timeSelect.appendChild(option);
+
+        return;
+    }
+
+
+    // ================================
+    // 通常の時間候補
+    // ================================
+
+    let times = [];
+
+    if (business.first) {
+        times.push(business.first);
+    }
+
+    if (business.repeat) {
+
+        const repeatTimes =
+            String(business.repeat)
+                .split(",")
+                .map(time => time.trim())
+                .filter(Boolean);
+
+        times.push(...repeatTimes);
+
+    }
+
+
+    // ================================
+    // 重複削除
+    // ================================
+
+    times = [...new Set(times)];
+
+
+    // ================================
+    // 14:00は再診のみ
+    // ================================
+
+    if (
+        visit === "再診" &&
+        !times.includes("14:00")
+    ) {
+
+        times.push("14:00");
+
+    }
+
+
+    // ================================
+    // 時間順
+    // ================================
+
+    times.sort();
+
+
+    // ================================
+    // 選択肢生成
+    // ================================
+
+    times.forEach(time => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = time;
+        option.textContent = time;
+
+        timeSelect.appendChild(option);
+
+    });
+
+
+    // ================================
+    // 現在の予約時間を維持
+    // ================================
+
+    if (times.includes(currentTime)) {
+
+        timeSelect.value = currentTime;
+
+    }
+
+}
