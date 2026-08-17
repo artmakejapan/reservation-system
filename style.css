@@ -819,3 +819,19 @@ textarea{
     line-height: 1.9;
     color: #4f4742;
 }
+
+/* =========================
+   施術歴日
+========================= */
+
+#historyDate{
+    width:100%;
+    max-width:100%;
+    height:46px;
+    padding:12px;
+    border:1px solid #D8CDC3;
+    border-radius:10px;
+    font-size:15px;
+    box-sizing:border-box;
+    background:#fff;
+}
