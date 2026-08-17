@@ -751,6 +751,14 @@ form.innerHTML = `
 
 </div>
 
+<div class="form-group" id="historyDateGroup" style="display:none;">
+
+<label>施術歴日 <span style="color:red;">*</span></label>
+
+<input type="date" id="historyDate">
+
+</div>
+
 <div class="form-group">
 
 <label>既往歴・服薬中のお薬</label>
@@ -798,6 +806,34 @@ placeholder="既往歴・服薬中のお薬をご入力ください。
 
 `;
 
+const historyRadios =
+    document.querySelectorAll('input[name="history"]');
+
+const historyDateGroup =
+    document.getElementById("historyDateGroup");
+
+historyRadios.forEach(radio => {
+
+    radio.addEventListener("change", () => {
+
+        if (radio.value === "あり" && radio.checked) {
+
+            historyDateGroup.style.display = "block";
+
+        }
+
+        if (radio.value === "なし" && radio.checked) {
+
+            historyDateGroup.style.display = "none";
+
+            document.getElementById("historyDate").value = "";
+
+        }
+
+    });
+
+});
+
 document.querySelector(".next-form").addEventListener("click", () => {
 
 const name = document.getElementById("customerName").value.trim();
@@ -842,14 +878,29 @@ if (age === "") {
 
     }
 
-    customerData = {
+    const history =
+    document.querySelector('input[name="history"]:checked').value;
+
+const historyDate =
+    document.getElementById("historyDate").value;
+
+if (history === "あり" && historyDate === "") {
+
+    alert("施術歴日を選択してください。");
+
+    return;
+
+}
+
+customerData = {
 
     name,
     gender: gender.value,
     age,
     referrer,
     tel,
-    history: document.querySelector('input[name="history"]:checked').value,
+    history,
+    historyDate,
     medicalHistory: document.getElementById("medicalHistory").value.trim(),
     pregnancy: document.querySelector('input[name="pregnancy"]:checked').value
 
@@ -979,6 +1030,13 @@ function showConfirm() {
 <span class="value">${customerData.history}</span>
 </div>
 
+${customerData.history === "あり" ? `
+<div class="confirm-item">
+<span class="label">施術歴日</span>
+<span class="value">${customerData.historyDate}</span>
+</div>
+` : ""}
+
 <div class="confirm-item">
 <span class="label">既往歴・服薬中のお薬</span>
 <span class="value">${customerData.medicalHistory || "なし"}</span>
@@ -1017,6 +1075,7 @@ function showConfirm() {
     referrer: reservationData.visit === "再診" ? "" : customerData.referrer,
     tel: reservationData.visit === "再診" ? "" : customerData.tel,
     history: reservationData.visit === "再診" ? "" : customerData.history,
+    historyDate: reservationData.visit === "再診" ? "" : customerData.historyDate,
     medicalHistory: reservationData.visit === "再診" ? "" : customerData.medicalHistory,
     pregnancy: reservationData.visit === "再診" ? "" : customerData.pregnancy
 
