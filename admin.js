@@ -1,478 +1,719 @@
 let treatmentMenus = [];
 
+window.reservationList = [];
+window.businessHours = [];
+window.holidays = [];
+
+let editingReservation = null;
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    document.getElementById("loginButton").addEventListener("click", () => {
+    // ================================
+    // ログイン
+    // ================================
 
-        const password = document.getElementById("adminPassword").value;
+    document
+        .getElementById("loginButton")
+        .addEventListener("click", () => {
 
-        if (password === "0918") {
+            const password =
+                document.getElementById("adminPassword").value;
 
-            loadReservations();
+            if (password === "0918") {
 
-        } else {
+                loadReservations();
 
-            alert("パスワードが違います");
+            } else {
 
-        }
+                alert("パスワードが違います");
 
-    });
+            }
+
+        });
 
 
     // ================================
-    // 変更日を変えたとき
+    // 日付変更
     // ================================
 
-    document.getElementById("editDate").addEventListener("change", () => {
+    document
+        .getElementById("editDate")
+        .addEventListener("change", () => {
 
-        const visit =
-            document.getElementById("editVisit").value;
+            updateEditTimeOptions(
+                document.getElementById("editDate").value,
+                document.getElementById("editVisit").value
+            );
 
-        updateEditTimeOptions(
-            document.getElementById("editDate").value,
-            visit
-        );
-
-    });
+        });
 
 
     // ================================
-    // 初診・再診を変えたとき
+    // 初診・再診変更
     // ================================
 
-    document.getElementById("editVisit").addEventListener("change", () => {
+    document
+        .getElementById("editVisit")
+        .addEventListener("change", () => {
 
-        const visit =
-            document.getElementById("editVisit").value;
+            updateEditTimeOptions(
+                document.getElementById("editDate").value,
+                document.getElementById("editVisit").value
+            );
 
-        updateEditTimeOptions(
-            document.getElementById("editDate").value,
-            visit
-        );
+        });
 
-    });
+
+    // ================================
+    // 検索
+    // ================================
+
+    document
+        .getElementById("searchName")
+        .addEventListener("input", renderReservations);
+
+    document
+        .getElementById("searchDate")
+        .addEventListener("change", renderReservations);
 
 });
+
+
+// ==================================================
+// データ取得
+// ==================================================
 
 async function loadReservations() {
+
     document.getElementById("loginArea").style.display = "none";
     document.getElementById("adminArea").style.display = "block";
-    
-    const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=getReservationList"
-    );
 
-    const list = await response.json();
-
-const treatmentResponse = await fetch(
-    "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=treatments"
-);
-
-treatmentMenus = await treatmentResponse.json();
+    const baseUrl =
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
 
 
-// ================================
-// BusinessHours・Holidays取得
-// ================================
+    const reservationResponse =
+        await fetch(baseUrl + "?action=getReservationList");
 
-const businessResponse = await fetch(
-    "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=businesshours"
-);
+    window.reservationList =
+        await reservationResponse.json();
 
-const businessHours = await businessResponse.json();
 
-const holidayResponse = await fetch(
-    "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=holidays"
-);
+    const treatmentResponse =
+        await fetch(baseUrl + "?action=treatments");
 
-const holidays = await holidayResponse.json();
+    treatmentMenus =
+        await treatmentResponse.json();
 
-window.businessHours = businessHours;
-window.holidays = holidays;
 
-    window.reservationList = list;
+    const businessResponse =
+        await fetch(baseUrl + "?action=businesshours");
 
-    const keyword = document
-    .getElementById("searchName")
-    .value
-    .trim();
+    window.businessHours =
+        await businessResponse.json();
 
-    const searchDate = document
-    .getElementById("searchDate")
-    .value;
 
-let filteredList = list;
+    const holidayResponse =
+        await fetch(baseUrl + "?action=holidays");
 
-if (keyword) {
+    window.holidays =
+        await holidayResponse.json();
 
-    filteredList = filteredList.filter(item =>
-        item.name.includes(keyword)
-    );
+
+    renderReservations();
 
 }
 
-if (searchDate) {
 
-    filteredList = filteredList.filter(item =>
-        item.date === searchDate
-    );
+// ==================================================
+// 予約一覧表示
+// ==================================================
 
-}
+function renderReservations() {
 
-    const today = new Date().toISOString().slice(0,10);
+    const keyword =
+        document
+            .getElementById("searchName")
+            .value
+            .trim();
 
-const area = document.getElementById("reservationList");
+    const searchDate =
+        document
+            .getElementById("searchDate")
+            .value;
 
-area.innerHTML = "";
 
-const todayList = filteredList
-.filter(item => item.date === today)
-.sort((a,b)=>a.time.localeCompare(b.time));
+    let filteredList =
+        [...window.reservationList];
 
-const otherList = filteredList
-.filter(item => item.date > today)
-.sort((a,b)=>{
 
-    if(a.date===b.date){
+    if (keyword) {
 
-        return a.time.localeCompare(b.time);
+        filteredList =
+            filteredList.filter(item =>
+                String(item.name || "")
+                    .includes(keyword)
+            );
 
     }
 
-    return a.date.localeCompare(b.date);
 
-});
+    if (searchDate) {
 
-if (todayList.length > 0) {
-
-    area.innerHTML += `
-<div class="today-header">
-📅 本日の予約
-</div>
-`;
-
-}
-
-todayList.forEach(item => {
-
-    area.innerHTML += `
-
-<div class="reservation-card">
-
-    <div><strong>📅 予約日</strong><br>${item.date}</div>
-
-    <br>
-
-    <div class="time-box">${item.time}</div>
-
-    <br>
-
-    <div><strong>👤 お名前</strong><br>${item.name}</div>
-
-    <br>
-    <div><strong>🩺 初診・再診</strong><br>${item.visit}</div>
-    
-    <br>
-
-    <div><strong>🖋️ メニュー</strong><br>${item.menu}</div>
-
-<br>
-
-<div class="button-row">
-
-<button
-class="editButton"
-data-id="${item.id}">
-変更
-</button>
-
-<button
-class="cancelButton"
-data-id="${item.id}">
-キャンセル
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-if (otherList.length > 0) {
-
-    area.innerHTML += `
-<div class="today-header">
-📖 その他の予約
-</div>
-`;
-
-}
-
-otherList.forEach(item => {
-    
-    area.innerHTML += `
-
-<div class="reservation-card">
-
-    <div><strong>📅 予約日</strong><br>${item.date}</div>
-
-    <br>
-
-    <div class="time-box">${item.time}</div>
-
-    <br>
-
-    <div><strong>👤 お名前</strong><br>${item.name}</div>
-
-    <br>
-
-    <div><strong>🩺 初診・再診</strong><br>${item.visit}</div>
-    
-    <br>
-    
-    <div><strong>🖋️ メニュー</strong><br>${item.menu}</div>
-
-<br>
-
-<div class="button-row">
-
-<button
-class="editButton"
-data-id="${item.id}">
-変更
-</button>
-
-<button
-class="cancelButton"
-data-id="${item.id}">
-キャンセル
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-
-document.querySelectorAll(".editButton").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const id = button.dataset.id;
-
-        const reservation = window.reservationList.find(item => item.id == id);
-
-        openEditForm(reservation);
-
-    });
-
-});
-
-document.querySelectorAll(".cancelButton").forEach(button => {
-
-    button.addEventListener("click", async () => {
-
-        const id = button.dataset.id;
-
-        console.log("キャンセルID:", id);
-
-        if(!confirm("この予約をキャンセルしますか？")){
-            return;
-        }
-
-        // 以下そのまま
-
-    const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
-        {
-            method:"POST",
-            headers:{
-    "Content-Type":"text/plain"
-},
-            body:JSON.stringify({
-                action:"cancel",
-                reservationId:id
-            })
-        }
-    );
-
-    const result = await response.json();
-
-    if(result.result==="success"){
-
-        alert("キャンセルしました");
-
-        loadReservations();
-
-    }else{
-
-        alert("キャンセルできませんでした");
+        filteredList =
+            filteredList.filter(item =>
+                item.date === searchDate
+            );
 
     }
 
-});
 
-});
+    const today =
+        new Date().toISOString().slice(0, 10);
+
+
+    const area =
+        document.getElementById("reservationList");
+
+    area.innerHTML = "";
+
+
+    const todayList =
+        filteredList
+            .filter(item => item.date === today)
+            .sort((a, b) =>
+                a.time.localeCompare(b.time)
+            );
+
+
+    const otherList =
+        filteredList
+            .filter(item => item.date !== today)
+            .sort((a, b) => {
+
+                if (a.date === b.date) {
+
+                    return a.time.localeCompare(b.time);
+
+                }
+
+                return a.date.localeCompare(b.date);
+
+            });
+
+
+    if (todayList.length > 0) {
+
+        area.innerHTML += `
+            <div class="today-header">
+                📅 本日の予約
+            </div>
+        `;
+
+        todayList.forEach(item => {
+            area.innerHTML += createReservationCard(item);
+        });
+
+    }
+
+
+    if (otherList.length > 0) {
+
+        area.innerHTML += `
+            <div class="today-header">
+                📖 その他の予約
+            </div>
+        `;
+
+        otherList.forEach(item => {
+            area.innerHTML += createReservationCard(item);
+        });
+
+    }
+
+
+    document
+        .querySelectorAll(".editButton")
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const id =
+                    button.dataset.id;
+
+                const reservation =
+                    window.reservationList.find(
+                        item => String(item.id) === String(id)
+                    );
+
+                if (reservation) {
+
+                    openEditForm(reservation);
+
+                }
+
+            });
+
+        });
+
+
+    document
+        .querySelectorAll(".cancelButton")
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                cancelReservation(button.dataset.id);
+
+            });
+
+        });
 
 }
 
-function openEditForm(reservation){
 
-    console.log(reservation);
+// ==================================================
+// 予約カード
+// ==================================================
 
-    console.log(document.getElementById("editArea"));
+function createReservationCard(item) {
 
-    document.getElementById("editArea").style.display = "block";
+    return `
 
-    document.getElementById("editName").value = reservation.name;
+        <div class="reservation-card">
 
-    document.getElementById("editDate").value = reservation.date;
+            <div>
+                <strong>📅 予約日</strong><br>
+                ${item.date}
+            </div>
 
-document.getElementById("editVisit").value = reservation.visit;
+            <br>
 
-// ================================
-// 変更日時の時間候補を更新
-// ================================
+            <div>
+                <strong>🕘 開始時間</strong><br>
+                <div class="time-box">
+                    ${item.time}
+                </div>
+            </div>
 
-updateEditTimeOptions(
-    reservation.date,
-    reservation.visit,
-    reservation.time
-);
+            <div>
+                <strong>👤 お名前</strong><br>
+                ${item.name || "-"}
+            </div>
 
-    const menu1 = document.getElementById("editMenu1");
-const menu2 = document.getElementById("editMenu2");
+            <br>
 
-menu1.innerHTML = '<option value="">選択してください</option>';
-menu2.innerHTML = '<option value="">選択してください</option>';
+            <div>
+                <strong>🖋️ 施術メニュー</strong><br>
+                ${item.menu || "-"}
+            </div>
 
-treatmentMenus.forEach(item => {
+            <div class="button-row">
 
-    menu1.innerHTML += `
-    <option value="${item.name}">
-    ${item.name}
-    </option>`;
+                <button
+                    class="editButton"
+                    data-id="${item.id}">
+                    変更
+                </button>
 
-    menu2.innerHTML += `
-    <option value="${item.name}">
-    ${item.name}
-    </option>`;
+                <button
+                    class="cancelButton"
+                    data-id="${item.id}">
+                    キャンセル
+                </button>
 
-});
+            </div>
 
-    document.getElementById("editMenu1").value = reservation.menu1 || "";
+        </div>
 
-    document.getElementById("editMenu2").value = reservation.menu2 || "";
-　　
-    document.getElementById("editTel").value = reservation.tel || "";
+    `;
 
-    document.getElementById("editArea").scrollIntoView({
-    behavior:"smooth"
-});
+}
 
-document.getElementById("saveEditButton").onclick = async () => {
+
+// ==================================================
+// 編集画面
+// ==================================================
+
+function openEditForm(reservation) {
+
+    editingReservation = reservation;
+
+
+    document
+        .getElementById("editArea")
+        .style.display = "block";
+
+
+    document.getElementById("editName").value =
+        reservation.name || "";
+
+
+    document.getElementById("editDate").value =
+        reservation.date || "";
+
+
+    document.getElementById("editVisit").value =
+        reservation.visit || "初診";
+
+
+    // ================================
+    // メニュー生成
+    // ================================
+
+    const menu1 =
+        document.getElementById("editMenu1");
+
+    const menu2 =
+        document.getElementById("editMenu2");
+
+
+    menu1.innerHTML =
+        `<option value="">選択してください</option>`;
+
+    menu2.innerHTML =
+        `<option value="">選択してください</option>`;
+
+
+    treatmentMenus
+        .filter(item => item.enabled)
+        .forEach(item => {
+
+            menu1.innerHTML += `
+                <option value="${escapeHtml(item.name)}">
+                    ${escapeHtml(item.name)}
+                </option>
+            `;
+
+            menu2.innerHTML += `
+                <option value="${escapeHtml(item.name)}">
+                    ${escapeHtml(item.name)}
+                </option>
+            `;
+
+        });
+
+
+    menu1.value =
+        reservation.menu1 || "";
+
+    menu2.value =
+        reservation.menu2 || "";
+
+
+    // ================================
+    // 詳細情報
+    // ================================
+
+    document.getElementById("editTel").value =
+        reservation.tel || "";
+
+    document.getElementById("editGender").value =
+        reservation.gender || "";
+
+    document.getElementById("editAge").value =
+        reservation.age || "";
+
+    document.getElementById("editReferrer").value =
+        reservation.referrer || "";
+
+    document.getElementById("editHistory").value =
+        reservation.history || "";
+
+    document.getElementById("editHistoryDate").value =
+        reservation.historyDate || "";
+
+    document.getElementById("editMedicalHistory").value =
+        reservation.medicalHistory || "";
+
+    document.getElementById("editPregnancy").value =
+        reservation.pregnancy || "";
+
+
+    // ================================
+    // 時間候補
+    // ================================
+
+    updateEditTimeOptions(
+        reservation.date,
+        reservation.visit,
+        reservation.time
+    );
+
+
+    document
+        .getElementById("editArea")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+    // ================================
+    // 保存
+    // ================================
+
+    document
+        .getElementById("saveEditButton")
+        .onclick = saveEdit;
+
+
+    // ================================
+    // 閉じる
+    // ================================
+
+    document
+        .getElementById("closeEditButton")
+        .onclick = () => {
+
+            document
+                .getElementById("editArea")
+                .style.display = "none";
+
+            editingReservation = null;
+
+        };
+
+}
+
+
+// ==================================================
+// 保存
+// ==================================================
+
+async function saveEdit() {
+
+    if (!editingReservation) return;
+
+
+    const oldDate =
+        editingReservation.date;
+
+    const oldTime =
+        editingReservation.time;
+
 
     const newData = {
 
         action: "update",
 
-        reservationId: reservation.id,
+        reservationId:
+            editingReservation.id,
 
-        name: document.getElementById("editName").value,
+        name:
+            document.getElementById("editName").value.trim(),
 
-        date: document.getElementById("editDate").value,
+        date:
+            document.getElementById("editDate").value,
 
-        time: document.getElementById("editTime").value,
+        time:
+            document.getElementById("editTime").value,
 
-        visit: document.getElementById("editVisit").value,
-        
-        menu1: document.getElementById("editMenu1").value,
+        visit:
+            document.getElementById("editVisit").value,
 
-　　　　menu2: document.getElementById("editMenu2").value,
+        menu1:
+            document.getElementById("editMenu1").value,
 
-　　　　　tel: document.getElementById("editTel").value
-        
+        menu2:
+            document.getElementById("editMenu2").value,
+
+        // 電話番号は文字列として送る
+        tel:
+            document.getElementById("editTel").value,
+
+        gender:
+            document.getElementById("editGender").value,
+
+        age:
+            document.getElementById("editAge").value,
+
+        referrer:
+            document.getElementById("editReferrer").value,
+
+        history:
+            document.getElementById("editHistory").value,
+
+        historyDate:
+            document.getElementById("editHistoryDate").value,
+
+        medicalHistory:
+            document.getElementById("editMedicalHistory").value,
+
+        pregnancy:
+            document.getElementById("editPregnancy").value
 
     };
 
-    const response = await fetch(
 
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
+    if (!newData.name) {
 
-        {
-
-            method:"POST",
-
-            headers:{
-    "Content-Type":"text/plain"
-},
-
-            body:JSON.stringify(newData)
-
-        }
-
-    );
-
-    const result = await response.json();
-
-    if(result.result==="success"){
-
-        alert("変更しました");
-
-        document.getElementById("editArea").style.display="none";
-
-        loadReservations();
-
-    }else{
-
-        alert(result.message);
+        alert("お名前を入力してください。");
+        return;
 
     }
 
-};
 
-document.getElementById("closeEditButton").onclick = () => {
+    if (!newData.date || !newData.time) {
 
-    document.getElementById("editArea").style.display = "none";
+        alert("予約日と開始時間を入力してください。");
+        return;
 
-};
+    }
+
+
+    const baseUrl =
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
+
+
+    const response =
+        await fetch(baseUrl, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "text/plain"
+            },
+
+            body: JSON.stringify(newData)
+
+        });
+
+
+    const result =
+        await response.json();
+
+
+    if (result.result === "success") {
+
+        const dateChanged =
+            oldDate !== newData.date;
+
+        const timeChanged =
+            oldTime !== newData.time;
+
+
+        if (dateChanged || timeChanged) {
+
+            alert(
+                "予約を変更しました。\n\n" +
+                "予約日時が変更されたため、お客様へLINE通知を送信しました。"
+            );
+
+        } else {
+
+            alert("予約内容を変更しました。");
+
+        }
+
+
+        document
+            .getElementById("editArea")
+            .style.display = "none";
+
+
+        editingReservation = null;
+
+
+        await loadReservations();
+
+
+    } else {
+
+        alert(
+            result.message ||
+            "変更できませんでした。"
+        );
+
+    }
 
 }
 
-document
-.getElementById("searchName")
-.addEventListener("input", loadReservations);
 
-document
-.getElementById("searchDate")
-.addEventListener("change", loadReservations);
+// ==================================================
+// キャンセル
+// ==================================================
 
-function updateEditTimeOptions(date, visit, currentTime = "") {
+async function cancelReservation(id) {
 
-    const timeSelect = document.getElementById("editTime");
-
-    timeSelect.innerHTML = "";
-
-    if (!date) {
+    if (!confirm("この予約をキャンセルしますか？")) {
         return;
     }
 
 
-    // ================================
-    // 休日チェック
-    // ================================
+    const baseUrl =
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
+
+
+    const response =
+        await fetch(baseUrl, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "text/plain"
+            },
+
+            body: JSON.stringify({
+
+                action: "cancel",
+
+                reservationId: id
+
+            })
+
+        });
+
+
+    const result =
+        await response.json();
+
+
+    if (result.result === "success") {
+
+        alert("キャンセルしました。");
+
+        loadReservations();
+
+    } else {
+
+        alert(
+            result.message ||
+            "キャンセルできませんでした。"
+        );
+
+    }
+
+}
+
+
+// ==================================================
+// 時間候補
+// ==================================================
+
+function updateEditTimeOptions(
+    date,
+    visit,
+    currentTime = ""
+) {
+
+    const timeSelect =
+        document.getElementById("editTime");
+
+
+    timeSelect.innerHTML = "";
+
+
+    if (!date) return;
+
 
     if (
         window.holidays &&
         window.holidays.includes(date)
     ) {
 
-        const option = document.createElement("option");
+        const option =
+            document.createElement("option");
 
         option.value = "";
         option.textContent = "休診日";
@@ -480,18 +721,16 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
         timeSelect.appendChild(option);
 
         return;
+
     }
 
-
-    // ================================
-    // 曜日取得
-    // ================================
 
     const day =
         new Date(date + "T00:00:00").getDay();
 
 
     const weekdayMap = {
+
         0: "日",
         1: "月",
         2: "火",
@@ -499,23 +738,25 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
         4: "木",
         5: "金",
         6: "土"
+
     };
 
-    const weekday = weekdayMap[day];
 
+    const weekday =
+        weekdayMap[day];
 
-    // ================================
-    // BusinessHours取得
-    // ================================
 
     const business =
         (window.businessHours || [])
-            .find(item => item.weekday === weekday);
+            .find(item =>
+                item.weekday === weekday
+            );
 
 
     if (!business) {
 
-        const option = document.createElement("option");
+        const option =
+            document.createElement("option");
 
         option.value = "";
         option.textContent = "予約不可";
@@ -523,54 +764,29 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
         timeSelect.appendChild(option);
 
         return;
-    }
-
-
-    // ================================
-    // 初診・再診によって
-    // 使用する列を切り替える
-    // ================================
-
-    let sourceTimes = "";
-
-    if (visit === "再診") {
-
-        sourceTimes = business.repeat;
-
-    } else {
-
-        sourceTimes = business.first;
 
     }
 
 
-    // ================================
-    // カンマ区切りを時間に分解
-    // ================================
-
-    let times = String(sourceTimes || "")
-        .split(/[,、]/)
-        .map(time => time.trim())
-        .filter(Boolean);
+    const sourceTimes =
+        visit === "再診"
+            ? business.repeat
+            : business.first;
 
 
-    // ================================
-    // 重複削除
-    // ================================
+    let times =
+        String(sourceTimes || "")
+            .split(/[,、]/)
+            .map(time => time.trim())
+            .filter(Boolean);
 
-    times = [...new Set(times)];
 
+    times =
+        [...new Set(times)];
 
-    // ================================
-    // 時間順
-    // ================================
 
     times.sort();
 
-
-    // ================================
-    // 選択肢生成
-    // ================================
 
     times.forEach(time => {
 
@@ -578,7 +794,6 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
             document.createElement("option");
 
         option.value = time;
-
         option.textContent = time;
 
         timeSelect.appendChild(option);
@@ -586,14 +801,26 @@ function updateEditTimeOptions(date, visit, currentTime = "") {
     });
 
 
-    // ================================
-    // 現在の予約時間を維持
-    // ================================
-
     if (times.includes(currentTime)) {
 
         timeSelect.value = currentTime;
 
     }
+
+}
+
+
+// ==================================================
+// HTMLエスケープ
+// ==================================================
+
+function escapeHtml(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }

@@ -16,97 +16,196 @@
 
 <div class="login-box" id="loginArea">
 
-<h1>管理者ページ</h1>
+    <h1>管理者ページ</h1>
 
-<input
-type="password"
-id="adminPassword"
-placeholder="パスワード">
+    <input
+        type="password"
+        id="adminPassword"
+        placeholder="パスワード">
 
-<br><br>
+    <br><br>
 
-<button id="loginButton">
-ログイン
-</button>
+    <button id="loginButton">
+        ログイン
+    </button>
 
 </div>
+
 
 <div id="adminArea" style="display:none;">
 
-<div class="search-area">
+    <div class="search-area">
 
-<input
-type="text"
-id="searchName"
-placeholder="🔍 お名前で検索">
+        <input
+            type="text"
+            id="searchName"
+            placeholder="🔍 お名前で検索">
 
-<input
-type="date"
-id="searchDate">
+        <input
+            type="date"
+            id="searchDate">
+
+    </div>
+
+
+    <!-- ==================================
+         予約変更エリア
+    ================================== -->
+
+    <div id="editArea" style="display:none;">
+
+        <h2>予約変更</h2>
+
+
+        <!-- 基本情報 -->
+
+        <label>お名前</label>
+        <input
+            type="text"
+            id="editName">
+
+
+        <label>予約日</label>
+        <input
+            type="date"
+            id="editDate">
+
+
+        <label>開始時間</label>
+        <select id="editTime"></select>
+
+
+        <!-- ==================================
+             詳細項目
+        ================================== -->
+
+        <div id="editDetails">
+
+            <label>初診・再診</label>
+
+            <select id="editVisit">
+
+                <option value="初診">初診</option>
+                <option value="再診">再診</option>
+
+            </select>
+
+
+            <label>メニュー①</label>
+
+            <select id="editMenu1">
+
+                <option value="">
+                    選択してください
+                </option>
+
+            </select>
+
+
+            <label>メニュー②</label>
+
+            <select id="editMenu2">
+
+                <option value="">
+                    選択してください
+                </option>
+
+            </select>
+
+
+            <label>電話番号</label>
+
+            <input
+                type="tel"
+                id="editTel"
+                inputmode="tel">
+
+
+            <label>性別</label>
+
+            <select id="editGender">
+
+                <option value="">選択してください</option>
+                <option value="女性">女性</option>
+                <option value="男性">男性</option>
+                <option value="その他">その他</option>
+
+            </select>
+
+
+            <label>年齢</label>
+
+            <input
+                type="number"
+                id="editAge"
+                min="0"
+                max="120">
+
+
+            <label>紹介者</label>
+
+            <input
+                type="text"
+                id="editReferrer">
+
+
+            <label>アートメイク施術歴</label>
+
+            <select id="editHistory">
+
+                <option value="">選択してください</option>
+                <option value="あり">あり</option>
+                <option value="なし">なし</option>
+
+            </select>
+
+
+            <label>施術歴日</label>
+
+            <input
+                type="date"
+                id="editHistoryDate">
+
+
+            <label>既往歴・服薬中のお薬</label>
+
+            <textarea
+                id="editMedicalHistory"
+                rows="4"></textarea>
+
+
+            <label>妊娠・授乳中</label>
+
+            <select id="editPregnancy">
+
+                <option value="">選択してください</option>
+                <option value="はい">はい</option>
+                <option value="いいえ">いいえ</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="edit-button-row">
+
+            <button id="saveEditButton">
+                保存
+            </button>
+
+            <button id="closeEditButton">
+                閉じる
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div id="reservationList"></div>
 
 </div>
 
-<div id="editArea" style="display:none; margin-top:30px;">
-
-<h2>予約変更</h2>
-
-<input type="text" id="editName" placeholder="お名前">
-
-<input type="date" id="editDate">
-
-<select id="editTime">
-
-    <option value="09:30">09:30</option>
-
-    <option value="11:45">11:45</option>
-
-    <option value="14:00">14:00</option>
-
-    <option value="16:15">16:15</option>
-
-</select>
-
-<label>初診・再診</label>
-
-<select id="editVisit">
-
-    <option value="初診">初診</option>
-
-    <option value="再診">再診</option>
-
-</select>
-
-<label>メニュー①</label>
-
-<select id="editMenu1">
-    <option value="">選択してください</option>
-</select>
-
-
-<label>メニュー②</label>
-
-<select id="editMenu2">
-    <option value="">選択してください</option>
-</select>
-
-<label>電話番号</label>
-<input type="text" id="editTel">
-
-<br><br>
-
-<button id="saveEditButton">
-保存
-</button>
-
-<button id="closeEditButton">
-閉じる
-</button>
-
-</div>
-
-<div id="reservationList"></div>
-
-</div>
 
 <script src="admin.js"></script>
 

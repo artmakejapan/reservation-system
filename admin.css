@@ -401,3 +401,75 @@ input[type="time"]{
     appearance:none;
 
 }
+
+#editDetails{
+
+    margin-top:10px;
+
+    padding-top:10px;
+
+    border-top:1px solid #EFE7E1;
+
+}
+
+
+#editArea textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-bottom:16px;
+
+    border:1px solid #E6DED8;
+
+    border-radius:10px;
+
+    box-sizing:border-box;
+
+    resize:vertical;
+
+    font-family:"Yu Gothic",sans-serif;
+
+}
+
+
+.edit-button-row{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:10px;
+
+}
+
+
+.edit-button-row button{
+
+    flex:1;
+
+}
+
+
+#editGender,
+#editHistory,
+#editPregnancy{
+
+    width:100%;
+
+}
+
+
+#editAge{
+
+    width:100%;
+
+}
+
+
+#editArea input[type="tel"]{
+
+    width:100%;
+
+}
