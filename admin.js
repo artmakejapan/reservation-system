@@ -188,19 +188,31 @@ function renderReservations() {
 
 
     const otherList =
-        filteredList
-            .filter(item => item.date !== today)
-            .sort((a, b) => {
+    filteredList
+        .filter(item => {
 
-                if (a.date === b.date) {
+            // 名前検索・日付検索をしている場合
+            // → 過去の予約も検索結果として表示
+            if (keyword || searchDate) {
+                return item.date !== today;
+            }
 
-                    return a.time.localeCompare(b.time);
+            // 通常表示
+            // → 今日より前の予約は非表示
+            return item.date > today;
 
-                }
+        })
+        .sort((a, b) => {
 
-                return a.date.localeCompare(b.date);
+            if (a.date === b.date) {
 
-            });
+                return a.time.localeCompare(b.time);
+
+            }
+
+            return a.date.localeCompare(b.date);
+
+        });
 
 
     if (todayList.length > 0) {
