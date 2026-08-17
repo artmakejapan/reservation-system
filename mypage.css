@@ -16,7 +16,7 @@ body {
     height: 50px;
     display: flex;
     align-items: center;
-    padding-left: 15px;
+    justify-content: center;
     font-size: 13px;
 }
 

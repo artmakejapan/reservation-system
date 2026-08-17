@@ -109,8 +109,15 @@ function displayReservation(reservations) {
     }
 
 
-    const reservation =
-        futureReservations[0];
+    futureReservations.sort((a, b) => {
+
+    return new Date(a.date + " " + a.time) -
+           new Date(b.date + " " + b.time);
+
+});
+
+const reservation =
+    futureReservations[0];
 
 
     area.innerHTML = `
