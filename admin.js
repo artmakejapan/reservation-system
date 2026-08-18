@@ -317,6 +317,13 @@ function createReservationCard(item) {
             <br>
 
             <div>
+                <strong>🩺 初診・再診</strong><br>
+                ${item.visit || "-"}
+            </div>
+
+            <br>
+
+            <div>
                 <strong>🖋️ 施術メニュー</strong><br>
                 ${item.menu || "-"}
             </div>
