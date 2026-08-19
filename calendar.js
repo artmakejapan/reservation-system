@@ -682,7 +682,7 @@ form.innerHTML = `
 
 <div class="form-group">
 <label>氏名（フルネーム・漢字） <span style="color:red;">*</span></label>
-<input type="text" id="customerName"placeholder="※漢字でご入力ください">
+<input type="text" id="customerName">
 </div>
 
 <div class="form-group">
