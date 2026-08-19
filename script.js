@@ -52,71 +52,95 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nextButton = document.getElementById("nextButton");
 
     nextButton.disabled = true;
+    nextButton.textContent = "読み込み中...";
 
-nextButton.textContent = "読み込み中...";
+    // ================================
+    // メニュー読み込み
+    // LIFFの完了を待たずに開始する
+    // ================================
 
-// LIFF初期化完了を待つ
-while (!liffReady) {
+    try {
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+        await loadInitialData();
 
-}
+    } catch (error) {
 
-await loadInitialData();
+        console.error("初期データ読み込みエラー:", error);
 
-const menuCheckboxes =
-document.querySelectorAll('input[name="menu"]');
+        const menuList = document.getElementById("menuList");
 
-nextButton.disabled = false;
+        if (menuList) {
 
-nextButton.textContent = "空き状況を見る";
-
-
-    // メニューは2つまで
-    menuCheckboxes.forEach(box => {
-
-    box.addEventListener("change", () => {
-
-        // 最大2メニュー
-        const checked = [...document.querySelectorAll('input[name="menu"]:checked')];
-
-        if (checked.length > 2) {
-
-            alert("施術メニューは最大2つまで選択できます。");
-
-            box.checked = false;
-
-            return;
+            menuList.innerHTML =
+                '<p>メニューの読み込みに失敗しました。ページを再読み込みしてください。</p>';
 
         }
 
-        // 一旦全部有効化
-        menuCheckboxes.forEach(item => {
+        return;
 
-            item.disabled = false;
+    }
 
-            item.parentElement.style.opacity = "1";
+    // ================================
+    // メニュー読み込み完了
+    // ================================
 
-        });
+    const menuCheckboxes =
+        document.querySelectorAll('input[name="menu"]');
 
-        // 選択中メニューから同時選択不可を探す
-        checked.forEach(item => {
+    nextButton.disabled = false;
+    nextButton.textContent = "空き状況を見る";
 
-            const ngList = exclusiveRules[item.value];
 
-            if (!ngList) return;
+    // ================================
+    // メニューは2つまで
+    // ================================
 
-            ngList.forEach(name => {
+    menuCheckboxes.forEach(box => {
 
-                const target = document.querySelector(`input[value="${name}"]`);
+        box.addEventListener("change", () => {
 
-                if (target && !target.checked) {
+            // 最大2メニュー
+            const checked =
+                [...document.querySelectorAll('input[name="menu"]:checked')];
 
-                    target.disabled = true;
+            if (checked.length > 2) {
 
-                    target.parentElement.style.opacity = "0.4";
+                alert("施術メニューは最大2つまで選択できます。");
 
-                }
+                box.checked = false;
+
+                return;
+
+            }
+
+            // 一旦全部有効化
+            menuCheckboxes.forEach(item => {
+
+                item.disabled = false;
+                item.parentElement.style.opacity = "1";
+
+            });
+
+            // 選択中メニューから同時選択不可を探す
+            checked.forEach(item => {
+
+                const ngList = exclusiveRules[item.value];
+
+                if (!ngList) return;
+
+                ngList.forEach(name => {
+
+                    const target =
+                        document.querySelector(`input[value="${name}"]`);
+
+                    if (target && !target.checked) {
+
+                        target.disabled = true;
+                        target.parentElement.style.opacity = "0.4";
+
+                    }
+
+                });
 
             });
 
@@ -124,17 +148,23 @@ nextButton.textContent = "空き状況を見る";
 
     });
 
-});
 
+    // ================================
     // 予約へ進む
+    // ================================
+
     nextButton.addEventListener("click", () => {
 
-        const checkedMenus = document.querySelectorAll('input[name="menu"]:checked');
-        const visit = document.querySelector('input[name="visit"]:checked');
+        const checkedMenus =
+            document.querySelectorAll('input[name="menu"]:checked');
+
+        const visit =
+            document.querySelector('input[name="visit"]:checked');
 
         if (checkedMenus.length === 0) {
 
-            alert("施術メニューを選択してください。");
+            alert("施術メニューを選択してください.");
+
             return;
 
         }
@@ -142,40 +172,43 @@ nextButton.textContent = "空き状況を見る";
         if (!visit) {
 
             alert("初診・再診を選択してください。");
+
             return;
 
         }
 
         // 選択内容保存
-const reservationData = {
+        const reservationData = {
 
-    menus: [...checkedMenus].map(item => item.value),
+            menus: [...checkedMenus].map(item => item.value),
 
-    visit: visit.value
+            visit: visit.value
 
-};
+        };
 
-console.log(reservationData);
+        console.log(reservationData);
 
-// カレンダー表示
-const calendarSection = document.getElementById("calendarSection");
+        // カレンダー表示
+        const calendarSection =
+            document.getElementById("calendarSection");
 
-calendarSection.style.display = "block";
+        calendarSection.style.display = "block";
 
-// お客様情報・確認画面はまだ非表示
-document.getElementById("customerSection").style.display = "none";
-document.getElementById("confirmSection").style.display = "none";
+        // お客様情報・確認画面はまだ非表示
+        document.getElementById("customerSection").style.display = "none";
 
-// カレンダーまでスクロール
-calendarSection.scrollIntoView({
+        document.getElementById("confirmSection").style.display = "none";
 
-    behavior: "smooth"
+        // カレンダーまでスクロール
+        calendarSection.scrollIntoView({
 
-});
+            behavior: "smooth"
 
-// 次のステップでカレンダー生成
-generateCalendar(reservationData);
+        });
 
-});
+        // カレンダー生成
+        generateCalendar(reservationData);
+
+    });
 
 });
