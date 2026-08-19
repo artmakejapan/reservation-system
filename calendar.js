@@ -1059,9 +1059,15 @@ ${customerData.history === "あり" ? `
 
         document.getElementById("reserveButton").addEventListener("click", async () => {
 
-        const reserveButton = document.getElementById("reserveButton");
+    // LINE情報の取得確認
+    if (!liffReady || !lineUserId) {
+        alert("LINE情報の取得中です。少し待ってからもう一度お試しください。");
+        return;
+    }
 
-        const data = {
+    const reserveButton = document.getElementById("reserveButton");
+
+    const data = {
 
     date: selectedDate,
     time: selectedTime,
