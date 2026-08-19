@@ -40,71 +40,136 @@ async function loadHolidays() {
 
 async function loadInitialData() {
 
-    const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=init"
-    );
+    // --------------------------------
+    // まずメニューを最優先で取得・表示
+    // --------------------------------
+    const menuPromise = fetch(
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=treatments"
+    )
+    .then(response => response.json())
+    .then(treatmentData => {
 
-    const data = await response.json();
+        treatmentSlots = {};
+        exclusiveRules = {};
 
-    reservedSlots = data.reservations || [];
-    businessHours = data.businessHours || [];
-    holidays = data.holidays || [];
+        treatmentData.forEach(item => {
 
-    const treatmentData = data.treatments || [];
+            treatmentSlots[item.name] = Number(item.slots);
 
-    treatmentSlots = {};
+            if (item.exclusive) {
 
-    treatmentData.forEach(item => {
+                const ngList = item.exclusive
+                    .split(",")
+                    .map(name => name.trim())
+                    .filter(Boolean);
 
-        treatmentSlots[item.name] = Number(item.slots);
+                exclusiveRules[item.name] = ngList;
 
-    });
-
-    exclusiveRules = {};
-
-    treatmentData.forEach(item => {
-
-        if (!item.exclusive) return;
-
-        const ngList = item.exclusive
-            .split(",")
-            .map(name => name.trim())
-            .filter(name => name);
-
-        exclusiveRules[item.name] = ngList;
-
-    });
-
-    // メニュー表示
-    const menuList = document.getElementById("menuList");
-
-    menuList.innerHTML = "";
-
-    treatmentData
-        .filter(item => item.enabled)
-        .sort((a, b) => a.displayOrder - b.displayOrder)
-        .forEach(item => {
-
-            const label = document.createElement("label");
-
-            label.className = "menu-item";
-
-            const checkbox = document.createElement("input");
-
-            checkbox.type = "checkbox";
-            checkbox.name = "menu";
-            checkbox.value = item.name;
-
-            const span = document.createElement("span");
-
-            span.textContent = item.name;
-
-            label.appendChild(checkbox);
-            label.appendChild(span);
-
-            menuList.appendChild(label);
+            }
 
         });
+
+        // メニューを即表示
+        const menuList = document.getElementById("menuList");
+
+        menuList.innerHTML = "";
+
+        treatmentData
+            .filter(item => item.enabled)
+            .sort((a, b) => a.displayOrder - b.displayOrder)
+            .forEach(item => {
+
+                const label = document.createElement("label");
+
+                label.className = "menu-item";
+
+                const checkbox = document.createElement("input");
+
+                checkbox.type = "checkbox";
+                checkbox.name = "menu";
+                checkbox.value = item.name;
+
+                const span = document.createElement("span");
+
+                span.textContent = item.name;
+
+                label.appendChild(checkbox);
+                label.appendChild(span);
+
+                menuList.appendChild(label);
+
+            });
+
+        console.log("メニュー表示完了");
+
+        return treatmentData;
+
+    });
+
+
+    // --------------------------------
+    // 予約状況・営業時間・休日を
+    // 裏側で同時取得
+    // --------------------------------
+    const reservationPromise = fetch(
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=reservations"
+    )
+    .then(response => response.json())
+    .then(data => {
+
+        reservedSlots = data || [];
+
+        console.log("予約状況取得完了");
+
+    });
+
+
+    const businessPromise = fetch(
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=businesshours"
+    )
+    .then(response => response.json())
+    .then(data => {
+
+        businessHours = data || [];
+
+        console.log("営業時間取得完了");
+
+    });
+
+
+    const holidayPromise = fetch(
+        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=holidays"
+    )
+    .then(response => response.json())
+    .then(data => {
+
+        holidays = data || [];
+
+        console.log("休日取得完了");
+
+    });
+
+
+    // --------------------------------
+    // メニュー取得完了を先に返す
+    // --------------------------------
+    await menuPromise;
+
+
+    // --------------------------------
+    // 予約・営業時間・休日は裏で取得中
+    // --------------------------------
+    window.initialDataReady = Promise.all([
+        reservationPromise,
+        businessPromise,
+        holidayPromise
+    ]).then(() => {
+
+        console.log("空き状況データ取得完了");
+
+        return true;
+
+    });
 
 }
 

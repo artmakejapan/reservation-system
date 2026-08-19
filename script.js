@@ -67,9 +67,19 @@ await loadInitialData();
 const menuCheckboxes =
 document.querySelectorAll('input[name="menu"]');
 
-nextButton.disabled = false;
+// メニューは表示済み
+// ただし空き状況データは裏で取得中
+nextButton.disabled = true;
+nextButton.textContent = "空き状況を確認中…";
 
-nextButton.textContent = "空き状況を見る";
+window.initialDataReady.then(() => {
+
+    nextButton.disabled = false;
+    nextButton.textContent = "空き状況を見る";
+
+    console.log("予約システム準備完了");
+
+});
 
 
     // メニューは2つまで
@@ -127,7 +137,7 @@ nextButton.textContent = "空き状況を見る";
 });
 
     // 予約へ進む
-    nextButton.addEventListener("click", () => {
+        nextButton.addEventListener("click", () => {
 
         const checkedMenus = document.querySelectorAll('input[name="menu"]:checked');
         const visit = document.querySelector('input[name="visit"]:checked');
@@ -146,36 +156,31 @@ nextButton.textContent = "空き状況を見る";
 
         }
 
-        // 選択内容保存
-const reservationData = {
+        const reservationData = {
 
-    menus: [...checkedMenus].map(item => item.value),
+            menus: [...checkedMenus].map(item => item.value),
 
-    visit: visit.value
+            visit: visit.value
 
-};
+        };
 
-console.log(reservationData);
+        console.log(reservationData);
 
-// カレンダー表示
-const calendarSection = document.getElementById("calendarSection");
+        const calendarSection = document.getElementById("calendarSection");
 
-calendarSection.style.display = "block";
+        calendarSection.style.display = "block";
 
-// お客様情報・確認画面はまだ非表示
-document.getElementById("customerSection").style.display = "none";
-document.getElementById("confirmSection").style.display = "none";
+        document.getElementById("customerSection").style.display = "none";
+        document.getElementById("confirmSection").style.display = "none";
 
-// カレンダーまでスクロール
-calendarSection.scrollIntoView({
+        calendarSection.scrollIntoView({
 
-    behavior: "smooth"
+            behavior: "smooth"
 
-});
+        });
 
-// 次のステップでカレンダー生成
-generateCalendar(reservationData);
+        generateCalendar(reservationData);
 
-});
+    });
 
 });
