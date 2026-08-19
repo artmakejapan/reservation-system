@@ -67,19 +67,9 @@ await loadInitialData();
 const menuCheckboxes =
 document.querySelectorAll('input[name="menu"]');
 
-// メニューは表示済み
-// ただし空き状況データは裏で取得中
-nextButton.disabled = true;
-nextButton.textContent = "空き状況を確認中…";
+nextButton.disabled = false;
 
-window.initialDataReady.then(() => {
-
-    nextButton.disabled = false;
-    nextButton.textContent = "空き状況を見る";
-
-    console.log("予約システム準備完了");
-
-});
+nextButton.textContent = "空き状況を見る";
 
 
     // メニューは2つまで
@@ -137,7 +127,7 @@ window.initialDataReady.then(() => {
 });
 
     // 予約へ進む
-        nextButton.addEventListener("click", () => {
+    nextButton.addEventListener("click", () => {
 
         const checkedMenus = document.querySelectorAll('input[name="menu"]:checked');
         const visit = document.querySelector('input[name="visit"]:checked');
@@ -156,31 +146,36 @@ window.initialDataReady.then(() => {
 
         }
 
-        const reservationData = {
+        // 選択内容保存
+const reservationData = {
 
-            menus: [...checkedMenus].map(item => item.value),
+    menus: [...checkedMenus].map(item => item.value),
 
-            visit: visit.value
+    visit: visit.value
 
-        };
+};
 
-        console.log(reservationData);
+console.log(reservationData);
 
-        const calendarSection = document.getElementById("calendarSection");
+// カレンダー表示
+const calendarSection = document.getElementById("calendarSection");
 
-        calendarSection.style.display = "block";
+calendarSection.style.display = "block";
 
-        document.getElementById("customerSection").style.display = "none";
-        document.getElementById("confirmSection").style.display = "none";
+// お客様情報・確認画面はまだ非表示
+document.getElementById("customerSection").style.display = "none";
+document.getElementById("confirmSection").style.display = "none";
 
-        calendarSection.scrollIntoView({
+// カレンダーまでスクロール
+calendarSection.scrollIntoView({
 
-            behavior: "smooth"
+    behavior: "smooth"
 
-        });
+});
 
-        generateCalendar(reservationData);
+// 次のステップでカレンダー生成
+generateCalendar(reservationData);
 
-    });
+});
 
 });
