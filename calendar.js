@@ -775,11 +775,11 @@ form.innerHTML = `
 
 </div>
 
-<div id="eyelinerHistoryGroup" style="display:none; margin-top:15px;">
+<div id="eyelineHistoryGroup" style="display:none; margin-top:15px;">
 
 <label>アイライン：施術歴日</label>
 
-<input type="date" id="eyelinerHistoryDate">
+<input type="date" id="eyelineHistoryDate">
 
 </div>
 
@@ -871,7 +871,7 @@ const historyDetailArea =
 
 const historyGroups = {
     "眉": document.getElementById("eyebrowHistoryGroup"),
-    "アイライン": document.getElementById("eyelinerHistoryGroup"),
+    "アイライン": document.getElementById("eyelineHistoryGroup"),
     "リップ": document.getElementById("lipHistoryGroup"),
     "ヘアライン": document.getElementById("hairlineHistoryGroup"),
     "その他": document.getElementById("otherHistoryGroup")
@@ -1004,11 +1004,11 @@ const eyebrowHistory =
 const eyebrowHistoryDate =
     document.getElementById("eyebrowHistoryDate").value;
 
-const eyelinerHistory =
+const eyelineHistory =
     selectedHistories.includes("アイライン") ? "あり" : "";
 
-const eyelinerHistoryDate =
-    document.getElementById("eyelinerHistoryDate").value;
+const eyelineHistoryDate =
+    document.getElementById("eyelineHistoryDate").value;
 
 const lipHistory =
     selectedHistories.includes("リップ") ? "あり" : "";
@@ -1044,7 +1044,7 @@ if (selectedHistories.includes("眉") && eyebrowHistoryDate === "") {
 
 if (
     selectedHistories.includes("アイライン") &&
-    eyelinerHistoryDate === ""
+    eyelineHistoryDate === ""
 ) {
 
     alert("アイラインの施術歴日を選択してください。");
@@ -1104,8 +1104,8 @@ customerData = {
 eyebrowHistory,
 eyebrowHistoryDate,
 
-eyelinerHistory,
-eyelinerHistoryDate,
+eyelineHistory,
+eyelineHistoryDate,
 
 lipHistory,
 lipHistoryDate,
@@ -1185,8 +1185,8 @@ customerData.historyDate = "";
 customerData.eyebrowHistory = "";
 customerData.eyebrowHistoryDate = "";
 
-customerData.eyelinerHistory = "";
-customerData.eyelinerHistoryDate = "";
+customerData.eyelineHistory = "";
+customerData.eyelineHistoryDate = "";
 
 customerData.lipHistory = "";
 customerData.lipHistoryDate = "";
@@ -1274,15 +1274,15 @@ ${customerData.eyebrowHistory ? `
 </div>
 ` : ""}
 
-${customerData.eyelinerHistory ? `
+${customerData.eyelineHistory ? `
 <div class="confirm-item">
 <span class="label">アイライン施術歴</span>
-<span class="value">${customerData.eyelinerHistory}</span>
+<span class="value">${customerData.eyelineHistory}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">アイライン施術歴日</span>
-<span class="value">${customerData.eyelinerHistoryDate}</span>
+<span class="value">${customerData.eyelineHistoryDate}</span>
 </div>
 ` : ""}
 
@@ -1371,8 +1371,8 @@ historyDate: reservationData.visit === "再診" ? "" : customerData.historyDate,
 eyebrowHistory: reservationData.visit === "再診" ? "" : customerData.eyebrowHistory,
 eyebrowHistoryDate: reservationData.visit === "再診" ? "" : customerData.eyebrowHistoryDate,
 
-eyelinerHistory: reservationData.visit === "再診" ? "" : customerData.eyelinerHistory,
-eyelinerHistoryDate: reservationData.visit === "再診" ? "" : customerData.eyelinerHistoryDate,
+eyelineHistory: reservationData.visit === "再診" ? "" : customerData.eyelineHistory,
+eyelineHistoryDate: reservationData.visit === "再診" ? "" : customerData.eyelineHistoryDate,
 
 lipHistory: reservationData.visit === "再診" ? "" : customerData.lipHistory,
 lipHistoryDate: reservationData.visit === "再診" ? "" : customerData.lipHistoryDate,
