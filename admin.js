@@ -437,11 +437,43 @@ function openEditForm(reservation) {
     document.getElementById("editReferrer").value =
         reservation.referrer || "";
 
-    document.getElementById("editHistory").value =
-        reservation.history || "";
+    // ================================
+// 個別施術歴
+// ================================
 
-    document.getElementById("editHistoryDate").value =
-        reservation.historyDate || "";
+document.getElementById("editEyebrowHistory").value =
+    reservation.eyebrowHistory || "";
+
+document.getElementById("editEyebrowHistoryDate").value =
+    reservation.eyebrowHistoryDate || "";
+
+
+document.getElementById("editEyelineHistory").value =
+    reservation.eyelineHistory || "";
+
+document.getElementById("editEyelineHistoryDate").value =
+    reservation.eyelineHistoryDate || "";
+
+
+document.getElementById("editLipHistory").value =
+    reservation.lipHistory || "";
+
+document.getElementById("editLipHistoryDate").value =
+    reservation.lipHistoryDate || "";
+
+
+document.getElementById("editHairlineHistory").value =
+    reservation.hairlineHistory || "";
+
+document.getElementById("editHairlineHistoryDate").value =
+    reservation.hairlineHistoryDate || "";
+
+
+document.getElementById("editOtherHistory").value =
+    reservation.otherHistory || "";
+
+document.getElementById("editOtherHistoryDate").value =
+    reservation.otherHistoryDate || "";
 
     document.getElementById("editMedicalHistory").value =
         reservation.medicalHistory || "";
@@ -550,11 +582,39 @@ async function saveEdit() {
         referrer:
             document.getElementById("editReferrer").value,
 
-        history:
-            document.getElementById("editHistory").value,
+        eyebrowHistory:
+    document.getElementById("editEyebrowHistory").value,
 
-        historyDate:
-            document.getElementById("editHistoryDate").value,
+eyebrowHistoryDate:
+    document.getElementById("editEyebrowHistoryDate").value,
+
+
+eyelineHistory:
+    document.getElementById("editEyelineHistory").value,
+
+eyelineHistoryDate:
+    document.getElementById("editEyelineHistoryDate").value,
+
+
+lipHistory:
+    document.getElementById("editLipHistory").value,
+
+lipHistoryDate:
+    document.getElementById("editLipHistoryDate").value,
+
+
+hairlineHistory:
+    document.getElementById("editHairlineHistory").value,
+
+hairlineHistoryDate:
+    document.getElementById("editHairlineHistoryDate").value,
+
+
+otherHistory:
+    document.getElementById("editOtherHistory").value,
+
+otherHistoryDate:
+    document.getElementById("editOtherHistoryDate").value,
 
         medicalHistory:
             document.getElementById("editMedicalHistory").value,

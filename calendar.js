@@ -155,7 +155,7 @@ function getRequiredSlots(){
 
 
 
-function canReserve(date,time,times){
+function canReserve(date, time) {
 
     const requiredSlots = getRequiredSlots();
 
@@ -500,7 +500,7 @@ function showTimes(data){
 
     const timeArea=document.getElementById("timeArea");
 
-    const date = new Date(selectedDate);
+    const date = createLocalDate(selectedDate, "00:00");
 
 const day = date.getDay();
 
@@ -732,30 +732,84 @@ form.innerHTML = `
 <div class="radio-group">
 
 <label>
-
-<input type="radio" name="history" value="あり">
-
-<span>あり</span>
-
+<input type="checkbox" name="historyType" value="眉">
+<span>眉</span>
 </label>
 
 <label>
+<input type="checkbox" name="historyType" value="アイライン">
+<span>アイライン</span>
+</label>
 
-<input type="radio" name="history" value="なし" checked>
+<label>
+<input type="checkbox" name="historyType" value="リップ">
+<span>リップ</span>
+</label>
 
+<label>
+<input type="checkbox" name="historyType" value="ヘアライン">
+<span>ヘアライン</span>
+</label>
+
+<label>
+<input type="checkbox" name="historyType" value="その他">
+<span>その他</span>
+</label>
+
+<label>
+<input type="checkbox" id="noHistory">
 <span>なし</span>
-
 </label>
 
 </div>
 
 </div>
 
-<div class="form-group" id="historyDateGroup" style="display:none;">
+<div class="form-group" id="historyDetailArea" style="display:none;">
 
-<label>施術歴日 <span style="color:red;">*</span></label>
+<div id="eyebrowHistoryGroup" style="display:none;">
 
-<input type="date" id="historyDate">
+<label>眉：施術歴日</label>
+
+<input type="date" id="eyebrowHistoryDate">
+
+</div>
+
+<div id="eyelinerHistoryGroup" style="display:none; margin-top:15px;">
+
+<label>アイライン：施術歴日</label>
+
+<input type="date" id="eyelinerHistoryDate">
+
+</div>
+
+<div id="lipHistoryGroup" style="display:none; margin-top:15px;">
+
+<label>リップ：施術歴日</label>
+
+<input type="date" id="lipHistoryDate">
+
+</div>
+
+<div id="hairlineHistoryGroup" style="display:none; margin-top:15px;">
+
+<label>ヘアライン：施術歴日</label>
+
+<input type="date" id="hairlineHistoryDate">
+
+</div>
+
+<div id="otherHistoryGroup" style="display:none; margin-top:15px;">
+
+<label>その他：施術内容</label>
+
+<input type="text" id="otherHistory">
+
+<label style="margin-top:15px;">その他：施術歴日</label>
+
+<input type="date" id="otherHistoryDate">
+
+</div>
 
 </div>
 
@@ -806,31 +860,87 @@ placeholder="既往歴・服薬中のお薬をご入力ください。
 
 `;
 
-const historyRadios =
-    document.querySelectorAll('input[name="history"]');
+const historyChecks =
+    document.querySelectorAll('input[name="historyType"]');
 
-const historyDateGroup =
-    document.getElementById("historyDateGroup");
+const noHistory =
+    document.getElementById("noHistory");
 
-historyRadios.forEach(radio => {
+const historyDetailArea =
+    document.getElementById("historyDetailArea");
 
-    radio.addEventListener("change", () => {
+const historyGroups = {
+    "眉": document.getElementById("eyebrowHistoryGroup"),
+    "アイライン": document.getElementById("eyelinerHistoryGroup"),
+    "リップ": document.getElementById("lipHistoryGroup"),
+    "ヘアライン": document.getElementById("hairlineHistoryGroup"),
+    "その他": document.getElementById("otherHistoryGroup")
+};
 
-        if (radio.value === "あり" && radio.checked) {
+historyChecks.forEach(check => {
 
-            historyDateGroup.style.display = "block";
+    check.addEventListener("change", () => {
 
-        }
+        const group = historyGroups[check.value];
 
-        if (radio.value === "なし" && radio.checked) {
+        if (check.checked) {
 
-            historyDateGroup.style.display = "none";
+            noHistory.checked = false;
 
-            document.getElementById("historyDate").value = "";
+            historyDetailArea.style.display = "block";
+
+            if (group) {
+                group.style.display = "block";
+            }
+
+        } else {
+
+            if (group) {
+
+                group.style.display = "none";
+
+                group.querySelectorAll("input").forEach(input => {
+                    input.value = "";
+                });
+
+            }
+
+            const hasHistory =
+                [...historyChecks].some(item => item.checked);
+
+            if (!hasHistory) {
+                historyDetailArea.style.display = "none";
+            }
 
         }
 
     });
+
+});
+
+noHistory.addEventListener("change", () => {
+
+    if (noHistory.checked) {
+
+        historyChecks.forEach(check => {
+
+            check.checked = false;
+
+        });
+
+        Object.values(historyGroups).forEach(group => {
+
+            group.style.display = "none";
+
+            group.querySelectorAll("input").forEach(input => {
+                input.value = "";
+            });
+
+        });
+
+        historyDetailArea.style.display = "none";
+
+    }
 
 });
 
@@ -878,16 +988,106 @@ if (age === "") {
 
     }
 
-    const history =
-    document.querySelector('input[name="history"]:checked').value;
+    const selectedHistories = [
+    ...document.querySelectorAll(
+        'input[name="historyType"]:checked'
+    )
+].map(input => input.value);
 
-const historyDate =
-    document.getElementById("historyDate").value;
+const history = selectedHistories.length > 0
+    ? "あり"
+    : "なし";
 
-if (history === "あり" && historyDate === "") {
+const eyebrowHistory =
+    selectedHistories.includes("眉") ? "あり" : "";
 
-    alert("施術歴日を選択してください。");
+const eyebrowHistoryDate =
+    document.getElementById("eyebrowHistoryDate").value;
 
+const eyelinerHistory =
+    selectedHistories.includes("アイライン") ? "あり" : "";
+
+const eyelinerHistoryDate =
+    document.getElementById("eyelinerHistoryDate").value;
+
+const lipHistory =
+    selectedHistories.includes("リップ") ? "あり" : "";
+
+const lipHistoryDate =
+    document.getElementById("lipHistoryDate").value;
+
+const hairlineHistory =
+    selectedHistories.includes("ヘアライン") ? "あり" : "";
+
+const hairlineHistoryDate =
+    document.getElementById("hairlineHistoryDate").value;
+
+const otherHistory =
+    selectedHistories.includes("その他")
+        ? document.getElementById("otherHistory").value.trim()
+        : "";
+
+const otherHistoryDate =
+    document.getElementById("otherHistoryDate").value;
+
+
+// ==========================
+// 入力チェック
+// ==========================
+
+if (selectedHistories.includes("眉") && eyebrowHistoryDate === "") {
+
+    alert("眉の施術歴日を選択してください。");
+    return;
+
+}
+
+if (
+    selectedHistories.includes("アイライン") &&
+    eyelinerHistoryDate === ""
+) {
+
+    alert("アイラインの施術歴日を選択してください。");
+    return;
+
+}
+
+if (
+    selectedHistories.includes("リップ") &&
+    lipHistoryDate === ""
+) {
+
+    alert("リップの施術歴日を選択してください。");
+    return;
+
+}
+
+if (
+    selectedHistories.includes("ヘアライン") &&
+    hairlineHistoryDate === ""
+) {
+
+    alert("ヘアラインの施術歴日を選択してください。");
+    return;
+
+}
+
+if (
+    selectedHistories.includes("その他") &&
+    otherHistory === ""
+) {
+
+    alert("その他の施術内容を入力してください。");
+    return;
+
+}
+
+if (
+    selectedHistories.includes("その他") &&
+    otherHistoryDate === ""
+) {
+
+    alert("その他の施術歴日を選択してください。");
     return;
 
 }
@@ -900,7 +1100,21 @@ customerData = {
     referrer,
     tel,
     history,
-    historyDate,
+
+eyebrowHistory,
+eyebrowHistoryDate,
+
+eyelinerHistory,
+eyelinerHistoryDate,
+
+lipHistory,
+lipHistoryDate,
+
+hairlineHistory,
+hairlineHistoryDate,
+
+otherHistory,
+otherHistoryDate,
     medicalHistory: document.getElementById("medicalHistory").value.trim(),
     pregnancy: document.querySelector('input[name="pregnancy"]:checked').value
 
@@ -961,12 +1175,30 @@ function showConfirm() {
 `;
 
         customerData.gender = "";
-        customerData.age = "";
-        customerData.referrer = "";
-        customerData.tel = "";
-        customerData.history = "";
-        customerData.medicalHistory = "";
-        customerData.pregnancy = "";
+customerData.age = "";
+customerData.referrer = "";
+customerData.tel = "";
+
+customerData.history = "";
+customerData.historyDate = "";
+
+customerData.eyebrowHistory = "";
+customerData.eyebrowHistoryDate = "";
+
+customerData.eyelinerHistory = "";
+customerData.eyelinerHistoryDate = "";
+
+customerData.lipHistory = "";
+customerData.lipHistoryDate = "";
+
+customerData.hairlineHistory = "";
+customerData.hairlineHistoryDate = "";
+
+customerData.otherHistory = "";
+customerData.otherHistoryDate = "";
+
+customerData.medicalHistory = "";
+customerData.pregnancy = "";
 
     }
 
@@ -1030,10 +1262,63 @@ function showConfirm() {
 <span class="value">${customerData.history}</span>
 </div>
 
-${customerData.history === "あり" ? `
+${customerData.eyebrowHistory ? `
 <div class="confirm-item">
-<span class="label">施術歴日</span>
-<span class="value">${customerData.historyDate}</span>
+<span class="label">眉施術歴</span>
+<span class="value">${customerData.eyebrowHistory}</span>
+</div>
+
+<div class="confirm-item">
+<span class="label">眉施術歴日</span>
+<span class="value">${customerData.eyebrowHistoryDate}</span>
+</div>
+` : ""}
+
+${customerData.eyelinerHistory ? `
+<div class="confirm-item">
+<span class="label">アイライン施術歴</span>
+<span class="value">${customerData.eyelinerHistory}</span>
+</div>
+
+<div class="confirm-item">
+<span class="label">アイライン施術歴日</span>
+<span class="value">${customerData.eyelinerHistoryDate}</span>
+</div>
+` : ""}
+
+${customerData.lipHistory ? `
+<div class="confirm-item">
+<span class="label">リップ施術歴</span>
+<span class="value">${customerData.lipHistory}</span>
+</div>
+
+<div class="confirm-item">
+<span class="label">リップ施術歴日</span>
+<span class="value">${customerData.lipHistoryDate}</span>
+</div>
+` : ""}
+
+${customerData.hairlineHistory ? `
+<div class="confirm-item">
+<span class="label">ヘアライン施術歴</span>
+<span class="value">${customerData.hairlineHistory}</span>
+</div>
+
+<div class="confirm-item">
+<span class="label">ヘアライン施術歴日</span>
+<span class="value">${customerData.hairlineHistoryDate}</span>
+</div>
+` : ""}
+
+${customerData.otherHistory ? `
+<div class="confirm-item">
+<span class="label">その他施術歴</span>
+<span class="value">${customerData.otherHistory}</span>
+</div>
+
+<div class="confirm-item">
+<span class="label">その他施術歴日</span>
+<span class="value">${customerData.otherHistoryDate}</span>
 </div>
 ` : ""}
 
@@ -1081,9 +1366,25 @@ ${customerData.history === "あり" ? `
     referrer: reservationData.visit === "再診" ? "" : customerData.referrer,
     tel: reservationData.visit === "再診" ? "" : customerData.tel,
     history: reservationData.visit === "再診" ? "" : customerData.history,
-    historyDate: reservationData.visit === "再診" ? "" : customerData.historyDate,
-    medicalHistory: reservationData.visit === "再診" ? "" : customerData.medicalHistory,
-    pregnancy: reservationData.visit === "再診" ? "" : customerData.pregnancy
+historyDate: reservationData.visit === "再診" ? "" : customerData.historyDate,
+
+eyebrowHistory: reservationData.visit === "再診" ? "" : customerData.eyebrowHistory,
+eyebrowHistoryDate: reservationData.visit === "再診" ? "" : customerData.eyebrowHistoryDate,
+
+eyelinerHistory: reservationData.visit === "再診" ? "" : customerData.eyelinerHistory,
+eyelinerHistoryDate: reservationData.visit === "再診" ? "" : customerData.eyelinerHistoryDate,
+
+lipHistory: reservationData.visit === "再診" ? "" : customerData.lipHistory,
+lipHistoryDate: reservationData.visit === "再診" ? "" : customerData.lipHistoryDate,
+
+hairlineHistory: reservationData.visit === "再診" ? "" : customerData.hairlineHistory,
+hairlineHistoryDate: reservationData.visit === "再診" ? "" : customerData.hairlineHistoryDate,
+
+otherHistory: reservationData.visit === "再診" ? "" : customerData.otherHistory,
+otherHistoryDate: reservationData.visit === "再診" ? "" : customerData.otherHistoryDate,
+
+medicalHistory: reservationData.visit === "再診" ? "" : customerData.medicalHistory,
+pregnancy: reservationData.visit === "再診" ? "" : customerData.pregnancy
 
 };
 
