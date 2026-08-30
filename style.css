@@ -821,33 +821,6 @@ textarea{
 }
 
 /* =========================
-   施術歴日：他の入力欄と完全に統一
-========================= */
-
-#historyDate {
-    display: block;
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    height: 48px;
-
-    padding: 12px;
-
-    border: 1px solid #D8CDC3;
-    border-radius: 10px;
-
-    font-size: 15px;
-    font-family: inherit;
-
-    box-sizing: border-box;
-
-    background: #fff;
-
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-/* =========================
    施術歴：スマホ2列表示
 ========================= */
 
@@ -860,8 +833,6 @@ textarea{
         grid-template-columns: 1fr 1fr;
 
         gap: 14px 12px;
-
-        justify-content: initial;
 
     }
 
@@ -895,21 +866,74 @@ textarea{
 
 
 /* =========================
-   施術歴入力欄の幅を統一
+   施術歴日：入力欄の幅を統一
 ========================= */
 
-#historyDetailArea,
-#historyDetailArea > div {
+#historyDetailArea {
+
     width: 100%;
     max-width: 100%;
+    min-width: 0;
+
     box-sizing: border-box;
+
+}
+
+#historyDetailArea > div {
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    box-sizing: border-box;
+
 }
 
 #historyDetailArea input[type="date"],
 #historyDetailArea input[type="text"] {
+
     display: block;
-    width: 100% !important;
-    max-width: 100% !important;
+
+    width: 100%;
+    max-width: 100%;
     min-width: 0;
+
+    height: 48px;
+
+    padding: 12px;
+
+    border: 1px solid #D8CDC3;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-family: inherit;
+
     box-sizing: border-box;
+
+    background: #fff;
+
+    -webkit-appearance: none;
+    appearance: none;
+
+}
+
+
+/* =========================
+   施術歴詳細：横幅はフォームと完全統一
+========================= */
+
+#customerForm .form-group #historyDetailArea {
+
+    width: 100%;
+    max-width: 100%;
+
+}
+
+#customerForm .form-group #historyDetailArea input {
+
+    width: 100%;
+    max-width: 100%;
+
 }
