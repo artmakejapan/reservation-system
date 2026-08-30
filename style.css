@@ -846,3 +846,94 @@ textarea{
     -webkit-appearance: none;
     appearance: none;
 }
+
+/* =========================
+   施術歴：スマホ2列表示
+========================= */
+
+@media (max-width: 600px) {
+
+    #customerForm .form-group:has(input[name="historyType"]) .radio-group {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 14px 12px;
+
+        justify-content: initial;
+
+    }
+
+    #customerForm .form-group:has(input[name="historyType"]) .radio-group label {
+
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        margin: 0;
+
+    }
+
+    #customerForm .form-group:has(input[name="historyType"]) .radio-group input[type="checkbox"] {
+
+        width: 18px;
+
+        height: 18px;
+
+        flex-shrink: 0;
+
+        accent-color: #D1A78E;
+
+    }
+
+}
+
+
+/* =========================
+   施術歴日：スマホ幅調整
+========================= */
+
+#customerForm input[type="date"] {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 320px;
+
+    min-width: 0;
+
+    height: 48px;
+
+    padding: 12px;
+
+    border: 1px solid #D8CDC3;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-family: inherit;
+
+    box-sizing: border-box;
+
+    background: #fff;
+
+}
+
+@media (max-width: 600px) {
+
+    #customerForm input[type="date"] {
+
+        width: 100%;
+
+        max-width: 320px;
+
+    }
+
+}
