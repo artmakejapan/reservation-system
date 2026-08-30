@@ -898,15 +898,19 @@ textarea{
    施術歴日：スマホ幅調整
 ========================= */
 
+/* =========================
+   施術歴日：他の入力欄と同じ幅
+========================= */
+
 #customerForm input[type="date"] {
 
     display: block;
 
     width: 100%;
 
-    max-width: 320px;
-
     min-width: 0;
+
+    max-width: 100%;
 
     height: 48px;
 
@@ -923,17 +927,5 @@ textarea{
     box-sizing: border-box;
 
     background: #fff;
-
-}
-
-@media (max-width: 600px) {
-
-    #customerForm input[type="date"] {
-
-        width: 100%;
-
-        max-width: 320px;
-
-    }
 
 }
