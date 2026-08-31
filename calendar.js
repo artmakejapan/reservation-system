@@ -367,15 +367,23 @@ if(reservable && future && !full){
 
     let colorClass = "";
 
-if (remain === 1 || remain === 2) {
+// 残り1枠 → 赤
+if (remain === 1) {
 
     colorClass = "one-left";
 
-} else if (remain === 3) {
+}
+
+// 残り2枠 → 黄
+else if (remain === 2) {
 
     colorClass = "two-left";
 
 }
+
+// 残り3枠以上 → クラスなし（デフォルトのベージュ）
+
+
 
     html+=`
     <button
