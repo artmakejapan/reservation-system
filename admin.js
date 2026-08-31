@@ -437,43 +437,87 @@ function openEditForm(reservation) {
     document.getElementById("editReferrer").value =
         reservation.referrer || "";
 
-    // ================================
-// 個別施術歴
+// ================================
+// 施術歴
 // ================================
 
-document.getElementById("editEyebrowHistory").value =
-    reservation.eyebrowHistory || "";
+const historySelector =
+    document.getElementById("editHistorySelector");
 
-document.getElementById("editEyebrowHistoryDate").value =
-    reservation.eyebrowHistoryDate || "";
+const historySelected =
+    document.getElementById("editHistorySelected");
 
-
-document.getElementById("editEyelineHistory").value =
-    reservation.eyelineHistory || "";
-
-document.getElementById("editEyelineHistoryDate").value =
-    reservation.eyelineHistoryDate || "";
+historySelected.innerHTML = "";
 
 
-document.getElementById("editLipHistory").value =
-    reservation.lipHistory || "";
+// 既存の施術歴を復元
+const existingHistories = [
+    {
+        name: "眉",
+        history: reservation.eyebrowHistory,
+        date: reservation.eyebrowHistoryDate
+    },
+    {
+        name: "アイライン",
+        history: reservation.eyelineHistory,
+        date: reservation.eyelineHistoryDate
+    },
+    {
+        name: "リップ",
+        history: reservation.lipHistory,
+        date: reservation.lipHistoryDate
+    },
+    {
+        name: "ヘアライン",
+        history: reservation.hairlineHistory,
+        date: reservation.hairlineHistoryDate
+    },
+    {
+        name: "その他",
+        history: reservation.otherHistory,
+        date: reservation.otherHistoryDate
+    }
+];
 
-document.getElementById("editLipHistoryDate").value =
-    reservation.lipHistoryDate || "";
+existingHistories.forEach(item => {
+
+    if (item.history === "あり") {
+
+        addHistoryItem(
+            item.name,
+            item.date || ""
+        );
+
+    }
+
+});
 
 
-document.getElementById("editHairlineHistory").value =
-    reservation.hairlineHistory || "";
+// プルダウンから追加
+historySelector.onchange = () => {
 
-document.getElementById("editHairlineHistoryDate").value =
-    reservation.hairlineHistoryDate || "";
+    const value =
+        historySelector.value;
 
+    if (!value) return;
 
-document.getElementById("editOtherHistory").value =
-    reservation.otherHistory || "";
+    // すでに追加されていたら何もしない
+    const exists =
+        [...historySelected.querySelectorAll(".history-item")]
+            .some(item =>
+                item.dataset.history === value
+            );
 
-document.getElementById("editOtherHistoryDate").value =
-    reservation.otherHistoryDate || "";
+    if (!exists) {
+
+        addHistoryItem(value, "");
+
+    }
+
+    // 選択を初期状態に戻す
+    historySelector.value = "";
+
+};
 
     document.getElementById("editMedicalHistory").value =
         reservation.medicalHistory || "";
@@ -544,6 +588,18 @@ async function saveEdit() {
         editingReservation.time;
 
 
+    // ================================
+    // 施術歴データ
+    // ================================
+
+    const historyData =
+        getHistoryData();
+
+
+    // ================================
+    // 新しい予約データ
+    // ================================
+
     const newData = {
 
         action: "update",
@@ -552,78 +608,108 @@ async function saveEdit() {
             editingReservation.id,
 
         name:
-            document.getElementById("editName").value.trim(),
+            document
+                .getElementById("editName")
+                .value
+                .trim(),
 
         date:
-            document.getElementById("editDate").value,
+            document
+                .getElementById("editDate")
+                .value,
 
         time:
-            document.getElementById("editTime").value,
+            document
+                .getElementById("editTime")
+                .value,
 
         visit:
-            document.getElementById("editVisit").value,
+            document
+                .getElementById("editVisit")
+                .value,
 
         menu1:
-            document.getElementById("editMenu1").value,
+            document
+                .getElementById("editMenu1")
+                .value,
 
         menu2:
-            document.getElementById("editMenu2").value,
+            document
+                .getElementById("editMenu2")
+                .value,
 
-        // 電話番号は文字列として送る
         tel:
-            document.getElementById("editTel").value,
+            document
+                .getElementById("editTel")
+                .value,
 
         gender:
-            document.getElementById("editGender").value,
+            document
+                .getElementById("editGender")
+                .value,
 
         age:
-            document.getElementById("editAge").value,
+            document
+                .getElementById("editAge")
+                .value,
 
         referrer:
-            document.getElementById("editReferrer").value,
+            document
+                .getElementById("editReferrer")
+                .value,
+
+
+        // ================================
+        // 施術歴
+        // ================================
 
         eyebrowHistory:
-    document.getElementById("editEyebrowHistory").value,
+            historyData.eyebrowHistory,
 
-eyebrowHistoryDate:
-    document.getElementById("editEyebrowHistoryDate").value,
+        eyebrowHistoryDate:
+            historyData.eyebrowHistoryDate,
 
+        eyelineHistory:
+            historyData.eyelineHistory,
 
-eyelineHistory:
-    document.getElementById("editEyelineHistory").value,
+        eyelineHistoryDate:
+            historyData.eyelineHistoryDate,
 
-eyelineHistoryDate:
-    document.getElementById("editEyelineHistoryDate").value,
+        lipHistory:
+            historyData.lipHistory,
 
+        lipHistoryDate:
+            historyData.lipHistoryDate,
 
-lipHistory:
-    document.getElementById("editLipHistory").value,
+        hairlineHistory:
+            historyData.hairlineHistory,
 
-lipHistoryDate:
-    document.getElementById("editLipHistoryDate").value,
+        hairlineHistoryDate:
+            historyData.hairlineHistoryDate,
 
+        otherHistory:
+            historyData.otherHistory,
 
-hairlineHistory:
-    document.getElementById("editHairlineHistory").value,
+        otherHistoryDate:
+            historyData.otherHistoryDate,
 
-hairlineHistoryDate:
-    document.getElementById("editHairlineHistoryDate").value,
-
-
-otherHistory:
-    document.getElementById("editOtherHistory").value,
-
-otherHistoryDate:
-    document.getElementById("editOtherHistoryDate").value,
 
         medicalHistory:
-            document.getElementById("editMedicalHistory").value,
+            document
+                .getElementById("editMedicalHistory")
+                .value,
 
         pregnancy:
-            document.getElementById("editPregnancy").value
+            document
+                .getElementById("editPregnancy")
+                .value
 
     };
 
+
+    // ================================
+    // 入力チェック
+    // ================================
 
     if (!newData.name) {
 
@@ -645,6 +731,10 @@ otherHistoryDate:
         "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
 
 
+    // ================================
+    // 保存
+    // ================================
+
     const response =
         await fetch(baseUrl, {
 
@@ -662,6 +752,10 @@ otherHistoryDate:
     const result =
         await response.json();
 
+
+    // ================================
+    // 保存成功
+    // ================================
 
     if (result.result === "success") {
 
@@ -901,5 +995,172 @@ function escapeHtml(value) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
+}
+
+// ==================================================
+// 施術歴データ取得
+// ==================================================
+
+function getHistoryData() {
+
+    const data = {
+
+        eyebrowHistory: "",
+        eyebrowHistoryDate: "",
+
+        eyelineHistory: "",
+        eyelineHistoryDate: "",
+
+        lipHistory: "",
+        lipHistoryDate: "",
+
+        hairlineHistory: "",
+        hairlineHistoryDate: "",
+
+        otherHistory: "",
+        otherHistoryDate: ""
+
+    };
+
+
+    document
+        .querySelectorAll("#editHistorySelected .history-item")
+        .forEach(item => {
+
+            const name =
+                item.dataset.history;
+
+            const date =
+                item.querySelector(".history-date")?.value || "";
+
+
+            if (name === "眉") {
+
+                data.eyebrowHistory = "あり";
+                data.eyebrowHistoryDate = date;
+
+            }
+
+
+            if (name === "アイライン") {
+
+                data.eyelineHistory = "あり";
+                data.eyelineHistoryDate = date;
+
+            }
+
+
+            if (name === "リップ") {
+
+                data.lipHistory = "あり";
+                data.lipHistoryDate = date;
+
+            }
+
+
+            if (name === "ヘアライン") {
+
+                data.hairlineHistory = "あり";
+                data.hairlineHistoryDate = date;
+
+            }
+
+
+            if (name === "その他") {
+
+                data.otherHistory = "あり";
+                data.otherHistoryDate = date;
+
+            }
+
+        });
+
+
+    return data;
+
+}
+
+// ==================================================
+// 施術歴日の表示・非表示
+// ==================================================
+
+function updateHistoryDateVisibility(
+    historyElement,
+    dateElement
+) {
+
+    if (!historyElement || !dateElement) return;
+
+    if (historyElement.value === "あり") {
+
+        dateElement.style.display = "block";
+
+        if (dateElement.previousElementSibling) {
+            dateElement.previousElementSibling.style.display = "block";
+        }
+
+    } else {
+
+        dateElement.style.display = "none";
+
+        if (dateElement.previousElementSibling) {
+            dateElement.previousElementSibling.style.display = "none";
+        }
+
+        if (historyElement.value === "なし") {
+            dateElement.value = "";
+        }
+
+    }
+
+}
+
+// ==================================================
+// 施術歴項目追加
+// ==================================================
+
+function addHistoryItem(name, dateValue = "") {
+
+    const container =
+        document.getElementById("editHistorySelected");
+
+    const item =
+        document.createElement("div");
+
+    item.className = "history-item";
+
+    item.dataset.history = name;
+
+    item.innerHTML = `
+
+        <div class="history-title">
+            ${escapeHtml(name)}
+        </div>
+
+        <label>施術歴日</label>
+
+        <input
+            type="date"
+            class="history-date"
+            value="${escapeHtml(dateValue)}">
+
+        <button
+            type="button"
+            class="history-remove">
+            削除
+        </button>
+
+    `;
+
+    item
+        .querySelector(".history-remove")
+        .addEventListener("click", () => {
+
+            item.remove();
+
+        });
+
+    container.appendChild(item);
 
 }
