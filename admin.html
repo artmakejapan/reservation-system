@@ -47,6 +47,251 @@
 
     </div>
 
+    <!-- ==================================
+     新規予約
+================================== -->
+
+<div class="new-reservation-section">
+
+    <button id="openNewReservationButton" type="button">
+        ＋ 新規予約
+    </button>
+
+</div>
+
+
+<div id="newReservationArea" style="display:none;">
+
+    <h2>新規予約</h2>
+
+    <!-- ================================
+         お客様
+    ================================= -->
+
+    <label>お客様検索</label>
+
+<input
+    type="text"
+    id="newCustomerSearch"
+    list="newCustomerCandidates"
+    placeholder="名前で検索して選択">
+
+<datalist id="newCustomerCandidates"></datalist>
+
+<div class="customer-help">
+    既存のお客様を選ぶと、LINE連携情報と初診項目を自動で引き継ぎます
+</div>
+
+
+
+    <!-- ================================
+         予約基本情報
+    ================================= -->
+
+    <label>予約日</label>
+
+    <input
+        type="date"
+        id="newDate">
+
+
+    <label>開始時間</label>
+
+    <select id="newTime">
+
+        <option value="">
+            選択してください
+        </option>
+
+    </select>
+
+
+    <label>初診・再診</label>
+
+    <select id="newVisit">
+
+        <option value="初診">
+            初診
+        </option>
+
+        <option value="再診">
+            再診
+        </option>
+
+    </select>
+
+
+    <label>メニュー①</label>
+
+    <select id="newMenu1">
+
+        <option value="">
+            選択してください
+        </option>
+
+    </select>
+
+
+    <label>メニュー②</label>
+
+    <select id="newMenu2">
+
+        <option value="">
+            なし
+        </option>
+
+    </select>
+
+
+    <!-- ================================
+         お客様情報
+    ================================= -->
+
+    <label>お名前</label>
+
+    <input
+        type="text"
+        id="newName">
+
+
+    <label>性別</label>
+
+    <select id="newGender">
+
+        <option value="">
+            選択してください
+        </option>
+
+        <option value="女性">
+            女性
+        </option>
+
+        <option value="男性">
+            男性
+        </option>
+
+        <option value="その他">
+            その他
+        </option>
+
+    </select>
+
+
+    <label>年齢</label>
+
+    <input
+        type="number"
+        id="newAge"
+        min="0"
+        max="120">
+
+
+    <label>紹介者</label>
+
+    <input
+        type="text"
+        id="newReferrer">
+
+
+    <label>電話番号</label>
+
+    <input
+        type="tel"
+        id="newTel"
+        inputmode="tel">
+
+
+    <!-- ================================
+         施術歴
+    ================================= -->
+
+    <label>施術歴</label>
+
+    <select id="newHistorySelector">
+
+        <option value="">
+            施術歴を選択してください
+        </option>
+
+        <option value="眉">
+            眉
+        </option>
+
+        <option value="アイライン">
+            アイライン
+        </option>
+
+        <option value="リップ">
+            リップ
+        </option>
+
+        <option value="ヘアライン">
+            ヘアライン
+        </option>
+
+        <option value="その他">
+            その他
+        </option>
+
+    </select>
+
+
+    <div id="newHistorySelected"></div>
+
+
+    <label>既往歴・服薬中のお薬</label>
+
+    <textarea
+        id="newMedicalHistory"
+        rows="4"></textarea>
+
+
+    <label>妊娠・授乳中</label>
+
+    <select id="newPregnancy">
+
+        <option value="">
+            選択してください
+        </option>
+
+        <option value="はい">
+            はい
+        </option>
+
+        <option value="いいえ">
+            いいえ
+        </option>
+
+    </select>
+
+
+    <!-- ================================
+         ボタン
+    ================================= -->
+
+    <div class="new-reservation-button-row">
+
+        <button
+            id="createNewReservationButton"
+            type="button">
+
+            予約を登録
+
+        </button>
+
+
+        <button
+            id="closeNewReservationButton"
+            type="button">
+
+            閉じる
+
+        </button>
+
+    </div>
+
+</div>
+
 
     <!-- ==================================
          予約変更エリア

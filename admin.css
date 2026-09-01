@@ -1,347 +1,199 @@
 body{
-
     margin:0;
     padding:20px;
-
     background:#F7F3EF;
-
     font-family:"Yu Gothic",sans-serif;
-
+    color:#4F433B;
 }
 
 h1{
-
     text-align:center;
-
     color:#8A6F5A;
-
     font-size:30px;
-
+    margin:0 0 20px;
 }
 
-#reservationList{
-
-    max-width:700px;
-
-    margin:40px auto;
-
-}
-
-.reservation-card{
-
-    background:#FFFFFF;
-
-    border-radius:18px;
-
-    padding:22px;
-
-    margin-bottom:18px;
-
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-
-    border:1px solid #EFE7E1;
-
-    transition:.2s ease;
-
-}
-
-.reservation-card:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:0 10px 24px rgba(0,0,0,.10);
-
-}
-
-.reservation-card strong{
-
+h2{
     color:#8A6F5A;
-
-    font-size:15px;
-
+    margin-top:0;
 }
 
-.today-header{
+/* =================================
+   ログイン
+================================= */
 
-    margin:24px 0 16px;
+.login-box{
+    max-width:420px;
+    margin:60px auto;
+    background:#FFFFFF;
+    border-radius:18px;
+    padding:28px 24px;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+    border:1px solid #EFE7E1;
+    text-align:center;
+}
 
-    padding:12px 18px;
-
-    background:#F5EFE9;
-
+.login-box input{
+    width:100%;
+    padding:14px;
+    border:1px solid #E6DED8;
     border-radius:12px;
-
-    font-size:18px;
-
-    font-weight:700;
-
-    color:#6D5A4D;
-
+    font-size:16px;
+    background:#fff;
+    box-sizing:border-box;
 }
 
-.time-box{
-
-    font-size:28px;
-
+.login-box button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#8A6F5A;
+    color:#fff;
+    cursor:pointer;
+    font-size:15px;
     font-weight:700;
+}
 
-    color:#8B6752;
+/* =================================
+   管理画面共通レイアウト
+================================= */
 
-    margin-bottom:18px;
-
-    font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
-
+#reservationList,
+#editArea,
+#newReservationArea{
+    max-width:700px;
+    margin:30px auto;
 }
 
 .search-area{
-
+    max-width:700px;
     display:flex;
-
     gap:12px;
-
-    margin:20px 0 28px;
-
+    margin:20px auto 28px;
 }
 
 .search-area input{
-
     flex:1;
-
     padding:14px;
-
     border:1px solid #E6DED8;
-
     border-radius:14px;
-
     font-size:15px;
-
     background:#fff;
-
     box-sizing:border-box;
+}
 
+/* =================================
+   新規予約ボタン
+================================= */
+
+.new-reservation-section{
+    max-width:700px;
+    margin:0 auto 20px;
+}
+
+#openNewReservationButton{
+    width:100%;
+    padding:15px 18px;
+    border:none;
+    border-radius:14px;
+    background:#B89B82;
+    color:#fff;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:700;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+/* =================================
+   カード一覧
+================================= */
+
+.reservation-card{
+    background:#FFFFFF;
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:18px;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+    border:1px solid #EFE7E1;
+    transition:.2s ease;
+}
+
+.reservation-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(0,0,0,.10);
+}
+
+.reservation-card strong{
+    color:#8A6F5A;
+    font-size:15px;
+}
+
+.today-header{
+    margin:24px 0 16px;
+    padding:12px 18px;
+    background:#F5EFE9;
+    border-radius:12px;
+    font-size:18px;
+    font-weight:700;
+    color:#6D5A4D;
+}
+
+.time-box{
+    font-size:28px;
+    font-weight:700;
+    color:#8B6752;
+    margin-bottom:18px;
+    font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 }
 
 .button-row{
-
     display:flex;
-
     gap:10px;
-
     margin-top:18px;
+}
 
+.editButton,
+.cancelButton{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    color:#fff;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:700;
 }
 
 .editButton{
-
-    flex:1;
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:10px;
-
     background:#C7B299;
-
-    color:#fff;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    font-weight:700;
-
 }
 
 .cancelButton{
-
-    flex:1;
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:10px;
-
     background:#C98F8F;
-
-    color:#fff;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    font-weight:700;
-
 }
 
-#editArea{
+/* =================================
+   新規予約・編集 共通フォーム
+================================= */
 
-    max-width:700px;
-
-    margin:30px auto;
-
+#editArea,
+#newReservationArea{
     background:#fff;
-
     border-radius:18px;
-
     padding:24px;
-
     box-shadow:0 6px 18px rgba(0,0,0,.08);
-
     border:1px solid #EFE7E1;
-
 }
 
-#editArea h2{
-
+#editArea h2,
+#newReservationArea h2{
     margin-top:0;
-
     color:#8A6F5A;
-
 }
 
-#editArea input{
-
-    width:100%;
-
-    padding:12px;
-
-    margin-bottom:16px;
-
-    border:1px solid #E6DED8;
-
-    border-radius:10px;
-
-    box-sizing:border-box;
-
-}
-
-#saveEditButton,
-#closeEditButton{
-
-    padding:12px 22px;
-
-    border:none;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-}
-
-#saveEditButton{
-
-    background:#8A6F5A;
-
-    color:#fff;
-
-}
-
-#closeEditButton{
-
-    background:#ddd;
-
-    margin-left:10px;
-
-}
-
-@media(max-width:600px){
-
-    body{
-
-        padding:16px 12px;
-
-    }
-
-
-    h1{
-
-        font-size:24px;
-
-    }
-
-
-    .search-area{
-
-        flex-direction:column;
-
-        gap:10px;
-
-    }
-
-
-    .search-area input{
-
-        width:100%;
-
-        font-size:16px;
-
-    }
-
-
-    #reservationList{
-
-        margin:25px auto;
-
-    }
-
-
-    .reservation-card{
-
-        padding:18px;
-
-        border-radius:16px;
-
-    }
-
-
-    .time-box{
-
-        font-size:26px;
-
-    }
-
-
-    .button-row{
-
-        gap:8px;
-
-    }
-
-
-    .button-row button{
-
-        padding:14px 8px;
-
-        font-size:15px;
-
-    }
-
-
-    #editArea{
-
-        padding:18px;
-
-        border-radius:16px;
-
-    }
-
-
-    #saveEditButton,
-    #closeEditButton{
-
-        width:100%;
-
-        margin:5px 0;
-
-    }
-
-}
-
-#editArea label{
+#editArea label,
+#newReservationArea label{
     display:block;
     margin-top:14px;
     margin-bottom:6px;
@@ -349,127 +201,236 @@ h1{
     font-weight:700;
 }
 
-#editArea select{
-
+#editArea input,
+#newReservationArea input,
+#editArea select,
+#newReservationArea select,
+#editArea textarea,
+#newReservationArea textarea{
     width:100%;
     padding:12px;
-
     margin-bottom:16px;
-
     border:1px solid #E6DED8;
-
     border-radius:10px;
-
     box-sizing:border-box;
-
     background:#fff;
-
+    font-size:15px;
+    font-family:"Yu Gothic",sans-serif;
 }
 
-.search-area input[type="date"],
-#editArea input[type="date"]{
-
-    width:100% !important;
-    max-width:100% !important;
-    min-width:0;
-    box-sizing:border-box;
-
-}
-
-.search-area input[type="time"],
-#editArea input[type="time"]{
-
-    width:100% !important;
-    max-width:100% !important;
-    min-width:0;
-    box-sizing:border-box;
-
+#editArea textarea,
+#newReservationArea textarea{
+    resize:vertical;
 }
 
 input[type="date"],
 input[type="time"]{
-
     width:100%;
     max-width:100%;
     min-width:0;
-
     display:block;
-
     box-sizing:border-box;
-
     -webkit-appearance:none;
     appearance:none;
-
 }
+
+.search-area input[type="date"],
+.search-area input[type="time"],
+#editArea input[type="date"],
+#editArea input[type="time"],
+#newReservationArea input[type="date"],
+#newReservationArea input[type="time"]{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0;
+    box-sizing:border-box;
+}
+
+/* =================================
+   顧客検索
+================================= */
+
+.customer-help{
+    margin:-6px 0 14px;
+    padding:10px 12px;
+    background:#FAF6F2;
+    border:1px solid #EFE7E1;
+    border-radius:10px;
+    color:#7A6557;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* =================================
+   詳細エリア
+================================= */
 
 #editDetails{
-
     margin-top:10px;
-
     padding-top:10px;
-
     border-top:1px solid #EFE7E1;
-
 }
 
+/* =================================
+   施術歴
+================================= */
 
-#editArea textarea{
+#editHistorySelected,
+#newHistorySelected{
+    margin-bottom:10px;
+}
 
+.history-item{
+    background:#FCFAF8;
+    border:1px solid #EDE2D8;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:12px;
+}
+
+.history-title{
+    font-weight:700;
+    color:#8A6F5A;
+    margin-bottom:10px;
+    font-size:15px;
+}
+
+.history-item label{
+    margin-top:0 !important;
+}
+
+.history-item .history-date{
+    margin-bottom:10px !important;
+}
+
+.history-remove{
     width:100%;
-
-    padding:12px;
-
-    margin-bottom:16px;
-
-    border:1px solid #E6DED8;
-
+    padding:10px 12px;
+    border:none;
     border-radius:10px;
-
-    box-sizing:border-box;
-
-    resize:vertical;
-
-    font-family:"Yu Gothic",sans-serif;
-
+    background:#D9B3B3;
+    color:#fff;
+    cursor:pointer;
+    font-weight:700;
 }
 
+/* =================================
+   ボタン列
+================================= */
 
-.edit-button-row{
-
+.edit-button-row,
+.new-reservation-button-row{
     display:flex;
-
     gap:10px;
-
     margin-top:10px;
-
 }
 
-
-.edit-button-row button{
-
+.edit-button-row button,
+.new-reservation-button-row button{
     flex:1;
-
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:14px;
 }
 
+#saveEditButton,
+#createNewReservationButton{
+    background:#8A6F5A;
+    color:#fff;
+}
+
+#closeEditButton,
+#closeNewReservationButton{
+    background:#ddd;
+    color:#4F433B;
+}
+
+/* =================================
+   個別補正
+================================= */
 
 #editGender,
-#editHistory,
-#editPregnancy{
-
+#editPregnancy,
+#editAge,
+#editArea input[type="tel"],
+#newGender,
+#newPregnancy,
+#newAge,
+#newReservationArea input[type="tel"]{
     width:100%;
-
 }
 
+/* =================================
+   レスポンシブ
+================================= */
 
-#editAge{
+@media(max-width:600px){
 
-    width:100%;
+    body{
+        padding:16px 12px;
+    }
 
-}
+    h1{
+        font-size:24px;
+    }
 
+    .login-box{
+        margin:30px auto;
+        padding:22px 18px;
+        border-radius:16px;
+    }
 
-#editArea input[type="tel"]{
+    .search-area{
+        flex-direction:column;
+        gap:10px;
+    }
 
-    width:100%;
+    .search-area input{
+        width:100%;
+        font-size:16px;
+    }
 
+    #reservationList{
+        margin:25px auto;
+    }
+
+    .reservation-card{
+        padding:18px;
+        border-radius:16px;
+    }
+
+    .time-box{
+        font-size:26px;
+    }
+
+    .button-row{
+        gap:8px;
+    }
+
+    .button-row button{
+        padding:14px 8px;
+        font-size:15px;
+    }
+
+    #editArea,
+    #newReservationArea{
+        padding:18px;
+        border-radius:16px;
+    }
+
+    .edit-button-row,
+    .new-reservation-button-row{
+        flex-direction:column;
+    }
+
+    #saveEditButton,
+    #closeEditButton,
+    #createNewReservationButton,
+    #closeNewReservationButton{
+        width:100%;
+        margin:0;
+    }
 }
