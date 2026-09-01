@@ -916,8 +916,9 @@ historyChecks.forEach(check => {
             const hasHistory =
                 [...historyChecks].some(item => item.checked);
 
-            if (!hasHistory) {
-                historyDetailArea.style.display = "none";
+              if (!hasHistory) {
+                 historyDetailArea.style.display = "none";
+                 noHistory.checked = true;
             }
 
         }
