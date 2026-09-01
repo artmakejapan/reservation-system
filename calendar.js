@@ -765,7 +765,7 @@ form.innerHTML = `
 </label>
 
 <label>
-<input type="checkbox" id="noHistory">
+<input type="checkbox" id="noHistory" checked>
 <span>なし</span>
 </label>
 
@@ -925,6 +925,10 @@ historyChecks.forEach(check => {
     });
 
 });
+
+// 初期状態は「なし」
+noHistory.checked = true;
+historyDetailArea.style.display = "none";
 
 noHistory.addEventListener("change", () => {
 
