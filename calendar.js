@@ -402,13 +402,11 @@ if (data.visit === "初診") {
     // 再診
     // 残り1〜2枠 → 赤
     if (remain === 1 || remain === 2) {
-        colorClass = "one-left";
-    }
-
-    // 残り3枠 → 黄
-    else if (remain === 3) {
-        colorClass = "two-left";
-    }
+    colorClass = "one-left";
+}
+else if (remain === 3 || remain === 4) {
+    colorClass = "two-left";
+}
 
     // 残り4枠以上 → ベージュ
 }
