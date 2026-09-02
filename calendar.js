@@ -336,11 +336,24 @@ const weekdayName = {
 
 
 // 2メニューは火曜16:15のみ
-if(requiredSlots >= 2 && weekdayName !== "火"){
+if (requiredSlots >= 2) {
 
-    checkTimes = checkTimes.filter(time =>
-        time !== "16:15"
-    );
+    checkTimes = checkTimes.filter(time => {
+
+        // 16:15より前 → 空きがあればOK
+        if (time < "16:15") {
+            return true;
+        }
+
+        // 火曜16:15 → OK
+        if (weekdayName === "火" && time === "16:15") {
+            return true;
+        }
+
+        // 16:15より後、または月・金16:15 → NG
+        return false;
+
+    });
 
 }
 
@@ -574,15 +587,27 @@ times.filter(time=>{
 
 });
 
-// 2枠施術は火曜日16:15のみ許可
+// 2メニューの開始時間ルール
 const requiredSlots = getRequiredSlots();
 
-if(requiredSlots >= 2 && weekday !== "火"){
+if (requiredSlots >= 2) {
 
-    availableTimes =
-    availableTimes.filter(time =>
-        time !== "16:15"
-    );
+    availableTimes = availableTimes.filter(time => {
+
+        // 16:15より前 → 空きがあればOK
+        if (time < "16:15") {
+            return true;
+        }
+
+        // 火曜16:15 → OK
+        if (weekday === "火" && time === "16:15") {
+            return true;
+        }
+
+        // 16:15より後 → NG
+        return false;
+
+    });
 
 }
 
