@@ -367,21 +367,38 @@ if(reservable && future && !full){
 
     let colorClass = "";
 
-// 残り1枠 → 赤
-if (remain === 1) {
+// ================================================
+// 初診・再診で残り枠の色分け
+// ================================================
 
-    colorClass = "one-left";
+if (data.visit === "初診") {
 
+    // 初診
+    // 残り1枠 → 赤
+    if (remain === 1) {
+        colorClass = "one-left";
+    }
+
+    // 残り2枠 → 黄
+    else if (remain === 2) {
+        colorClass = "two-left";
+    }
+
+} else {
+
+    // 再診
+    // 残り1〜2枠 → 赤
+    if (remain === 1 || remain === 2) {
+        colorClass = "one-left";
+    }
+
+    // 残り3枠 → 黄
+    else if (remain === 3) {
+        colorClass = "two-left";
+    }
+
+    // 残り4枠以上 → ベージュ
 }
-
-// 残り2枠 → 黄
-else if (remain === 2) {
-
-    colorClass = "two-left";
-
-}
-
-// 残り3枠以上 → クラスなし（デフォルトのベージュ）
 
 
 
