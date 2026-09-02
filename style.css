@@ -939,34 +939,36 @@ textarea{
 }
 
 /* =================================
-   16:15以降の時間を1つの枠にまとめる
+   16:15以降を1つの枠にまとめる
 ================================= */
 
 .late-time-group {
     width: 100%;
     margin-top: 10px;
     padding: 0;
+
     box-sizing: border-box;
 
     background: #fff;
 
     border: 1px solid #D1A78E;
-    border-radius: 20px;
+    border-radius: 12px;
 
     overflow: hidden;
 }
 
 
-/* 16:15以降の各時間 */
+/* 中の時間 */
 
 .late-time-button {
     display: block;
 
     width: 100%;
-    min-height: 72px;
+
+    /* 通常ボタンと同じくらいの高さ */
+    padding: 15px;
 
     margin: 0 !important;
-    padding: 15px;
 
     border: none !important;
     border-radius: 0 !important;
@@ -976,29 +978,22 @@ textarea{
     box-shadow: none !important;
 
     font-size: 15px;
+    line-height: normal;
 
     box-sizing: border-box;
 }
 
 
-/* 時間と時間の境界線 */
+/* 時間同士の区切り */
 
 .late-time-button + .late-time-button {
     border-top: 1px solid #E8DED6 !important;
 }
 
 
-/* 最後の時間 */
+/* タップ時 */
 
-.late-time-button:last-child {
-    border-bottom: none !important;
-}
-
-
-/* タップ時・選択時 */
-
-.late-time-button:hover,
-.late-time-button.selected {
+.late-time-button:hover {
     background: #B88666;
-    color: #fff;
+    color: white;
 }
