@@ -937,3 +937,24 @@ textarea{
     max-width: 100%;
 
 }
+
+.late-time-group {
+    width: 100%;
+    border: 1px solid #d8c0ae;
+    border-radius: 20px;
+    padding: 10px 0;
+    margin-top: 16px;
+    box-sizing: border-box;
+}
+
+.late-time-button {
+    width: 100%;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+}
+
+.late-time-button + .late-time-button {
+    border-top: 1px solid #eadfd7 !important;
+}

@@ -625,15 +625,32 @@ if (availableTimes.length === 0) {
 
 }
 
-    availableTimes.forEach(time => {
+    // 時間表示
+const earlyTimes = availableTimes.filter(time => time < "16:15");
+const lateTimes = availableTimes.filter(time => time >= "16:15");
 
+// 16:15より前は今まで通り1つずつ表示
+earlyTimes.forEach(time => {
     timeArea.innerHTML += `
         <button class="time-button" data-time="${time}">
             ${time}
         </button>
     `;
-
 });
+
+// 16:15以降は1つの枠にまとめて縦並び
+if (lateTimes.length > 0) {
+
+    timeArea.innerHTML += `
+        <div class="late-time-group">
+            ${lateTimes.map(time => `
+                <button class="time-button late-time-button" data-time="${time}">
+                    ${time}
+                </button>
+            `).join("")}
+        </div>
+    `;
+}
 
 document.querySelectorAll(".time-button").forEach(btn => {
 
