@@ -69,6 +69,21 @@ async function initMyPage() {
 
 }
 
+// ================================
+// 日付表示
+// ================================
+
+function formatDateJapanese(dateString) {
+
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) {
+        return dateString;
+    }
+
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+
+}
 
 // ================================
 // 次回予約
@@ -122,34 +137,26 @@ const reservation =
 
     area.innerHTML = `
 
-        <div class="reservation-item">
+    <div class="reservation-item">
 
-            <p>
-                <span>予約日</span>
-                ${reservation.date}
-            </p>
+        <p class="reservation-date">
+            ${formatDateJapanese(reservation.date)}
+        </p>
 
-            <p>
-                <span>予約時間</span>
-                ${reservation.time}
-            </p>
+        <p class="reservation-time">
+            ${reservation.time}〜
+        </p>
 
-            <p>
-                <span>施術</span>
-                ${reservation.menu1}
-                ${reservation.menu2
-                    ? "・" + reservation.menu2
-                    : ""}
-            </p>
+        <p class="reservation-menu">
+            ${reservation.menu1}
+            ${reservation.menu2
+                ? "・" + reservation.menu2
+                : ""}
+        </p>
 
-            <p>
-                <span>初診・再診</span>
-                ${reservation.visit}
-            </p>
+    </div>
 
-        </div>
-
-    `;
+`;
 
 }
 
@@ -211,18 +218,17 @@ function displayHistory(reservations) {
 
             <div class="history-item">
 
-                <p>
-                    ${item.date}
-                </p>
+    <p>
+        ${formatDateJapanese(item.date)}
+        <span class="history-menu">
+            ${item.menu1}
+            ${item.menu2
+                ? "・" + item.menu2
+                : ""}
+        </span>
+    </p>
 
-                <p>
-                    ${item.menu1}
-                    ${item.menu2
-                        ? "・" + item.menu2
-                        : ""}
-                </p>
-
-            </div>
+</div>
 
         `;
 
