@@ -387,28 +387,34 @@ if(reservable && future && !full){
 if (data.visit === "初診") {
 
     // 初診
-    // 残り1枠 → 赤
-    if (remain === 1) {
+    // 残り1〜2枠 → 赤
+    if (remain === 1 || remain === 2) {
         colorClass = "one-left";
     }
 
-    // 残り2枠 → 黄
-    else if (remain === 2) {
+    // 残り3枠 → 黄色
+    else if (remain === 3) {
         colorClass = "two-left";
     }
+
+    // 残り4枠以上 → ベージュ
+    // colorClassなし
 
 } else {
 
     // 再診
-    // 残り1〜2枠 → 赤
-    if (remain === 1 || remain === 2) {
-    colorClass = "one-left";
-}
-else if (remain === 3 || remain === 4) {
-    colorClass = "two-left";
-}
+    // 残り1〜3枠 → 赤
+    if (remain === 1 || remain === 2 || remain === 3) {
+        colorClass = "one-left";
+    }
 
-    // 残り4枠以上 → ベージュ
+    // 残り4枠 → 黄色
+    else if (remain === 4) {
+        colorClass = "two-left";
+    }
+
+    // 残り5枠以上 → ベージュ
+    // colorClassなし
 }
 
 
