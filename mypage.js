@@ -115,13 +115,19 @@ function displayReservation(reservations) {
 
     if (futureReservations.length === 0) {
 
-        area.innerHTML = `
-            <p>現在、ご予約はありません。</p>
-        `;
+    area.innerHTML = `
+        <p class="no-reservation">
+            現在、ご予約はありません。
+        </p>
 
-        return;
+        <p class="no-reservation-guide">
+            ご予約をご希望の場合は、<br>
+            「ご予約・空き状況」よりお申し込みください。
+        </p>
+    `;
 
-    }
+    return;
+}
 
 
     futureReservations.sort((a, b) => {

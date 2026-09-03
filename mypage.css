@@ -170,3 +170,17 @@ h1 {
 .google-map-link:hover {
     opacity: 0.7;
 }
+
+.no-reservation {
+    text-align: center;
+    font-size: 16px;
+    color: #4A403A;
+    margin-bottom: 12px;
+}
+
+.no-reservation-guide {
+    text-align: center;
+    font-size: 14px;
+    color: #8A7768;
+    line-height: 1.8;
+}
