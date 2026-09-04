@@ -227,43 +227,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // サイドメニューの名前表示
-    async function updateSideMenuWelcome() {
+async function updateSideMenuWelcome() {
 
-        const welcome =
-            document.getElementById("sideMenuWelcome");
+    const welcome =
+        document.getElementById("sideMenuWelcome");
 
-        if (!welcome) return;
+    if (!welcome) return;
 
-        try {
+    try {
 
-            if (
-                typeof liff !== "undefined" &&
-                liff.isLoggedIn()
-            ) {
-
-                const profile =
-                    await liff.getProfile();
-
-                welcome.textContent =
-                    `ようこそ ${profile.displayName}様`;
-
-            } else {
-
-                welcome.textContent =
-                    "ようこそ ゲスト様";
-
-            }
-
-        } catch (error) {
-
-            console.error(error);
-
-            welcome.textContent =
-                "ようこそ ゲスト様";
-
+        // LIFF初期化が完了するまで待つ
+        while (!liffReady) {
+            await new Promise(resolve =>
+                setTimeout(resolve, 50)
+            );
         }
 
+        const profile =
+            await liff.getProfile();
+
+        welcome.textContent =
+            `ようこそ ${profile.displayName}様`;
+
+    } catch (error) {
+
+        console.error(
+            "サイドメニュー名前取得エラー:",
+            error
+        );
+
+        welcome.textContent =
+            "ようこそ ゲスト様";
+
     }
+
+}
 
 
     // メニューを開く
