@@ -1049,7 +1049,7 @@ textarea{
 
     z-index: 1001;
 
-    padding: 78px 32px 40px;
+    padding: 30px 32px 40px;
 
     box-shadow: 8px 0 30px rgba(0, 0, 0, .08);
 
@@ -1258,7 +1258,7 @@ textarea{
         max-width: 78vw;
 
         padding:
-            72px
+            30px
             26px
             36px;
     }
