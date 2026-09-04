@@ -25,7 +25,7 @@ body{
 ========================================== */
 
 .top-bar{
-    background:#D6AA8D;
+    background:#DDBFA5;
     height:50px;
     display:flex;
     align-items:center;
@@ -35,13 +35,13 @@ body{
 
 .top-bar h1 {
     font-family: "Zen Maru Gothic", sans-serif;
-    color:#3b2c25;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    margin: 0;
-    line-height: 1;
-    text-align: left;
+    color:#171411;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    margin:0;
+    line-height:1;
+    text-align:left;
 }
 
 /* ==========================================
@@ -1015,7 +1015,7 @@ textarea{
     height: 40px;
     border: none;
     background: transparent;
-    color: #3B2C25;
+    color: #171411;
     font-size: 24px;
     line-height: 1;
     display: flex;
