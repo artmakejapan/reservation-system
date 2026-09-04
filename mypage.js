@@ -244,3 +244,15 @@ function displayHistory(reservations) {
 
 
 initMyPage();
+
+// =================================
+// マイページを閉じる
+// =================================
+
+const closeButton = document.getElementById("closeButton");
+
+if (closeButton) {
+    closeButton.addEventListener("click", () => {
+        liff.closeWindow();
+    });
+}
