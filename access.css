@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #F7F3EF;
+    color: #4A403A;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+}
+
+/* ================================
+   ヘッダー
+================================ */
+
+.top-bar {
+    width: 100%;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E8DED6;
+}
+
+.top-bar-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+.close-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: #6B5A50;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1;
+    padding: 0;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.top-bar h1 {
+    margin: 0;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #6B5A50;
+    letter-spacing: .05em;
+}
+
+/* ================================
+   メイン
+================================ */
+
+.container {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 30px 16px 50px;
+}
+
+.card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 28px 22px;
+    box-shadow: 0 4px 18px rgba(70, 55, 45, .06);
+}
+
+.access-card {
+    text-align: center;
+}
+
+.access-card h2 {
+    margin: 0 0 22px;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #6B5A50;
+}
+
+.clinic-name {
+    margin: 0 0 20px;
+    font-size: 17px;
+    color: #4A403A;
+}
+
+.clinic-map {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 0 auto 22px;
+}
+
+.google-map-link {
+    display: inline-block;
+    color: #8A6F5C;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.google-map-link:hover {
+    opacity: .7;
+}
+
+/* ================================
+   スマホ
+================================ */
+
+@media (max-width: 600px) {
+
+    .top-bar-inner {
+        min-height: 58px;
+        padding: 0 16px;
+    }
+
+    .top-bar h1 {
+        font-size: 17px;
+    }
+
+    .container {
+        padding: 22px 14px 40px;
+    }
+
+    .card {
+        padding: 24px 18px;
+    }
+}

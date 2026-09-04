@@ -233,6 +233,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "hidden";
     }
 
+        // ACCESSから戻ってきた場合は
+    // サイドメニューを自動で開く
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.get("openMenu") === "1") {
+        setTimeout(() => {
+            openSideMenu();
+        }, 300);
+    }
+
 
     // メニューを閉じる
     function closeSideMenu() {
@@ -312,11 +322,16 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
 
-            // ACCESS
-            if (target === "access") {
+           // ACCESS
+if (target === "access") {
+
+    sessionStorage.setItem(
+        "fromReservationMenu",
+        "1"
+    );
 
     window.location.href =
-        "https://liff.line.me/2010613933-QlpOgM74#access";
+        "access.html";
 
 }
 
