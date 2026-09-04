@@ -1163,7 +1163,7 @@ textarea{
 .side-menu-list button {
     width: 100%;
 
-    min-height: 72px;
+    min-height: 58px;
 
     display: flex;
     align-items: center;
@@ -1275,7 +1275,7 @@ textarea{
     }
 
     .side-menu-list button {
-        min-height: 70px;
+        min-height: 58px;
         gap: 20px;
         font-size: 16px;
     }
