@@ -306,17 +306,19 @@ document.addEventListener("DOMContentLoaded", () => {
             // マイページ
             if (target === "mypage") {
 
-                window.location.href = "mypage.html";
+    window.location.href =
+        "https://liff.line.me/2010613933-QlpOgM74/mypage.html";
 
-            }
+}
 
 
             // ACCESS
             if (target === "access") {
 
-                window.location.href = "mypage.html#access";
+    window.location.href =
+        "https://liff.line.me/2010613933-QlpOgM74/mypage.html#access";
 
-            }
+}
 
         });
 
