@@ -242,5 +242,58 @@ function displayHistory(reservations) {
 
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const menuButton = document.getElementById("menuButton");
+    const sideMenu = document.getElementById("sideMenu");
+    const sideOverlay = document.getElementById("sideOverlay");
+
+    function openSideMenu() {
+        sideMenu.classList.add("open");
+        sideOverlay.classList.add("open");
+    }
+
+    function closeSideMenu() {
+        sideMenu.classList.remove("open");
+        sideOverlay.classList.remove("open");
+    }
+
+    menuButton.addEventListener("click", openSideMenu);
+    sideOverlay.addEventListener("click", closeSideMenu);
+
+    document.querySelectorAll(".side-menu-list button").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const target = button.dataset.menuTarget;
+
+        if (target === "home") {
+    closeSideMenu();
+    return;
+}
+
+        if (target === "reservation") {
+            // 予約ページ
+            window.location.href =
+                "https://liff.line.me/2010613933-uBqu1yDz";
+            return;
+        }
+
+        if (target === "mypage") {
+            // 現在のページ
+            closeSideMenu();
+            return;
+        }
+
+        if (target === "access") {
+            window.location.href = "access.html";
+            return;
+        }
+
+    });
+
+});
+
+});
 
 initMyPage();

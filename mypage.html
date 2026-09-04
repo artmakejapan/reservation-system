@@ -15,8 +15,49 @@
 <body>
 
 <header class="top-bar">
-    アートメイク | マイページ
+    <div class="top-bar-inner">
+        <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く">☰</button>
+        <h1>アートメイク | マイページ</h1>
+    </div>
 </header>
+
+<div class="side-overlay" id="sideOverlay"></div>
+
+<nav class="side-menu" id="sideMenu">
+
+    <div class="side-menu-welcome" id="sideMenuWelcome">
+        ようこそ ゲスト様
+    </div>
+
+    <div class="side-menu-brand">
+        アートメイクまなみ
+    </div>
+
+    <div class="side-menu-list">
+
+        <button type="button" data-menu-target="home">
+            <span class="side-menu-icon">⌂</span>
+            <span class="side-menu-text">ホーム</span>
+        </button>
+
+        <button type="button" data-menu-target="reservation">
+            <span class="side-menu-icon">▣</span>
+            <span class="side-menu-text">ご予約・空き状況</span>
+        </button>
+
+        <button type="button" data-menu-target="mypage">
+            <span class="side-menu-icon">♙</span>
+            <span class="side-menu-text">マイページ</span>
+        </button>
+
+        <button type="button" data-menu-target="access">
+            <span class="side-menu-icon">⌖</span>
+            <span class="side-menu-text">アクセス</span>
+        </button>
+
+    </div>
+
+</nav>
 
 <main class="container">
 

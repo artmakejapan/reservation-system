@@ -222,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuButton = document.getElementById("menuButton");
     const sideMenu = document.getElementById("sideMenu");
     const sideOverlay = document.getElementById("sideOverlay");
-    const sideMenuClose = document.getElementById("sideMenuClose");
     const menuItems = document.querySelectorAll("[data-menu-target]");
 
 
@@ -294,12 +293,6 @@ async function updateSideMenuWelcome() {
     // ☰
     if (menuButton) {
         menuButton.addEventListener("click", openSideMenu);
-    }
-
-
-    // ×
-    if (sideMenuClose) {
-        sideMenuClose.addEventListener("click", closeSideMenu);
     }
 
 
