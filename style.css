@@ -24,24 +24,29 @@ body{
    TOP BAR
 ========================================== */
 
-.top-bar{
-    background:#DDBFA5;
-    height:50px;
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    padding-left:15px;
+.top-bar {
+    background: #DDBFA5;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
 }
 
 .top-bar h1 {
     font-family: "Zen Maru Gothic", sans-serif;
-    color:#171411;
-    font-size:15px;
-    font-weight:700;
-    letter-spacing:0.02em;
-    margin:0;
-    line-height:1;
-    text-align:left;
+
+    color: #171411;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    letter-spacing: 0.02em;
+
+    margin: 0;
+    padding: 0;
+
+    line-height: 1;
+    text-align: left;
 }
 
 /* ==========================================
@@ -1013,16 +1018,22 @@ textarea{
 .menu-button {
     width: 40px;
     height: 40px;
+
     border: none;
     background: transparent;
+
     color: #171411;
-    font-size: 24px;
+
+    font-size: 27px;
     line-height: 1;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 0;
-    margin-right: 8px;
+    margin: 0 22px 0 0;
+
     cursor: pointer;
 }
 
