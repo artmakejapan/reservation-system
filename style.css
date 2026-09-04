@@ -1002,7 +1002,6 @@ textarea{
 ================================= */
 
 /* トップバー内 */
-
 .top-bar-inner {
     width: 100%;
     display: flex;
@@ -1010,15 +1009,13 @@ textarea{
     position: relative;
 }
 
-
 /* ハンバーガーボタン */
-
 .menu-button {
     width: 40px;
     height: 40px;
     border: none;
     background: transparent;
-    color: #3b2c25;
+    color: #3B2C25;
     font-size: 24px;
     line-height: 1;
     display: flex;
@@ -1030,7 +1027,9 @@ textarea{
 }
 
 
-/* サイドメニュー本体 */
+/* =================================
+   サイドメニュー本体
+================================= */
 
 .side-menu {
     position: fixed;
@@ -1038,17 +1037,16 @@ textarea{
     left: 0;
 
     width: 330px;
-    max-width: 82vw;
+    max-width: 78vw;
     height: 100vh;
 
     background: #FFFFFF;
 
     z-index: 1001;
 
-    padding: 82px 34px 40px;
+    padding: 78px 32px 40px;
 
-    box-shadow:
-        8px 0 30px rgba(0, 0, 0, .10);
+    box-shadow: 8px 0 30px rgba(0, 0, 0, .08);
 
     transform: translateX(-100%);
     transition: transform .3s ease;
@@ -1056,15 +1054,14 @@ textarea{
     overflow-y: auto;
 }
 
-
-/* メニューが開いた状態 */
-
 .side-menu.open {
     transform: translateX(0);
 }
 
 
-/* 背景 */
+/* =================================
+   背景
+================================= */
 
 .side-overlay {
     position: fixed;
@@ -1082,19 +1079,19 @@ textarea{
         visibility .3s ease;
 }
 
-
-/* 背景表示 */
-
 .side-overlay.open {
     opacity: 1;
     visibility: visible;
 }
 
 
-/* 閉じるボタン */
+/* =================================
+   閉じるボタン
+================================= */
 
 .side-menu-close {
     position: absolute;
+
     top: 18px;
     right: 18px;
 
@@ -1110,86 +1107,101 @@ textarea{
     font-weight: 300;
     line-height: 1;
 
+    padding: 0;
+
     cursor: pointer;
 }
 
 
-/* ようこそ */
+/* =================================
+   ようこそ ○○様
+================================= */
 
 .side-menu-welcome {
-    margin-bottom: 10px;
+    margin: 0 0 22px;
 
-    color: #77716D;
+    text-align: center;
+
+    color: #4A403A;
 
     font-family:
         "Yu Mincho",
         "Hiragino Mincho ProN",
         serif;
 
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 400;
 
     letter-spacing: .04em;
 }
 
 
-/* ブランド名 */
+/* =================================
+   ブランド名
+================================= */
 
 .side-menu-brand {
-    padding-bottom: 28px;
+    margin: 0 0 30px;
 
-    color: #4A403A;
+    padding: 0;
+
+    color: #8A817B;
 
     font-family:
         "Yu Mincho",
         "Hiragino Mincho ProN",
         serif;
 
-    font-size: 21px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 400;
 
     letter-spacing: .05em;
 
-    border-bottom: 1px solid #E5E0DC;
+    border: none;
 }
 
 
-/* メニュー一覧 */
+/* =================================
+   メニュー一覧
+================================= */
 
 .side-menu-list {
     display: flex;
     flex-direction: column;
 
-    margin-top: 10px;
+    margin: 0;
+    padding: 0;
 }
 
 
-/* メニュー項目 */
+/* =================================
+   メニュー項目
+================================= */
 
 .side-menu-list button {
     width: 100%;
 
-    min-height: 82px;
+    min-height: 72px;
 
     display: flex;
     align-items: center;
 
-    gap: 24px;
+    gap: 22px;
 
-    padding: 18px 4px;
+    padding: 12px 2px;
 
     border: none;
-    border-bottom: 1px solid #EEEAE7;
+    border-bottom: none;
 
     background: transparent;
 
-    color: #4A403A;
+    color: #3F3935;
 
     font-family:
         "M PLUS Rounded 1c",
         sans-serif;
 
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 400;
 
     text-align: left;
@@ -1202,11 +1214,13 @@ textarea{
 }
 
 
-/* アイコン */
+/* =================================
+   アイコン
+================================= */
 
 .side-menu-icon {
-    width: 42px;
-    min-width: 42px;
+    width: 38px;
+    min-width: 38px;
 
     display: flex;
     align-items: center;
@@ -1214,14 +1228,16 @@ textarea{
 
     color: #8A837E;
 
-    font-size: 30px;
+    font-size: 27px;
     line-height: 1;
 
     text-align: center;
 }
 
 
-/* メニュー文字 */
+/* =================================
+   メニュー文字
+================================= */
 
 .side-menu-text {
     flex: 1;
@@ -1232,7 +1248,9 @@ textarea{
 }
 
 
-/* ホバー */
+/* =================================
+   ホバー
+================================= */
 
 .side-menu-list button:hover {
     background: #F7F3EF;
@@ -1248,35 +1266,42 @@ textarea{
 }
 
 
-/* スマホ */
+/* =================================
+   スマホ
+================================= */
 
 @media (max-width: 600px) {
 
     .side-menu {
         width: 320px;
-        max-width: 82vw;
+        max-width: 78vw;
 
         padding:
-            76px
-            28px
+            72px
+            26px
             36px;
     }
 
+    .side-menu-welcome {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
     .side-menu-brand {
-        font-size: 19px;
-        padding-bottom: 24px;
+        font-size: 14px;
+        margin-bottom: 26px;
     }
 
     .side-menu-list button {
-        min-height: 76px;
+        min-height: 70px;
         gap: 20px;
         font-size: 16px;
     }
 
     .side-menu-icon {
-        width: 38px;
-        min-width: 38px;
-        font-size: 27px;
+        width: 36px;
+        min-width: 36px;
+        font-size: 26px;
     }
 
 }
