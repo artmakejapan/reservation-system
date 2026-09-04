@@ -233,15 +233,20 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "hidden";
     }
 
-        // ACCESSから戻ってきた場合は
-    // サイドメニューを自動で開く
-    const urlParams = new URLSearchParams(window.location.search);
+        // 別ページから戻ってきた場合は
+// サイドメニューを自動で開く
+const urlParams = new URLSearchParams(window.location.search);
 
-    if (urlParams.get("openMenu") === "1") {
-        setTimeout(() => {
-            openSideMenu();
-        }, 300);
-    }
+if (
+    urlParams.get("openMenu") === "1" ||
+    sessionStorage.getItem("returnToMenu") === "1"
+) {
+    sessionStorage.removeItem("returnToMenu");
+
+    setTimeout(() => {
+        openSideMenu();
+    }, 300);
+}
 
 
     // メニューを閉じる
@@ -315,13 +320,16 @@ if (target !== "mypage") {
             }
 
 
-            // マイページ
+          // マイページ
 if (target === "mypage") {
 
-    liff.openWindow({
-        url: "https://liff.line.me/2010613933-QlpOgM74",
-        external: false
-    });
+    sessionStorage.setItem(
+        "returnToMenu",
+        "1"
+    );
+
+    window.location.href =
+        "https://liff.line.me/2010613933-QlpOgM74";
 
 }
 
