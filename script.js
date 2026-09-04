@@ -233,16 +233,11 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "hidden";
     }
 
-        // 別ページから戻ってきた場合は
+        // ACCESSから戻ってきた場合は
 // サイドメニューを自動で開く
 const urlParams = new URLSearchParams(window.location.search);
 
-if (
-    urlParams.get("openMenu") === "1" ||
-    sessionStorage.getItem("returnToMenu") === "1"
-) {
-    sessionStorage.removeItem("returnToMenu");
-
+if (urlParams.get("openMenu") === "1") {
     setTimeout(() => {
         openSideMenu();
     }, 300);
@@ -322,11 +317,6 @@ if (target !== "mypage") {
 
           // マイページ
 if (target === "mypage") {
-
-    sessionStorage.setItem(
-        "returnToMenu",
-        "1"
-    );
 
     window.location.href =
         "https://liff.line.me/2010613933-QlpOgM74";
