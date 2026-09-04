@@ -11,13 +11,17 @@ body {
     line-height: 1.8;
 }
 
-.top-bar {
-    background: #D6AA8D;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
+.top-bar { 
+    background: #DDBFA5; 
+    height: 50px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-family: "Zen Maru Gothic", sans-serif;
+    color: #171411;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .container {
