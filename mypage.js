@@ -21,14 +21,16 @@ async function initMyPage() {
         }
 
 
-        const profile = await liff.getProfile();
+        const profile = await liff.getProfile(); 
+const lineUserId = profile.userId; 
 
-        const lineUserId = profile.userId;
+document.getElementById("userName").textContent = 
+    `${profile.displayName} 様`;
 
-
-        // 名前表示
-        document.getElementById("userName").textContent =
-            `${profile.displayName} 様`;
+const welcome = document.getElementById("sideMenuWelcome");
+if (welcome) {
+    welcome.textContent = `ようこそ ${profile.displayName}様`;
+}
 
 
         // GASから予約情報取得
