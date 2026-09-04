@@ -12,6 +12,7 @@ body {
 }
 
 .top-bar {
+    font-family: "Zen Maru Gothic", sans-serif;
     background: #D6AA8D;
     height: 50px;
     display: flex;
@@ -28,7 +29,7 @@ body {
 
 h1 {
     text-align: center;
-    font-family: "Zen Maru Gothic", sans-serif;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
     font-size: 24px;
     color: #6B5A50;
     margin-bottom: 10px;
