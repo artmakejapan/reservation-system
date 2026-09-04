@@ -277,7 +277,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const target = item.dataset.menuTarget;
 
-            closeSideMenu();
+if (target !== "mypage") {
+    closeSideMenu();
+}
 
 
             // HOME
