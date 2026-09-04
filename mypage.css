@@ -75,7 +75,9 @@ h1 {
 
 #userName {
     text-align: center;
-    color: #8A7768;
+    color: #6B5A50;
+    font-size: 18px;
+    font-weight: 500;
     margin-bottom: 25px;
 }
 
