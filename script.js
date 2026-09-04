@@ -314,10 +314,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             // マイページ
-            if (target === "mypage") {
+if (target === "mypage") {
 
-    window.location.href =
-        "https://liff.line.me/2010613933-QlpOgM74";
+    liff.openWindow({
+        url: "https://liff.line.me/2010613933-QlpOgM74",
+        external: false
+    });
 
 }
 
