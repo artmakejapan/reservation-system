@@ -226,6 +226,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuItems = document.querySelectorAll("[data-menu-target]");
 
 
+    // サイドメニューの名前表示
+    async function updateSideMenuWelcome() {
+
+        const welcome =
+            document.getElementById("sideMenuWelcome");
+
+        if (!welcome) return;
+
+        try {
+
+            if (
+                typeof liff !== "undefined" &&
+                liff.isLoggedIn()
+            ) {
+
+                const profile =
+                    await liff.getProfile();
+
+                welcome.textContent =
+                    `ようこそ ${profile.displayName}様`;
+
+            } else {
+
+                welcome.textContent =
+                    "ようこそ ゲスト様";
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            welcome.textContent =
+                "ようこそ ゲスト様";
+
+        }
+
+    }
+
+
     // メニューを開く
     function openSideMenu() {
         sideMenu.classList.add("open");
@@ -233,15 +273,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "hidden";
     }
 
-        // ACCESSから戻ってきた場合は
-// サイドメニューを自動で開く
-const urlParams = new URLSearchParams(window.location.search);
 
-if (urlParams.get("openMenu") === "1") {
-    setTimeout(() => {
-        openSideMenu();
-    }, 300);
-}
+    // ACCESSから戻ってきた場合は
+    // サイドメニューを自動で開く
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.get("openMenu") === "1") {
+        setTimeout(() => {
+            openSideMenu();
+        }, 300);
+    }
 
 
     // メニューを閉じる
@@ -277,9 +318,9 @@ if (urlParams.get("openMenu") === "1") {
 
             const target = item.dataset.menuTarget;
 
-if (target !== "mypage") {
-    closeSideMenu();
-}
+            if (target !== "mypage") {
+                closeSideMenu();
+            }
 
 
             // HOME
@@ -315,30 +356,33 @@ if (target !== "mypage") {
             }
 
 
-          // マイページ
-if (target === "mypage") {
+            // マイページ
+            if (target === "mypage") {
 
-    window.location.href =
-        "https://liff.line.me/2010613933-QlpOgM74";
+                window.location.href =
+                    "https://liff.line.me/2010613933-QlpOgM74";
 
-}
+            }
 
 
-           // ACCESS
-if (target === "access") {
+            // ACCESS
+            if (target === "access") {
 
-    sessionStorage.setItem(
-        "fromReservationMenu",
-        "1"
-    );
+                sessionStorage.setItem(
+                    "fromReservationMenu",
+                    "1"
+                );
 
-    window.location.href =
-        "access.html";
+                window.location.href =
+                    "access.html";
 
-}
+            }
 
         });
 
     });
+
+
+    updateSideMenuWelcome();
 
 });
