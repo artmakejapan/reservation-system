@@ -27,13 +27,71 @@
 
 <header class="top-bar">
 
-<div class="top-bar-inner">
+    <div class="top-bar-inner">
 
-<h1>アートメイク | ご予約フォーム</h1>
+        <!-- ハンバーガーボタン -->
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="メニューを開く"
+        >
+            ☰
+        </button>
 
-</div>
+        <h1>アートメイク | ご予約フォーム</h1>
+
+    </div>
 
 </header>
+
+
+<!-- ================================
+     サイドメニュー
+================================ -->
+
+<div class="side-overlay" id="sideOverlay"></div>
+
+<nav class="side-menu" id="sideMenu">
+
+    <button
+        class="side-menu-close"
+        id="sideMenuClose"
+        type="button"
+        aria-label="メニューを閉じる"
+    >
+        ×
+    </button>
+
+    <div class="side-menu-title">
+        アートメイクまなみ
+    </div>
+
+    <div class="side-menu-subtitle">
+        MENU
+    </div>
+
+    <div class="side-menu-list">
+
+        <button type="button" data-menu-target="home">
+            🏠 HOME
+        </button>
+
+        <button type="button" data-menu-target="reservation">
+            📅 ご予約・空き状況
+        </button>
+
+        <button type="button" data-menu-target="mypage">
+            👤 マイページ
+        </button>
+
+        <button type="button" data-menu-target="access">
+            📍 ACCESS
+        </button>
+
+    </div>
+
+</nav>
 
 <section class="hero">
 
@@ -140,8 +198,7 @@
 
 </section>
 
-<section class="card">
-
+<<section class="card" id="reservationStart">
 <h3>施術メニュー（最大2つ）</h3>
 
 <p class="caption">

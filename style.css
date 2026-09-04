@@ -996,3 +996,211 @@ textarea{
     background: #B88666;
     color: white;
 }
+
+/* =================================
+   サイドメニュー
+================================= */
+
+/* トップバー内 */
+.top-bar-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+
+/* ハンバーガーボタン */
+.menu-button {
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    background: transparent;
+
+    color: #3b2c25;
+
+    font-size: 24px;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin-right: 8px;
+
+    cursor: pointer;
+}
+
+
+/* サイドメニュー本体 */
+.side-menu {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 280px;
+    max-width: 82vw;
+    height: 100vh;
+
+    background: #F8F6F3;
+
+    z-index: 1001;
+
+    padding: 30px 24px;
+
+    box-shadow: 8px 0 30px rgba(0,0,0,.12);
+
+    transform: translateX(-100%);
+
+    transition: transform .3s ease;
+
+    overflow-y: auto;
+}
+
+
+/* メニューが開いた状態 */
+.side-menu.open {
+    transform: translateX(0);
+}
+
+
+/* 背景 */
+.side-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(45,35,30,.35);
+
+    z-index: 1000;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease;
+}
+
+
+/* 背景表示 */
+.side-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* 閉じるボタン */
+.side-menu-close {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    background: transparent;
+
+    color: #6B5A50;
+
+    font-size: 30px;
+    font-weight: 300;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+/* メニュータイトル */
+.side-menu-title {
+    margin-top: 20px;
+
+    color: #6B5A50;
+
+    font-family:
+        "Yu Mincho",
+        "Hiragino Mincho ProN",
+        serif;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    letter-spacing: .05em;
+}
+
+
+/* MENU */
+.side-menu-subtitle {
+    margin-top: 4px;
+    margin-bottom: 30px;
+
+    color: #D1A78E;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+}
+
+
+/* メニュー項目 */
+.side-menu-list {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.side-menu-list button {
+    width: 100%;
+
+    padding: 17px 4px;
+
+    border: none;
+    border-bottom: 1px solid #E5DDD5;
+
+    background: transparent;
+
+    color: #4A403A;
+
+    font-family: "M PLUS Rounded 1c", sans-serif;
+
+    font-size: 15px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+
+.side-menu-list button:first-child {
+    border-top: 1px solid #E5DDD5;
+}
+
+
+.side-menu-list button:hover {
+    background: #F1E8E1;
+    color: #8B6752;
+}
+
+
+/* スマホ */
+@media (max-width: 600px) {
+
+    .side-menu {
+        width: 270px;
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+}

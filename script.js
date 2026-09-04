@@ -212,3 +212,114 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
 });
+
+// =================================
+// サイドメニュー
+// =================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const menuButton = document.getElementById("menuButton");
+    const sideMenu = document.getElementById("sideMenu");
+    const sideOverlay = document.getElementById("sideOverlay");
+    const sideMenuClose = document.getElementById("sideMenuClose");
+    const menuItems = document.querySelectorAll("[data-menu-target]");
+
+
+    // メニューを開く
+    function openSideMenu() {
+        sideMenu.classList.add("open");
+        sideOverlay.classList.add("open");
+        document.body.style.overflow = "hidden";
+    }
+
+
+    // メニューを閉じる
+    function closeSideMenu() {
+        sideMenu.classList.remove("open");
+        sideOverlay.classList.remove("open");
+        document.body.style.overflow = "";
+    }
+
+
+    // ☰
+    if (menuButton) {
+        menuButton.addEventListener("click", openSideMenu);
+    }
+
+
+    // ×
+    if (sideMenuClose) {
+        sideMenuClose.addEventListener("click", closeSideMenu);
+    }
+
+
+    // 背景をタップ
+    if (sideOverlay) {
+        sideOverlay.addEventListener("click", closeSideMenu);
+    }
+
+
+    // メニュー項目
+    menuItems.forEach(item => {
+
+        item.addEventListener("click", () => {
+
+            const target = item.dataset.menuTarget;
+
+            closeSideMenu();
+
+
+            // HOME
+            if (target === "home") {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+
+
+            // ご予約・空き状況
+            if (target === "reservation") {
+
+                const reservationStart =
+                    document.getElementById("reservationStart");
+
+                if (reservationStart) {
+
+                    setTimeout(() => {
+
+                        reservationStart.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }, 100);
+
+                }
+
+            }
+
+
+            // マイページ
+            if (target === "mypage") {
+
+                window.location.href = "mypage.html";
+
+            }
+
+
+            // ACCESS
+            if (target === "access") {
+
+                window.location.href = "mypage.html#access";
+
+            }
+
+        });
+
+    });
+
+});
