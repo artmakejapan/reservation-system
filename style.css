@@ -33,7 +33,7 @@ body{
 }
 
 .top-bar h1 {
-    font-family: "Zen Maru Gothic", sans-serif;
+    font-family: "Nunito Sans", sans-serif;
 
     color: #171411;
 
@@ -280,14 +280,13 @@ body{
 
 }
 
-.sub-title{
-
-    font-size:12px;
-
-    letter-spacing:3px;
-
-    color:#D1A78E;
-
+.sub-title {
+    font-family: "Zen Maru Gothic", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: #B39A86;
+    margin-top: 6px;
 }
 
 /* ===========================
