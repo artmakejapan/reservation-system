@@ -281,11 +281,13 @@ body{
 }
 
 .sub-title {
-    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-family: "Yu Mincho","Hiragino Mincho ProN",serif;
     font-size: 15px;
     font-weight: 500;
+    color: #6B5A50;
+    text-align: center;
+    line-height: 1.4;
     letter-spacing: 0.02em;
-    color: #4A403A;
     margin-top: 8px;
 }
 
