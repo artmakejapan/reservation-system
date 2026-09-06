@@ -388,12 +388,12 @@ if (remain === 1) {
     // 残り1枠 → 赤
     colorClass = "one-left";
 
-} else if (remain === 2 || remain === 3) {
-    // 残り2〜3枠 → 黄色
+} else if (remain === 2) {
+    // 残り2枠 → 黄色
     colorClass = "two-left";
 }
 
-// 残り4枠以上 → colorClassなし
+// 残り3枠以上 → colorClassなし
 // → 通常のベージュ
 
 
