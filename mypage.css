@@ -35,7 +35,7 @@ body {
 .top-bar h1 {
     font-family: "Nunito Sans", sans-serif;
     color: #171411;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.02em;
     margin: 0;
@@ -228,7 +228,7 @@ h1 {
     border: none;
     background: transparent;
     color: #171411;
-    font-size: 27px;
+    font-size: 23px;
     line-height: 1;
     display: flex;
     align-items: center;
