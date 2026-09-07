@@ -357,16 +357,50 @@ if (requiredSlots >= 2) {
 
 }
 
-const remain =
-checkTimes.filter(time =>
+// ================================================
+// カレンダー色分け用：実質枠数を計算
+// ================================================
 
-    canReserve(
-        dateString,
-        time,
-        checkTimes
-    )
+// 初診は3枠、再診は4枠
+const maxSlots = data.visit === "初診" ? 3 : 4;
 
-).length;
+// 各実質枠の代表開始時間
+const slotTimes = data.visit === "初診"
+    ? ["09:30", "11:45", "16:15"]
+    : ["09:30", "11:45", "14:00", "16:15"];
+
+// 実質枠ごとの空き状況を確認
+let remain = 0;
+
+slotTimes.forEach(time => {
+
+    // 2メニューの場合、
+    // 今までの開始時間ルールをそのまま適用
+    if (requiredSlots >= 2) {
+
+        if (time > "16:15") {
+            return;
+        }
+
+        if (
+            time === "16:15" &&
+            weekdayName !== "火"
+        ) {
+            return;
+        }
+    }
+
+    if (
+        times.includes(time) &&
+        canReserve(dateString, time)
+    ) {
+        remain++;
+    }
+
+});
+
+// 念のため上限を超えないようにする
+remain = Math.min(remain, maxSlots);
 
 const full =
 reservable &&
