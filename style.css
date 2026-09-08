@@ -25,7 +25,7 @@ body{
 ========================================== */
 
 .top-bar {
-    background: #DDBFA5;
+    background: #D1A78E;
     height: 50px;
     display: flex;
     align-items: center;
@@ -54,7 +54,7 @@ body{
 ========================================== */
 
 .hero{
-    border-bottom:6px solid #DDBFA5;
+    border-bottom:6px solid #D1A78E;
 }
 
 .hero img{
@@ -77,7 +77,7 @@ body{
 
     max-width:650px;
 
-    margin:25px auto 30px;
+    margin:20px auto 30px;
 
 }
 
