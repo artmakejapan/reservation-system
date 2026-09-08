@@ -53,6 +53,10 @@ body{
    HERO
 ========================================== */
 
+.hero{
+    border-bottom:4px solid #DDBFA5;
+}
+
 .hero img{
 
     width:100%;
