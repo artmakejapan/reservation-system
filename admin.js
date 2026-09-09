@@ -255,7 +255,7 @@ function resetNewReservationForm() {
     document.getElementById("newVisit").value = "初診";
     document.getElementById("newName").value = "";
     document.getElementById("newGender").value = "";
-    document.getElementById("newAge").value = "";
+    document.getElementById("newBirthDate").value = "";
     document.getElementById("newReferrer").value = "";
     document.getElementById("newTel").value = "";
     document.getElementById("newMedicalHistory").value = "";
@@ -409,8 +409,8 @@ function applyCustomerToNewForm(customer) {
     document.getElementById("newGender").value =
         customer.gender || "";
 
-    document.getElementById("newAge").value =
-        customer.age || "";
+    document.getElementById("newBirthDate").value =
+        customer.birthDate || "";
 
     document.getElementById("newReferrer").value =
         customer.referrer || "";
@@ -438,7 +438,7 @@ function clearNewCustomerFields() {
     document.getElementById("newName").value = "";
     document.getElementById("newTel").value = "";
     document.getElementById("newGender").value = "";
-    document.getElementById("newAge").value = "";
+    document.getElementById("newBirthDate").value = "";
     document.getElementById("newReferrer").value = "";
     document.getElementById("newMedicalHistory").value = "";
     document.getElementById("newPregnancy").value = "";
@@ -783,7 +783,12 @@ async function submitNewReservation() {
             document.getElementById("newGender").value,
 
         age:
-            document.getElementById("newAge").value,
+            calcAgeFromBirth(
+                document.getElementById("newBirthDate").value
+            ),
+
+        birthDate:
+            document.getElementById("newBirthDate").value,
 
         referrer:
             document.getElementById("newReferrer").value.trim(),
@@ -931,6 +936,39 @@ async function submitNewReservation() {
 // ==================================================
 // 比較
 // ==================================================
+
+// ====================================
+// 生年月日から年齢を自動計算
+// ====================================
+
+function calcAgeFromBirth(birthDate) {
+
+    if (!birthDate) return "";
+
+    const birth =
+        new Date(birthDate + "T00:00:00");
+
+    if (isNaN(birth.getTime())) return "";
+
+    const today = new Date();
+
+    let age =
+        today.getFullYear() - birth.getFullYear();
+
+    const m =
+        today.getMonth() - birth.getMonth();
+
+    if (
+        m < 0 ||
+        (m === 0 && today.getDate() < birth.getDate())
+    ) {
+        age--;
+    }
+
+    return age >= 0 ? age : "";
+
+}
+
 
 function compareReservationDesc(a, b) {
 
@@ -1256,8 +1294,8 @@ function openEditForm(reservation) {
     document.getElementById("editGender").value =
         reservation.gender || "";
 
-    document.getElementById("editAge").value =
-        reservation.age || "";
+    document.getElementById("editBirthDate").value =
+        reservation.birthDate || "";
 
     document.getElementById("editReferrer").value =
         reservation.referrer || "";
@@ -1474,8 +1512,15 @@ async function saveEdit() {
                 .value,
 
         age:
+            calcAgeFromBirth(
+                document
+                    .getElementById("editBirthDate")
+                    .value
+            ),
+
+        birthDate:
             document
-                .getElementById("editAge")
+                .getElementById("editBirthDate")
                 .value,
 
         referrer:

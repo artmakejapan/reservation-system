@@ -712,6 +712,38 @@ document.querySelectorAll(".time-button").forEach(btn => {
 
 }
 
+// ====================================
+// 生年月日から年齢を自動計算
+// ====================================
+
+function calcAgeFromBirth(birthDate) {
+
+    if (!birthDate) return "";
+
+    const birth =
+        new Date(birthDate + "T00:00:00");
+
+    if (isNaN(birth.getTime())) return "";
+
+    const today = new Date();
+
+    let age =
+        today.getFullYear() - birth.getFullYear();
+
+    const m =
+        today.getMonth() - birth.getMonth();
+
+    if (
+        m < 0 ||
+        (m === 0 && today.getDate() < birth.getDate())
+    ) {
+        age--;
+    }
+
+    return age >= 0 ? age : "";
+
+}
+
 function showCustomerForm() {
 
     const section = document.getElementById("customerSection");
@@ -814,8 +846,8 @@ form.innerHTML = `
 </div>
 
 <div class="form-group">
-<label>年齢 <span style="color:red;">*</span></label>
-<input type="number" id="customerAge">
+<label>生年月日 <span style="color:red;">*</span></label>
+<input type="date" id="customerBirthDate">
 </div>
 
 <div class="form-group">
@@ -1058,7 +1090,7 @@ const name = document.getElementById("customerName").value.trim();
 
 const gender = document.querySelector('input[name="gender"]:checked');
 
-const age = document.getElementById("customerAge").value.trim();
+const birthDate = document.getElementById("customerBirthDate").value;
 
 const referrer = document.getElementById("customerReferrer").value.trim();
 
@@ -1080,9 +1112,9 @@ const tel = document.getElementById("customerTel").value.trim();
 
 }
 
-if (age === "") {
+if (birthDate === "") {
 
-    alert("年齢を入力してください。");
+    alert("生年月日を選択してください。");
 
     return;
 
@@ -1204,7 +1236,7 @@ customerData = {
 
     name,
     gender: gender.value,
-    age,
+    birthDate,
     referrer,
     tel,
     history,
@@ -1283,7 +1315,7 @@ function showConfirm() {
 `;
 
         customerData.gender = "";
-customerData.age = "";
+customerData.birthDate = "";
 customerData.referrer = "";
 customerData.tel = "";
 
@@ -1356,8 +1388,13 @@ customerData.pregnancy = "";
 </div>
 
 <div class="confirm-item">
+<span class="label">生年月日</span>
+<span class="value">${customerData.birthDate || "-"}</span>
+</div>
+
+<div class="confirm-item">
 <span class="label">年齢</span>
-<span class="value">${customerData.age}歳</span>
+<span class="value">${calcAgeFromBirth(customerData.birthDate) ? calcAgeFromBirth(customerData.birthDate) + "歳" : "-"}</span>
 </div>
 
 <div class="confirm-item">
@@ -1470,7 +1507,8 @@ ${customerData.otherHistory ? `
     name: customerData.name,
 
     gender: reservationData.visit === "再診" ? "" : customerData.gender,
-    age: reservationData.visit === "再診" ? "" : customerData.age,
+    age: reservationData.visit === "再診" ? "" : calcAgeFromBirth(customerData.birthDate),
+    birthDate: reservationData.visit === "再診" ? "" : customerData.birthDate,
     referrer: reservationData.visit === "再診" ? "" : customerData.referrer,
     tel: reservationData.visit === "再診" ? "" : customerData.tel,
     history: reservationData.visit === "再診" ? "" : customerData.history,
