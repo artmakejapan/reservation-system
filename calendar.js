@@ -1393,11 +1393,6 @@ customerData.pregnancy = "";
 </div>
 
 <div class="confirm-item">
-<span class="label">年齢</span>
-<span class="value">${calcAgeFromBirth(customerData.birthDate) ? calcAgeFromBirth(customerData.birthDate) + "歳" : "-"}</span>
-</div>
-
-<div class="confirm-item">
 <span class="label">紹介者</span>
 <span class="value">${customerData.referrer || "なし"}</span>
 </div>
