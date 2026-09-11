@@ -271,8 +271,6 @@ body{
 
 .title-card .main-title{
 
-    font-family: "Yu Mincho","Hiragino Mincho ProN",serif;
-
     font-size: 15px;
 
     font-weight: 500;
@@ -290,7 +288,6 @@ body{
 }
 
 .sub-title {
-    font-family: "Yu Mincho","Hiragino Mincho ProN",serif;
     font-size: 15px;
     font-weight: 700;
     color: #6B5A50;
