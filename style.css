@@ -275,9 +275,9 @@ body{
 
     font-family: "M PLUS Rounded 1c", sans-serif;
 
-    font-size: 15px;
+    font-size: 16px;
 
-    font-weight: 500;
+    font-weight: 400;
 
 
     text-align: center;
@@ -292,8 +292,8 @@ body{
 
 .sub-title {
     font-family: "M PLUS Rounded 1c", sans-serif;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 400;
     text-align: center;
     line-height: 1.4;
     letter-spacing: 0.02em;
