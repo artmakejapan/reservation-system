@@ -3,6 +3,7 @@ let treatmentMenus = [];
 window.reservationList = [];
 window.businessHours = [];
 window.holidays = [];
+window.lineUsers = [];
 
 let editingReservation = null;
 let selectedNewCustomer = null;
@@ -192,14 +193,21 @@ async function loadReservations() {
         await businessResponse.json();
 
     const holidayResponse =
-        await fetch(ADMIN_BASE_URL + "?action=holidays");
+    await fetch(ADMIN_BASE_URL + "?action=holidays");
 
-    window.holidays =
-        await holidayResponse.json();
+window.holidays =
+    await holidayResponse.json();
 
-    buildCustomerSearchList();
-    buildNewMenuOptions();
-    renderReservations();
+const lineUserResponse =
+    await fetch(ADMIN_BASE_URL + "?action=lineusers");
+
+window.lineUsers =
+    await lineUserResponse.json();
+
+buildCustomerSearchList();
+buildLineUserOptions();
+buildNewMenuOptions();
+renderReservations();
 
 }
 
@@ -262,6 +270,7 @@ function resetNewReservationForm() {
     document.getElementById("newPregnancy").value = "";
     document.getElementById("newMenu1").value = "";
     document.getElementById("newMenu2").value = "";
+    document.getElementById("newLineUser").value = "";
     document.getElementById("newHistorySelected").innerHTML = "";
     document.getElementById("newHistorySelector").value = "";
 
@@ -278,6 +287,50 @@ function resetNewReservationForm() {
 
 }
 
+// ==================================================
+// LINEアカウント候補作成
+// ==================================================
+
+function buildLineUserOptions() {
+
+    const newSelect =
+        document.getElementById("newLineUser");
+
+    const editSelect =
+        document.getElementById("editLineUser");
+
+    const build = (select) => {
+
+        if (!select) return;
+
+        select.innerHTML = `
+            <option value="">
+                LINE連携なし
+            </option>
+        `;
+
+        (window.lineUsers || [])
+            .forEach(user => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value =
+                    user.userId;
+
+                option.textContent =
+                    user.displayName || "名前未設定";
+
+                select.appendChild(option);
+
+            });
+
+    };
+
+    build(newSelect);
+    build(editSelect);
+
+}
 
 // ==================================================
 // 新規予約 顧客候補作成
@@ -800,7 +853,7 @@ async function submitNewReservation() {
             document.getElementById("newPregnancy").value,
 
         lineUserId:
-            selectedNewCustomer?.lineUserId || "",
+            document.getElementById("newLineUser").value || "",
 
         eyebrowHistory:
             historyData.eyebrowHistory,
@@ -860,14 +913,6 @@ async function submitNewReservation() {
         newData.menu1 === newData.menu2
     ) {
         alert("同じ施術メニューは2つ選択できません。");
-        return;
-    }
-
-    if (
-        visit === "再診" &&
-        !newData.lineUserId
-    ) {
-        alert("再診の方はお客様検索の候補から選択してください。");
         return;
     }
 
@@ -1231,6 +1276,16 @@ function openEditForm(reservation) {
     document.getElementById("editName").value =
         reservation.name || "";
 
+        const editLineUser =
+    document.getElementById("editLineUser");
+
+if (editLineUser) {
+
+    editLineUser.value =
+        reservation.lineUserId || "";
+
+}
+
 
     document.getElementById("editDate").value =
         reservation.date || "";
@@ -1568,6 +1623,9 @@ async function saveEdit() {
             document
                 .getElementById("editMedicalHistory")
                 .value,
+
+        lineUserId:
+            document.getElementById("editLineUser").value || "",
 
         pregnancy:
             document
