@@ -852,7 +852,7 @@ form.innerHTML = `
 
 <div class="form-group">
 <label>紹介者</label>
-<input type="text" id="customerReferrer" placeholder="紹介者名 / ゆみこ皮フ科 / Instagram">
+<input type="text" id="customerReferrer" placeholder="紹介者名 / クリニック / インスタ">
 </div>
 
 <div class="form-group">
