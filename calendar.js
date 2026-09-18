@@ -744,6 +744,105 @@ function calcAgeFromBirth(birthDate) {
 
 }
 
+// ====================================
+// 年・月・日 プルダウン
+// ====================================
+
+function createDateSelects(hiddenId, prefix) {
+
+    const currentYear = new Date().getFullYear();
+
+    let yearOptions = `<option value="">年</option>`;
+
+    for (let year = currentYear; year >= 1920; year--) {
+        yearOptions += `
+            <option value="${year}">${year}年</option>
+        `;
+    }
+
+    let monthOptions = `<option value="">月</option>`;
+
+    for (let month = 1; month <= 12; month++) {
+        monthOptions += `
+            <option value="${month}">${month}月</option>
+        `;
+    }
+
+    let dayOptions = `<option value="">日</option>`;
+
+    for (let day = 1; day <= 31; day++) {
+        dayOptions += `
+            <option value="${day}">${day}日</option>
+        `;
+    }
+
+    return `
+        <div class="date-select-row">
+
+            <select id="${prefix}Year">
+                ${yearOptions}
+            </select>
+
+            <select id="${prefix}Month">
+                ${monthOptions}
+            </select>
+
+            <select id="${prefix}Day">
+                ${dayOptions}
+            </select>
+
+        </div>
+
+        <input type="hidden" id="${hiddenId}">
+    `;
+}
+
+
+function setupDateSelects(hiddenId, prefix) {
+
+    const year = document.getElementById(`${prefix}Year`);
+    const month = document.getElementById(`${prefix}Month`);
+    const day = document.getElementById(`${prefix}Day`);
+    const hidden = document.getElementById(hiddenId);
+
+    if (!year || !month || !day || !hidden) return;
+
+    const updateDate = () => {
+
+        const y = year.value;
+        const m = month.value;
+        const d = day.value;
+
+        if (!y || !m || !d) {
+            hidden.value = "";
+            return;
+        }
+
+        const date = new Date(
+            Number(y),
+            Number(m) - 1,
+            Number(d)
+        );
+
+        // 存在しない日付は無効
+        if (
+            date.getFullYear() !== Number(y) ||
+            date.getMonth() !== Number(m) - 1 ||
+            date.getDate() !== Number(d)
+        ) {
+            hidden.value = "";
+            return;
+        }
+
+        hidden.value =
+            `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+    };
+
+    year.addEventListener("change", updateDate);
+    month.addEventListener("change", updateDate);
+    day.addEventListener("change", updateDate);
+}
+
 function showCustomerForm() {
 
     const section = document.getElementById("customerSection");
@@ -847,7 +946,9 @@ form.innerHTML = `
 
 <div class="form-group">
 <label>生年月日 <span style="color:red;">*</span></label>
-<input type="date" id="customerBirthDate">
+
+${createDateSelects("customerBirthDate", "customerBirth")}
+
 </div>
 
 <div class="form-group">
@@ -906,7 +1007,7 @@ form.innerHTML = `
 
 <label>眉：施術歴日</label>
 
-<input type="date" id="eyebrowHistoryDate">
+${createDateSelects("eyebrowHistoryDate", "eyebrowHistory")}
 
 </div>
 
@@ -914,7 +1015,7 @@ form.innerHTML = `
 
 <label>アイライン：施術歴日</label>
 
-<input type="date" id="eyelineHistoryDate">
+${createDateSelects("eyelineHistoryDate", "eyelineHistory")}
 
 </div>
 
@@ -922,7 +1023,7 @@ form.innerHTML = `
 
 <label>リップ：施術歴日</label>
 
-<input type="date" id="lipHistoryDate">
+${createDateSelects("lipHistoryDate", "lipHistory")}
 
 </div>
 
@@ -930,7 +1031,7 @@ form.innerHTML = `
 
 <label>ヘアライン：施術歴日</label>
 
-<input type="date" id="hairlineHistoryDate">
+${createDateSelects("hairlineHistoryDate", "hairlineHistory")}
 
 </div>
 
@@ -942,7 +1043,7 @@ form.innerHTML = `
 
 <label style="margin-top:15px;">その他：施術歴日</label>
 
-<input type="date" id="otherHistoryDate">
+${createDateSelects("otherHistoryDate", "otherHistory")}
 
 </div>
 
@@ -994,6 +1095,13 @@ placeholder="既往歴・服薬中のお薬をご入力ください。
 </button>
 
 `;
+
+setupDateSelects("customerBirthDate", "customerBirth");
+setupDateSelects("eyebrowHistoryDate", "eyebrowHistory");
+setupDateSelects("eyelineHistoryDate", "eyelineHistory");
+setupDateSelects("lipHistoryDate", "lipHistory");
+setupDateSelects("hairlineHistoryDate", "hairlineHistory");
+setupDateSelects("otherHistoryDate", "otherHistory");
 
 const historyChecks =
     document.querySelectorAll('input[name="historyType"]');

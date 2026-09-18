@@ -1315,3 +1315,28 @@ textarea{
     -webkit-appearance: none;
     appearance: none;
 }
+
+/* 年・月・日プルダウン */
+.date-select-row {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.date-select-row select {
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    padding: 8px 10px;
+    border: 1px solid #D8CEC6;
+    border-radius: 8px;
+    background: #fff;
+    color: #4A403A;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-size: 16px;
+}
+
+.date-select-row select:focus {
+    outline: none;
+    border-color: #C68F5B;
+}
