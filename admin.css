@@ -1,20 +1,20 @@
 body{
     margin:0;
     padding:20px;
-    background:#F7F3EF;
+    background:#EEF2F7;
     font-family:"Yu Gothic",sans-serif;
-    color:#4F433B;
+    color:#4A5260;
 }
 
 h1{
     text-align:center;
-    color:#8A6F5A;
+    color:#66758A;
     font-size:30px;
     margin:0 0 20px;
 }
 
 h2{
-    color:#8A6F5A;
+    color:#66758A;
     margin-top:0;
 }
 
@@ -28,18 +28,18 @@ h2{
     background:#FFFFFF;
     border-radius:18px;
     padding:28px 24px;
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-    border:1px solid #EFE7E1;
+    box-shadow:0 6px 18px rgba(92,108,130,.12);
+    border:1px solid #DDE4EE;
     text-align:center;
 }
 
 .login-box input{
     width:100%;
     padding:14px;
-    border:1px solid #E6DED8;
+    border:1px solid #D5DDE8;
     border-radius:12px;
     font-size:16px;
-    background:#fff;
+    background:#FFFFFF;
     box-sizing:border-box;
 }
 
@@ -48,7 +48,7 @@ h2{
     padding:14px;
     border:none;
     border-radius:12px;
-    background:#8A6F5A;
+    background:#71839B;
     color:#fff;
     cursor:pointer;
     font-size:15px;
@@ -76,10 +76,10 @@ h2{
 .search-area input{
     flex:1;
     padding:14px;
-    border:1px solid #E6DED8;
+    border:1px solid #D5DDE8;
     border-radius:14px;
     font-size:15px;
-    background:#fff;
+    background:#FFFFFF;
     box-sizing:border-box;
 }
 
@@ -97,12 +97,12 @@ h2{
     padding:15px 18px;
     border:none;
     border-radius:14px;
-    background:#B89B82;
+    background:#8B9BB1;
     color:#fff;
     cursor:pointer;
     font-size:16px;
     font-weight:700;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    box-shadow:0 4px 12px rgba(92,108,130,.12);
 }
 
 /* =================================
@@ -114,35 +114,35 @@ h2{
     border-radius:18px;
     padding:22px;
     margin-bottom:18px;
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-    border:1px solid #EFE7E1;
+    box-shadow:0 6px 18px rgba(92,108,130,.12);
+    border:1px solid #DDE4EE;
     transition:.2s ease;
 }
 
 .reservation-card:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 24px rgba(0,0,0,.10);
+    box-shadow:0 10px 24px rgba(92,108,130,.16);
 }
 
 .reservation-card strong{
-    color:#8A6F5A;
+    color:#66758A;
     font-size:15px;
 }
 
 .today-header{
     margin:24px 0 16px;
     padding:12px 18px;
-    background:#F5EFE9;
+    background:#E4EAF2;
     border-radius:12px;
     font-size:18px;
     font-weight:700;
-    color:#6D5A4D;
+    color:#5D6C7F;
 }
 
 .time-box{
     font-size:28px;
     font-weight:700;
-    color:#8B6752;
+    color:#65788F;
     margin-bottom:18px;
     font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
 }
@@ -166,11 +166,11 @@ h2{
 }
 
 .editButton{
-    background:#C7B299;
+    background:#9AAAC0;
 }
 
 .cancelButton{
-    background:#C98F8F;
+    background:#B9A6BA;
 }
 
 /* =================================
@@ -179,17 +179,17 @@ h2{
 
 #editArea,
 #newReservationArea{
-    background:#fff;
+    background:#FFFFFF;
     border-radius:18px;
     padding:24px;
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-    border:1px solid #EFE7E1;
+    box-shadow:0 6px 18px rgba(92,108,130,.12);
+    border:1px solid #DDE4EE;
 }
 
 #editArea h2,
 #newReservationArea h2{
     margin-top:0;
-    color:#8A6F5A;
+    color:#66758A;
 }
 
 #editArea label,
@@ -197,7 +197,7 @@ h2{
     display:block;
     margin-top:14px;
     margin-bottom:6px;
-    color:#8A6F5A;
+    color:#66758A;
     font-weight:700;
 }
 
@@ -210,12 +210,13 @@ h2{
     width:100%;
     padding:12px;
     margin-bottom:16px;
-    border:1px solid #E6DED8;
+    border:1px solid #D5DDE8;
     border-radius:10px;
     box-sizing:border-box;
-    background:#fff;
+    background:#FFFFFF;
     font-size:15px;
     font-family:"Yu Gothic",sans-serif;
+    color:#4A5260;
 }
 
 #editArea textarea,
@@ -253,10 +254,10 @@ input[type="time"]{
 .customer-help{
     margin:-6px 0 14px;
     padding:10px 12px;
-    background:#FAF6F2;
-    border:1px solid #EFE7E1;
+    background:#F3F5F9;
+    border:1px solid #DDE4EE;
     border-radius:10px;
-    color:#7A6557;
+    color:#687487;
     font-size:13px;
     line-height:1.6;
 }
@@ -268,7 +269,7 @@ input[type="time"]{
 #editDetails{
     margin-top:10px;
     padding-top:10px;
-    border-top:1px solid #EFE7E1;
+    border-top:1px solid #DDE4EE;
 }
 
 /* =================================
@@ -281,8 +282,8 @@ input[type="time"]{
 }
 
 .history-item{
-    background:#FCFAF8;
-    border:1px solid #EDE2D8;
+    background:#F7F8FB;
+    border:1px solid #E0E5ED;
     border-radius:12px;
     padding:14px;
     margin-bottom:12px;
@@ -290,7 +291,7 @@ input[type="time"]{
 
 .history-title{
     font-weight:700;
-    color:#8A6F5A;
+    color:#66758A;
     margin-bottom:10px;
     font-size:15px;
 }
@@ -308,7 +309,7 @@ input[type="time"]{
     padding:10px 12px;
     border:none;
     border-radius:10px;
-    background:#D9B3B3;
+    background:#C3B1C5;
     color:#fff;
     cursor:pointer;
     font-weight:700;
@@ -338,14 +339,14 @@ input[type="time"]{
 
 #saveEditButton,
 #createNewReservationButton{
-    background:#8A6F5A;
+    background:#71839B;
     color:#fff;
 }
 
 #closeEditButton,
 #closeNewReservationButton{
-    background:#ddd;
-    color:#4F433B;
+    background:#D9DEE6;
+    color:#4A5260;
 }
 
 /* =================================
