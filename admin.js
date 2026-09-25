@@ -474,6 +474,16 @@ function applyCustomerToNewForm(customer) {
     document.getElementById("newPregnancy").value =
         customer.pregnancy || "";
 
+    // LINE連携を自動セット
+    const newLineUser =
+        document.getElementById("newLineUser");
+
+    if (newLineUser) {
+        newLineUser.value =
+            customer.lineUserId || "";
+    }
+
+    // 既存客なので再診
     document.getElementById("newVisit").value = "再診";
 
     restoreNewHistoryFromReservation(customer);
