@@ -1142,9 +1142,9 @@ historyChecks.forEach(check => {
 
                 group.style.display = "none";
 
-                group.querySelectorAll("input").forEach(input => {
-                    input.value = "";
-                });
+                group.querySelectorAll("input, select").forEach(element => {
+                element.value = "";
+             });
 
             }
 
@@ -1180,9 +1180,9 @@ noHistory.addEventListener("change", () => {
 
             group.style.display = "none";
 
-            group.querySelectorAll("input").forEach(input => {
-                input.value = "";
-            });
+            group.querySelectorAll("input, select").forEach(element => {
+                 element.value = "";
+           });
 
         });
 
