@@ -209,7 +209,7 @@ async function loadReservations() {
     const reservationResponse =
         await fetch(ADMIN_BASE_URL + "?action=getReservationList");
 
-    window.reservationList =
+window.reservationList =
     await reservationResponse.json();
 
 const customerHistoryResponse =
@@ -223,16 +223,16 @@ window.customerHistoryList =
 const treatmentResponse =
     await fetch(ADMIN_BASE_URL + "?action=treatments");
 
-    treatmentMenus =
-        await treatmentResponse.json();
+treatmentMenus =
+    await treatmentResponse.json();
 
-    const businessResponse =
-        await fetch(ADMIN_BASE_URL + "?action=businesshours");
+const businessResponse =
+    await fetch(ADMIN_BASE_URL + "?action=businesshours");
 
-    window.businessHours =
-        await businessResponse.json();
+window.businessHours =
+    await businessResponse.json();
 
-    const holidayResponse =
+const holidayResponse =
     await fetch(ADMIN_BASE_URL + "?action=holidays");
 
 window.holidays =
@@ -609,7 +609,6 @@ function applyCustomerToNewForm(customer) {
 
 
 function clearNewCustomerFields() {
-
     document.getElementById("newName").value = "";
     document.getElementById("newTel").value = "";
     document.getElementById("newGender").value = "";
@@ -617,9 +616,21 @@ function clearNewCustomerFields() {
     document.getElementById("newReferrer").value = "";
     document.getElementById("newMedicalHistory").value = "";
     document.getElementById("newPregnancy").value = "";
-    document.getElementById("newLineUser").value = "";
-    document.getElementById("newHistorySelected").innerHTML = "";
 
+    const newLineUser =
+        document.getElementById("newLineUser");
+
+    if (newLineUser) {
+        newLineUser.value = "";
+
+        [...newLineUser.options]
+            .filter(option =>
+                option.textContent === "過去予約のLINEアカウント"
+            )
+            .forEach(option => option.remove());
+    }
+
+    document.getElementById("newHistorySelected").innerHTML = "";
 }
 
 
@@ -1175,20 +1186,39 @@ function renderReservations() {
             .value;
 
 
+    // =========================================
+    // 通常表示
+    // → 予約済みのみ
+    // =========================================
+
     let filteredList =
         [...window.reservationList];
 
 
+    // =========================================
+    // 名前検索
+    // → キャンセル済みも含めて検索
+    // =========================================
+
     if (keyword) {
 
+        const historyList =
+            Array.isArray(window.customerHistoryList)
+                ? window.customerHistoryList
+                : [];
+
         filteredList =
-            filteredList.filter(item =>
+            historyList.filter(item =>
                 String(item.name || "")
                     .includes(keyword)
             );
 
     }
 
+
+    // =========================================
+    // 日付検索
+    // =========================================
 
     if (searchDate) {
 
@@ -1210,41 +1240,53 @@ function renderReservations() {
     area.innerHTML = "";
 
 
+    // =========================================
+    // 本日の予約
+    // =========================================
+
     const todayList =
         filteredList
-            .filter(item => item.date === today)
+            .filter(item =>
+                item.date === today
+            )
             .sort((a, b) =>
                 a.time.localeCompare(b.time)
             );
 
 
+    // =========================================
+    // その他
+    // =========================================
+
     const otherList =
-    filteredList
-        .filter(item => {
+        filteredList
+            .filter(item => {
 
-            // 名前検索・日付検索をしている場合
-            // → 過去の予約も検索結果として表示
-            if (keyword || searchDate) {
-                return item.date !== today;
-            }
+                // 名前検索・日付検索中
+                // → 過去予約・キャンセルも表示
+                if (keyword || searchDate) {
+                    return item.date !== today;
+                }
 
-            // 通常表示
-            // → 今日より前の予約は非表示
-            return item.date > today;
+                // 通常表示
+                // → 今日より前は表示しない
+                return item.date > today;
 
-        })
-        .sort((a, b) => {
+            })
+            .sort((a, b) => {
 
-            if (a.date === b.date) {
+                if (a.date === b.date) {
+                    return a.time.localeCompare(b.time);
+                }
 
-                return a.time.localeCompare(b.time);
+                return a.date.localeCompare(b.date);
 
-            }
+            });
 
-            return a.date.localeCompare(b.date);
 
-        });
-
+    // =========================================
+    // 本日の予約表示
+    // =========================================
 
     if (todayList.length > 0) {
 
@@ -1255,11 +1297,18 @@ function renderReservations() {
         `;
 
         todayList.forEach(item => {
-            area.innerHTML += createReservationCard(item);
+
+            area.innerHTML +=
+                createReservationCard(item);
+
         });
 
     }
 
+
+    // =========================================
+    // その他の予約表示
+    // =========================================
 
     if (otherList.length > 0) {
 
@@ -1270,11 +1319,18 @@ function renderReservations() {
         `;
 
         otherList.forEach(item => {
-            area.innerHTML += createReservationCard(item);
+
+            area.innerHTML +=
+                createReservationCard(item);
+
         });
 
     }
 
+
+    // =========================================
+    // 変更ボタン
+    // =========================================
 
     document
         .querySelectorAll(".editButton")
@@ -1285,10 +1341,16 @@ function renderReservations() {
                 const id =
                     button.dataset.id;
 
+
+                // 検索結果に表示している
+                // filteredList から探す
                 const reservation =
-                    window.reservationList.find(
-                        item => String(item.id) === String(id)
+                    filteredList.find(
+                        item =>
+                            String(item.id) ===
+                            String(id)
                     );
+
 
                 if (reservation) {
 
@@ -1301,13 +1363,19 @@ function renderReservations() {
         });
 
 
+    // =========================================
+    // キャンセルボタン
+    // =========================================
+
     document
         .querySelectorAll(".cancelButton")
         .forEach(button => {
 
             button.addEventListener("click", () => {
 
-                cancelReservation(button.dataset.id);
+                cancelReservation(
+                    button.dataset.id
+                );
 
             });
 
@@ -1361,19 +1429,25 @@ function createReservationCard(item) {
 
             <div class="button-row">
 
-                <button
-                    class="editButton"
-                    data-id="${item.id}">
-                    変更
-                </button>
+    <button
+        class="editButton"
+        data-id="${item.id}">
+        変更
+    </button>
 
+    ${
+        item.status === "キャンセル"
+            ? ""
+            : `
                 <button
                     class="cancelButton"
                     data-id="${item.id}">
                     キャンセル
                 </button>
+            `
+    }
 
-            </div>
+</div>
 
         </div>
 
