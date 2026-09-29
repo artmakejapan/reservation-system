@@ -931,6 +931,11 @@ async function submitNewReservation() {
     const visit =
         document.getElementById("newVisit").value;
 
+        console.log(
+    "【保存直前】LINE User ID =",
+    document.getElementById("newLineUser").value
+);
+
     const newData = {
 
         action: "adminCreate",
