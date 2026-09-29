@@ -235,11 +235,18 @@ async function updateSideMenuWelcome() {
 
     try {
 
-        // LIFF初期化が完了するまで待つ
-        while (!liffReady) {
+        // LIFF初期化が完了するまで待つ（最大5秒）
+        let waited = 0;
+        while (!liffReady && waited < 100) {
             await new Promise(resolve =>
                 setTimeout(resolve, 50)
             );
+            waited++;
+        }
+
+        if (!liffReady) {
+            welcome.textContent = "ようこそ ゲスト様";
+            return;
         }
 
         const profile =

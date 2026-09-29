@@ -231,6 +231,24 @@ function canReserve(date, time) {
 
 }
 
+
+// ================================================
+// HTMLエスケープ（お客様入力値を画面に表示する際に使用）
+// ================================================
+
+function escapeHtml(str) {
+
+    if (str === null || str === undefined) return "";
+
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+
+}
+
 function generateCalendar(data) {
 
     reservationData = data;
@@ -318,7 +336,7 @@ if(reservable){
             ? row.first
             : row.repeat;
 
-        times=source.split(",").map(t=>t.trim());
+        times=String(source || "").split(",").map(t=>t.trim()).filter(Boolean);
 
     }
 
@@ -408,7 +426,6 @@ future &&
 times.length > 0 &&
 remain === 0;
 
-console.log(dateString, remain, full);
 
 if(reservable && future && !full){
 
@@ -596,9 +613,10 @@ if (row) {
         ? row.first
         : row.repeat;
 
-    times = source
+    times = String(source || "")
         .split(",")
-        .map(t => t.trim());
+        .map(t => t.trim())
+        .filter(Boolean);
 
 }
 
@@ -1411,7 +1429,7 @@ function showConfirm() {
 
 <div class="confirm-item">
 <span class="label">氏名</span>
-<span class="value">${customerData.name}</span>
+<span class="value">${escapeHtml(customerData.name)}</span>
 </div>
 
 <br>
@@ -1482,102 +1500,102 @@ customerData.pregnancy = "";
 
 <div class="confirm-item">
 <span class="label">お名前</span>
-<span class="value">${customerData.name}</span>
+<span class="value">${escapeHtml(customerData.name)}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">電話番号</span>
-<span class="value">${customerData.tel}</span>
+<span class="value">${escapeHtml(customerData.tel)}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">性別</span>
-<span class="value">${customerData.gender}</span>
+<span class="value">${escapeHtml(customerData.gender)}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">生年月日</span>
-<span class="value">${customerData.birthDate || "-"}</span>
+<span class="value">${escapeHtml(customerData.birthDate) || "-"}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">紹介者</span>
-<span class="value">${customerData.referrer || "なし"}</span>
+<span class="value">${escapeHtml(customerData.referrer) || "なし"}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">アートメイク施術歴</span>
-<span class="value">${customerData.history}</span>
+<span class="value">${escapeHtml(customerData.history)}</span>
 </div>
 
 ${customerData.eyebrowHistory ? `
 <div class="confirm-item">
 <span class="label">眉施術歴</span>
-<span class="value">${customerData.eyebrowHistory}</span>
+<span class="value">${escapeHtml(customerData.eyebrowHistory)}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">眉施術歴日</span>
-<span class="value">${customerData.eyebrowHistoryDate}</span>
+<span class="value">${escapeHtml(customerData.eyebrowHistoryDate)}</span>
 </div>
 ` : ""}
 
 ${customerData.eyelineHistory ? `
 <div class="confirm-item">
 <span class="label">アイライン施術歴</span>
-<span class="value">${customerData.eyelineHistory}</span>
+<span class="value">${escapeHtml(customerData.eyelineHistory)}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">アイライン施術歴日</span>
-<span class="value">${customerData.eyelineHistoryDate}</span>
+<span class="value">${escapeHtml(customerData.eyelineHistoryDate)}</span>
 </div>
 ` : ""}
 
 ${customerData.lipHistory ? `
 <div class="confirm-item">
 <span class="label">リップ施術歴</span>
-<span class="value">${customerData.lipHistory}</span>
+<span class="value">${escapeHtml(customerData.lipHistory)}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">リップ施術歴日</span>
-<span class="value">${customerData.lipHistoryDate}</span>
+<span class="value">${escapeHtml(customerData.lipHistoryDate)}</span>
 </div>
 ` : ""}
 
 ${customerData.hairlineHistory ? `
 <div class="confirm-item">
 <span class="label">ヘアライン施術歴</span>
-<span class="value">${customerData.hairlineHistory}</span>
+<span class="value">${escapeHtml(customerData.hairlineHistory)}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">ヘアライン施術歴日</span>
-<span class="value">${customerData.hairlineHistoryDate}</span>
+<span class="value">${escapeHtml(customerData.hairlineHistoryDate)}</span>
 </div>
 ` : ""}
 
 ${customerData.otherHistory ? `
 <div class="confirm-item">
 <span class="label">その他施術歴</span>
-<span class="value">${customerData.otherHistory}</span>
+<span class="value">${escapeHtml(customerData.otherHistory)}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">その他施術歴日</span>
-<span class="value">${customerData.otherHistoryDate}</span>
+<span class="value">${escapeHtml(customerData.otherHistoryDate)}</span>
 </div>
 ` : ""}
 
 <div class="confirm-item">
 <span class="label">既往歴・服薬中のお薬</span>
-<span class="value">${customerData.medicalHistory || "なし"}</span>
+<span class="value">${escapeHtml(customerData.medicalHistory) || "なし"}</span>
 </div>
 
 <div class="confirm-item">
 <span class="label">妊娠・授乳中</span>
-<span class="value">${customerData.pregnancy}</span>
+<span class="value">${escapeHtml(customerData.pregnancy)}</span>
 </div>
 
 <br>
@@ -1658,7 +1676,6 @@ pregnancy: reservationData.visit === "再診" ? "" : customerData.pregnancy
 
             const text = await response.text();
 
-console.log("GAS response:", text);
 
 let result;
 

@@ -22,18 +22,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document
         .getElementById("loginButton")
-        .addEventListener("click", () => {
+        .addEventListener("click", async () => {
 
             const password =
                 document.getElementById("adminPassword").value;
 
-            if (password === "0918") {
+            if (!password) {
 
-                loadReservations();
+                alert("パスワードを入力してください");
+                return;
 
-            } else {
+            }
 
-                alert("パスワードが違います");
+            try {
+
+                const response =
+                    await fetch(ADMIN_BASE_URL, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "text/plain;charset=utf-8"
+                        },
+                        body: JSON.stringify({
+                            action: "verifyAdmin",
+                            password: password
+                        })
+                    });
+
+                const result =
+                    await response.json();
+
+                if (result.result === true) {
+
+                    loadReservations();
+
+                } else {
+
+                    alert("パスワードが違います");
+
+                }
+
+            } catch (error) {
+
+                console.error("ログインエラー:", error);
+                alert("ログインに失敗しました。通信環境をご確認ください。");
 
             }
 

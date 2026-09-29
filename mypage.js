@@ -134,8 +134,8 @@ function displayReservation(reservations) {
 
     futureReservations.sort((a, b) => {
 
-    return new Date(a.date + " " + a.time) -
-           new Date(b.date + " " + b.time);
+    return new Date(a.date + "T" + a.time) -
+           new Date(b.date + "T" + b.time);
 
 });
 
