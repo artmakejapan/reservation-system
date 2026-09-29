@@ -1,6 +1,7 @@
 let treatmentMenus = [];
 
 window.reservationList = [];
+window.customerHistoryList = [];
 window.businessHours = [];
 window.holidays = [];
 window.lineUsers = [];
@@ -178,10 +179,18 @@ async function loadReservations() {
         await fetch(ADMIN_BASE_URL + "?action=getReservationList");
 
     window.reservationList =
-        await reservationResponse.json();
+    await reservationResponse.json();
 
-    const treatmentResponse =
-        await fetch(ADMIN_BASE_URL + "?action=treatments");
+const customerHistoryResponse =
+    await fetch(
+        ADMIN_BASE_URL + "?action=customersearch"
+    );
+
+window.customerHistoryList =
+    await customerHistoryResponse.json();
+
+const treatmentResponse =
+    await fetch(ADMIN_BASE_URL + "?action=treatments");
 
     treatmentMenus =
         await treatmentResponse.json();
@@ -346,35 +355,62 @@ function buildCustomerSearchList() {
     datalist.innerHTML = "";
     customerLabelMap = new Map();
 
+    const historyList =
+        Array.isArray(window.customerHistoryList)
+            ? window.customerHistoryList
+            : [];
+
     const grouped =
         new Map();
 
-    window.reservationList.forEach(item => {
-
-        const lineUserId =
-            String(item.lineUserId || "").trim();
+    historyList.forEach(item => {
 
         const name =
             String(item.name || "").trim();
 
-        if (!lineUserId || !name) return;
+        if (!name) return;
 
-        if (!grouped.has(lineUserId)) {
-            grouped.set(lineUserId, []);
+        const tel =
+            String(item.tel || "").trim();
+
+        const key =
+            name + "\t" + tel;
+
+        if (!grouped.has(key)) {
+            grouped.set(key, []);
         }
 
-        grouped.get(lineUserId).push(item);
+        grouped.get(key).push(item);
 
     });
 
     [...grouped.entries()]
-        .map(([lineUserId, list]) => {
+        .map(([key, list]) => {
 
             const sorted =
                 [...list].sort(compareReservationDesc);
 
             const source =
-                sorted.find(item => item.visit === "初診") || sorted[0];
+                sorted.find(
+                    item => item.visit === "初診"
+                ) || sorted[0];
+
+            // --------------------------------
+            // 過去予約のどこかにLINE IDがあれば取得
+            // キャンセル済み予約も対象
+            // --------------------------------
+
+            const lineUserSource =
+                sorted.find(item =>
+                    String(item.lineUserId || "").trim()
+                );
+
+            const lineUserId =
+                lineUserSource
+                    ? String(
+                        lineUserSource.lineUserId || ""
+                    ).trim()
+                    : "";
 
             const tel =
                 String(source.tel || "").trim();
@@ -382,7 +418,7 @@ function buildCustomerSearchList() {
             const label =
                 tel
                     ? `${source.name}｜${tel}`
-                    : `${source.name}｜LINE連携済み`;
+                    : `${source.name}｜LINE連携なし`;
 
             return {
                 label: label,
@@ -402,7 +438,8 @@ function buildCustomerSearchList() {
             const option =
                 document.createElement("option");
 
-            option.value = customer.label;
+            option.value =
+                customer.label;
 
             datalist.appendChild(option);
 
@@ -446,7 +483,10 @@ function handleNewCustomerSelection() {
 
     selectedNewCustomer = customer.source;
 
-    applyCustomerToNewForm(customer.source);
+applyCustomerToNewForm({
+    ...customer.source,
+    lineUserId: customer.lineUserId
+});
 
 }
 
@@ -474,19 +514,60 @@ function applyCustomerToNewForm(customer) {
     document.getElementById("newPregnancy").value =
         customer.pregnancy || "";
 
-    // LINE連携を自動セット
+
+    // =========================================
+    // LINE User ID
+    // =========================================
+
     const newLineUser =
         document.getElementById("newLineUser");
 
     if (newLineUser) {
+
+        const lineUserId =
+            String(customer.lineUserId || "").trim();
+
+        // LINE_Usersに存在するか確認
+        const exists =
+            [...newLineUser.options]
+                .some(option =>
+                    option.value === lineUserId
+                );
+
+        if (lineUserId && !exists) {
+
+            // LINE_Usersには存在しないが、
+            // 過去のReservationsに保存されているLINE ID
+            // を選択肢として一時的に追加する
+            const option =
+                document.createElement("option");
+
+            option.value =
+                lineUserId;
+
+            option.textContent =
+                "過去予約のLINEアカウント";
+
+            newLineUser.appendChild(option);
+
+        }
+
         newLineUser.value =
-            customer.lineUserId || "";
+            lineUserId;
+
     }
 
+
+    // =========================================
     // 既存客なので再診
-    document.getElementById("newVisit").value = "再診";
+    // =========================================
+
+    document.getElementById("newVisit").value =
+        "再診";
+
 
     restoreNewHistoryFromReservation(customer);
+
 
     updateNewTimeOptions(
         document.getElementById("newDate").value,
@@ -505,6 +586,7 @@ function clearNewCustomerFields() {
     document.getElementById("newReferrer").value = "";
     document.getElementById("newMedicalHistory").value = "";
     document.getElementById("newPregnancy").value = "";
+    document.getElementById("newLineUser").value = "";
     document.getElementById("newHistorySelected").innerHTML = "";
 
 }
