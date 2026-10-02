@@ -453,17 +453,17 @@ if (data.visit === "初診") {
 } else {
 
     // 再診
-    // 残り1枠 → 赤
-    if (remain === 1) {
-        colorClass = "one-left";
+// 残り1枠 → 赤
+if (remain === 1) {
+    colorClass = "one-left";
 
-    // 残り2〜3枠 → 黄色
-    } else if (remain === 2 || remain === 3) {
-        colorClass = "two-left";
-    }
+// 残り2枠 → 黄色
+} else if (remain === 2) {
+    colorClass = "two-left";
+}
 
-    // 残り4枠以上 → colorClassなし
-    // → 通常のベージュ
+// 残り3〜4枠 → colorClassなし
+// → 元のベージュ
 }
 
 
