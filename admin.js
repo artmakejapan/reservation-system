@@ -53,6 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (result.result === true) {
 
+                    // 管理者トークンを保持（以降の管理操作で使用）
+                    window.adminToken = result.token || "";
+
                     loadReservations();
 
                 } else {
@@ -946,6 +949,8 @@ async function submitNewReservation() {
 
         action: "adminCreate",
 
+        adminToken: window.adminToken || "",
+
         date:
             document.getElementById("newDate").value,
 
@@ -1231,7 +1236,12 @@ function renderReservations() {
 
 
     const today =
-        new Date().toISOString().slice(0, 10);
+    new Date().toLocaleDateString(
+        "sv-SE",
+        {
+            timeZone: "Asia/Tokyo"
+        }
+    );
 
 
     const area =
@@ -1410,35 +1420,35 @@ function createReservationCard(item) {
 
             <div>
                 <strong>👤 お名前</strong><br>
-                ${item.name || "-"}
+                ${escapeHtml(item.name || "-")}
             </div>
 
             <br>
 
             <div>
                 <strong>🩺 初診・再診</strong><br>
-                ${item.visit || "-"}
+                ${escapeHtml(item.visit || "-")}
             </div>
 
             <br>
 
             <div>
                 <strong>🖋️ 施術メニュー</strong><br>
-                ${item.menu || "-"}
+                ${escapeHtml(item.menu || "-")}
             </div>
 
             <div class="button-row">
 
-    <button
-        class="editButton"
-        data-id="${item.id}">
-        変更
-    </button>
-
     ${
         item.status === "キャンセル"
-            ? ""
+            ? `<div style="color:#a05a5a;font-weight:700;">キャンセル済みの予約</div>`
             : `
+                <button
+                    class="editButton"
+                    data-id="${item.id}">
+                    変更
+                </button>
+
                 <button
                     class="cancelButton"
                     data-id="${item.id}">
@@ -1478,8 +1488,46 @@ function openEditForm(reservation) {
 
 if (editLineUser) {
 
+    const lineUserId =
+        String(reservation.lineUserId || "").trim();
+
+    // LINE_Usersに存在するか確認
+    const exists =
+        [...editLineUser.options]
+            .some(option =>
+                option.value === lineUserId
+            );
+
+    // LINE_Usersには存在しないが、
+    // Reservationsに過去のLINE IDが保存されている場合
+    const alreadyAdded =
+        [...editLineUser.options]
+            .some(option =>
+                option.value === lineUserId &&
+                option.textContent === "過去予約のLINEアカウント"
+            );
+
+    if (
+        lineUserId &&
+        !exists &&
+        !alreadyAdded
+    ) {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            lineUserId;
+
+        option.textContent =
+            "過去予約のLINEアカウント";
+
+        editLineUser.appendChild(option);
+
+    }
+
     editLineUser.value =
-        reservation.lineUserId || "";
+        lineUserId;
 
 }
 
@@ -1695,6 +1743,13 @@ async function saveEdit() {
 
     if (!editingReservation) return;
 
+    if (editingReservation.status === "キャンセル") {
+
+        alert("キャンセル済みの予約は変更できません。");
+        return;
+
+    }
+
 
     const oldDate =
         editingReservation.date;
@@ -1718,6 +1773,8 @@ async function saveEdit() {
     const newData = {
 
         action: "update",
+
+        adminToken: window.adminToken || "",
 
         reservationId:
             editingReservation.id,
@@ -1955,6 +2012,8 @@ async function cancelReservation(id) {
             body: JSON.stringify({
 
                 action: "cancel",
+
+                adminToken: window.adminToken || "",
 
                 reservationId: id
 
@@ -2290,92 +2349,3 @@ function addHistoryItem(name, dateValue = "") {
 
 }
 
-// ========================================
-// 管理画面から新規予約登録
-// ========================================
-
-async function createAdminReservation(data) {
-
-  try {
-
-    const baseUrl =
-      "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
-
-    const response = await fetch(baseUrl, {
-
-      method: "POST",
-
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-
-      body: JSON.stringify({
-
-        action: "createAdminReservation",
-
-        date: data.date,
-        time: data.time,
-        visit: data.visit,
-
-        menu1: data.menu1,
-        menu2: data.menu2,
-
-        name: data.name,
-
-        gender: data.gender || "",
-        age: data.age || "",
-        referrer: data.referrer || "",
-        tel: data.tel || "",
-
-        history: data.history || "",
-        historyDate: data.historyDate || "",
-
-        eyebrowHistory: data.eyebrowHistory || "",
-        eyebrowHistoryDate: data.eyebrowHistoryDate || "",
-
-        eyelineHistory: data.eyelineHistory || "",
-        eyelineHistoryDate: data.eyelineHistoryDate || "",
-
-        lipHistory: data.lipHistory || "",
-        lipHistoryDate: data.lipHistoryDate || "",
-
-        hairlineHistory: data.hairlineHistory || "",
-        hairlineHistoryDate: data.hairlineHistoryDate || "",
-
-        otherHistory: data.otherHistory || "",
-        otherHistoryDate: data.otherHistoryDate || "",
-
-        medicalHistory: data.medicalHistory || "",
-        pregnancy: data.pregnancy || "",
-
-        // 既存客の場合はReservationsから
-        // LINE userIdを取得してGAS側で紐付ける
-        customerName: data.customerName || data.name || ""
-      })
-
-    });
-
-    const result = await response.json();
-
-    if (result.result !== "success") {
-
-      throw new Error(
-        result.message || "予約登録に失敗しました。"
-      );
-
-    }
-
-    return result;
-
-  } catch (error) {
-
-    console.error(
-      "管理画面新規予約エラー:",
-      error
-    );
-
-    throw error;
-
-  }
-
-}

@@ -1222,7 +1222,6 @@ textarea{
 
     font-size: 27px;
     line-height: 1;
-
     text-align: center;
 }
 
@@ -1298,23 +1297,6 @@ textarea{
 
 }
 
-#customerBirthDate {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    height: 48px;
-    padding: 12px;
-    margin: 0;
-    border: 1px solid #D8CDC3;
-    border-radius: 10px;
-    font-size: 15px;
-    font-family: inherit;
-    box-sizing: border-box;
-    background: #fff;
-    -webkit-appearance: none;
-    appearance: none;
-}
 
 /* 年・月・日プルダウン */
 .date-select-row {

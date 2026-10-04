@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (checkedMenus.length === 0) {
 
-            alert("施術メニューを選択してください.");
+            alert("施術メニューを選択してください。");
 
             return;
 
@@ -185,8 +185,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             visit: visit.value
 
         };
-
-        console.log(reservationData);
 
         // カレンダー表示
         const calendarSection =

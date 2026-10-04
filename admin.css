@@ -18,10 +18,6 @@ h2{
     margin-top:0;
 }
 
-/* =================================
-   ログイン
-================================= */
-
 .login-box{
     max-width:420px;
     margin:60px auto;
@@ -55,10 +51,6 @@ h2{
     font-weight:700;
 }
 
-/* =================================
-   管理画面共通レイアウト
-================================= */
-
 #reservationList,
 #editArea,
 #newReservationArea{
@@ -83,10 +75,6 @@ h2{
     box-sizing:border-box;
 }
 
-/* =================================
-   新規予約ボタン
-================================= */
-
 .new-reservation-section{
     max-width:700px;
     margin:0 auto 20px;
@@ -104,10 +92,6 @@ h2{
     font-weight:700;
     box-shadow:0 4px 12px rgba(92,108,130,.12);
 }
-
-/* =================================
-   カード一覧
-================================= */
 
 .reservation-card{
     background:#FFFFFF;
@@ -172,10 +156,6 @@ h2{
 .cancelButton{
     background:#B9A6BA;
 }
-
-/* =================================
-   新規予約・編集 共通フォーム
-================================= */
 
 #editArea,
 #newReservationArea{
@@ -247,10 +227,6 @@ input[type="time"]{
     box-sizing:border-box;
 }
 
-/* =================================
-   顧客検索
-================================= */
-
 .customer-help{
     margin:-6px 0 14px;
     padding:10px 12px;
@@ -262,19 +238,11 @@ input[type="time"]{
     line-height:1.6;
 }
 
-/* =================================
-   詳細エリア
-================================= */
-
 #editDetails{
     margin-top:10px;
     padding-top:10px;
     border-top:1px solid #DDE4EE;
 }
-
-/* =================================
-   施術歴
-================================= */
 
 #editHistorySelected,
 #newHistorySelected{
@@ -315,10 +283,6 @@ input[type="time"]{
     font-weight:700;
 }
 
-/* =================================
-   ボタン列
-================================= */
-
 .edit-button-row,
 .new-reservation-button-row{
     display:flex;
@@ -349,24 +313,14 @@ input[type="time"]{
     color:#4A5260;
 }
 
-/* =================================
-   個別補正
-================================= */
-
 #editGender,
 #editPregnancy,
-#editAge,
 #editArea input[type="tel"],
 #newGender,
 #newPregnancy,
-#newAge,
 #newReservationArea input[type="tel"]{
     width:100%;
 }
-
-/* =================================
-   レスポンシブ
-================================= */
 
 @media(max-width:600px){
 

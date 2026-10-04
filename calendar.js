@@ -155,6 +155,120 @@ function getRequiredSlots(){
 
 
 
+// ================================================
+// 予約ルール設定（変更はこの block だけ直せば全画面に反映される）
+// ================================================
+
+const RESERVATION_RULES = {
+
+    // 営業曜日（0=日, 1=月, 2=火, 3=水, 4=木, 5=金, 6=土）
+    openDays: [1, 2, 5],
+
+    // 2メニュー以上は、この時間以降の開始を原則不可
+    twoMenuCutoff: "16:15",
+
+    // 例外：この曜日だけ cutoff 時間の開始を許可（2=火曜）
+    twoMenuAllowedDay: 2,
+
+    // カレンダー色分け用の実質枠（代表開始時間）
+    slotTimes: {
+        "初診": ["09:30", "11:45", "16:15"],
+        "再診": ["09:30", "11:45", "14:00", "16:15"]
+    },
+
+    // 残り枠表示の上限
+    maxSlots: {
+        "初診": 3,
+        "再診": 4
+    }
+};
+
+// その日は営業日か
+function isOpenDay(dateObj) {
+
+    return RESERVATION_RULES.openDays.includes(dateObj.getDay());
+
+}
+
+// BusinessHours シートからその日の候補時間を取得
+function getDayTimes(dateString, visit) {
+
+    const dateObj = createLocalDate(dateString, "00:00");
+
+    const weekdayNames = {
+        0: "日",
+        1: "月",
+        2: "火",
+        3: "水",
+        4: "木",
+        5: "金",
+        6: "土"
+    };
+
+    const weekday = weekdayNames[dateObj.getDay()];
+
+    const row = businessHours.find(item => item.weekday === weekday);
+
+    if (!row) return [];
+
+    const source = visit === "初診"
+        ? row.first
+        : row.repeat;
+
+    return String(source || "")
+        .split(",")
+        .map(t => t.trim())
+        .filter(Boolean);
+
+}
+
+// 2メニュー以上の開始時間ルール
+function filterTwoMenuRule(times, dateObj) {
+
+    const requiredSlots = getRequiredSlots();
+
+    if (requiredSlots < 2) return times;
+
+    return times.filter(time => {
+
+        // cutoff より前 → OK
+        if (time < RESERVATION_RULES.twoMenuCutoff) {
+            return true;
+        }
+
+        // 例外曜日の cutoff 時間 → OK（火曜16:15）
+        if (
+            dateObj.getDay() === RESERVATION_RULES.twoMenuAllowedDay &&
+            time === RESERVATION_RULES.twoMenuCutoff
+        ) {
+            return true;
+        }
+
+        // それ以降 → NG
+        return false;
+
+    });
+
+}
+
+// その日に予約可能な候補時間（営業日・休診日・ルールすべて適用）
+function getReservableTimes(dateString, visit) {
+
+    const dateObj = createLocalDate(dateString, "00:00");
+
+    if (!isOpenDay(dateObj)) return [];
+
+    if (holidays.includes(dateString)) return [];
+
+    return filterTwoMenuRule(
+        getDayTimes(dateString, visit),
+        dateObj
+    );
+
+}
+
+
+
 function canReserve(date, time) {
 
     const requiredSlots = getRequiredSlots();
@@ -313,100 +427,34 @@ const dateString =
 
 const holiday = holidays.includes(dateString);
 
-// 月・火・金、かつ休診日ではない
+// 営業曜日・休診日判定（ルールは RESERVATION_RULES に一元化）
 const reservable =
-    (day === 1 || day === 2 || day === 5) &&
+    RESERVATION_RULES.openDays.includes(day) &&
     !holiday;
 
-let times = [];
+// この日の営業時間（初診/再診別）
+const dayTimes = getDayTimes(dateString, data.visit);
 
-if(reservable){
-
-    const weekdayMap={
-        1:"月",
-        2:"火",
-        5:"金"
-    };
-
-    const row=businessHours.find(item=>item.weekday===weekdayMap[day]);
-
-    if(row){
-
-        const source=data.visit==="初診"
-            ? row.first
-            : row.repeat;
-
-        times=String(source || "").split(",").map(t=>t.trim()).filter(Boolean);
-
-    }
-
-}
-
-let checkTimes = [...times];
-
-const requiredSlots = getRequiredSlots();
-
-const weekdayName = {
-    1:"月",
-    2:"火",
-    5:"金"
-}[day];
-
-
-// 2メニューは火曜16:15のみ
-if (requiredSlots >= 2) {
-
-    checkTimes = checkTimes.filter(time => {
-
-        // 16:15より前 → 空きがあればOK
-        if (time < "16:15") {
-            return true;
-        }
-
-        // 火曜16:15 → OK
-        if (weekdayName === "火" && time === "16:15") {
-            return true;
-        }
-
-        // 16:15より後、または月・金16:15 → NG
-        return false;
-
-    });
-
-}
+// 2メニューの開始時間ルールを適用した候補
+const times = filterTwoMenuRule(dayTimes, date);
 
 // ================================================
 // カレンダー色分け用：実質枠数を計算
 // ================================================
 
 // 初診は3枠、再診は4枠
-const maxSlots = data.visit === "初診" ? 3 : 4;
+const maxSlots =
+    RESERVATION_RULES.maxSlots[data.visit] || 4;
 
 // 各実質枠の代表開始時間
-const slotTimes = data.visit === "初診"
-    ? ["09:30", "11:45", "16:15"]
-    : ["09:30", "11:45", "14:00", "16:15"];
+const slotTimes =
+    RESERVATION_RULES.slotTimes[data.visit] || [];
 
 // 実質枠ごとの空き状況を確認
+// （times には 2メニュールール適用済み）
 let remain = 0;
 
 slotTimes.forEach(time => {
-
-    // 2メニューの場合、
-    // 今までの開始時間ルールをそのまま適用
-    if (requiredSlots >= 2) {
-
-        if (time > "16:15") {
-            return;
-        }
-
-        if (
-            time === "16:15" &&
-            weekdayName !== "火"
-        ) {
-            return;
-        }
-    }
 
     if (
         times.includes(time) &&
@@ -593,33 +641,6 @@ function showTimes(data){
 
     const date = createLocalDate(selectedDate, "00:00");
 
-const day = date.getDay();
-
-let times = [];
-
-const weekdayMap = {
-    1: "月",
-    2: "火",
-    5: "金"
-};
-
-const weekday = weekdayMap[day];
-
-const row = businessHours.find(item => item.weekday === weekday);
-
-if (row) {
-
-    const source = data.visit === "初診"
-        ? row.first
-        : row.repeat;
-
-    times = String(source || "")
-        .split(",")
-        .map(t => t.trim())
-        .filter(Boolean);
-
-}
-
     timeArea.innerHTML="";
 
     timeArea.innerHTML+=`
@@ -628,42 +649,10 @@ if (row) {
         </h4>
     `;
 
-    let availableTimes =
-times.filter(time=>{
-
-
-    return canReserve(
-        selectedDate,
-        time,
-        times
-    );
-
-
-});
-
-// 2メニューの開始時間ルール
-const requiredSlots = getRequiredSlots();
-
-if (requiredSlots >= 2) {
-
-    availableTimes = availableTimes.filter(time => {
-
-        // 16:15より前 → 空きがあればOK
-        if (time < "16:15") {
-            return true;
-        }
-
-        // 火曜16:15 → OK
-        if (weekday === "火" && time === "16:15") {
-            return true;
-        }
-
-        // 16:15より後 → NG
-        return false;
-
-    });
-
-}
+// その日の候補時間（営業日・休診日・2メニュールール適用済み）
+let availableTimes =
+    getReservableTimes(selectedDate, data.visit)
+        .filter(time => canReserve(selectedDate, time));
 
 if (availableTimes.length === 0) {
 
@@ -1446,7 +1435,6 @@ customerData.referrer = "";
 customerData.tel = "";
 
 customerData.history = "";
-customerData.historyDate = "";
 
 customerData.eyebrowHistory = "";
 customerData.eyebrowHistoryDate = "";
@@ -1633,7 +1621,6 @@ ${customerData.otherHistory ? `
     referrer: reservationData.visit === "再診" ? "" : customerData.referrer,
     tel: reservationData.visit === "再診" ? "" : customerData.tel,
     history: reservationData.visit === "再診" ? "" : customerData.history,
-historyDate: reservationData.visit === "再診" ? "" : customerData.historyDate,
 
 eyebrowHistory: reservationData.visit === "再診" ? "" : customerData.eyebrowHistory,
 eyebrowHistoryDate: reservationData.visit === "再診" ? "" : customerData.eyebrowHistoryDate,
