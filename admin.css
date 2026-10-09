@@ -1,20 +1,24 @@
 body{
     margin:0;
     padding:20px;
-    background:#EEF2F7;
-    font-family:"Yu Gothic",sans-serif;
-    color:#4A5260;
+    background:#F7F6F3;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
+    color:#505050;
 }
 
 h1{
     text-align:center;
-    color:#66758A;
+    color:#A17B35;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
+    font-weight:600;
     font-size:30px;
     margin:0 0 20px;
 }
 
 h2{
-    color:#66758A;
+    color:#A17B35;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
+    font-weight:600;
     margin-top:0;
 }
 
@@ -24,19 +28,21 @@ h2{
     background:#FFFFFF;
     border-radius:18px;
     padding:28px 24px;
-    box-shadow:0 6px 18px rgba(92,108,130,.12);
-    border:1px solid #DDE4EE;
+    box-shadow:0 6px 18px rgba(105,88,62,.08);
+    border:1px solid #E8E1D6;
     text-align:center;
 }
 
 .login-box input{
     width:100%;
     padding:14px;
-    border:1px solid #D5DDE8;
+    border:1px solid #DED8CE;
     border-radius:12px;
     font-size:16px;
     background:#FFFFFF;
+    color:#505050;
     box-sizing:border-box;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
 
 .login-box button{
@@ -44,11 +50,12 @@ h2{
     padding:14px;
     border:none;
     border-radius:12px;
-    background:#71839B;
+    background:#A17B35;
     color:#fff;
     cursor:pointer;
     font-size:15px;
     font-weight:700;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
 
 #reservationList,
@@ -68,11 +75,13 @@ h2{
 .search-area input{
     flex:1;
     padding:14px;
-    border:1px solid #D5DDE8;
+    border:1px solid #DED8CE;
     border-radius:14px;
     font-size:15px;
     background:#FFFFFF;
+    color:#505050;
     box-sizing:border-box;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
 
 .new-reservation-section{
@@ -85,12 +94,13 @@ h2{
     padding:15px 18px;
     border:none;
     border-radius:14px;
-    background:#8B9BB1;
+    background:#A17B35;
     color:#fff;
     cursor:pointer;
     font-size:16px;
     font-weight:700;
-    box-shadow:0 4px 12px rgba(92,108,130,.12);
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
+    box-shadow:0 4px 12px rgba(105,88,62,.10);
 }
 
 .reservation-card{
@@ -98,37 +108,39 @@ h2{
     border-radius:18px;
     padding:22px;
     margin-bottom:18px;
-    box-shadow:0 6px 18px rgba(92,108,130,.12);
-    border:1px solid #DDE4EE;
+    box-shadow:0 6px 18px rgba(105,88,62,.08);
+    border:1px solid #E8E1D6;
     transition:.2s ease;
 }
 
 .reservation-card:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 24px rgba(92,108,130,.16);
+    box-shadow:0 10px 24px rgba(105,88,62,.12);
 }
 
 .reservation-card strong{
-    color:#66758A;
+    color:#A17B35;
     font-size:15px;
+    font-weight:700;
 }
 
 .today-header{
     margin:24px 0 16px;
     padding:12px 18px;
-    background:#E4EAF2;
+    background:#F0EBE2;
+    border:1px solid #E8E1D6;
     border-radius:12px;
     font-size:18px;
     font-weight:700;
-    color:#5D6C7F;
+    color:#80632F;
 }
 
 .time-box{
     font-size:28px;
     font-weight:700;
-    color:#65788F;
+    color:#8C6A2E;
     margin-bottom:18px;
-    font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
 
 .button-row{
@@ -147,14 +159,15 @@ h2{
     cursor:pointer;
     font-size:14px;
     font-weight:700;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
 
 .editButton{
-    background:#9AAAC0;
+    background:#B39A69;
 }
 
 .cancelButton{
-    background:#B9A6BA;
+    background:#A87575;
 }
 
 #editArea,
@@ -162,14 +175,16 @@ h2{
     background:#FFFFFF;
     border-radius:18px;
     padding:24px;
-    box-shadow:0 6px 18px rgba(92,108,130,.12);
-    border:1px solid #DDE4EE;
+    box-shadow:0 6px 18px rgba(105,88,62,.08);
+    border:1px solid #E8E1D6;
 }
 
 #editArea h2,
 #newReservationArea h2{
     margin-top:0;
-    color:#66758A;
+    color:#A17B35;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
+    font-weight:600;
 }
 
 #editArea label,
@@ -177,8 +192,9 @@ h2{
     display:block;
     margin-top:14px;
     margin-bottom:6px;
-    color:#66758A;
+    color:#80632F;
     font-weight:700;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
 
 #editArea input,
@@ -190,13 +206,13 @@ h2{
     width:100%;
     padding:12px;
     margin-bottom:16px;
-    border:1px solid #D5DDE8;
+    border:1px solid #DED8CE;
     border-radius:10px;
     box-sizing:border-box;
     background:#FFFFFF;
     font-size:15px;
-    font-family:"Yu Gothic",sans-serif;
-    color:#4A5260;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
+    color:#505050;
 }
 
 #editArea textarea,
@@ -230,10 +246,10 @@ input[type="time"]{
 .customer-help{
     margin:-6px 0 14px;
     padding:10px 12px;
-    background:#F3F5F9;
-    border:1px solid #DDE4EE;
+    background:#F8F6F1;
+    border:1px solid #E8E1D6;
     border-radius:10px;
-    color:#687487;
+    color:#68635B;
     font-size:13px;
     line-height:1.6;
 }
@@ -241,7 +257,7 @@ input[type="time"]{
 #editDetails{
     margin-top:10px;
     padding-top:10px;
-    border-top:1px solid #DDE4EE;
+    border-top:1px solid #E8E1D6;
 }
 
 #editHistorySelected,
@@ -250,8 +266,8 @@ input[type="time"]{
 }
 
 .history-item{
-    background:#F7F8FB;
-    border:1px solid #E0E5ED;
+    background:#FAF9F6;
+    border:1px solid #E8E1D6;
     border-radius:12px;
     padding:14px;
     margin-bottom:12px;
@@ -259,7 +275,7 @@ input[type="time"]{
 
 .history-title{
     font-weight:700;
-    color:#66758A;
+    color:#A17B35;
     margin-bottom:10px;
     font-size:15px;
 }
@@ -277,10 +293,11 @@ input[type="time"]{
     padding:10px 12px;
     border:none;
     border-radius:10px;
-    background:#C3B1C5;
+    background:#A87575;
     color:#fff;
     cursor:pointer;
     font-weight:700;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
 
 .edit-button-row,
@@ -299,18 +316,19 @@ input[type="time"]{
     cursor:pointer;
     font-weight:700;
     font-size:14px;
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
 
 #saveEditButton,
 #createNewReservationButton{
-    background:#71839B;
+    background:#A17B35;
     color:#fff;
 }
 
 #closeEditButton,
 #closeNewReservationButton{
-    background:#D9DEE6;
-    color:#4A5260;
+    background:#E8E3DA;
+    color:#505050;
 }
 
 #editGender,
