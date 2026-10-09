@@ -1389,244 +1389,233 @@ textarea{
 }
 
 
-/* ======================================================
-   ARTMAKE Manami | White Silk Reservation Theme
-   2026-10 | 外観のみ変更・予約ロジックは変更しない
-   ====================================================== */
-:root{
-  --silk-text:#737373;
-  --silk-dark:#5D5853;
-  --silk-gold:#C79736;
-  --silk-line:#EAE8E5;
-  --silk-button:#A58B75;
+/* =========================================================
+   ARTMAKE Manami | DAYS WHITE / GRAY / GOLD / MUTED RED
+   既存予約処理・DOMを変えず、見た目だけを統一する追記スタイル
+   ========================================================= */
+:root {
+  --days-white:#FFFFFF;
+  --days-surface:#F8F8F8;
+  --days-gray:#E9E9E9;
+  --days-line:#E6E6E6;
+  --days-text:#626262;
+  --days-sub:#858585;
+  --days-gold:#C79736;
+  --days-gold-light:#E5D5B3;
+  --days-red:#C97979;
 }
-body{
-  background-color:#fff;
-  background-image:
-    radial-gradient(ellipse 95% 38% at 96% 10%,rgba(225,224,221,.30),transparent 74%),
-    radial-gradient(ellipse 110% 44% at -12% 36%,rgba(233,232,230,.33),transparent 76%),
-    radial-gradient(ellipse 80% 40% at 108% 76%,rgba(226,224,220,.25),transparent 77%),
-    linear-gradient(155deg,#fff 0%,#FCFCFB 48%,#fff 100%);
-  background-attachment:fixed;
-  color:var(--silk-text);
+html { background:#fff; }
+body {
+  background:#fff;
+  color:var(--days-text);
   font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
-  font-weight:400;
-  line-height:2;
-  letter-spacing:.035em;
+  line-height:1.9;
   -webkit-font-smoothing:antialiased;
 }
-.top-bar{
-  background:rgba(255,255,255,.96);
-  border-bottom:1px solid #EAE5DD;
-  box-shadow:0 2px 12px rgba(73,62,50,.045) !important;
+.top-bar {
+  background:#fff;
+  height:54px;
+  border-bottom:1px solid var(--days-line);
+  box-shadow:none !important;
 }
-.top-bar h1,.menu-button{color:#756C65}
-.hero{border-bottom:1px solid #EAE5DD}
-.container{width:calc(100% - 28px);max-width:650px;margin:24px auto 44px}
-.card{
-  background:rgba(255,255,255,.94);
-  border:1px solid rgba(202,187,166,.40);
-  border-radius:16px;
-  box-shadow:0 10px 32px rgba(79,73,68,.045);
-  padding:clamp(17px,4vw,28px);
-  margin-bottom:22px;
+.top-bar h1 { color:#777; font-weight:500; letter-spacing:.12em; }
+.hero { border-bottom:1px solid var(--days-line); }
+.container { width:min(92%,650px); margin:24px auto 48px; }
+.card {
+  background:#fff;
+  border:1px solid #ECECEC;
+  border-radius:8px;
+  box-shadow:0 7px 28px rgba(0,0,0,.025);
+  padding:clamp(20px,5vw,32px);
+  margin-bottom:24px;
 }
-.card h2,.page-title,.confirm-title,.complete-title,
-.complete-title-small,.guide-title{
+.title-card { padding-top:34px; padding-bottom:32px; }
+.card h2, .page-title, .guide-title,
+.important-confirm-title, .complete-title-small {
   font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
   font-weight:400;
-  color:#716A63;
-  letter-spacing:.09em;
+  letter-spacing:.10em;
 }
-.card h2,.confirm-title{font-size:clamp(22px,5.8vw,29px)}
-.title-card .main-title,.sub-title{
-  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
-  font-weight:400;
-  color:#746B64;
-  letter-spacing:.07em;
+.card h2 { font-size:clamp(22px,5vw,28px); color:#747474; }
+.page-title { color:#747474; }
+.clinic-name { color:var(--days-gold); letter-spacing:.13em; }
+.title-card .main-title, .sub-title { color:#707070; font-weight:400; letter-spacing:.09em; }
+h3,h4 { color:#777; }
+.notice h3, .guide-title { color:var(--days-gold); }
+.notice-box {
+  background:#FAFAFA;
+  border-left:2px solid var(--days-gold);
+  border-radius:2px;
+  padding:18px;
 }
-.clinic-name{color:var(--silk-gold)}
-.notice h3{color:#9B765B;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-weight:500}
-.notice-box,.important-confirm-box{
-  background:#FDFCFB;
-  border:1px solid #E8E1D8;
-  border-left:2px solid #C79736;
-  border-radius:6px;
+.reservation-guide { border:1px solid var(--days-gold-light); }
+.menu-list { gap:12px; }
+.menu-item {
+  background:#fff;
+  color:#626262;
+  border:1px solid #E5E5E5;
+  border-left:3px solid #D5D5D5;
+  border-radius:7px;
+  padding:17px 16px;
   box-shadow:none;
+  transition:border-color .2s, background .2s, box-shadow .2s;
 }
-.important-confirm-title{color:#85745E;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-weight:500}
-.important-confirm-description,.important-confirm-check{color:#74706D}
-.menu-list{gap:12px}
-.menu-item{
-  border:1px solid #E8E4DF;
-  border-radius:9px;
-  box-shadow:none;
-  color:#5F5954;
-  transition:background .18s,border-color .18s,box-shadow .18s;
-}
-.menu-item:hover{background:#F8F6F3}
-.menu-item:focus-within{border-color:#B89B74;box-shadow:0 0 0 2px rgba(199,151,54,.13)}
-/* 施術ごとの淡い識別色。既存のメニュー判定はそのまま */
+.menu-item:hover { background:#FAFAFA; border-color:#CFCFCF; }
+/* 眉：シャンパンゴールド */
 .menu-item:has(input[value="眉"]),
-.menu-item:has(input[value="眉＋リップセット"]){
-  background:#F6F0E2;border-color:#E7DCC3;
+.menu-item:has(input[value="眉＋リップセット"]) {
+  background:#F7F1E5;
+  border-color:#E7DAC1;
+  border-left-color:#C79736;
 }
+/* リップ：くすみレッド */
 .menu-item:has(input[value="リップ"]),
-.menu-item:has(input[value="リップ2回セット"]){
-  background:#F8ECEE;border-color:#EAD7DC;
+.menu-item:has(input[value="リップ2回セット"]) {
+  background:#F7E8E8;
+  border-color:#EDD9D9;
+  border-left-color:#C97979;
 }
+/* アイライン：ライトグレー */
 .menu-item:has(input[value="アイライン上"]),
 .menu-item:has(input[value="アイライン下"]),
-.menu-item:has(input[value="アイライン上下セット"]){
-  background:#EEF0F7;border-color:#DDE0ED;
+.menu-item:has(input[value="アイライン上下セット"]),
+.menu-item:has(input[value="上下セット"]) {
+  background:#F0F0F0;
+  border-color:#E0E0E0;
+  border-left-color:#B8B8B8;
 }
+/* ヘアライン：白＋ゴールドの細い輪郭 */
 .menu-item:has(input[value="ヘアライン（M字 or 分け目）"]),
-.menu-item:has(input[value="ヘアライン全体"]){
-  background:#EDF2EA;border-color:#DCE6D8;
+.menu-item:has(input[value="ヘアライン（M字・分け目）"]),
+.menu-item:has(input[value="ヘアライン全体"]) {
+  background:#FFFFFF;
+  border-color:#DFD4C0;
+  border-left-color:#C79736;
 }
-.menu-item:has(input:checked){outline:2px solid #B89B74;outline-offset:1px}
-.form-group label,.confirm-item .label{color:#817A73}
-.form-group input,.date-select-row select,
-#historyDetailArea input[type="date"],#historyDetailArea input[type="text"],textarea{
-  background:#fff;
-  color:#615B55;
-  border:1px solid #DDD7CE;
-  border-radius:7px;
-  font-family:inherit;
-  box-shadow:none;
-}
-.form-group input:focus,.date-select-row select:focus,
-#historyDetailArea input:focus,textarea:focus{
-  outline:2px solid rgba(199,151,54,.17);
+.menu-item:has(input:checked) {
+  outline:2px solid var(--days-gold);
   outline-offset:1px;
-  border-color:#BCA27C;
+  box-shadow:0 2px 12px rgba(199,151,54,.10);
 }
-input[type="radio"],input[type="checkbox"],
-.important-confirm-check input[type="checkbox"]{accent-color:#A58B75}
-#nextButton,.next-form,.important-confirm-link{
-  background:var(--silk-button);
-  color:#fff;
-  border-radius:8px;
-  box-shadow:none;
-  font-family:inherit;
-  font-weight:500;
-  letter-spacing:.045em;
-}
-#nextButton:hover,.next-form:hover,.important-confirm-link:hover{opacity:.93}
-#customerForm .next-form.important-confirm-disabled,
-#customerForm .next-form.important-confirm-disabled:hover{
-  background:#D6D6D6;
-  color:#fff;
-  opacity:1;
-  cursor:not-allowed;
-  box-shadow:none;
-}
-/* 月間カレンダー：日付の並び・予約判定はJSのまま */
-.calendar-header{gap:12px;margin:20px 0 16px}
-.calendar-header button{
-  background:#F4EFEB;
-  border:1px solid #E8E0D7;
-  border-radius:5px;
-  color:#7D6F63;
-  box-shadow:none;
-}
-.calendar-grid{
+input[type="radio"], input[type="checkbox"] { accent-color:var(--days-gold); }
+/* 7列・四角いカレンダー。時間枠は従来通り日付選択後に別表示 */
+.calendar-grid {
   display:grid;
   grid-template-columns:repeat(7,minmax(0,1fr));
-  gap:1px;
-  margin-top:16px;
-  background:#E3E0DC;
-  border:1px solid #E3E0DC;
-  overflow:hidden;
-}
-.calendar-grid>div{
-  min-width:0;
-  min-height:35px;
-  background:#FAF9F7;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#77716C;
-  font-weight:400;
-  font-size:12px;
-}
-.calendar-grid>.day-button{
-  min-width:0;
+  gap:4px;
+  padding:10px 0;
+  margin-top:14px;
   width:100%;
-  aspect-ratio:auto;
-  min-height:clamp(51px,12vw,74px);
-  padding:4px 0;
   border:0;
   border-radius:0;
-  background:#F2EBE4;
-  color:#69584A;
-  font-size:clamp(12px,3.5vw,16px);
-  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
-  font-weight:400;
-  transform:none;
-  box-shadow:none;
-  transition:background .15s ease,color .15s ease;
+  background:#fff;
 }
-.calendar-grid>.day-button:hover:not(:disabled){background:#E8DBCF;color:#56483E}
-.calendar-grid>.day-button:disabled{
-  background:#F7F6F4;
-  color:#BDB8B2;
-  opacity:1;
+.calendar-grid div:not(.day-button) { color:#888; font-weight:500; }
+.day-button,
+.day-button:not(.two-left):not(.one-left):not(.full):not(:disabled) {
+  aspect-ratio:1;
+  min-width:0;
+  border:1px solid #B88C30;
+  border-radius:3px;
+  background:var(--days-gold);
+  color:#fff;
+  font-weight:600;
+  font-size:clamp(12px,3.3vw,15px);
+  box-shadow:none;
+  transform:none;
+}
+.day-button.two-left, .day-button.two-left:not(:disabled) {
+  background:var(--days-gold-light) !important;
+  color:#645238 !important;
+  border-color:#D7C398 !important;
+}
+.day-button.one-left, .day-button.one-left:not(:disabled) {
+  background:var(--days-red) !important;
+  color:#fff !important;
+  border-color:#B96767 !important;
+}
+.day-button.full, .day-button:disabled,
+.day-button.full:not(.two-left):not(.one-left) {
+  background:#F0F0F0 !important;
+  color:#9A9A9A !important;
+  border:1px solid #E7E7E7 !important;
+  box-shadow:none;
   cursor:not-allowed;
 }
-.calendar-grid>.day-button.full,
-.calendar-grid>.day-button.full:disabled{
-  background:#EFEDEC;
-  color:#AAA5A0;
+.day-button.selected, .day-button.two-left.selected,
+.day-button.one-left.selected {
+  outline:2px solid #5B5B5B !important;
+  outline-offset:2px;
+  transform:none !important;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
 }
-.calendar-grid>.day-button.two-left,
-.calendar-grid>.day-button.two-left:disabled{
-  background:#F6E9C8 !important;
-  color:#74603F !important;
-}
-.calendar-grid>.day-button.one-left,
-.calendar-grid>.day-button.one-left:disabled{
-  background:#EFCFCD !important;
-  color:#8D5151 !important;
-}
-.calendar-grid>.day-button.selected,
-.calendar-grid>.day-button.two-left.selected,
-.calendar-grid>.day-button.one-left.selected{
-  background:#A58B75 !important;
-  color:#fff !important;
-  border:2px solid #8E755F !important;
-  transform:none;
-  box-shadow:inset 0 0 0 2px rgba(255,255,255,.65);
-  z-index:1;
-}
-.time-button{
+.day-button:not(:disabled):hover { filter:brightness(.94); }
+.calendar-header { color:#666; }
+.calendar-header button {
+  border:1px solid #E5E5E5;
   background:#fff;
-  border:1px solid #DCD4C9;
-  color:#635A53;
-  border-radius:7px;
-  font-family:inherit;
+  color:var(--days-gold);
+  border-radius:5px;
+  box-shadow:none;
 }
-.time-button:hover,.time-button.selected{
-  background:#A58B75;
-  border-color:#A58B75;
+.time-button {
+  background:#fff;
+  color:#666;
+  border:1px solid #D7C398;
+  border-radius:5px;
+  box-shadow:none;
+}
+.time-button:hover, .time-button.selected,
+.time-button:focus-visible {
+  background:#F7F1E5;
+  color:#645238;
+  border-color:var(--days-gold);
+}
+#nextButton, .next-form, .important-confirm-link {
+  background:var(--days-gold);
   color:#fff;
+  border-radius:5px;
+  box-shadow:none;
+  letter-spacing:.05em;
+  font-weight:500;
 }
-.late-time-group{border-color:#DCD4C9;border-radius:7px}
-.late-time-button:hover{background:#A58B75;color:#fff}
-.reservation-guide{border:1px solid #D9CBB7;background:#fff}
-.guide-title{color:#9B8062}
-.guide-divider{border-top:1px solid #E6DDD3}
-.confirm-item{border-bottom-color:#ECEAE6}
-.confirm-item .value{color:#605A54;font-size:18px}
-.complete-text,.guide-steps p,.guide-contact{color:#74706C}
-.side-menu{background:#fff;box-shadow:8px 0 30px rgba(70,63,57,.07)}
-.side-menu-welcome,.side-menu-brand{color:#7C7166}
-.side-menu-list button{font-family:inherit;color:#6E6862}
-.side-menu-icon{color:#A58B75}
-.side-menu-list button:hover{background:#F8F6F3}
-@media(max-width:600px){
-  .container{width:calc(100% - 24px)}
-  .calendar-grid>.day-button{min-height:clamp(47px,11vw,62px)}
-  .calendar-grid>div{min-height:31px}
-  .card{padding:18px 15px}
+#nextButton:hover, .next-form:hover, .important-confirm-link:hover {
+  background:#B78B2F;
+  opacity:1;
+}
+#nextButton:disabled, .next-form:disabled,
+#customerForm .next-form.important-confirm-disabled,
+#customerForm .next-form.important-confirm-disabled:hover {
+  background:#D6D6D6 !important;
+  color:#fff !important;
+  box-shadow:none !important;
+  cursor:not-allowed;
+}
+input:not([type="radio"]):not([type="checkbox"]), select, textarea {
+  border-color:#DCDCDC;
+  border-radius:5px;
+  background:#fff;
+  color:#555;
+}
+input:focus-visible, select:focus-visible, textarea:focus-visible,
+button:focus-visible, a:focus-visible {
+  outline:2px solid var(--days-gold);
+  outline-offset:2px;
+}
+.price-note { color:var(--days-red); }
+.confirm-item .label { color:#898989; }
+.confirm-item .value, .complete-title, .complete-text { color:#646464; }
+.important-confirm-box {
+  background:#FAFAFA;
+  border:1px solid #E7E7E7;
+  border-radius:6px;
+  padding:22px 18px;
+}
+.important-confirm-title { color:var(--days-gold); }
+.important-confirm-description, .important-confirm-check { color:#666; }
+.important-confirm-check input[type="checkbox"] { accent-color:var(--days-gold); }
+@media(max-width:420px) {
+  .calendar-grid { gap:3px; }
+  .card { padding:20px 16px; }
+  .day-button { border-radius:2px; }
 }
