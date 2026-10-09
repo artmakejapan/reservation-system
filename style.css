@@ -1389,133 +1389,143 @@ textarea{
 }
 
 
-/* ==========================================================
-   ARTMAKE Manami | Refined White & Greige, 2026-10-09
-   Visual-only overrides. Existing font family, size, weight,
-   letter spacing, text, JavaScript and reservation logic retained.
-   Calendar: green = available, yellow = 2 left,
-   muted red = 1 left, gray = unavailable.
-   ========================================================== */
+/* ============================================================
+ ARTMAKE Manami | White x Champagne Gold | 2026-10-09
+ Visual styles only. Original font declarations and booking JS kept.
+ Calendar selected: darker SAME status hue + 2px WHITE border.
+ ============================================================ */
 :root {
-  --am-white:#FFFFFF;
-  --am-page:#FCFBFA;
-  --am-greige:#A99787;
-  --am-greige-dark:#8F7D6E;
-  --am-text:#655F5A;
-  --am-line:#EAE5DF;
-  --am-rose:#B96F7D;
-  --am-green:#DCEBDF;
-  --am-green-ink:#376448;
-  --am-yellow:#F5E8B8;
-  --am-yellow-ink:#785E26;
-  --am-red:#E8C4C4;
-  --am-red-ink:#88464D;
-  --am-disabled:#F0F0F0;
+  --am-gold:#C6AD7B;
+  --am-gold-deep:#A98A51;
+  --am-text:#686868;
+  --am-line:#E9E7E3;
 }
-body { background:var(--am-page); color:var(--am-text); }
+body { background:#FAFAFA; color:var(--am-text); }
 .top-bar {
-  background:var(--am-greige);
-  box-shadow:0 2px 8px rgba(68,55,45,.10) !important;
+  background:var(--am-gold);
+  box-shadow:0 2px 8px rgba(100,85,56,.08) !important;
 }
 .top-bar h1 { color:#FFFFFF; }
 .top-bar .menu-button, .top-bar .menu-button * { color:#FFFFFF; }
-.hero { border-bottom:3px solid #D8C8B9; }
+.hero { border-bottom:3px solid #E6D7B7; }
 .card {
-  background:var(--am-white);
-  border:1px solid #F0EDEA;
-  box-shadow:0 5px 22px rgba(73,59,48,.045);
-}
-.clinic-name, .page-title { color:var(--am-greige-dark); }
-.notice h3, .guide-title, .reservation-guide h2,
-.reservation-guide h3 { color:var(--am-rose); }
-.notice-box {
-  background:#F9F7F5;
-  border-left-color:#C6A38D;
-}
-.notice-box h4 { color:var(--am-text); }
-.reservation-guide { border-color:#D4A2AA; background:#FFFFFF; }
-.guide-divider { border-color:#E9E0DB; }
-/* Menu categories use restrained tints, never saturated blocks. */
-.menu-item {
+  background:#FFFFFF;
   border:1px solid var(--am-line);
-  box-shadow:none;
+  box-shadow:0 4px 18px rgba(90,90,90,.035);
 }
+.clinic-name, .page-title { color:var(--am-gold-deep); }
+.notice h3, .guide-title, .reservation-guide h2,
+.reservation-guide h3, .important-confirm-title { color:#B69A69; }
+.notice-box { background:#F8F8F8; border-left-color:var(--am-gold); }
+.notice-box h4 { color:var(--am-text); }
+.reservation-guide { background:#FFFFFF; border-color:#D8C6A2; }
+.guide-divider { border-color:#E9E7E3; }
+/* Treatment choices: neutral white; selected item gets soft gold. */
+.menu-item,
 .menu-item:has(input[value="眉"]),
-.menu-item:has(input[value="眉＋リップセット"]) { background:#F3EDE4; }
+.menu-item:has(input[value="眉＋リップセット"]),
 .menu-item:has(input[value="リップ"]),
-.menu-item:has(input[value="リップ2回セット"]) { background:#F6E9EC; }
+.menu-item:has(input[value="リップ2回セット"]),
 .menu-item:has(input[value="アイライン上"]),
 .menu-item:has(input[value="アイライン下"]),
-.menu-item:has(input[value="アイライン上下セット"]) { background:#F0EEF4; }
+.menu-item:has(input[value="アイライン上下セット"]),
 .menu-item:has(input[value="ヘアライン（M字 or 分け目）"]),
-.menu-item:has(input[value="ヘアライン全体"]) { background:#EEF2EC; }
-.menu-item:has(input:checked) {
-  border-color:var(--am-greige-dark);
-  box-shadow:0 0 0 1px var(--am-greige-dark);
+.menu-item:has(input[value="ヘアライン全体"]) {
+  background:#FFFFFF;
+  border:1px solid #E5E3DF;
+  box-shadow:none;
+}
+.menu-item:hover { background:#FAF8F3; }
+.menu-item:has(input:checked),
+.menu-item:has(input:checked):hover {
+  background:#F5F0E7;
+  border-color:var(--am-gold);
+  box-shadow:inset 0 0 0 1px var(--am-gold);
 }
 .menu-item input[type="checkbox"], .menu-item input[type="radio"],
 .visit-type input[type="radio"], .radio-group input[type="radio"] {
-  accent-color:var(--am-greige-dark);
+  accent-color:var(--am-gold-deep);
 }
-/* Calm, readable calendar: no time slots inside the date cells. */
+/* Square, clean calendar. Availability is the only 3-color UI. */
 .calendar-grid { gap:5px; }
-.calendar-grid div { color:var(--am-greige-dark); }
-.day-button {
-  background:var(--am-green) !important;
-  color:var(--am-green-ink) !important;
-  border:1px solid #C7DDCC !important;
-  border-radius:7px;
+.calendar-grid div { color:#858585; }
+.day-button, .day-button:not(.one-left):not(.two-left):not(.full):not(:disabled) {
+  background:#D9E8DD !important;
+  color:#426B50 !important;
+  border:1px solid #C6DBCD !important;
+  border-radius:6px;
   box-shadow:none !important;
-  font-weight:inherit;
+  transform:none;
 }
-.day-button.two-left {
-  background:var(--am-yellow) !important;
-  color:var(--am-yellow-ink) !important;
-  border-color:#E8D699 !important;
+.day-button.two-left, .day-button.two-left:not(:disabled) {
+  background:#F5E9C6 !important;
+  color:#806A35 !important;
+  border-color:#E9D99F !important;
 }
-.day-button.one-left {
-  background:var(--am-red) !important;
-  color:var(--am-red-ink) !important;
-  border-color:#DDAAAA !important;
+.day-button.one-left, .day-button.one-left:not(:disabled) {
+  background:#EBCFD1 !important;
+  color:#9E5B65 !important;
+  border-color:#E1B9BF !important;
 }
-.day-button.full, .day-button:disabled, .disabled-day {
-  background:var(--am-disabled) !important;
-  color:#A2A2A2 !important;
-  border-color:#E6E6E6 !important;
+.day-button.full, .day-button:disabled, .day-button.full.selected {
+  background:#F0F0F0 !important;
+  color:#999999 !important;
+  border:1px solid #E8E8E8 !important;
+  box-shadow:none !important;
   cursor:not-allowed;
+  transform:none;
 }
-.day-button.selected:not(:disabled) {
-  outline:2px solid var(--am-greige-dark) !important;
-  outline-offset:2px;
-  box-shadow:inset 0 0 0 1px #FFFFFF !important;
+/* Selected day: stronger status color and WHITE outline INSIDE the cell. */
+.day-button.selected:not(:disabled):not(.full) {
+  background:#82B394 !important;
+  color:#FFFFFF !important;
+  border:2px solid #FFFFFF !important;
+  box-shadow:0 0 0 1px #82B394 !important;
+  outline:none !important;
+  transform:none;
+  position:relative;
+  z-index:1;
 }
-.day-button:not(:disabled):hover { filter:brightness(.965); }
+.day-button.two-left.selected:not(:disabled) {
+  background:#DDBE69 !important;
+  color:#554018 !important;
+  border:2px solid #FFFFFF !important;
+  box-shadow:0 0 0 1px #DDBE69 !important;
+  outline:none !important;
+}
+.day-button.one-left.selected:not(:disabled) {
+  background:#C77F89 !important;
+  color:#FFFFFF !important;
+  border:2px solid #FFFFFF !important;
+  box-shadow:0 0 0 1px #C77F89 !important;
+  outline:none !important;
+}
+.day-button:not(:disabled):hover { filter:brightness(.975); }
 .calendar-header { color:var(--am-text); }
 .calendar-header button {
   background:#FFFFFF;
-  color:var(--am-greige-dark);
+  color:var(--am-gold-deep);
   border:1px solid var(--am-line);
   box-shadow:none;
 }
 .time-button, .late-time-button {
   background:#FFFFFF;
   color:var(--am-text);
-  border:1px solid #D8CCC1;
+  border:1px solid #E0DDD7;
   box-shadow:none;
 }
-.time-button.selected, .late-time-button.selected,
-.time-button:focus-visible, .late-time-button:focus-visible {
-  background:#F1EBE6;
-  border-color:var(--am-greige-dark);
+.time-button.selected, .late-time-button.selected {
+  background:#F5F0E7;
+  border-color:var(--am-gold);
   color:var(--am-text);
 }
 #nextButton, .next-form, .important-confirm-link {
-  background:var(--am-greige);
+  background:var(--am-gold);
   color:#FFFFFF;
   box-shadow:none;
 }
 #nextButton:hover, .next-form:hover, .important-confirm-link:hover {
-  background:var(--am-greige-dark);
+  background:var(--am-gold-deep);
 }
 #nextButton:disabled, .next-form:disabled,
 #customerForm .next-form.important-confirm-disabled,
@@ -1528,23 +1538,17 @@ body { background:var(--am-page); color:var(--am-text); }
 input:not([type="radio"]):not([type="checkbox"]), select, textarea {
   background:#FFFFFF;
   color:var(--am-text);
-  border-color:#DFD9D3;
+  border-color:#E2E0DC;
 }
 input:focus-visible, select:focus-visible, textarea:focus-visible,
 button:focus-visible, a:focus-visible {
-  outline:2px solid var(--am-greige-dark);
+  outline:2px solid var(--am-gold-deep);
   outline-offset:2px;
 }
-.important-confirm-box {
-  background:#F9F7F5;
-  border-color:#E8E0D9;
-}
-.important-confirm-title { color:var(--am-rose); }
+.important-confirm-box { background:#F9F9F8; border-color:#E9E7E3; }
 .important-confirm-description, .important-confirm-check { color:var(--am-text); }
-.important-confirm-check input[type="checkbox"] { accent-color:var(--am-greige-dark); }
-/* Warnings remain meaningful, and do not recolor calendar statuses. */
-.price-note { color:var(--am-rose); }
-.confirm-item .label { color:#89817B; }
+.important-confirm-check input[type="checkbox"] { accent-color:var(--am-gold-deep); }
+.confirm-item .label { color:#858585; }
 .confirm-item .value, .complete-text { color:var(--am-text); }
 @media(max-width:420px) {
   .calendar-grid { gap:4px; }
