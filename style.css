@@ -12,7 +12,7 @@ body{
 
     background:#FFFFFF;
 
-    color:#707070;
+    color:#4A403A;
 
     font-family: "M PLUS Rounded 1c", sans-serif;
 
@@ -25,7 +25,7 @@ body{
 ========================================== */
 
 .top-bar {
-    background: #A99787;
+    background: #DDBFA5;
     height: 50px;
     display: flex;
     align-items: center;
@@ -34,13 +34,13 @@ body{
     position: relative;
     z-index: 10;
 
-    box-shadow: 0 2px 8px rgba(0,0,0,.08) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25) !important;
 }
 
 .top-bar h1 {
     font-family: "Nunito Sans", sans-serif;
 
-    color: #FFFFFF;
+    color: #171411;
 
     font-size: 14px;
     font-weight: 700;
@@ -59,7 +59,7 @@ body{
 ========================================== */
 
 .hero{
-    border-bottom:6px solid #A99787;
+    border-bottom:6px solid #DDBFA5;
 }
 
 .hero img{
@@ -92,7 +92,9 @@ body{
 
 .card{
 
-    background:#fff;
+    background:#FFFFFF;
+
+    border:1px solid #E9E9E9;
 
     border-radius:18px;
 
@@ -100,9 +102,8 @@ body{
 
     margin-bottom:24px;
 
-    box-shadow:0 3px 16px rgba(0,0,0,.045);
+    box-shadow:0 4px 16px rgba(0,0,0,.035);
 
-    border: 1px solid #ECECEC;
 }
 
 .card h2{
@@ -119,7 +120,7 @@ body{
 
     text-align:center;
 
-    color:#A99787;
+    color:#A18470;
 
     margin-bottom:8px;
 
@@ -133,7 +134,6 @@ body{
 
     letter-spacing:2px;
 
-    color: #A99787;
 }
 
 /* ==========================================
@@ -142,7 +142,7 @@ body{
 
 .notice h3{
 
-    color:#A99787;
+    color:#B96A79;
 
     margin-bottom:18px;
 
@@ -150,9 +150,9 @@ body{
 
 .notice-box{
 
-    background:#FAFAFA;
+    background:#F9F5F1;
 
-    border-left:5px solid #A99787;
+    border-left:5px solid #D1A78E;
 
     padding:16px;
 
@@ -186,9 +186,9 @@ body{
 
 .menu-item{
 
-    background:#FFFFFF;
+    background:#FAFAFA;
 
-    border:2px solid #E7E7E7;
+    border:1px solid #E5DDD5;
 
     border-radius:12px;
 
@@ -198,14 +198,12 @@ body{
 
     transition:.25s;
 
-    box-shadow: inset 0 0 0 2px transparent;
 }
 
 .menu-item:hover{
 
     background:#F3ECE6;
 
-    filter: brightness(.97);
 }
 
 /* ==========================================
@@ -238,9 +236,9 @@ body{
 
     border:none;
 
-    background:#A99787;
+    background:#D1A78E;
 
-    color:#FFFFFF;
+    color:#fff;
 
     font-size:18px;
 
@@ -352,7 +350,7 @@ body{
 
 .day-button:hover{
 
-    background:#978373;
+    background:#B88666;
 
     color:white;
 
@@ -384,11 +382,13 @@ body{
 
     margin-top:10px;
 
-    border:1px solid #A99787;
+    border:none;
 
     border-radius:12px;
 
     background:white;
+
+    border:1px solid #D1A78E;
 
     cursor:pointer;
 
@@ -396,23 +396,18 @@ body{
 
     transition:.2s;
 
-    box-shadow: inset 0 0 0 2px transparent;
 }
 
-.time-button:hover{
-
-    background:#978373;
-
-    color:#FFFFFF;
-
-}
-
+.time-button:hover,
 .time-button.selected,
-.late-time-button.selected {
-    background:#8B7565;
-    color:#FFFFFF;
-    border-color:#FFFFFF;
-    box-shadow:inset 0 0 0 2px #FFFFFF;
+.time-button[aria-pressed="true"]{
+
+    background:#B88666;
+
+    color:white;
+
+    box-shadow: inset 0 0 0 2px #FFFFFF, 0 0 0 1px #B88666;
+
 }
 
 .calendar-header{
@@ -447,9 +442,9 @@ body{
 
 .day-button:disabled{
 
-    background:#F2F2F2;
+    background:#F3F1EF;
 
-    color:#BBBBBB;
+    color:#D2CDC8;
 
     cursor:not-allowed;
 
@@ -457,9 +452,9 @@ body{
 
 .day-button{
 
-    background:#A99787;
+    background:#D1A78E;
 
-    color:#FFFFFF;
+    color:white;
 
     transition:
     background .2s ease,
@@ -467,29 +462,26 @@ body{
     box-shadow .18s ease,
     border .18s ease;
 
-    border-radius: 50%;
-    border: 2px solid transparent;
-    box-shadow: inset 0 0 0 2px transparent;
 }
 
 .day-button.full{
 
-    background:#E9E9E9;
-    color:#999999;
+    background:#D9D9D9;
+    color:#7A7A7A;
 
 }
 
 .day-button.selected{
 
-    background:#8B7565;
+    background:#B88666;
 
-    color:#FFFFFF;
+    color:white;
 
     transform:scale(1.08);
 
     border:2px solid #FFFFFF;
 
-    box-shadow:inset 0 0 0 2px #FFFFFF,0 3px 10px rgba(0,0,0,.12);
+    box-shadow:0 6px 16px rgba(0,0,0,.18);
 
     z-index:2;
 
@@ -547,9 +539,9 @@ body{
 
     border-radius:12px;
 
-    background:#A99787;
+    background:#D1A78E;
 
-    color:#FFFFFF;
+    color:white;
 
     font-size:16px;
 
@@ -585,7 +577,7 @@ body{
 
 .radio-group input[type=radio]{
 
-    accent-color:#A99787;
+    accent-color:#D1A78E;
 
     width:18px;
 
@@ -719,38 +711,34 @@ textarea{
 
 .day-button.two-left{
 
-    background:#E7C95A !important;
+    background:#F5D547 !important;
 
-    color:#FFFFFF;
+    color:white;
 
 }
 
 .day-button.one-left{
 
-    background:#D78989 !important;
+    background:#D96A6A !important;
 
-    color:#FFFFFF;
+    color:white;
 
 }
 
 .day-button.two-left.selected{
 
-    background:#C7A32E !important;
+    background:#E3C133 !important;
 
-    color:#FFFFFF;
+    color:white;
 
-    border: 2px solid #FFFFFF;
-    box-shadow: inset 0 0 0 2px #FFFFFF,0 3px 10px rgba(0,0,0,.12);
 }
 
 .day-button.one-left.selected{
 
-    background:#B85B5B !important;
+    background:#C95858 !important;
 
-    color:#FFFFFF;
+    color:white;
 
-    border: 2px solid #FFFFFF;
-    box-shadow: inset 0 0 0 2px #FFFFFF,0 3px 10px rgba(0,0,0,.12);
 }
 
 .next-form.loading{
@@ -772,59 +760,33 @@ textarea{
 }
 
 /* =========================
-   メニュー別カラー（選択時は濃色＋白枠）
+   メニュー別カラー
 ========================= */
+
+/* 眉 → 薄いひまわり色 */
 .menu-item:has(input[value="眉"]),
 .menu-item:has(input[value="眉＋リップセット"]){
-    background:#A99787;
-    color:#FFFFFF;
+    background: #F8E8A8;
 }
+
+/* リップ → 薄いピンク */
 .menu-item:has(input[value="リップ"]),
-.menu-item:has(input[value="リップ2回セット"]){
-    background:#C77C82;
-    color:#FFFFFF;
+.menu-item:has(input[value="リップ2回セット"]) {
+    background: #F6D9DC;
 }
+
+/* アイライン → 薄い空色 */
 .menu-item:has(input[value="アイライン上"]),
 .menu-item:has(input[value="アイライン下"]),
-.menu-item:has(input[value="アイライン上下セット"]){
-    background:#E4E4E4;
-    color:#555555;
+.menu-item:has(input[value="アイライン上下セット"]) {
+    background: #DCEBF2;
 }
+
+/* ヘアライン → 薄い葉っぱ色 */
 .menu-item:has(input[value="ヘアライン（M字 or 分け目）"]),
-.menu-item:has(input[value="ヘアライン全体"]){
-    background:#FFFFFF;
-    color:#707070;
+.menu-item:has(input[value="ヘアライン全体"]) {
+    background: #DDE8D2;
 }
-.menu-item:has(input[value="眉"]:checked),
-.menu-item:has(input[value="眉＋リップセット"]:checked){
-    background:#8B7565;
-    border-color:#FFFFFF;
-    box-shadow:inset 0 0 0 2px #FFFFFF;
-    color:#FFFFFF;
-}
-.menu-item:has(input[value="リップ"]:checked),
-.menu-item:has(input[value="リップ2回セット"]:checked){
-    background:#A94F5A;
-    border-color:#FFFFFF;
-    box-shadow:inset 0 0 0 2px #FFFFFF;
-    color:#FFFFFF;
-}
-.menu-item:has(input[value="アイライン上"]:checked),
-.menu-item:has(input[value="アイライン下"]:checked),
-.menu-item:has(input[value="アイライン上下セット"]:checked){
-    background:#999999;
-    border-color:#FFFFFF;
-    box-shadow:inset 0 0 0 2px #FFFFFF;
-    color:#FFFFFF;
-}
-.menu-item:has(input[value="ヘアライン（M字 or 分け目）"]:checked),
-.menu-item:has(input[value="ヘアライン全体"]:checked){
-    background:#B9B9B9;
-    border-color:#FFFFFF;
-    box-shadow:inset 0 0 0 2px #FFFFFF;
-    color:#FFFFFF;
-}
-.menu-item input[type="checkbox"]{ accent-color:#A99787; }
 
 /* ================================
    予約方法ガイド
@@ -833,13 +795,12 @@ textarea{
 .reservation-guide {
     text-align: center;
     padding: 40px 30px;
-    background: #FFFFFF;
-    border: 1px solid #A99787;
+    border: 1px solid #D1A78E;
 }
 
 .guide-title {
     margin: 0 0 24px;
-    color: #A99787;
+    color: #A18470;
     font-size: 22px;
     font-weight: 700;
 }
@@ -867,7 +828,7 @@ textarea{
 .guide-divider {
     width: 85%;
     margin: 28px auto;
-    border-top: 1px dashed #D9C49B;
+    border-top: 1px dashed #D1A78E;
 }
 
 .guide-contact {
@@ -917,7 +878,7 @@ textarea{
 
         flex-shrink: 0;
 
-        accent-color: #A99787;
+        accent-color: #D1A78E;
 
     }
 
@@ -1010,7 +971,7 @@ textarea{
 
     background: #fff;
 
-    border: 1px solid #A99787;
+    border: 1px solid #D1A78E;
     border-radius: 12px;
 
     overflow: hidden;
@@ -1052,9 +1013,12 @@ textarea{
 
 /* タップ時 */
 
-.late-time-button:hover {
-    background: #978373;
-    color: #FFFFFF;
+.late-time-button:hover,
+.late-time-button.selected,
+.late-time-button[aria-pressed="true"] {
+    background: #B88666;
+    color: white;
+    box-shadow: inset 0 0 0 2px #FFFFFF;
 }
 
 /* =================================
@@ -1075,7 +1039,7 @@ textarea{
     height: 40px;
     border: none;
     background: transparent;
-    color: #FFFFFF;
+    color: #171411;
     font-size: 23px;
     line-height: 1;
     display: flex;
@@ -1365,7 +1329,7 @@ textarea{
 
 .date-select-row select:focus {
     outline: none;
-    border-color: #A99787;
+    border-color: #D1A78E;
 }
 
 
@@ -1375,12 +1339,12 @@ textarea{
 .important-confirm-box {
     margin-top: 26px;
     padding: 20px 16px;
-    background: #FAFAFA;
-    border: 1px solid #E7E7E7;
+    background: #F9F5F1;
+    border: 1px solid #D1A78E;
     border-radius: 12px;
 }
 .important-confirm-title {
-    color: #A99787;
+    color: #4A403A;
     font-size: 17px;
     font-weight: 700;
     margin-bottom: 10px;
@@ -1395,8 +1359,8 @@ textarea{
     display: block;
     width: 100%;
     padding: 13px 12px;
-    background: #A99787;
-    color: #FFFFFF;
+    background: #D1A78E;
+    color: #fff;
     border-radius: 10px;
     text-align: center;
     text-decoration: none;
@@ -1420,7 +1384,7 @@ textarea{
     flex: 0 0 20px;
     margin-top: 2px;
     padding: 0;
-    accent-color: #A99787;
+    accent-color: #D1A78E;
 }
 
 /* 初診のみ：重要事項未了承時の「確認画面へ」ボタン */
