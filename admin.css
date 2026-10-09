@@ -1,7 +1,7 @@
 body{
     margin:0;
     padding:20px;
-    background:#F7F6F3;
+    background:#FFFFFF;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
     color:#505050;
 }
@@ -29,14 +29,14 @@ h2{
     border-radius:18px;
     padding:28px 24px;
     box-shadow:0 6px 18px rgba(105,88,62,.08);
-    border:1px solid #E8E1D6;
+    border:1px solid #E8E3DA;
     text-align:center;
 }
 
 .login-box input{
     width:100%;
     padding:14px;
-    border:1px solid #DED8CE;
+    border:1px solid #D8D2C8;
     border-radius:12px;
     font-size:16px;
     background:#FFFFFF;
@@ -75,7 +75,7 @@ h2{
 .search-area input{
     flex:1;
     padding:14px;
-    border:1px solid #DED8CE;
+    border:1px solid #D8D2C8;
     border-radius:14px;
     font-size:15px;
     background:#FFFFFF;
@@ -109,7 +109,7 @@ h2{
     padding:22px;
     margin-bottom:18px;
     box-shadow:0 6px 18px rgba(105,88,62,.08);
-    border:1px solid #E8E1D6;
+    border:1px solid #E8E3DA;
     transition:.2s ease;
 }
 
@@ -128,7 +128,7 @@ h2{
     margin:24px 0 16px;
     padding:12px 18px;
     background:#F0EBE2;
-    border:1px solid #E8E1D6;
+    border:1px solid #E8E3DA;
     border-radius:12px;
     font-size:18px;
     font-weight:700;
@@ -176,7 +176,7 @@ h2{
     border-radius:18px;
     padding:24px;
     box-shadow:0 6px 18px rgba(105,88,62,.08);
-    border:1px solid #E8E1D6;
+    border:1px solid #E8E3DA;
 }
 
 #editArea h2,
@@ -206,7 +206,7 @@ h2{
     width:100%;
     padding:12px;
     margin-bottom:16px;
-    border:1px solid #DED8CE;
+    border:1px solid #D8D2C8;
     border-radius:10px;
     box-sizing:border-box;
     background:#FFFFFF;
@@ -247,7 +247,7 @@ input[type="time"]{
     margin:-6px 0 14px;
     padding:10px 12px;
     background:#F8F6F1;
-    border:1px solid #E8E1D6;
+    border:1px solid #E8E3DA;
     border-radius:10px;
     color:#68635B;
     font-size:13px;
@@ -257,7 +257,7 @@ input[type="time"]{
 #editDetails{
     margin-top:10px;
     padding-top:10px;
-    border-top:1px solid #E8E1D6;
+    border-top:1px solid #E8E3DA;
 }
 
 #editHistorySelected,
@@ -267,7 +267,7 @@ input[type="time"]{
 
 .history-item{
     background:#FAF9F6;
-    border:1px solid #E8E1D6;
+    border:1px solid #E8E3DA;
     border-radius:12px;
     padding:14px;
     margin-bottom:12px;
@@ -341,7 +341,6 @@ input[type="time"]{
 }
 
 @media(max-width:600px){
-
     body{
         padding:16px 12px;
     }
