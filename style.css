@@ -1322,3 +1322,68 @@ textarea{
     outline: none;
     border-color: #C68F5B;
 }
+
+
+/* ==========================================
+   初診：重要事項確認（既存スタイルに影響しない専用クラス）
+========================================== */
+.important-confirm-box {
+    margin-top: 26px;
+    padding: 20px 16px;
+    background: #F9F5F1;
+    border: 1px solid #E5DDD5;
+    border-radius: 12px;
+}
+.important-confirm-title {
+    color: #4A403A;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.important-confirm-description {
+    color: #6D625C;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+.important-confirm-link {
+    display: block;
+    width: 100%;
+    padding: 13px 12px;
+    background: #D1A78E;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+}
+.important-confirm-link:hover { opacity: .9; }
+.important-confirm-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 18px;
+    color: #4A403A;
+    font-size: 14px;
+    line-height: 1.7;
+    cursor: pointer;
+}
+.important-confirm-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    margin-top: 2px;
+    padding: 0;
+    accent-color: #D1A78E;
+}
+
+/* 初診のみ：重要事項未了承時の「確認画面へ」ボタン */
+#customerForm .next-form.important-confirm-disabled,
+#customerForm .next-form.important-confirm-disabled:hover {
+    background: #D6D6D6;
+    color: #FFFFFF;
+    opacity: 1;
+    cursor: not-allowed;
+    box-shadow: none;
+}

@@ -1095,6 +1095,20 @@ placeholder="既往歴・服薬中のお薬をご入力ください。
 
 </div>
 
+<!-- 初診のみ：重要事項の確認 -->
+<div class="important-confirm-box">
+    <h4 class="important-confirm-title">重要事項のご確認</h4>
+    <p class="important-confirm-description">ご予約前に、アートメイクの重要事項を必ずご確認ください。</p>
+    <a class="important-confirm-link"
+       href="https://script.google.com/macros/s/AKfycbzBpWIRLBu95XQr1zlDSlS4_NR1UcvyQEZQ6xCL1x7818FqiBCiMsfzE_QYPi1652hQ/exec"
+       target="_blank"
+       rel="noopener noreferrer">重要事項を確認する ↗</a>
+    <label class="important-confirm-check">
+        <input type="checkbox" id="importantAgreed">
+        <span>重要事項を確認し、内容を理解・了承しました。</span>
+    </label>
+</div>
+
 <button class="next-form">
 
 確認画面へ
@@ -1102,6 +1116,20 @@ placeholder="既往歴・服薬中のお薬をご入力ください。
 </button>
 
 `;
+
+// 初診のみ：重要事項の了承チェックに応じて確認ボタンを切り替える
+const importantAgreedCheckbox = document.getElementById("importantAgreed");
+const initialConfirmButton = form.querySelector(".next-form");
+
+function updateImportantConfirmButton() {
+    const agreed = importantAgreedCheckbox.checked;
+    initialConfirmButton.disabled = !agreed;
+    initialConfirmButton.classList.toggle("important-confirm-disabled", !agreed);
+    initialConfirmButton.setAttribute("aria-disabled", String(!agreed));
+}
+
+importantAgreedCheckbox.addEventListener("change", updateImportantConfirmButton);
+updateImportantConfirmButton();
 
 setupDateSelects("customerBirthDate", "customerBirth");
 setupDateSelects("eyebrowHistoryDate", "eyebrowHistory");
@@ -1200,6 +1228,14 @@ noHistory.addEventListener("change", () => {
 });
 
 document.querySelector(".next-form").addEventListener("click", () => {
+
+// 初診のみ：重要事項への同意がなければ確認画面に進めない
+const importantAgreed = document.getElementById("importantAgreed");
+if (!importantAgreed || !importantAgreed.checked) {
+    alert("重要事項をご確認のうえ、了承のチェックを入れてください。");
+    if (importantAgreed) importantAgreed.focus();
+    return;
+}
 
 const name = document.getElementById("customerName").value.trim();
 
