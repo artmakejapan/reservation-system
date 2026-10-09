@@ -1387,3 +1387,166 @@ textarea{
     cursor: not-allowed;
     box-shadow: none;
 }
+
+
+/* ==========================================================
+   ARTMAKE Manami | Refined White & Greige, 2026-10-09
+   Visual-only overrides. Existing font family, size, weight,
+   letter spacing, text, JavaScript and reservation logic retained.
+   Calendar: green = available, yellow = 2 left,
+   muted red = 1 left, gray = unavailable.
+   ========================================================== */
+:root {
+  --am-white:#FFFFFF;
+  --am-page:#FCFBFA;
+  --am-greige:#A99787;
+  --am-greige-dark:#8F7D6E;
+  --am-text:#655F5A;
+  --am-line:#EAE5DF;
+  --am-rose:#B96F7D;
+  --am-green:#DCEBDF;
+  --am-green-ink:#376448;
+  --am-yellow:#F5E8B8;
+  --am-yellow-ink:#785E26;
+  --am-red:#E8C4C4;
+  --am-red-ink:#88464D;
+  --am-disabled:#F0F0F0;
+}
+body { background:var(--am-page); color:var(--am-text); }
+.top-bar {
+  background:var(--am-greige);
+  box-shadow:0 2px 8px rgba(68,55,45,.10) !important;
+}
+.top-bar h1 { color:#FFFFFF; }
+.top-bar .menu-button, .top-bar .menu-button * { color:#FFFFFF; }
+.hero { border-bottom:3px solid #D8C8B9; }
+.card {
+  background:var(--am-white);
+  border:1px solid #F0EDEA;
+  box-shadow:0 5px 22px rgba(73,59,48,.045);
+}
+.clinic-name, .page-title { color:var(--am-greige-dark); }
+.notice h3, .guide-title, .reservation-guide h2,
+.reservation-guide h3 { color:var(--am-rose); }
+.notice-box {
+  background:#F9F7F5;
+  border-left-color:#C6A38D;
+}
+.notice-box h4 { color:var(--am-text); }
+.reservation-guide { border-color:#D4A2AA; background:#FFFFFF; }
+.guide-divider { border-color:#E9E0DB; }
+/* Menu categories use restrained tints, never saturated blocks. */
+.menu-item {
+  border:1px solid var(--am-line);
+  box-shadow:none;
+}
+.menu-item:has(input[value="眉"]),
+.menu-item:has(input[value="眉＋リップセット"]) { background:#F3EDE4; }
+.menu-item:has(input[value="リップ"]),
+.menu-item:has(input[value="リップ2回セット"]) { background:#F6E9EC; }
+.menu-item:has(input[value="アイライン上"]),
+.menu-item:has(input[value="アイライン下"]),
+.menu-item:has(input[value="アイライン上下セット"]) { background:#F0EEF4; }
+.menu-item:has(input[value="ヘアライン（M字 or 分け目）"]),
+.menu-item:has(input[value="ヘアライン全体"]) { background:#EEF2EC; }
+.menu-item:has(input:checked) {
+  border-color:var(--am-greige-dark);
+  box-shadow:0 0 0 1px var(--am-greige-dark);
+}
+.menu-item input[type="checkbox"], .menu-item input[type="radio"],
+.visit-type input[type="radio"], .radio-group input[type="radio"] {
+  accent-color:var(--am-greige-dark);
+}
+/* Calm, readable calendar: no time slots inside the date cells. */
+.calendar-grid { gap:5px; }
+.calendar-grid div { color:var(--am-greige-dark); }
+.day-button {
+  background:var(--am-green) !important;
+  color:var(--am-green-ink) !important;
+  border:1px solid #C7DDCC !important;
+  border-radius:7px;
+  box-shadow:none !important;
+  font-weight:inherit;
+}
+.day-button.two-left {
+  background:var(--am-yellow) !important;
+  color:var(--am-yellow-ink) !important;
+  border-color:#E8D699 !important;
+}
+.day-button.one-left {
+  background:var(--am-red) !important;
+  color:var(--am-red-ink) !important;
+  border-color:#DDAAAA !important;
+}
+.day-button.full, .day-button:disabled, .disabled-day {
+  background:var(--am-disabled) !important;
+  color:#A2A2A2 !important;
+  border-color:#E6E6E6 !important;
+  cursor:not-allowed;
+}
+.day-button.selected:not(:disabled) {
+  outline:2px solid var(--am-greige-dark) !important;
+  outline-offset:2px;
+  box-shadow:inset 0 0 0 1px #FFFFFF !important;
+}
+.day-button:not(:disabled):hover { filter:brightness(.965); }
+.calendar-header { color:var(--am-text); }
+.calendar-header button {
+  background:#FFFFFF;
+  color:var(--am-greige-dark);
+  border:1px solid var(--am-line);
+  box-shadow:none;
+}
+.time-button, .late-time-button {
+  background:#FFFFFF;
+  color:var(--am-text);
+  border:1px solid #D8CCC1;
+  box-shadow:none;
+}
+.time-button.selected, .late-time-button.selected,
+.time-button:focus-visible, .late-time-button:focus-visible {
+  background:#F1EBE6;
+  border-color:var(--am-greige-dark);
+  color:var(--am-text);
+}
+#nextButton, .next-form, .important-confirm-link {
+  background:var(--am-greige);
+  color:#FFFFFF;
+  box-shadow:none;
+}
+#nextButton:hover, .next-form:hover, .important-confirm-link:hover {
+  background:var(--am-greige-dark);
+}
+#nextButton:disabled, .next-form:disabled,
+#customerForm .next-form.important-confirm-disabled,
+#customerForm .next-form.important-confirm-disabled:hover {
+  background:#D6D6D6 !important;
+  color:#FFFFFF !important;
+  box-shadow:none !important;
+  cursor:not-allowed;
+}
+input:not([type="radio"]):not([type="checkbox"]), select, textarea {
+  background:#FFFFFF;
+  color:var(--am-text);
+  border-color:#DFD9D3;
+}
+input:focus-visible, select:focus-visible, textarea:focus-visible,
+button:focus-visible, a:focus-visible {
+  outline:2px solid var(--am-greige-dark);
+  outline-offset:2px;
+}
+.important-confirm-box {
+  background:#F9F7F5;
+  border-color:#E8E0D9;
+}
+.important-confirm-title { color:var(--am-rose); }
+.important-confirm-description, .important-confirm-check { color:var(--am-text); }
+.important-confirm-check input[type="checkbox"] { accent-color:var(--am-greige-dark); }
+/* Warnings remain meaningful, and do not recolor calendar statuses. */
+.price-note { color:var(--am-rose); }
+.confirm-item .label { color:#89817B; }
+.confirm-item .value, .complete-text { color:var(--am-text); }
+@media(max-width:420px) {
+  .calendar-grid { gap:4px; }
+  .day-button { border-radius:5px; }
+}
