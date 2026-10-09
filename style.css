@@ -92,9 +92,7 @@ body{
 
 .card{
 
-    background:#FFFFFF;
-
-    border:1px solid #E9E9E9;
+    background:#fff;
 
     border-radius:18px;
 
@@ -102,7 +100,9 @@ body{
 
     margin-bottom:24px;
 
-    box-shadow:0 4px 16px rgba(0,0,0,.035);
+    border:1px solid #E9E9E9;
+
+    box-shadow:0 4px 16px rgba(0,0,0,.04);
 
 }
 
@@ -152,7 +152,7 @@ body{
 
     background:#F9F5F1;
 
-    border-left:5px solid #D1A78E;
+    border-left:5px solid #DDBFA5;
 
     padding:16px;
 
@@ -236,7 +236,7 @@ body{
 
     border:none;
 
-    background:#D1A78E;
+    background:#DDBFA5;
 
     color:#fff;
 
@@ -336,7 +336,7 @@ body{
 
     border-radius:16px;
 
-    background:#D1A78E;
+    background:#DDBFA5;
 
     color:white;
 
@@ -388,7 +388,7 @@ body{
 
     background:white;
 
-    border:1px solid #D1A78E;
+    border:1px solid #DDBFA5;
 
     cursor:pointer;
 
@@ -398,15 +398,11 @@ body{
 
 }
 
-.time-button:hover,
-.time-button.selected,
-.time-button[aria-pressed="true"]{
+.time-button:hover{
 
     background:#B88666;
 
     color:white;
-
-    box-shadow: inset 0 0 0 2px #FFFFFF, 0 0 0 1px #B88666;
 
 }
 
@@ -452,7 +448,7 @@ body{
 
 .day-button{
 
-    background:#D1A78E;
+    background:#DDBFA5;
 
     color:white;
 
@@ -479,7 +475,7 @@ body{
 
     transform:scale(1.08);
 
-    border:2px solid #FFFFFF;
+    border:3px solid rgba(255,255,255,.95);
 
     box-shadow:0 6px 16px rgba(0,0,0,.18);
 
@@ -539,7 +535,7 @@ body{
 
     border-radius:12px;
 
-    background:#D1A78E;
+    background:#DDBFA5;
 
     color:white;
 
@@ -577,7 +573,7 @@ body{
 
 .radio-group input[type=radio]{
 
-    accent-color:#D1A78E;
+    accent-color:#DDBFA5;
 
     width:18px;
 
@@ -795,12 +791,12 @@ textarea{
 .reservation-guide {
     text-align: center;
     padding: 40px 30px;
-    border: 1px solid #D1A78E;
+    border: 1px solid #b86b78;
 }
 
 .guide-title {
     margin: 0 0 24px;
-    color: #A18470;
+    color: #b86b78;
     font-size: 22px;
     font-weight: 700;
 }
@@ -828,7 +824,7 @@ textarea{
 .guide-divider {
     width: 85%;
     margin: 28px auto;
-    border-top: 1px dashed #D1A78E;
+    border-top: 1px dashed #d9aaa9;
 }
 
 .guide-contact {
@@ -878,7 +874,7 @@ textarea{
 
         flex-shrink: 0;
 
-        accent-color: #D1A78E;
+        accent-color: #DDBFA5;
 
     }
 
@@ -971,7 +967,7 @@ textarea{
 
     background: #fff;
 
-    border: 1px solid #D1A78E;
+    border: 1px solid #DDBFA5;
     border-radius: 12px;
 
     overflow: hidden;
@@ -1013,12 +1009,9 @@ textarea{
 
 /* タップ時 */
 
-.late-time-button:hover,
-.late-time-button.selected,
-.late-time-button[aria-pressed="true"] {
+.late-time-button:hover {
     background: #B88666;
     color: white;
-    box-shadow: inset 0 0 0 2px #FFFFFF;
 }
 
 /* =================================
@@ -1329,7 +1322,7 @@ textarea{
 
 .date-select-row select:focus {
     outline: none;
-    border-color: #D1A78E;
+    border-color: #C68F5B;
 }
 
 
@@ -1340,7 +1333,7 @@ textarea{
     margin-top: 26px;
     padding: 20px 16px;
     background: #F9F5F1;
-    border: 1px solid #D1A78E;
+    border: 1px solid #E5DDD5;
     border-radius: 12px;
 }
 .important-confirm-title {
@@ -1359,7 +1352,7 @@ textarea{
     display: block;
     width: 100%;
     padding: 13px 12px;
-    background: #D1A78E;
+    background: #DDBFA5;
     color: #fff;
     border-radius: 10px;
     text-align: center;
@@ -1384,7 +1377,7 @@ textarea{
     flex: 0 0 20px;
     margin-top: 2px;
     padding: 0;
-    accent-color: #D1A78E;
+    accent-color: #DDBFA5;
 }
 
 /* 初診のみ：重要事項未了承時の「確認画面へ」ボタン */
