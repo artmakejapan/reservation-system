@@ -798,14 +798,14 @@ textarea{
 .reservation-guide {
     text-align: center;
     padding: 40px 30px;
-    border: 1px solid #DDBFA5;
+    border: 1px solid #C99732;
 }
 
 .guide-title {
     margin: 0 0 24px;
-    color: #DDBFA5;
-    font-size: 22px;
-    font-weight: 700;
+    color: #C99732;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .guide-steps {
