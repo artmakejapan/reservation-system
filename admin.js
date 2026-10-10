@@ -1324,7 +1324,7 @@ function renderReservations() {
 
         area.innerHTML += `
             <div class="today-header">
-                📖 その他の予約
+                📅 その他の予約
             </div>
         `;
 
@@ -1405,35 +1405,35 @@ function createReservationCard(item) {
         <div class="reservation-card">
 
             <div>
-                <strong>📅 予約日</strong><br>
+                <strong>▫️ 予約日</strong><br>
                 ${item.date}
             </div>
 
             <br>
 
             <div>
-                <strong>🕘 開始時間</strong><br>
+                <strong>▫️ 開始時間</strong><br>
                 <div class="time-box">
                     ${item.time}
                 </div>
             </div>
 
             <div>
-                <strong>👤 お名前</strong><br>
+                <strong>▫️ お名前</strong><br>
                 ${escapeHtml(item.name || "-")}
             </div>
 
             <br>
 
             <div>
-                <strong>🩺 初診・再診</strong><br>
+                <strong>▫️ 初診・再診</strong><br>
                 ${escapeHtml(item.visit || "-")}
             </div>
 
             <br>
 
             <div>
-                <strong>🖋️ 施術メニュー</strong><br>
+                <strong>▫️ 施術メニュー</strong><br>
                 ${escapeHtml(item.menu || "-")}
             </div>
 
