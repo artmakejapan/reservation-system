@@ -25,7 +25,7 @@ body{
 ========================================== */
 
 .top-bar {
-    background: #DDBFA5;
+    background: #C99732;
     height: 50px;
     display: flex;
     align-items: center;
@@ -59,7 +59,7 @@ body{
 ========================================== */
 
 .hero{
-    border-bottom:6px solid #DDBFA5;
+    border-bottom:6px solid #C99732;
 }
 
 .hero img{
@@ -152,7 +152,7 @@ body{
 
     background:#F9F5F1;
 
-    border-left:5px solid #DDBFA5;
+    border-left:5px solid #C99732;
 
     padding:16px;
 
@@ -236,7 +236,7 @@ body{
 
     border:none;
 
-    background:#DDBFA5;
+    background:#C99732;
 
     color:#fff;
 
@@ -254,13 +254,14 @@ body{
 
 #nextButton:hover{
 
-    opacity:.9;
+    background:#A8791F;
+    opacity:1;
 
 }
 
 /* 空き状況を見る：押している間だけ濃いベージュ */
 #nextButton:active{
-    background:#B88666;
+    background: #A8791F;
     opacity:1;
 }
 
@@ -343,7 +344,7 @@ body{
 
     border-radius:16px;
 
-    background:#DDBFA5;
+    background:#C99732;
 
     color:white;
 
@@ -357,7 +358,7 @@ body{
 
 .day-button:hover{
 
-    background:#B88666;
+    background: #A8791F;
 
     color:white;
 
@@ -365,7 +366,7 @@ body{
 
 .day-button.selected{
 
-    background:#B88666;
+    background: #A8791F;
 
     color:white;
 
@@ -395,7 +396,7 @@ body{
 
     background:white;
 
-    border:1px solid #DDBFA5;
+    border:1px solid #C99732;
 
     cursor:pointer;
 
@@ -407,7 +408,7 @@ body{
 
 .time-button:hover{
 
-    background:#B88666;
+    background: #A8791F;
 
     color:white;
 
@@ -455,7 +456,7 @@ body{
 
 .day-button{
 
-    background:#DDBFA5;
+    background:#C99732;
 
     color:white;
 
@@ -476,7 +477,7 @@ body{
 
 .day-button.selected{
 
-    background:#B88666;
+    background: #A8791F;
 
     color:white;
 
@@ -542,7 +543,7 @@ body{
 
     border-radius:12px;
 
-    background:#DDBFA5;
+    background:#C99732;
 
     color:white;
 
@@ -580,7 +581,7 @@ body{
 
 .radio-group input[type=radio]{
 
-    accent-color:#DDBFA5;
+    accent-color:#C99732;
 
     width:18px;
 
@@ -881,7 +882,7 @@ textarea{
 
         flex-shrink: 0;
 
-        accent-color: #DDBFA5;
+        accent-color: #C99732;
 
     }
 
@@ -974,7 +975,7 @@ textarea{
 
     background: #fff;
 
-    border: 1px solid #DDBFA5;
+    border: 1px solid #C99732;
     border-radius: 12px;
 
     overflow: hidden;
@@ -1017,7 +1018,7 @@ textarea{
 /* タップ時 */
 
 .late-time-button:hover {
-    background: #B88666;
+    background: #A8791F;
     color: white;
 }
 
@@ -1359,7 +1360,7 @@ textarea{
     display: block;
     width: 100%;
     padding: 13px 12px;
-    background: #DDBFA5;
+    background: #C99732;
     color: #fff;
     border-radius: 10px;
     text-align: center;
@@ -1367,7 +1368,8 @@ textarea{
     font-size: 15px;
     font-weight: 700;
 }
-.important-confirm-link:hover { opacity: .9; }
+.important-confirm-link:hover { background: #A8791F;
+    opacity: 1; }
 .important-confirm-check {
     display: flex;
     align-items: flex-start;
@@ -1384,7 +1386,7 @@ textarea{
     flex: 0 0 20px;
     margin-top: 2px;
     padding: 0;
-    accent-color: #DDBFA5;
+    accent-color: #C99732;
 }
 
 /* 初診のみ：重要事項未了承時の「確認画面へ」ボタン */
@@ -1395,4 +1397,34 @@ textarea{
     opacity: 1;
     cursor: not-allowed;
     box-shadow: none;
+}
+
+/* ==========================================
+   ゴールドのホバー・選択状態の統一（確認修正）
+========================================== */
+
+/* 次へボタン：ホバー／押下時 */
+.next-form:hover:not(.important-confirm-disabled):not(.loading),
+.next-form:active:not(.important-confirm-disabled):not(.loading) {
+    background: #A8791F;
+}
+
+/* 時間ボタン：選択状態（JS側が .selected または aria-pressed="true" を付与する場合） */
+.time-button.selected,
+.time-button[aria-pressed="true"] {
+    background: #A8791F;
+    border-color: #A8791F;
+    color: #FFFFFF;
+}
+
+.late-time-button.selected,
+.late-time-button[aria-pressed="true"] {
+    background: #A8791F;
+    color: #FFFFFF;
+}
+
+/* 残り2枠・1枠の日も、選択中は濃いゴールドで統一 */
+.day-button.two-left.selected,
+.day-button.one-left.selected {
+    background: #A8791F !important;
 }
