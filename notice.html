@@ -87,8 +87,8 @@ footer{border-top-color:#F1F2F4}
 .closing-message p{margin:0 0 16px!important;}
 .closing-message p:last-child{margin-bottom:0!important;}
 footer{padding:25px 10px!important;}
-</style>
-<style>/* 共通重要事項：通常は淡い赤背景＋赤文字、選択時は濃い赤背景＋白文字 */
+</style><style>
+/* 共通重要事項：通常は淡い赤背景＋赤文字、選択時は濃い赤背景＋白文字 */
 .navbtn[href="#common"]{background:#FBEFEF!important;border:2px solid #B85C5C!important;color:#B85C5C!important}
 .navbtn[href="#common"] small{color:#B85C5C!important}
 .navbtn[href="#common"]:hover,.navbtn[href="#common"]:focus-visible,.navbtn[href="#common"]:active,.navbtn[href="#common"].is-selected{background:#A64B4B!important;border-color:#A64B4B!important;color:#FFFFFF!important}
@@ -185,7 +185,6 @@ footer{padding:25px 10px!important;}
   .contents{padding-top:11px!important}
 }
 </style>
-
 <style>
 /* 静止した白いシルクのドレープ。波紋・アニメーションなし。 */
 .hero{position:relative;isolation:isolate;overflow:hidden;background:#fff!important}
@@ -238,6 +237,14 @@ body{color:#505050}
   font-weight:600;
   color:#C99732;
 }
+</style><style>
+/* black-unify: 黒系テキストの色を #202020 に統一（ゴールド・赤・茶の見出しはそのまま） */
+body{color:#202020}
+.brand,.contents h2,.group h2{color:#202020}
+.contents-note,.article p,.ending,.closing-message{color:#202020!important}
+.toc-entry{color:#202020}
+.toc-entry:hover,.toc-entry:focus-visible{color:#C99732}
+.toc-entry-common,.toc-entry-common:hover,.toc-entry-common:focus-visible{color:#B85C5C}
 </style>
 </head>
 <body><header class="hero"><div class="wrap"><div class="brand">アートメイクを受けられる方へ</div><h1>アートメイクの重要事項</h1><div class="eyebrow">IMPORTANT MATTERS</div><p class="intro">ご予約前に、以下の内容を必ずご確認ください。</p></div></header>
@@ -246,8 +253,7 @@ body{color:#505050}
 <a class="navbtn" href="#brow">眉アートメイク<small>EYEBROWS</small></a>
 <a class="navbtn" href="#eyeline">アイライン<small>EYELINER</small></a>
 <a class="navbtn" href="#lip">リップ<small>LIPS</small></a>
-<a class="navbtn" href="#hairline">ヘアライン<small>HAIRLINE</small></a></nav></div></section>
-<section class="group" id="common"><div class="section-kicker">COMMON INFORMATION</div><h2>共通重要事項</h2><div class="gold-rule"></div><article class="article"><h3>アートメイクについて</h3><p>アートメイクは医療行為です。施術に伴い、以下のような症状やリスクが生じる可能性があります。施術を受けられる前に、これらのリスクについて十分にご理解いただきますようお願いいたします。</p>
+<a class="navbtn" href="#hairline">ヘアライン<small>HAIRLINE</small></a></nav></div></section><section class="group" id="common"><div class="section-kicker">COMMON INFORMATION</div><h2>共通重要事項</h2><div class="gold-rule"></div><article class="article"><h3>アートメイクについて</h3><p>アートメイクは医療行為です。施術に伴い、以下のような症状やリスクが生じる可能性があります。施術を受けられる前に、これらのリスクについて十分にご理解いただきますようお願いいたします。</p>
 <p class="item">（疼痛／発赤／腫脹／内出血／感染／創傷治癒の遅延／瘢痕／アレルギー／色素沈着／色素不定着／色素の変性や拡散 等）</p>
 </article><article class="article"><h3>施術をお受けいただけない方</h3><p>以下に該当する方は施術をお受けいただけません。</p>
 <p>▫️重度の糖尿病（HbA1c7.0以上）</p>
@@ -336,5 +342,6 @@ body{color:#505050}
   function sync(){buttons.forEach(function(b){b.classList.toggle('is-selected',b.getAttribute('href')===location.hash);});}
   buttons.forEach(function(b){b.addEventListener('click',function(){buttons.forEach(function(x){x.classList.remove('is-selected');});b.classList.add('is-selected');});});
   window.addEventListener('hashchange',sync);sync();
-});</script></body>
+});</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
 </html>
