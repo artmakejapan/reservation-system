@@ -1406,10 +1406,10 @@ function createReservationCard(item) {
 
             <div>
                 <strong>▫️ 予約日</strong><br>
+                <div class="time-box">
                 ${item.date}
+                </div>
             </div>
-
-            <br>
 
             <div>
                 <strong>▫️ 開始時間</strong><br>
