@@ -1,14 +1,15 @@
+
 body{
     margin:0;
     padding:20px;
     background:#FFFFFF;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
-    color:#505050;
+    color:#303030;
 }
 
 h1{
     text-align:center;
-    color:#DDBFA5;
+    color:#C49B42;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
     font-weight:600;
     font-size:30px;
@@ -16,7 +17,7 @@ h1{
 }
 
 h2{
-    color:#DDBFA5;
+    color:#C49B42;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
     font-weight:600;
     margin-top:0;
@@ -28,19 +29,19 @@ h2{
     background:#FFFFFF;
     border-radius:18px;
     padding:28px 24px;
-    box-shadow:0 6px 18px rgba(105,88,62,.08);
-    border:1px solid #E8E3DA;
+    box-shadow:0 6px 18px rgba(48,48,48,.06);
+    border:1px solid #E5E2DD;
     text-align:center;
 }
 
 .login-box input{
     width:100%;
     padding:14px;
-    border:1px solid #D8D2C8;
+    border:1px solid #D8D5D0;
     border-radius:12px;
     font-size:16px;
     background:#FFFFFF;
-    color:#505050;
+    color:#303030;
     box-sizing:border-box;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
@@ -50,8 +51,8 @@ h2{
     padding:14px;
     border:none;
     border-radius:12px;
-    background:#DDBFA5;
-    color:#505050;
+    background:#C49B42;
+    color:#FFFFFF;
     cursor:pointer;
     font-size:15px;
     font-weight:700;
@@ -75,11 +76,11 @@ h2{
 .search-area input{
     flex:1;
     padding:14px;
-    border:1px solid #D8D2C8;
+    border:1px solid #D8D5D0;
     border-radius:14px;
     font-size:15px;
     background:#FFFFFF;
-    color:#505050;
+    color:#303030;
     box-sizing:border-box;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
@@ -94,13 +95,13 @@ h2{
     padding:15px 18px;
     border:none;
     border-radius:14px;
-    background:#DDBFA5;
-    color:#505050;
+    background:#C49B42;
+    color:#FFFFFF;
     cursor:pointer;
     font-size:16px;
     font-weight:700;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
-    box-shadow:0 4px 12px rgba(105,88,62,.10);
+    box-shadow:0 4px 12px rgba(48,48,48,.08);
 }
 
 .reservation-card{
@@ -108,18 +109,18 @@ h2{
     border-radius:18px;
     padding:22px;
     margin-bottom:18px;
-    box-shadow:0 6px 18px rgba(105,88,62,.08);
-    border:1px solid #E8E3DA;
+    box-shadow:0 6px 18px rgba(48,48,48,.06);
+    border:1px solid #E5E2DD;
     transition:.2s ease;
 }
 
 .reservation-card:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 24px rgba(105,88,62,.12);
+    box-shadow:0 10px 24px rgba(48,48,48,.10);
 }
 
 .reservation-card strong{
-    color:#DDBFA5;
+    color:#303030;
     font-size:15px;
     font-weight:700;
 }
@@ -127,18 +128,18 @@ h2{
 .today-header{
     margin:24px 0 16px;
     padding:12px 18px;
-    background:#F0EBE2;
-    border:1px solid #E8E3DA;
+    background:#F7F6F4;
+    border:1px solid #E5E2DD;
     border-radius:12px;
     font-size:18px;
     font-weight:700;
-    color:#DDBFA5;
+    color:#C49B42;
 }
 
 .time-box{
     font-size:28px;
     font-weight:700;
-    color:#DDBFA5;
+    color:#C9973D;
     margin-bottom:18px;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
@@ -155,7 +156,6 @@ h2{
     padding:12px;
     border:none;
     border-radius:10px;
-    color:#fff;
     cursor:pointer;
     font-size:14px;
     font-weight:700;
@@ -163,12 +163,13 @@ h2{
 }
 
 .editButton{
-    background:#DDBFA5;
-    color:#505050;
+    background:#C49B42;
+    color:#FFFFFF;
 }
 
 .cancelButton{
-    background:#A87575;
+    background:#898481;
+    color:#FFFFFF;
 }
 
 #editArea,
@@ -176,14 +177,14 @@ h2{
     background:#FFFFFF;
     border-radius:18px;
     padding:24px;
-    box-shadow:0 6px 18px rgba(105,88,62,.08);
-    border:1px solid #E8E3DA;
+    box-shadow:0 6px 18px rgba(48,48,48,.06);
+    border:1px solid #E5E2DD;
 }
 
 #editArea h2,
 #newReservationArea h2{
     margin-top:0;
-    color:#DDBFA5;
+    color:#C49B42;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
     font-weight:600;
 }
@@ -193,7 +194,7 @@ h2{
     display:block;
     margin-top:14px;
     margin-bottom:6px;
-    color:#DDBFA5;
+    color:#303030;
     font-weight:700;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
 }
@@ -207,13 +208,13 @@ h2{
     width:100%;
     padding:12px;
     margin-bottom:16px;
-    border:1px solid #D8D2C8;
+    border:1px solid #D8D5D0;
     border-radius:10px;
     box-sizing:border-box;
     background:#FFFFFF;
     font-size:15px;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
-    color:#505050;
+    color:#303030;
 }
 
 #editArea textarea,
@@ -247,10 +248,10 @@ input[type="time"]{
 .customer-help{
     margin:-6px 0 14px;
     padding:10px 12px;
-    background:#F8F6F1;
-    border:1px solid #E8E3DA;
+    background:#F7F6F4;
+    border:1px solid #E5E2DD;
     border-radius:10px;
-    color:#68635B;
+    color:#5F5B57;
     font-size:13px;
     line-height:1.6;
 }
@@ -258,7 +259,7 @@ input[type="time"]{
 #editDetails{
     margin-top:10px;
     padding-top:10px;
-    border-top:1px solid #E8E3DA;
+    border-top:1px solid #E5E2DD;
 }
 
 #editHistorySelected,
@@ -267,8 +268,8 @@ input[type="time"]{
 }
 
 .history-item{
-    background:#FAF9F6;
-    border:1px solid #E8E3DA;
+    background:#FAF9F7;
+    border:1px solid #E5E2DD;
     border-radius:12px;
     padding:14px;
     margin-bottom:12px;
@@ -276,7 +277,7 @@ input[type="time"]{
 
 .history-title{
     font-weight:700;
-    color:#DDBFA5;
+    color:#C49B42;
     margin-bottom:10px;
     font-size:15px;
 }
@@ -294,8 +295,8 @@ input[type="time"]{
     padding:10px 12px;
     border:none;
     border-radius:10px;
-    background:#A87575;
-    color:#fff;
+    background:#898481;
+    color:#FFFFFF;
     cursor:pointer;
     font-weight:700;
     font-family:"Noto Sans JP","Yu Gothic",sans-serif;
@@ -322,14 +323,14 @@ input[type="time"]{
 
 #saveEditButton,
 #createNewReservationButton{
-    background:#DDBFA5;
-    color:#505050;
+    background:#C49B42;
+    color:#FFFFFF;
 }
 
 #closeEditButton,
 #closeNewReservationButton{
-    background:#E8E3DA;
-    color:#505050;
+    background:#EAE8E4;
+    color:#303030;
 }
 
 #editGender,
