@@ -792,18 +792,18 @@ textarea{
 }
 
 /* ================================
-   予約方法ガイド
+   予約方法ガイド：ベージュカラー
 ================================ */
 
 .reservation-guide {
     text-align: center;
     padding: 40px 30px;
-    border: 1px solid #b86b78;
+    border: 1px solid #DDBFA5;
 }
 
 .guide-title {
     margin: 0 0 24px;
-    color: #b86b78;
+    color: #DDBFA5;
     font-size: 22px;
     font-weight: 700;
 }
