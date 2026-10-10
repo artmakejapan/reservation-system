@@ -25,7 +25,7 @@ body{
 ========================================== */
 
 .top-bar {
-    background: #BD953E;
+    background: #DDBFA5;
     height: 50px;
     display: flex;
     align-items: center;
@@ -59,7 +59,7 @@ body{
 ========================================== */
 
 .hero{
-    border-bottom:6px solid #BD953E;
+    border-bottom:6px solid #DDBFA5;
 }
 
 .hero img{
@@ -152,7 +152,7 @@ body{
 
     background:#F9F5F1;
 
-    border-left:5px solid #BD953E;
+    border-left:5px solid #DDBFA5;
 
     padding:16px;
 
@@ -236,7 +236,7 @@ body{
 
     border:none;
 
-    background:#BD953E;
+    background:#DDBFA5;
 
     color:#fff;
 
@@ -260,7 +260,7 @@ body{
 
 /* 空き状況を見る：押している間だけ濃いベージュ */
 #nextButton:active{
-    background:#96732D;
+    background:#B88666;
     opacity:1;
 }
 
@@ -343,7 +343,7 @@ body{
 
     border-radius:16px;
 
-    background:#BD953E;
+    background:#DDBFA5;
 
     color:white;
 
@@ -357,7 +357,7 @@ body{
 
 .day-button:hover{
 
-    background:#96732D;
+    background:#B88666;
 
     color:white;
 
@@ -365,7 +365,7 @@ body{
 
 .day-button.selected{
 
-    background:#96732D;
+    background:#B88666;
 
     color:white;
 
@@ -395,7 +395,7 @@ body{
 
     background:white;
 
-    border:1px solid #BD953E;
+    border:1px solid #DDBFA5;
 
     cursor:pointer;
 
@@ -407,7 +407,7 @@ body{
 
 .time-button:hover{
 
-    background:#96732D;
+    background:#B88666;
 
     color:white;
 
@@ -455,7 +455,7 @@ body{
 
 .day-button{
 
-    background:#BD953E;
+    background:#DDBFA5;
 
     color:white;
 
@@ -476,7 +476,7 @@ body{
 
 .day-button.selected{
 
-    background:#96732D;
+    background:#B88666;
 
     color:white;
 
@@ -542,7 +542,7 @@ body{
 
     border-radius:12px;
 
-    background:#BD953E;
+    background:#DDBFA5;
 
     color:white;
 
@@ -580,7 +580,7 @@ body{
 
 .radio-group input[type=radio]{
 
-    accent-color:#BD953E;
+    accent-color:#DDBFA5;
 
     width:18px;
 
@@ -881,7 +881,7 @@ textarea{
 
         flex-shrink: 0;
 
-        accent-color: #BD953E;
+        accent-color: #DDBFA5;
 
     }
 
@@ -974,7 +974,7 @@ textarea{
 
     background: #fff;
 
-    border: 1px solid #BD953E;
+    border: 1px solid #DDBFA5;
     border-radius: 12px;
 
     overflow: hidden;
@@ -1017,7 +1017,7 @@ textarea{
 /* タップ時 */
 
 .late-time-button:hover {
-    background: #96732D;
+    background: #B88666;
     color: white;
 }
 
@@ -1359,7 +1359,7 @@ textarea{
     display: block;
     width: 100%;
     padding: 13px 12px;
-    background: #BD953E;
+    background: #DDBFA5;
     color: #fff;
     border-radius: 10px;
     text-align: center;
@@ -1384,7 +1384,7 @@ textarea{
     flex: 0 0 20px;
     margin-top: 2px;
     padding: 0;
-    accent-color: #BD953E;
+    accent-color: #DDBFA5;
 }
 
 /* 初診のみ：重要事項未了承時の「確認画面へ」ボタン */
