@@ -569,17 +569,9 @@ else{
 
         btn.classList.add("selected");
 
-                selectedDate = btn.dataset.date;
+        selectedDate = btn.dataset.date;
 
         showTimes(data);
-
-        // 時間選択エリアまでスムーズにスクロール
-        setTimeout(() => {
-            document.getElementById("timeArea").scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }, 100);
 
     });
 
