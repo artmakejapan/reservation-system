@@ -569,9 +569,26 @@ else{
 
         btn.classList.add("selected");
 
-        selectedDate = btn.dataset.date;
+                selectedDate = btn.dataset.date;
 
         showTimes(data);
+
+        // 時間表示の一番下が見える位置までスクロール
+setTimeout(() => {
+    const timeArea = document.getElementById("timeArea");
+
+    const bottom =
+        timeArea.getBoundingClientRect().bottom +
+        window.scrollY;
+
+    const target =
+    bottom - window.innerHeight;
+
+    window.scrollTo({
+        top: Math.max(0, target),
+        behavior: "smooth"
+    });
+}, 100);
 
     });
 
