@@ -143,7 +143,7 @@ body{
 .notice h3{
 
     color:#B85C5C;
-
+    font-size: 18px;
     margin-bottom:18px;
 
 }
@@ -798,7 +798,7 @@ textarea{
 .guide-title {
     margin: 0 0 24px;
     color: #4A403A;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 }
 
