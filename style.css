@@ -1395,3 +1395,67 @@ textarea{
 .card.notice {
     border: 1px solid #B85C5C;
 }
+
+/* ==========================================
+カレンダー：空き状況の凡例
+========================================== */
+
+.calendar-legend {
+margin-top: 18px;
+padding: 16px 14px;
+background: #FAF8F6;
+border: 1px solid #E9E1DA;
+border-radius: 12px;
+}
+
+.calendar-legend-title {
+margin: 0 0 12px;
+color: #4A403A;
+font-size: 14px;
+font-weight: 700;
+text-align: center;
+}
+
+.calendar-legend-items {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px 10px;
+}
+
+.calendar-legend-item {
+display: flex;
+align-items: center;
+gap: 8px;
+color: #4A403A;
+font-size: 13px;
+line-height: 1.5;
+}
+
+.legend-color {
+display: inline-block;
+width: 20px;
+height: 20px;
+flex: 0 0 20px;
+border-radius: 6px;
+}
+
+/* 通常：空きあり */
+.legend-available {
+background: #DDBFA5;
+}
+
+/* 黄色：残りわずか */
+.legend-limited {
+background: #F5D547;
+}
+
+/* 赤色：残り1枠 */
+.legend-one-left {
+background: #D96A6A;
+}
+
+/* グレー：満席 */
+.legend-full {
+background: #D9D9D9;
+border: 1px solid #C8C8C8;
+}
