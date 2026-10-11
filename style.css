@@ -366,14 +366,12 @@ body{
 }
 
 .day-button.full{
-
-    background:#D9D9D9;
-
-    color:#777;
-
-    cursor:not-allowed;
-
+background: #FFFFFF !important;
+color: #888888 !important;
+border: 1px solid #D9D9D9;
+cursor: not-allowed;
 }
+
 
 .time-button{
 
@@ -462,11 +460,11 @@ body{
 }
 
 .day-button.full{
-
-    background:#D9D9D9;
-    color:#7A7A7A;
-
+background: #FFFFFF !important;
+color: #888888 !important;
+border: 1px solid #D9D9D9;
 }
+
 
 .day-button.selected{
 
@@ -1454,8 +1452,8 @@ background: #F5D547;
 background: #D96A6A;
 }
 
-/* グレー：満席 */
+/* グレー → 白：満席 */
 .legend-full {
-background: #D9D9D9;
-border: 1px solid #C8C8C8;
+    background: #FFFFFF;
+    border: 1px solid #C8C8C8;
 }
