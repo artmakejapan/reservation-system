@@ -983,8 +983,13 @@ ${createDateSelects("customerBirthDate", "customerBirth")}
 </div>
 
 <div class="form-group">
-<label>紹介者</label>
-<input type="text" id="customerReferrer" placeholder="紹介者名 / クリニック / インスタ">
+<label>紹介者 <span style="color:red;">*</span></label>
+<input
+    type="text"
+    id="customerReferrer"
+    placeholder="紹介者名 / クリニック / インスタ / その他"
+    required
+>
 </div>
 
 <div class="form-group">
@@ -1302,6 +1307,15 @@ if (birthDate === "") {
         return;
 
     }
+
+    // 紹介者の入力チェック
+if (referrer === "") {
+
+    alert("紹介者名をご入力ください。");
+    document.getElementById("customerReferrer").focus();
+    return;
+
+}
 
     const selectedHistories = [
     ...document.querySelectorAll(
