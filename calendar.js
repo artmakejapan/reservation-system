@@ -582,7 +582,7 @@ setTimeout(() => {
         window.scrollY;
 
     const target =
-    bottom - window.innerHeight;
+    bottom - window.innerHeight + 40;
 
     window.scrollTo({
         top: Math.max(0, target),
@@ -728,7 +728,20 @@ document.querySelectorAll(".time-button").forEach(btn => {
 
         selectedTime = btn.dataset.time;
 
-        showCustomerForm();
+showCustomerForm();
+
+setTimeout(() => {
+    const section = document.getElementById("customerSection");
+
+    if (section) {
+        const top = section.getBoundingClientRect().top + window.scrollY;
+
+        window.scrollTo({
+            top: top,
+            behavior: "smooth"
+        });
+    }
+}, 300);
 
     });
 
@@ -874,12 +887,6 @@ function showCustomerForm() {
     const form = document.getElementById("customerForm");
 
     section.style.display = "block";
-
-    section.scrollIntoView({
-
-        behavior: "smooth"
-
-    });
 
     if (reservationData.visit === "再診") {
 
