@@ -528,13 +528,13 @@ if (remain === 1) {
 
 else if(full){
 
-    html+=`
+    html += `
     <button
-    class="day-button full"
-    disabled>
-    ${d}
+        class="day-button full"
+        disabled>
+        <span class="full-label">満</span>
     </button>
-    `;
+`;
 
 }
 else{
