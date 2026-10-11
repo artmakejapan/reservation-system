@@ -866,15 +866,11 @@ function showCustomerForm() {
 
     section.style.display = "block";
 
-// お客様情報の入力フォームを描画したあとにスクロール
-requestAnimationFrame(() => {
-    setTimeout(() => {
-        section.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-    }, 100);
-});
+    section.scrollIntoView({
+
+        behavior: "smooth"
+
+    });
 
     if (reservationData.visit === "再診") {
 
