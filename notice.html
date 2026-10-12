@@ -2,16 +2,6 @@
 
 <html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>アートメイクの重要事項｜ARTMAKE Manami</title>
 <style>
-/* =========================================================
-   ARTMAKE Manami / アートメイクの重要事項
-   統合スタイルシート（従来の重複した style ブロックを1つに整理）
-   ---------------------------------------------------------
-   色
-     --gold  #C99732  ゴールド（見出し・ボタン）
-     --red   #B85C5C  赤（ご予約前の案内・共通重要事項）
-     --ink   #505050  本文の文字色
-     --line  #F1F2F4  罫線
-   ========================================================= */
 :root{
   --gold:#C99732;
   --red:#B85C5C;
@@ -35,7 +25,6 @@ body{
 a{color:inherit}
 .wrap{width:min(880px,calc(100% - 44px));margin:auto}
 
-/* ---------- ファーストビュー ---------- */
 .hero{
   position:relative;
   isolation:isolate;
@@ -44,7 +33,6 @@ a{color:inherit}
   text-align:center;
   background:#fff;
 }
-/* 静止した白いシルクのドレープ（波紋・アニメーションなし） */
 .hero::before{
   content:"";
   position:absolute;
@@ -76,7 +64,6 @@ a{color:inherit}
 .eyebrow{color:#202020;font:11px Georgia,serif;letter-spacing:.24em;margin:0 0 49px}
 .intro{color:var(--red);font-size:13px;line-height:2.4;margin:0}
 
-/* ---------- 目次 ---------- */
 .contents{padding:13px 0 20px;text-align:center}
 .contents-box{
   max-width:740px;
@@ -142,7 +129,6 @@ a{color:inherit}
   background:#913D3D;border-color:#913D3D;
 }
 
-/* ---------- 各セクション ---------- */
 .group{padding:87px 0 37px;border-top:1px solid var(--line);background:#fff;scroll-margin-top:12px}
 #common{padding-top:25px}
 #common>h2{color:var(--red)}
@@ -159,7 +145,6 @@ a{color:inherit}
 }
 .gold-rule{width:38px;height:1px;background:var(--gold);margin:0 auto 51px}
 
-/* ---------- 本文 ---------- */
 .article{max-width:740px;margin:0 auto 41px;padding:0 22px}
 .article h3{
   font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
@@ -171,10 +156,10 @@ a{color:inherit}
   padding-left:15px;
   margin:44px 0 22px;
 }
-/* 各項目の先頭にある小見出しだけ、上の余白を詰める */
 .article .procedure-subhead:first-of-type{margin-top:19px}
 .article p{margin:0 0 12px;line-height:2.12;overflow-wrap:anywhere}
 .article .item{padding-left:1.55em;text-indent:-1.55em;margin-bottom:8px}
+.article .item + p:not(.item){margin-top:22px}
 .article p.opening-description{color:#202020}
 
 .back{text-align:center;font-size:12px;padding:17px 0 31px}
@@ -188,18 +173,6 @@ a{color:inherit}
   color:#202020;
   line-height:2.3;
 }
-.closing-message{
-  padding:0 20px 35px;
-  text-align:center;
-  color:var(--ink);
-  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
-  font-size:14px;
-  font-weight:400;
-  line-height:2.5;
-  letter-spacing:.045em;
-}
-.closing-message p{margin:0 0 16px}
-.closing-message p:last-child{margin-bottom:0}
 footer{
   text-align:center;
   border-top:1px solid var(--line);
@@ -210,7 +183,6 @@ footer{
   background:#fff;
 }
 
-/* ---------- スマートフォン ---------- */
 @media(max-width:600px){
   .wrap{width:calc(100% - 28px)}
   body{font-size:16px}
@@ -255,7 +227,6 @@ footer{
   .article p{line-height:2.05}
 
   .ending{font-size:15px}
-  .closing-message{font-size:13px}
 }
 @media(max-width:360px){
   .navbtn{min-height:61px;font-size:10.5px}
@@ -285,23 +256,24 @@ footer{
 <p class="item">▫️重度の金属アレルギー</p>
 <p class="item">▫️局所麻酔アレルギー</p>
 <p class="item">▫️妊娠中、または妊娠の可能性がある方（安定期で主治医の許可がある場合を除く）</p>
-<p class="item">▫️施術部位の皮膚疾患</p>
+<p class="item">▫️施術部位の皮膚疾患（ニキビを含む）</p>
 <p class="item">▫️重度のアトピー性皮膚炎</p>
 <p class="item">▫️発熱・体調不良のある方</p>
 <p class="item">▫️口唇ヘルペス発症中（リップ）</p>
 <p class="item">▫️緑内障・白内障（アイライン）</p>
 <p class="item">▫️まぶたが薄く、毛細血管が透けて見えている方（アイライン）</p>
-<p class="item">※高血圧で治療中の方は、施術の可否を確認いたしますので、必ず事前にお申し出ください。</p>
-<p class="item">※授乳中の方は、施術の可否を確認いたしますので、必ず事前にお申し出ください。</p>
-<p class="item">※傷跡のある部位は、傷が完治してからの施術となります。</p>
-<p class="item">※事前に受けた美容施術の内容によっては、当日のアートメイクをお受けできない場合がございます。</p>
-<p class="item">※上記以外の場合も、体調や皮膚の状態によっては、医師・看護師・施術者の判断により施術をお受けできないことがございます。</p></article><article class="article"><h3>施術回数・間隔について</h3><p>アートメイクは1回では完成しません。</p>
+<p>以下に該当する方は、施術の可否を確認いたしますので、必ず事前にお申し出ください。</p>
+<p class="item">▫️高血圧で治療中の方</p>
+<p class="item">▫️授乳中の方</p>
+<p class="item">▫️傷跡のある部位（傷が完治してからの施術となります）</p>
+<p class="item">▫️事前に美容施術を受けた方（内容によっては、当日お受けできない場合がございます）</p>
+<p>上記以外の場合も、体調や皮膚の状態によっては、医師・看護師の判断により、施術をお受けできないことがございます。</p></article><article class="article"><h3>施術回数・間隔について</h3><p>アートメイクは1回では完成しません。</p>
 <p class="item">▫️必要な施術回数には個人差がございます。</p>
 <p class="item">▫️通常2〜3回の施術を重ねて定着させていきます。</p>
-<p class="item">▫️2回目の施術は、1回目から2〜3ヶ月後（最短でも6週間以上）が目安です。</p>
+<p class="item">▫️2回目の施術は、1回目から2〜3ヶ月後（最短でも4週間以上）が目安です。肌の状態によっては、さらに間隔をあけていただく場合がございます。</p>
 <p class="item">▫️1回目の施術後に色が薄く感じられたり、一部が抜けたりすることがございますが、2回目以降の施術で調整していきます。</p>
 <p class="item">▫️基本の仕上がりが整った後は、1年を目安にメンテナンス（リタッチ）をおすすめしております。</p>
-<p class="item">※1回の施術のみでの完成をご希望の場合は、施術をお受けできません。</p></article><article class="article"><h3>定着・色味・肌質について</h3><p>肌質や体質によって、色素の定着には個人差がございます。特に、以下に該当する場合は影響が出やすくなります。</p>
+<p class="item">※1回の施術のみでの完成をご希望の場合は、施術をお受けできない場合がございます。</p></article><article class="article"><h3>定着・色味・肌質について</h3><p>肌質や体質によって、色素の定着には個人差がございます。特に、以下に該当する場合は影響が出やすくなります。</p>
 <p class="item">▫️脂性肌（オイリー・混合肌）</p>
 <p class="item">▫️施術時の出血が多い方</p>
 <p class="item">▫️瘢痕・傷跡のある部位</p>
@@ -311,13 +283,13 @@ footer{
 <p>他院のアートメイクの上に重ねる場合は、既存の色素の影響で、色味が思いどおりに出なかったり、眉では毛並み感が出にくくなったりします。</p></article><article class="article"><h3>仕上がり・デザインについて</h3><p class="item">▫️仕上がりには個人差がございます。</p>
 <p class="item">▫️ご希望どおりの仕上がりを保証するものではございません。</p>
 <p class="item">▫️骨格やお顔の左右差などにより、完全に左右対称の仕上がりにすることは難しい場合がございます。</p>
-<p class="item">▫️デザインは施術前に十分にご相談ください。ミリ単位のご要望や、施術直後からの完璧な色味には、対応できません。</p>
+<p class="item">▫️デザインは施術前に十分にご相談ください。ミリ単位のご要望や、施術直後からの完璧な色味には、対応いたしかねます。</p>
 <p class="item">▫️施術後のデザイン変更は困難です。また、アートメイクは完全に消えるものではありません。</p>
 <p class="item">▫️色素は、きちんと定着した場合も、肌のターンオーバーに伴い、時間をかけて徐々に薄くなっていきます。</p>
-<p class="item">▫️時間の経過とともに色素が拡散し、にじんだように見えることがございます（線が太く見える、毛並み感が出にくくなるなど）。</p></article><article class="article"><h3>MRIについて</h3><p>使用している色素はMRI検査に問題ないとされていますが、今後の検査機器の変更に備え、MRI検査を受ける際は、必ず医療機関および担当医にお伝えください。</p></article><article class="article"><h3>ご予約・キャンセルについて</h3>
+<p class="item">▫️時間の経過とともに色素が広がり、線が太く見えたり、毛並み感が薄れる場合がございます。</p></article><article class="article"><h3>MRIについて</h3><p>使用している色素はMRI検査に問題ないとされていますが、今後の検査機器の変更に備え、MRI検査を受ける際は、必ず医療機関および担当医にお伝えください。</p></article><article class="article"><h3>ご予約・キャンセルについて</h3>
 <p class="item">▫️無断キャンセルの場合、今後のご予約をお断りする場合がございます。</p>
-<p class="item">▫️当日キャンセルの場合は、キャンセル料が発生することがございます。</p>
-<p class="item">▫️遅刻された場合は、施術内容を変更する、または施術をお受けできない場合がございます。</p></article><article class="article"><h3>返金・修正について</h3><p>▫️仕上がりがご希望の色や形と異なる場合も、施術後の返金・無償での修正はお受けしておりません。</p>
+<p class="item">▫️当日のキャンセルは、キャンセル料が発生する場合がございます。</p>
+<p class="item">▫️遅刻された場合は、施術内容を変更する、または施術をお受けできない場合がございます。</p></article><article class="article"><h3>返金・修正について</h3><p class="item">▫️仕上がりがご希望の色や形と異なる場合も、施術後の返金・無償での修正はお受けしておりません。</p>
 </article><article class="article"><h3>自己管理・責任範囲について</h3><p class="item">▫️施術後に自己判断で医薬品の使用や処置を行った場合</p>
 <p class="item">▫️注意事項を守られなかった場合</p>
 <p class="item">▫️ダウンタイム中に不適切なケアを行った場合</p>
@@ -326,9 +298,9 @@ footer{
 <p class="item">▫️通常2〜3回の施術を重ねて完成させていきます。</p>
 <p class="item">▫️ダウンタイムは約1週間が目安です。</p>
 <p class="item">▫️施術後の経過や仕上がりは、ご自身のケアや自己管理によって大きく左右されます。</p>
-</article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section><section class="group" id="aftercare"><div class="section-kicker">AFTERCARE</div><h2>施術後の注意・アフターケア</h2><div class="gold-rule"></div><article class="article"><h3>施術後の注意事項（重要）</h3><p>施術後1週間〜10日程度は、以下の行為をお控えください。</p><p class="item">▫️洗顔や入浴など、施術部位を直接濡らす行為</p>
-<p class="item">▫️多量飲酒</p>
+</article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section><section class="group" id="aftercare"><div class="section-kicker">AFTERCARE</div><h2>施術後の注意・アフターケア</h2><div class="gold-rule"></div><article class="article"><h3>施術後の注意事項（重要）</h3><p>施術後1週間〜10日程度は、以下の行為をお控えください。</p><p class="item">▫️施術部位を直接濡らすこと（洗顔・入浴・シャワーの際は、施術部位に水がかからないよう、できるだけ気をつけてください）</p>
 <p class="item">※ヘアラインの洗髪については、ヘアラインの項目をご確認ください。</p>
+<p class="item">▫️多量飲酒</p>
 <p>また、以下の点にもご注意ください。</p><p class="item">▫️紫外線を避けてください。</p><p class="item">▫️かさぶたを無理に剥がさないでください。</p></article><article class="article"><h3>施術後の感染予防について</h3><p>施術後の皮膚は傷つきやすく、感染のリスクがございます。施術後1週間〜10日程度は感染予防に努めてください。</p>
 <p class="item">▫️スポーツ・サウナ・ホットヨガなど、発汗を伴う行為</p>
 <p class="item">▫️長時間の入浴</p>
@@ -339,26 +311,26 @@ footer{
 <p class="item">▫️施術当日から4日目頃までは、色が濃く見えることがございます。</p>
 <p class="item">▫️5日目以降は、徐々に色が薄くなっていきます。</p>
 <p class="item">▫️一時的に色が濃く見えたり、薄く見えたりすることがございますが、通常の経過です。</p>
-<p class="item">▫️かさぶたが取れる過程で、一時的に色ムラが出ることがございます。</p>
+<p class="item">▫️色素の定着過程で、一時的に色ムラが出る場合がございます。</p>
 <p class="item">▫️最終的な色素の定着率は、30〜50％程度が目安です（部位や肌質により異なります）。</p>
 <p class="item">▫️旅行や結婚式など大切なご予定がある場合は、ダウンタイムを考慮して日程をご調整ください。</p></article><article class="article"><h3>軟膏・保湿のケア</h3>
-<p class="item">▫️軟膏で保護している間は、施術部位を濡らさないようにしてください。</p>
+<p class="item">▫️軟膏で保護している間は、施術部位をできるだけ濡らさないようにしてください。</p>
 <p class="item">▫️濡れた場合は、こすらずに優しく押さえて水分を拭き取ってください。</p>
-<p class="item">▫️施術後は乾燥しやすいため、十分に保湿してください。</p>
+<p class="item">▫️施術後は乾燥しやすいため、軟膏でこまめに保湿してください。</p>
 <p class="item">▫️軟膏は1日3〜5回、1週間〜10日程度塗布してください。</p></article><article class="article"><h3>美容施術について</h3><p class="item">▫️レーザー・ピーリングなど、肌への負担が大きい施術は、施術の前後1ヶ月お控えください。</p>
 <p class="item">▫️上記以外の美容施術やマッサージは、施術後2週間お控えください。</p>
 </article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section><section class="group" id="brow"><div class="section-kicker">EYEBROWS</div><h2>眉アートメイク</h2><div class="gold-rule"></div><article class="article">
 <p class="opening-description">眉アートメイクは、皮膚の浅い層に色素を入れ、眉の毛並みを描いたり、眉メイクをしたような仕上がりに整えたりする施術です。</p>
-<h3 class="procedure-subhead">施術前のお願い</h3><p class="item">▫️ボトックス施術後は眉の位置が変化する場合があるため、アートメイクまで1〜2週間ほど間隔を空けることをおすすめしております。</p><p class="item">▫️眉の脱色は、施術日の1週間以上前にお済ませください。</p><p class="item">▫️施術当日は、普段どおり眉メイクをしてご来院いただいても差し支えございません。施術前にメイクを落としていただきます。</p><h3 class="procedure-subhead">施術後のケア</h3><p class="item">▫️軟膏は薄く塗布してください。塗りすぎにはご注意ください。</p><p class="item">▫️かさぶたが自然に剥がれ、肌の状態が落ち着いてから眉メイクを再開してください。</p><h3 class="procedure-subhead">仕上がりについて</h3><p class="item">▫️骨格や眉の生え方に合わないデザインは、お受けできない場合がございます。</p><p class="item">▫️施術部位のホクロ・ニキビ・イボは避けて施術いたします。</p><p class="item">▫️複数回の施術を重ねながら、仕上がりを調整していきます。</p></article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section><section class="group" id="eyeline"><div class="section-kicker">EYELINER</div><h2>アイライン</h2><div class="gold-rule"></div><article class="article">
+<h3 class="procedure-subhead">施術前のお願い</h3><p class="item">▫️ボトックス施術後は眉の位置が変化する場合があるため、アートメイクまで1〜2週間ほど間隔を空けることをおすすめしております。</p><p class="item">▫️眉の脱色は、施術日の1週間以上前にお済ませください。</p><p class="item">▫️施術当日は、普段どおりの眉メイクをしてご来院いただけると、デザインの参考になります。施術前にメイクを落としていただきます。</p><h3 class="procedure-subhead">施術後のケア</h3><p class="item">▫️軟膏は薄く塗布してください。塗りすぎにはご注意ください。</p><p class="item">▫️施術後は肌の状態が落ち着いてから、眉メイクを再開してください（目安：かさぶたが取れたあと）。</p><h3 class="procedure-subhead">仕上がりについて</h3><p class="item">▫️骨格や眉の生え方に合わないデザインは、お受けできない場合がございます。</p><p class="item">▫️施術部位のホクロ・イボは避けて施術いたします。</p><p class="item">▫️複数回の施術を重ねながら、仕上がりを調整していきます。</p></article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section><section class="group" id="eyeline"><div class="section-kicker">EYELINER</div><h2>アイライン</h2><div class="gold-rule"></div><article class="article">
 <p class="opening-description">アイラインアートメイクは、まつ毛の生え際に色素を入れ、目元を自然に引き立てる施術です。</p>
 <h3 class="procedure-subhead">施術前のお願い</h3><p class="item">▫️まつ毛エクステは施術の妨げとなるため、当日までに外してご来院ください。</p><p class="item">▫️施術中はコンタクトレンズを外していただきます。コンタクトケースまたは眼鏡をご持参ください。</p><h3 class="procedure-subhead">施術後のケア</h3><p class="item">▫️軟膏は薄く塗布してください。塗りすぎにはご注意ください。</p><p class="item">▫️施術後1週間程度は、目元に異物感や乾燥が生じる場合がございます。</p><p class="item">▫️ドライアイ用の目薬をご使用ください。クールタイプの目薬は避けてください。</p><h3 class="procedure-subhead">コンタクトレンズ・まつ毛施術・メイクの再開について</h3><p class="item">▫️コンタクトレンズは施術24時間後から使用できます。違和感がある場合は、症状が落ち着くまでお控えください。</p><p class="item">▫️まつ毛エクステ・まつ毛パーマ・その他の美容施術は、アイライン施術の2週間後からお受けください。</p><p class="item">▫️アイシャドウ・ビューラー・マスカラ・アイライナーなど、目元のメイクは、症状が落ち着いてから再開してください。</p><h3 class="procedure-subhead">仕上がりについて</h3><p class="item">▫️太いライン、跳ね上げライン、粘膜へのラインは、対応しておりません。</p><p class="item">▫️涙の量・出血・皮膚の状態により、仕上がりに左右差が生じる場合がございます。</p><p class="item">▫️複数回の施術を重ねながら、仕上がりを調整していきます。</p></article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section><section class="group" id="lip"><div class="section-kicker">LIPS</div><h2>リップ</h2><div class="gold-rule"></div><article class="article">
 <p class="opening-description">リップアートメイクは、唇に色素を入れ、自然な血色感や輪郭を整える施術です。</p>
-<h3 class="procedure-subhead">施術前のお願い</h3><p class="item">▫️施術の1週間前から唇を十分に保湿し、乾燥や皮むけのない状態に整えてください。</p><p class="item">▫️皮がむけている場合は、無理に剥がさず、自然に落ち着くまでお待ちください。</p><p class="item">▫️乾燥が強い場合や保湿が不十分な場合は、当日の施術をお受けできないことがございます。その場合は、キャンセル料として施術料金の全額をご負担いただきます。</p><p class="item">▫️当日は口紅やティントリップを落とし、保湿のみの状態でご来院ください。</p><p class="item">▫️ヒアルロン酸を注入された方は、施術までに期間を空ける必要がございますので、事前にお申し出ください。</p></article><article class="article"><h3>ヘルペスについて</h3><p>ヘルペスウイルスは多くの方が保有しており、疲労・ストレス・刺激などにより発症することがございます。特にリップアートメイクは唇に刺激が加わるため、発症する可能性がございます。ヘルペスを発症している場合は、施術をお受けいただけません。</p>
+<h3 class="procedure-subhead">施術前のお願い</h3><p class="item">▫️施術の1週間前から唇を十分に保湿し、乾燥や皮むけのない状態に整えてください。</p><p class="item">▫️皮がむけている場合は、無理に剥がさず、自然に落ち着くまでお待ちください。</p><p class="item">▫️乾燥が強い場合や保湿が不十分な場合は、当日の施術をお受けできないことがございます。その際は、キャンセル料として施術料金の全額をご負担いただく場合がございます。</p><p class="item">▫️当日は口紅やティントリップを落とし、保湿のみの状態でご来院ください。</p><p class="item">▫️ヒアルロン酸を注入された方は、施術までに期間を空ける必要がございますので、事前にお申し出ください。</p></article><article class="article"><h3>ヘルペスについて</h3><p>ヘルペスウイルスは多くの方が保有しており、疲労・ストレス・刺激などにより発症することがございます。特にリップアートメイクは唇に刺激が加わるため、発症する可能性がございます。ヘルペスを発症している場合は、施術をお受けいただけません。</p>
 <p class="item">▫️発症後の施術は、症状が完全に治まってからとなります。</p>
 <p class="item">▫️施術後にヘルペスが発症した場合は、お早めにご連絡ください。</p>
-<p class="item">※必要に応じて、ヘルペス予防・治療の内服薬の処方が可能です。</p></article><article class="article"><h3 class="procedure-subhead">施術後のケア</h3><p class="item">▫️施術後は乾燥しやすくなるため、軟膏を塗布してください。</p><p class="item">▫️施術後2〜3日は、腫れや熱感が生じる場合がございます。</p><p class="item">▫️施術直後は、内出血の影響で赤黒く見えることがございますが、2〜3日ほどで落ち着きます。</p><p class="item">▫️その後、乾燥や皮むけが生じる場合がございます。むけた皮は無理に剥がさず、自然に落ち着くまでお待ちください。</p><p class="item">▫️唇を噛んだり舐めたりすると、定着不良の原因となるため、お控えください。</p><p class="item">▫️施術後に飲み物を飲む際は、ストローをご使用ください。</p><p class="item">▫️熱い飲食物・香辛料・着色の強い飲食物（コーヒー・ワインなど）はお控えください。</p><p class="item">▫️飲食のあとは、唇をこすらず、優しく押さえて拭き取り、保湿してください。</p><p class="item">▫️口紅・カラーリップの使用は1週間お控えください。</p><p class="item">▫️クレンジングや洗顔の際は、唇をこすらないようご注意ください。</p><p class="item">▫️施術後1週間程度は、キスやペットとの口元の接触（ペットにキスをする、唇を舐められるなど）を避け、生ものの摂取にもご注意ください。</p><h3 class="procedure-subhead">仕上がりについて</h3><p class="item">▫️色素の定着には個人差がございます。</p><p class="item">▫️1回の施術では、色がうっすら残る程度です。しっかり定着させるには、3〜5回程度かかる場合がございます。</p><p class="item">▫️リップアートメイクは唇を大きくする施術ではないため、ご自身の唇の範囲を超えるデザインはお受けできません。</p><p class="item">▫️複数回の施術を重ねながら、仕上がりを整えていきます。</p></article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section><section class="group" id="hairline"><div class="section-kicker">HAIRLINE</div><h2>ヘアライン</h2><div class="gold-rule"></div><article class="article">
+<p class="item">※必要に応じて、ヘルペス予防・治療の内服薬の処方が可能です。</p></article><article class="article"><h3 class="procedure-subhead">施術後のケア</h3><p class="item">▫️施術後は乾燥しやすくなるため、軟膏を塗布してください。</p><p class="item">▫️施術後2〜3日は、腫れや熱感が生じる場合がございます。</p><p class="item">▫️施術直後は、内出血の影響で赤黒く見えることがございますが、2〜3日ほどで落ち着きます。</p><p class="item">▫️その後、乾燥や皮むけが生じる場合がございます。むけた皮は無理に剥がさず、自然に落ち着くまでお待ちください。</p><p class="item">▫️唇を噛んだり舐めたりすると、定着不良の原因となるため、お控えください。</p><p class="item">▫️施術後に飲み物を飲む際は、ストローをご使用ください。</p><p class="item">▫️熱い飲食物・香辛料・着色の強い飲食物（コーヒー・ワインなど）はお控えください。</p><p class="item">▫️飲食のあとは、唇をこすらず、優しく押さえて拭き取り、保湿してください。</p><p class="item">▫️口紅・カラーリップの使用は1週間お控えください。</p><p class="item">▫️洗顔やクレンジングの際は、唇に水やクレンジング剤がつかないよう、できるだけ気をつけてください。</p><p class="item">▫️施術後1週間程度は、キスやペットとの口元の接触（ペットにキスをする、唇を舐められるなど）を避け、生ものの摂取にもご注意ください。</p><h3 class="procedure-subhead">仕上がりについて</h3><p class="item">▫️色素の定着には個人差がございます。</p><p class="item">▫️1回の施術では、色がうっすら残る程度です。しっかり定着させるには、3〜5回程度かかる場合がございます。</p><p class="item">▫️リップアートメイクは唇を大きくする施術ではないため、ご自身の唇の範囲を超えるデザインはお受けできません。</p><p class="item">▫️複数回の施術を重ねながら、仕上がりを整えていきます。</p></article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section><section class="group" id="hairline"><div class="section-kicker">HAIRLINE</div><h2>ヘアライン</h2><div class="gold-rule"></div><article class="article">
 <p class="opening-description">ヘアラインアートメイクは、生え際や頭皮に色素を入れ、髪の毛が生えているような印象を目指す施術です。</p>
-<h3 class="procedure-subhead">施術前のお願い</h3><p class="item">▫️当日は洗髪して、清潔な状態でご来院ください。</p><p class="item">▫️ヘアカラー・脱色は、施術の前後2週間お控えください。</p><h3 class="procedure-subhead">施術後の経過</h3><p class="item">▫️施術後は一時的に赤み・腫れ・かさぶたが生じる場合がございます。</p><h3 class="procedure-subhead">施術後のケア</h3><p class="item">▫️軟膏は薄く塗布してください。塗りすぎにはご注意ください。</p><p class="item">▫️施術当日は、髪にインクが残ることがあるため、服や枕カバーへの付着にご注意ください。</p><p class="item">▫️施術後24時間はシャンプーをお控えください。</p><p class="item">▫️その後は施術部位を強くこすらず、優しく洗髪してください。</p><p class="item">▫️1週間程度は爪を立てての洗髪や強いマッサージはお控えください。</p><h3 class="procedure-subhead">仕上がりについて</h3><p class="item">▫️髪質・毛量・肌質により、仕上がりや定着には個人差がございます。</p><p class="item">▫️汗・皮脂・外的刺激により、色ムラや退色が生じる場合がございます。</p><p class="item">▫️髪の分け目やスタイリングにより、見え方が変化する場合がございます。</p><p class="item">▫️複数回の施術で定着させていきます。</p><p class="item">▫️色素は時間の経過とともに徐々に薄くなりますが、完全に消えるものではありません。</p></article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section>
+<h3 class="procedure-subhead">施術前のお願い</h3><p class="item">▫️当日は洗髪して、清潔な状態でご来院ください。</p><p class="item">▫️ヘアカラー・脱色は、施術の前後2週間お控えください。</p><h3 class="procedure-subhead">施術後の経過</h3><p class="item">▫️施術後は一時的に赤み・腫れ・かさぶたが生じる場合がございます。</p><h3 class="procedure-subhead">施術後のケア</h3><p class="item">▫️軟膏は薄く塗布してください。塗りすぎにはご注意ください。</p><p class="item">▫️施術当日は、髪にインクが残ることがあるため、服や枕カバーへの付着にご注意ください。</p><p class="item">▫️施術後24時間はシャンプーをお控えください。</p><p class="item">▫️その後は施術部位を強くこすらず、優しく洗髪してください。</p><p class="item">▫️2週間程度は爪を立てての洗髪や強いマッサージはお控えください。</p><h3 class="procedure-subhead">仕上がりについて</h3><p class="item">▫️髪質・毛量・肌質により、仕上がりや定着には個人差がございます。</p><p class="item">▫️汗・皮脂・外的刺激により、色ムラや退色が生じる場合がございます。</p><p class="item">▫️髪の分け目やスタイリングにより、見え方が変化する場合がございます。</p><p class="item">▫️複数回の施術で定着させていきます。</p><p class="item">▫️色素は時間の経過とともに徐々に薄くなりますが、完全に消えるものではありません。</p></article><div class="back"><a href="#contents">目次に戻る ↑</a></div></section>
 <div class="ending">
   ご不明な点がございましたら、お気軽にご相談ください。<br>以上の内容をご理解・ご了承のうえ、ご予約をお願いいたします。
 </div>
@@ -369,6 +341,6 @@ footer{
   function sync(){buttons.forEach(function(b){b.classList.toggle('is-selected',b.getAttribute('href')===location.hash);});}
   buttons.forEach(function(b){b.addEventListener('click',function(){buttons.forEach(function(x){x.classList.remove('is-selected');});b.classList.add('is-selected');});});
   window.addEventListener('hashchange',sync);sync();
-});</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+});</script>
 </body>
 </html>
