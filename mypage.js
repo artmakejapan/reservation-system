@@ -197,10 +197,16 @@ function displayHistory(reservations) {
         });
 
 
-    if (history.length === 0) {
+        if (history.length === 0) {
 
         area.innerHTML = `
-            <p>施術歴はありません。</p>
+            <p class="no-reservation">
+                施術歴はありません。
+            </p>
+
+            <p class="no-reservation-guide">
+                ※施術歴には、予約システム導入後にご予約いただいた施術のみ表示されます。
+            </p>
         `;
 
         return;
