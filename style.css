@@ -1,5 +1,5 @@
 :root{
-    --main:#DDBFA5;       /* メインのベージュ */
+    --main:#C49B4E;       /* メインのベージュ */
     --main-dark:#B88666;  /* ホバー・選択中の濃い色 */
 }
 
@@ -344,7 +344,7 @@ body{
 
     background:var(--main);
 
-    color:#4A403A;
+    color:white;
 
     cursor:pointer;
 
@@ -361,7 +361,7 @@ body{
 @media (hover: hover){
     .day-button:hover{
         background:var(--main-dark);
-        color:#4A403A;
+        color:white;
     }
 }
 
@@ -369,7 +369,7 @@ body{
 
     background:var(--main-dark);
 
-    color:#4A403A;
+    color:white;
 
 }
 
@@ -464,7 +464,7 @@ cursor: not-allowed;
 
     background:var(--main-dark);
 
-    color:#4A403A;
+    color:white;
 
     transform:scale(1.08);
 
@@ -702,7 +702,7 @@ textarea{
 
     background:#F5D547 !important;
 
-    color:#4A403A;
+    color:white;
 
 }
 
@@ -710,7 +710,7 @@ textarea{
 
     background:#D96A6A !important;
 
-    color:#4A403A;
+    color:white;
 
 }
 
@@ -718,7 +718,7 @@ textarea{
 
     background:#E3C133 !important;
 
-    color:#4A403A;
+    color:white;
 
 }
 
@@ -726,7 +726,7 @@ textarea{
 
     background:#C95858 !important;
 
-    color:#4A403A;
+    color:white;
 
 }
 
