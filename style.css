@@ -817,10 +817,13 @@ textarea{
 }
 
 .guide-divider {
+    display: block;
     width: 85%;
     margin: 28px auto;
-    border-top: 1px dashed var(--guide-line-color);
+    border: none;
+    border-top: 1px dashed #C8BDB2;
 }
+
 
 .guide-contact {
     margin: 32px auto 0;
