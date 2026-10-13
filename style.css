@@ -1,6 +1,8 @@
 :root{
-    --main:#DDBFA5;        /* メインのベージュ */
-    --main-dark:#B88666;  /* ホバー・選択中の濃い色 */
+    --main:#DDBFA5;        /* 全体のメインカラー */
+    --main-dark:#B88666;   /* ホバー・選択中の濃い色 */
+    --notice-color:#C8BDB2; /* ノーティスボックス専用カラー */
+　　--guide-line-color: #4A403A; /* 空き状況の確認方法の下線 */
 }
 
 /* ==========================================
@@ -817,7 +819,7 @@ textarea{
 .guide-divider {
     width: 85%;
     margin: 28px auto;
-    border-top: 1px dashed #d9aaa9;
+    border-top: 1px dashed var(--guide-line-color);
 }
 
 .guide-contact {
@@ -1391,9 +1393,9 @@ textarea{
     box-shadow: none;
 }
 
-/* ご予約前にご確認ください：外側のピンクの枠 */
+/* ご予約前にご確認ください：ノーティスボックス専用カラー */
 .card.notice {
-    border: 1px solid var(--main);
+    border: 1px solid var(--notice-color);
 }
 
 /* ==========================================
