@@ -180,7 +180,8 @@ a{color:inherit}
 .article p.opening-description{color:var(--ink)}
 
 .back{text-align:center;font-size:12px;padding:17px 0 31px}
-.back a{color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:5px}
+.back a{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid var(--gold);padding:8px 30px;font-size:13px;line-height:1.6;transition:background .16s ease,color .16s ease}
+.back a:hover,.back a:focus-visible,.back a:active{background:var(--gold);color:#fff}
 
 .ending{
   text-align:center;
@@ -271,11 +272,11 @@ footer{
 .box-ask>p:first-child{color:var(--gold-dark)}
 .box-ng .item:not(.note):not(.plain)::before{border-color:var(--red)}
 .box-ask + p{margin-top:4px}
-.toc-note{margin:0 0 6px;padding:0 0 14px;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.95;letter-spacing:.03em}
+.toc-note{max-width:740px;margin:0 auto 22px;padding:0 6px;text-align:center;font-size:13.5px;line-height:1.95;letter-spacing:.03em}
 .toc-note .sent{display:block}
 .toc-note .ph{display:inline-block}
 .toc-note strong{font-weight:600;color:var(--red)}
-.timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 20px}
+.timeline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 20px}
 .tl-step{background:#FBF7EC;border-top:2px solid var(--gold);padding:12px 14px 14px}
 .tl-term{font-weight:600;font-size:14px;line-height:1.6;color:var(--gold-dark);margin-bottom:4px}
 .tl-text{font-size:13.5px;line-height:1.8}
@@ -285,7 +286,7 @@ footer{
 #common .article.summary h3{margin-top:24px}
 @media(max-width:600px){
   .box-ng,.box-ask{padding:16px 14px 6px}
-  .toc-note{font-size:12.5px;line-height:1.8;padding-bottom:8px;margin-bottom:2px}
+  .toc-note{font-size:12.5px;line-height:1.8;margin-bottom:16px}
   .timeline{grid-template-columns:1fr;gap:8px}
   .tl-step{display:flex;gap:14px;align-items:baseline;padding:10px 14px}
   .tl-term{flex:0 0 8.5em;margin:0}
@@ -310,13 +311,13 @@ footer{
 </header>
 <main>
   <section class="contents wrap" id="contents">
+    <p class="toc-note">
+      <span class="sent"><span class="ph">共通重要事項と施術後の注意は、</span><span class="ph"><strong>全員の方がお読みください。</strong></span></span>
+      <span class="sent"><span class="ph">あわせて、</span><span class="ph">ご希望の施術の項目も</span><span class="ph">ご確認ください。</span></span>
+    </p>
     <div class="contents-box">
       <div aria-label="重要事項の目次一覧" class="toc-list">
         <div class="toc-list-title">目次</div>
-        <p class="toc-note">
-          <span class="sent"><span class="ph">共通重要事項と施術後の注意は、</span><span class="ph"><strong>全員の方がお読みください。</strong></span></span>
-          <span class="sent"><span class="ph">あわせて、</span><span class="ph">ご希望の施術の項目も</span><span class="ph">ご確認ください。</span></span>
-        </p>
         <a class="toc-entry toc-entry-common" href="#common">共通重要事項</a>
         <a class="toc-entry" href="#aftercare">施術後の注意・アフターケア</a>
         <a class="toc-entry" href="#brow">眉毛の施術の方</a>
@@ -471,7 +472,6 @@ footer{
       <div class="timeline" aria-label="ダウンタイムの経過">
         <div class="tl-step"><div class="tl-term">当日〜4日目頃</div><div class="tl-text">色が濃く見えることがございます</div></div>
         <div class="tl-step"><div class="tl-term">5日目以降</div><div class="tl-text">徐々に色が薄くなっていきます</div></div>
-        <div class="tl-step"><div class="tl-term">1週間〜10日程度</div><div class="tl-text">感染予防のための制限は続けてください</div></div>
       </div>
       <p class="item">一時的に色が濃く見えたり、薄く見えたりすることがございますが、通常の経過です。</p>
       <p class="item">色素の定着過程で、一時的に色ムラが出る場合がございます。</p>
