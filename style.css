@@ -289,10 +289,7 @@ body{
     line-height: 1.8;
     white-space: normal;
     letter-spacing: normal;
-}
-
-.title-card .main-title span {
-    display: block;
+    margin: 0;
 }
 
 
