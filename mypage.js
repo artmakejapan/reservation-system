@@ -205,7 +205,7 @@ function displayHistory(reservations) {
             </p>
 
             <p class="no-reservation-guide">
-                ※施術歴には、予約システム導入後にご予約いただいた施術のみ表示されます。
+                施術歴には、予約システム導入後にご予約いただいた施術のみ表示されます。
             </p>
         `;
 
