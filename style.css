@@ -289,7 +289,12 @@ body{
     line-height: 1.8;
     white-space: normal;
     letter-spacing: normal;
-    margin: 0;
+    width: 100%;
+}
+
+.title-card .main-title span {
+    display: block;
+    text-align: left;
 }
 
 
