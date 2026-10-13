@@ -1,8 +1,8 @@
-:root{
-    --main:#DDBFA5;        /* 全体のメインカラー */
-    --main-dark:#B88666;   /* ホバー・選択中の濃い色 */
-    --notice-color:#C8BDB2; /* ノーティスボックス専用カラー */
-　　--guide-line-color: #4A403A; /* 空き状況の確認方法の下線 */
+:root {
+    --main: #DDBFA5;
+    --main-dark: #B88666;
+    --notice-color: #C8BDB2;
+    --guide-line-color: #4A403A;
 }
 
 /* ==========================================
@@ -819,11 +819,11 @@ textarea{
 .guide-divider {
     display: block;
     width: 85%;
+    height: 0;
     margin: 28px auto;
     border: none;
-    border-top: 1px dashed #C8BDB2;
+    border-top: 1px dashed var(--guide-line-color);
 }
-
 
 .guide-contact {
     margin: 32px auto 0;
