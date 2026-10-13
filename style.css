@@ -1478,6 +1478,7 @@ flex-direction: column;
 .title-card .sub-title {
 order: 1;
 width: 100%;
+font-family: "M PLUS Rounded 1c", sans-serif;
 text-align: center;
 font-size: 22px;
 font-weight: 500;
@@ -1489,6 +1490,7 @@ margin-bottom: 16px;
 .title-card .main-title {
 order: 2;
 width: 100%;
+font-family: "M PLUS Rounded 1c", sans-serif;
 text-align: left;
 font-size: 16px;
 font-weight: 400;
