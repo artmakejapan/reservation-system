@@ -758,33 +758,29 @@ textarea{
    メニュー別カラー
 ========================= */
 
-/* 眉 → 料金表の「回数」の色 */
+/* 眉 → 薄いひまわり色 */
 .menu-item:has(input[value="眉"]),
 .menu-item:has(input[value="眉＋リップセット"]){
-    background: #A09286;
-    color: #FFFFFF;
+    background: #F8E8A8;
 }
 
-/* リップ → 料金表の「眉毛・リップ・ヘアライン」の色 */
+/* リップ → 薄いピンク */
 .menu-item:has(input[value="リップ"]),
 .menu-item:has(input[value="リップ2回セット"]) {
-    background: #C88F99;
-    color: #FFFFFF;
+    background: #F6D9DC;
 }
 
-/* アイライン → 料金表の「アイライン上」の色 */
+/* アイライン → 薄い空色 */
 .menu-item:has(input[value="アイライン上"]),
 .menu-item:has(input[value="アイライン下"]),
 .menu-item:has(input[value="アイライン上下セット"]) {
-    background: #85ADC2;
-    color: #FFFFFF;
+    background: #DCEBF2;
 }
 
-/* ヘアライン → 料金表の「アイライン下」の色 */
+/* ヘアライン → 薄い葉っぱ色 */
 .menu-item:has(input[value="ヘアライン（M字 or 分け目）"]),
 .menu-item:has(input[value="ヘアライン全体"]) {
-    background: #D4B189;
-    color: #FFFFFF;
+    background: #DDE8D2;
 }
 
 /* ================================
