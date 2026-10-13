@@ -285,7 +285,7 @@ body{
     font-family: "M PLUS Rounded 1c", sans-serif;
     font-size: 1em;
     font-weight: 400;
-    text-align: left;
+    text-align: center;
     line-height: 1.8;
     white-space: normal;
     letter-spacing: normal;
@@ -298,11 +298,13 @@ body{
 }
 
 .title-card .main-title .slash {
-    padding-left: 2em;
+    padding-left: 4em;
+    text-align: center;
 }
 
 .title-card .main-title .clinic-name {
-    padding-left: 3em;
+    padding-left: 8em;
+    text-align: center;
 }
 
 .sub-title {
