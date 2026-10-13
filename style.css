@@ -761,26 +761,30 @@ textarea{
 /* 眉 → 料金表の「回数」の色 */
 .menu-item:has(input[value="眉"]),
 .menu-item:has(input[value="眉＋リップセット"]){
-    background: #8F7F71;
+    background: #A09286;
+    color: #FFFFFF;
 }
 
 /* リップ → 料金表の「眉毛・リップ・ヘアライン」の色 */
 .menu-item:has(input[value="リップ"]),
 .menu-item:has(input[value="リップ2回セット"]) {
-    background: #BE7B87;
+    background: #C88F99;
+    color: #FFFFFF;
 }
 
 /* アイライン → 料金表の「アイライン上」の色 */
 .menu-item:has(input[value="アイライン上"]),
 .menu-item:has(input[value="アイライン下"]),
 .menu-item:has(input[value="アイライン上下セット"]) {
-    background: #6F9EB7;
+    background: #85ADC2;
+    color: #FFFFFF;
 }
 
 /* ヘアライン → 料金表の「アイライン下」の色 */
 .menu-item:has(input[value="ヘアライン（M字 or 分け目）"]),
 .menu-item:has(input[value="ヘアライン全体"]) {
-    background: #CCA374;
+    background: #D4B189;
+    color: #FFFFFF;
 }
 
 /* ================================
