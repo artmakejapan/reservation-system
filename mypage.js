@@ -124,7 +124,7 @@ function displayReservation(reservations) {
 
         <p class="no-reservation-guide">
             ご予約をご希望の場合は、<br>
-            「ご予約・空き状況」よりお申し込みください。
+            「ご予約・空き枠」よりお申し込みください。
         </p>
     `;
 
