@@ -293,6 +293,17 @@ body{
     margin-bottom: 0;
 }
 
+.title-card .main-title span {
+    display: block;
+}
+
+.title-card .main-title .slash {
+    padding-left: 2em;
+}
+
+.title-card .main-title .clinic-name {
+    padding-left: 3em;
+}
 
 .sub-title {
     font-family: "M PLUS Rounded 1c", sans-serif;
