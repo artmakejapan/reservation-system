@@ -197,15 +197,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         document.getElementById("confirmSection").style.display = "none";
 
-        // カレンダーまでスクロール
-        calendarSection.scrollIntoView({
-
-            behavior: "smooth"
-
-        });
-
         // カレンダー生成
-        generateCalendar(reservationData);
+generateCalendar(reservationData);
+
+// カレンダーが表示されたあとにスクロール
+requestAnimationFrame(() => {
+  setTimeout(() => {
+    const calendarSection = document.getElementById("calendarSection");
+    const top = calendarSection.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+      top: Math.max(0, top - 10),
+      behavior: "smooth"
+    });
+  }, 200);
+});
 
     });
 
