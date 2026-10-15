@@ -170,41 +170,101 @@ body{
 }
 
 /* ==========================================
-   MENU
+   MENU / メニューカテゴリー（アコーディオン）
 ========================================== */
 
 .menu-list{
-
     display:flex;
-
     flex-direction:column;
-
     gap:14px;
-
     margin-top:20px;
+}
 
+/* カテゴリー全体の枠線色は、下のメニュー別カラーと連動 */
+.menu-category{
+    overflow:hidden;
+    border:1.5px solid #E5DDD5;
+    border-radius:12px;
+    background:#FFFFFF;
+}
+
+.menu-category-brow{ border-color:#D9BD58; }
+.menu-category-lip{ border-color:#D9A5AC; }
+.menu-category-eyeliner{ border-color:#A8C8D8; }
+.menu-category-hairline{ border-color:#AFC49E; }
+.menu-category-other{ border-color:#E5DDD5; }
+
+.menu-category-toggle{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:15px 16px;
+    border:0;
+    background:#FAFAFA;
+    color:#4A403A;
+    font:inherit;
+    font-weight:600;
+    text-align:left;
+    cursor:pointer;
+    transition:background .2s ease;
+}
+
+.menu-category-brow .menu-category-toggle{ background:#F8E8A8; }
+.menu-category-lip .menu-category-toggle{ background:#F6D9DC; }
+.menu-category-eyeliner .menu-category-toggle{ background:#DCEBF2; }
+.menu-category-hairline .menu-category-toggle{ background:#DDE8D2; }
+
+.menu-category-toggle:hover{
+    filter:brightness(.98);
+}
+
+.menu-category-toggle:focus-visible{
+    outline:2px solid #8B6752;
+    outline-offset:-3px;
+}
+
+.menu-category-arrow{
+    flex:0 0 auto;
+    font-size:13px;
+    transition:transform .2s ease;
+}
+
+.menu-category-toggle[aria-expanded="true"] .menu-category-arrow{
+    transform:rotate(180deg);
+}
+
+.menu-category-options{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding:12px;
+    border-top:1px solid rgba(74,64,58,.12);
+}
+
+.menu-category-options[hidden]{
+    display:none;
 }
 
 .menu-item{
-
+    display:flex;
+    align-items:center;
+    gap:10px;
     background:#FAFAFA;
-
     border:1px solid #E5DDD5;
-
-    border-radius:12px;
-
-    padding:16px;
-
+    border-radius:10px;
+    padding:14px 16px;
     cursor:pointer;
-
-    transition:.25s;
-
+    transition:background .25s, border-color .25s;
 }
 
 .menu-item:hover{
+    filter:brightness(.98);
+}
 
-    background:#F3ECE6;
-
+.menu-item input{
+    flex:0 0 auto;
 }
 
 /* ==========================================
@@ -752,32 +812,38 @@ textarea{
 }
 
 /* =========================
-   メニュー別カラー
+   メニュー別カラー・枠線
+   既存の背景色を維持し、枠線も同系色に統一
 ========================= */
 
 /* 眉 → 薄いひまわり色 */
 .menu-item:has(input[value="眉"]),
 .menu-item:has(input[value="眉＋リップセット"]){
-    background: #F8E8A8;
+    background:#F8E8A8;
+    border-color:#D9BD58;
 }
 
 /* リップ → 薄いピンク */
 .menu-item:has(input[value="リップ"]),
 .menu-item:has(input[value="リップ2回セット"]) {
-    background: #F6D9DC;
+    background:#F6D9DC;
+    border-color:#D9A5AC;
 }
 
 /* アイライン → 薄い空色 */
 .menu-item:has(input[value="アイライン上"]),
 .menu-item:has(input[value="アイライン下"]),
 .menu-item:has(input[value="アイライン上下セット"]) {
-    background: #DCEBF2;
+    background:#DCEBF2;
+    border-color:#A8C8D8;
 }
 
 /* ヘアライン → 薄い葉っぱ色 */
 .menu-item:has(input[value="ヘアライン（M字 or 分け目）"]),
+.menu-item:has(input[value="ヘアライン（M字・分け目）"]),
 .menu-item:has(input[value="ヘアライン全体"]) {
-    background: #DDE8D2;
+    background:#DDE8D2;
+    border-color:#AFC49E;
 }
 
 /* ================================

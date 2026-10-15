@@ -75,36 +75,99 @@ async function loadInitialData() {
 
     });
 
-    // メニュー表示
+    // メニュー表示（カテゴリーごとのアコーディオン）
     const menuList = document.getElementById("menuList");
-
     menuList.innerHTML = "";
 
-    treatmentData
+    const enabledTreatments = treatmentData
         .filter(item => item.enabled)
-        .sort((a, b) => a.displayOrder - b.displayOrder)
-        .forEach(item => {
+        .sort((a, b) => a.displayOrder - b.displayOrder);
 
+    const menuCategories = [
+        { key: "brow", title: "眉", matches: name => name.includes("眉") },
+        { key: "lip", title: "リップ", matches: name => name.includes("リップ") && !name.includes("眉") },
+        { key: "eyeliner", title: "アイライン", matches: name => name.includes("アイライン") },
+        { key: "hairline", title: "ヘアライン", matches: name => name.includes("ヘアライン") }
+    ];
+
+    const groupedMenus = menuCategories.map(category => ({
+        ...category,
+        items: enabledTreatments.filter(item => category.matches(item.name))
+    })).filter(category => category.items.length > 0);
+
+    const otherItems = enabledTreatments.filter(item =>
+        !menuCategories.some(category => category.matches(item.name))
+    );
+    if (otherItems.length > 0) {
+        groupedMenus.push({ key: "other", title: "その他", items: otherItems });
+    }
+
+    groupedMenus.forEach((category, index) => {
+        const section = document.createElement("section");
+        section.className = `menu-category menu-category-${category.key}`;
+
+        const toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.className = "menu-category-toggle";
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-controls", `menu-options-${category.key}`);
+
+        const title = document.createElement("span");
+        title.textContent = category.title;
+
+        const arrow = document.createElement("span");
+        arrow.className = "menu-category-arrow";
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "▼";
+
+        toggle.appendChild(title);
+        toggle.appendChild(arrow);
+
+        const options = document.createElement("div");
+        options.className = "menu-category-options";
+        options.id = `menu-options-${category.key}`;
+        options.hidden = true;
+
+        category.items.forEach(item => {
             const label = document.createElement("label");
-
             label.className = "menu-item";
 
             const checkbox = document.createElement("input");
-
             checkbox.type = "checkbox";
             checkbox.name = "menu";
             checkbox.value = item.name;
 
             const span = document.createElement("span");
-
             span.textContent = item.name;
 
             label.appendChild(checkbox);
             label.appendChild(span);
-
-            menuList.appendChild(label);
-
+            options.appendChild(label);
         });
+
+        toggle.addEventListener("click", () => {
+            const shouldOpen = toggle.getAttribute("aria-expanded") !== "true";
+
+            // 開いているカテゴリーは先にすべて閉じる（同時に1つだけ開く）
+            menuList.querySelectorAll(".menu-category-toggle").forEach(otherToggle => {
+                otherToggle.setAttribute("aria-expanded", "false");
+                const otherOptions = document.getElementById(
+                    otherToggle.getAttribute("aria-controls")
+                );
+                if (otherOptions) otherOptions.hidden = true;
+            });
+
+            // 押したカテゴリーが閉じていた場合だけ開く。開いていた場合は閉じたまま。
+            if (shouldOpen) {
+                toggle.setAttribute("aria-expanded", "true");
+                options.hidden = false;
+            }
+        });
+
+        section.appendChild(toggle);
+        section.appendChild(options);
+        menuList.appendChild(section);
+    });
 
 }
 
@@ -983,18 +1046,17 @@ ${createDateSelects("customerBirthDate", "customerBirth")}
 </div>
 
 <div class="form-group">
-<label>紹介者 <span style="color:red;">*</span></label>
+<label>電話番号 <span style="color:red;">*</span></label>
+<input type="tel" id="customerTel">
+</div>
+
+<div class="form-group">
+<label>紹介者</label>
 <input
     type="text"
     id="customerReferrer"
     placeholder="紹介者名 / クリニック / インスタ / その他"
-    required
 >
-</div>
-
-<div class="form-group">
-<label>電話番号 <span style="color:red;">*</span></label>
-<input type="tel" id="customerTel">
 </div>
 
 <div class="form-group">
@@ -1307,15 +1369,6 @@ if (birthDate === "") {
         return;
 
     }
-
-    // 紹介者の入力チェック
-if (referrer === "") {
-
-    alert("紹介者名をご入力ください。");
-    document.getElementById("customerReferrer").focus();
-    return;
-
-}
 
     const selectedHistories = [
     ...document.querySelectorAll(
