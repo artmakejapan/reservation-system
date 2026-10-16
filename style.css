@@ -1537,7 +1537,7 @@ background: #D96A6A;
 選択ボタンのデザイン
 ========================================== */
 
-/* 初診・再診の選択エリア */
+/* 初診・再診 */
 .visit-type {
 display: flex;
 justify-content: center;
@@ -1545,7 +1545,6 @@ gap: 12px;
 margin-top: 18px;
 }
 
-/* 初診・再診のボタン */
 .visit-type label {
 flex: 1;
 display: flex;
@@ -1559,34 +1558,31 @@ background: #FFFFFF;
 color: #4A403A;
 font-size: 16px;
 cursor: pointer;
-transition: background .2s, color .2s, border-color .2s;
+transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-/* 初診・再診のラジオボタンを非表示 */
-.visit-type input[type="radio"] {
+.visit-type label input[type="radio"] {
 position: absolute;
 opacity: 0;
 width: 1px;
 height: 1px;
 }
 
-/* 初診・再診：選択中 */
 .visit-type label:has(input[type="radio"]:checked) {
-background: #B88666;
-border-color: #B88666;
+background: #DDBFA5;
+border-color: #DDBFA5;
 color: #FFFFFF;
 }
 
-/* 性別・妊娠・授乳中の選択エリア */
-#customerForm .form-group:has(input[type="radio"]) .radio-group {
+/* 性別・妊娠・授乳中 */
+#customerForm .radio-group {
 display: flex;
 justify-content: center;
 gap: 12px;
 margin-top: 12px;
 }
 
-/* 性別・妊娠・授乳中のボタン */
-#customerForm .form-group:has(input[type="radio"]) .radio-group label:has(input[type="radio"]) {
+#customerForm .radio-group label:has(input[type="radio"]) {
 flex: 1;
 display: flex;
 align-items: center;
@@ -1599,27 +1595,25 @@ background: #FFFFFF;
 color: #4A403A;
 font-size: 15px;
 cursor: pointer;
-transition: background .2s, color .2s, border-color .2s;
+transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-/* 性別・妊娠・授乳中のラジオボタンを非表示 */
-#customerForm .form-group:has(input[type="radio"]) .radio-group label:has(input[type="radio"]) input[type="radio"] {
+#customerForm .radio-group label input[type="radio"] {
 position: absolute;
 opacity: 0;
 width: 1px;
 height: 1px;
 }
 
-/* 性別・妊娠・授乳中：選択中 */
-#customerForm .form-group:has(input[type="radio"]) .radio-group label:has(input[type="radio"]:checked) {
-background: #B88666;
-border-color: #B88666;
+#customerForm .radio-group label:has(input[type="radio"]:checked) {
+background: #DDBFA5;
+border-color: #DDBFA5;
 color: #FFFFFF;
 }
 
 /* キーボード操作時のフォーカス表示 */
 .visit-type label:has(input[type="radio"]:focus-visible),
-#customerForm .form-group:has(input[type="radio"]) .radio-group label:has(input[type="radio"]:focus-visible) {
+#customerForm .radio-group label:has(input[type="radio"]:focus-visible) {
 outline: 2px solid #8A634B;
 outline-offset: 3px;
 }
