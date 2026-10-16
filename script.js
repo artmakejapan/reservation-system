@@ -53,26 +53,30 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // 初診・再診を選んだら、空き状況を見るボタンへスクロール
 visitRadios.forEach(radio => {
+
     radio.addEventListener("change", () => {
+
         setTimeout(() => {
-            const nextButton =
-                document.getElementById("nextButton");
+
+            const nextButton = document.getElementById("nextButton");
 
             if (!nextButton) return;
 
-            const buttonTop =
-                nextButton.getBoundingClientRect().top +
-                window.scrollY;
+            const buttonBottom =
+                nextButton.getBoundingClientRect().bottom + window.scrollY;
 
-            const scrollPosition =
-    buttonTop - window.innerHeight * 0.95;
+            const targetPosition =
+                buttonBottom - window.innerHeight + 30;
 
             window.scrollTo({
-                top: Math.max(0, scrollPosition),
+                top: Math.max(0, targetPosition),
                 behavior: "smooth"
             });
-        }, 150);
+
+        }, 200);
+
     });
+
 });
 
     nextButton.disabled = true;
