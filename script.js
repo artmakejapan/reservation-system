@@ -66,7 +66,7 @@ visitRadios.forEach(radio => {
                 nextButton.getBoundingClientRect().bottom + window.scrollY;
 
             const targetPosition =
-                buttonBottom - window.innerHeight + 35;
+                buttonBottom - window.innerHeight + 20;
 
             window.scrollTo({
                 top: Math.max(0, targetPosition),
