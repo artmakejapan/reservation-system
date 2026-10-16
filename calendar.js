@@ -1515,10 +1515,6 @@ function showConfirm() {
 
     section.style.display = "block";
 
-    section.scrollIntoView({
-        behavior: "smooth"
-    });
-
     // ==========================
     // 再診
     // ==========================
@@ -1722,6 +1718,20 @@ ${customerData.otherHistory ? `
 `;
 
     }
+
+    // 「予約内容確認」の見出しを画面上部に移動
+requestAnimationFrame(() => {
+    const title = section.querySelector(".confirm-title");
+
+    if (!title) return;
+
+    const top = title.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+        top: Math.max(0, top),
+        behavior: "smooth"
+    });
+});
 
         document.getElementById("reserveButton").addEventListener("click", async () => {
 
