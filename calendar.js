@@ -1020,7 +1020,7 @@ form.innerHTML = `
 
 <label>
 
-<input type="radio" name="gender" value="女性">
+<input type="radio" name="gender" value="女性" checked>
 
 <span>女性</span>
 
