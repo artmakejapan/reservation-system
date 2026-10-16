@@ -119,62 +119,83 @@ visitRadios.forEach(radio => {
     nextButton.textContent = "空き状況を見る";
 
 
-    // ================================
-    // メニューは2つまで
-    // ================================
+// ================================
+// メニュー選択・選択中メニューの表示
+// ================================
 
-    menuCheckboxes.forEach(box => {
+const selectedMenuNames =
+    document.getElementById("selectedMenuNames");
 
-        box.addEventListener("change", () => {
+function updateSelectedMenuDisplay() {
 
-            // 最大2メニュー
-            const checked =
-                [...document.querySelectorAll('input[name="menu"]:checked')];
+    const checkedMenus = [
+        ...document.querySelectorAll('input[name="menu"]:checked')
+    ];
 
-            if (checked.length > 2) {
+    if (!selectedMenuNames) return;
 
-                alert("施術メニューは最大2つまで選択できます。");
+    if (checkedMenus.length === 0) {
+        selectedMenuNames.textContent = "未選択";
+    } else {
+        selectedMenuNames.textContent =
+            checkedMenus.map(item => item.value).join(" ・ ");
+    }
+}
 
-                box.checked = false;
+menuCheckboxes.forEach(box => {
 
-                return;
+    box.addEventListener("change", () => {
 
-            }
+        let checked = [
+            ...document.querySelectorAll('input[name="menu"]:checked')
+        ];
 
-            // 一旦全部有効化
-            menuCheckboxes.forEach(item => {
+        // 最大2メニュー
+        if (checked.length > 2) {
 
-                item.disabled = false;
-                item.parentElement.style.opacity = "1";
+            alert("施術メニューは最大2つまで選択できます。");
 
-            });
+            box.checked = false;
 
-            // 選択中メニューから同時選択不可を探す
-            checked.forEach(item => {
+            checked = [
+                ...document.querySelectorAll('input[name="menu"]:checked')
+            ];
+        }
 
-                const ngList = exclusiveRules[item.value];
-
-                if (!ngList) return;
-
-                ngList.forEach(name => {
-
-                    const target =
-                        document.querySelector(`input[value="${name}"]`);
-
-                    if (target && !target.checked) {
-
-                        target.disabled = true;
-                        target.parentElement.style.opacity = "0.4";
-
-                    }
-
-                });
-
-            });
-
+        // 一旦全部有効化
+        menuCheckboxes.forEach(item => {
+            item.disabled = false;
+            item.parentElement.style.opacity = "1";
         });
 
+        // 同時選択できないメニューを無効化
+        checked.forEach(item => {
+
+            const ngList = exclusiveRules[item.value];
+
+            if (!ngList) return;
+
+            ngList.forEach(name => {
+
+                const target = document.querySelector(
+                    `input[name="menu"][value="${name}"]`
+                );
+
+                if (target && !target.checked) {
+                    target.disabled = true;
+                    target.parentElement.style.opacity = "0.4";
+                }
+            });
+        });
+
+        // 選択中メニューの表示を更新
+        updateSelectedMenuDisplay();
     });
+});
+
+// 初期表示
+updateSelectedMenuDisplay();
+
 
 
     // ================================
