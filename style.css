@@ -1609,3 +1609,59 @@ color: #FFFFFF;
 outline: 2px solid #8A634B;
 outline-offset: 3px;
 }
+
+/* ==========================================
+生年月日・施術歴日：手入力欄
+========================================== */
+
+.date-input-row {
+display: flex;
+align-items: center;
+gap: 8px;
+width: 100%;
+max-width: 100%;
+box-sizing: border-box;
+}
+
+.date-input-row input {
+height: 48px;
+padding: 10px 8px;
+border: 1px solid #D8CDC3;
+border-radius: 10px;
+background: #FFFFFF;
+color: #4A403A;
+font-family: "M PLUS Rounded 1c", sans-serif;
+font-size: 15px;
+text-align: center;
+box-sizing: border-box;
+min-width: 0;
+}
+
+.date-input-row .date-year {
+flex: 1.4;
+width: 0;
+}
+
+.date-input-row .date-month,
+.date-input-row .date-day {
+flex: 1;
+width: 0;
+}
+
+.date-input-row span {
+flex: 0 0 auto;
+color: #8A7768;
+font-size: 15px;
+}
+
+.date-input-row input:focus {
+outline: none;
+border-color: #C68F5B;
+box-shadow: 0 0 0 2px rgba(198, 143, 91, 0.12);
+}
+
+.date-input-row input::placeholder {
+color: #B5AAA1;
+font-size: 13px;
+opacity: 1;
+}

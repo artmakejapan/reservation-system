@@ -845,102 +845,166 @@ function calcAgeFromBirth(birthDate) {
 }
 
 // ====================================
-// 年・月・日 プルダウン
+// 生年月日・施術歴日：手入力方式
 // ====================================
 
 function createDateSelects(hiddenId, prefix) {
-
-    const currentYear = new Date().getFullYear();
-
-    let yearOptions = `<option value="">年</option>`;
-
-    for (let year = currentYear; year >= 1920; year--) {
-        yearOptions += `
-            <option value="${year}">${year}年</option>
-        `;
-    }
-
-    let monthOptions = `<option value="">月</option>`;
-
-    for (let month = 1; month <= 12; month++) {
-        monthOptions += `
-            <option value="${month}">${month}月</option>
-        `;
-    }
-
-    let dayOptions = `<option value="">日</option>`;
-
-    for (let day = 1; day <= 31; day++) {
-        dayOptions += `
-            <option value="${day}">${day}日</option>
-        `;
-    }
-
     return `
-        <div class="date-select-row">
-
-            <select id="${prefix}Year">
-                ${yearOptions}
-            </select>
-
-            <select id="${prefix}Month">
-                ${monthOptions}
-            </select>
-
-            <select id="${prefix}Day">
-                ${dayOptions}
-            </select>
-
+        <div class="date-input-row">
+            <input
+                type="text"
+                id="${prefix}Year"
+                class="date-year"
+                inputmode="numeric"
+                maxlength="4"
+                placeholder="西暦"
+                aria-label="年"
+                autocomplete="off"
+            >
+            <span>/</span>
+            <input
+                type="text"
+                id="${prefix}Month"
+                class="date-month"
+                inputmode="numeric"
+                maxlength="2"
+                placeholder="月"
+                aria-label="月"
+                autocomplete="off"
+            >
+            <span>/</span>
+            <input
+                type="text"
+                id="${prefix}Day"
+                class="date-day"
+                inputmode="numeric"
+                maxlength="2"
+                placeholder="日"
+                aria-label="日"
+                autocomplete="off"
+            >
         </div>
 
         <input type="hidden" id="${hiddenId}">
     `;
 }
 
-
 function setupDateSelects(hiddenId, prefix) {
-
-    const year = document.getElementById(`${prefix}Year`);
-    const month = document.getElementById(`${prefix}Month`);
-    const day = document.getElementById(`${prefix}Day`);
+    const yearInput = document.getElementById(`${prefix}Year`);
+    const monthInput = document.getElementById(`${prefix}Month`);
+    const dayInput = document.getElementById(`${prefix}Day`);
     const hidden = document.getElementById(hiddenId);
 
-    if (!year || !month || !day || !hidden) return;
+    if (!yearInput || !monthInput || !dayInput || !hidden) {
+        return;
+    }
 
-    const updateDate = () => {
+    const inputs = [yearInput, monthInput, dayInput];
 
-        const y = year.value;
-        const m = month.value;
-        const d = day.value;
+    // 数字以外を除去
+    inputs.forEach(input => {
+        input.addEventListener("input", () => {
+            input.value = input.value.replace(/\D/g, "");
+            updateDate();
+        });
+    });
 
-        if (!y || !m || !d) {
-            hidden.value = "";
+    // 日付を検証し、YYYY-MM-DD形式に変換
+    function updateDate() {
+        hidden.value = "";
+
+        const yearText = yearInput.value;
+        const monthText = monthInput.value;
+        const dayText = dayInput.value;
+
+        // すべて入力されているか確認
+        if (
+            !/^\d{4}$/.test(yearText) ||
+            !/^\d{1,2}$/.test(monthText) ||
+            !/^\d{1,2}$/.test(dayText)
+        ) {
             return;
         }
 
-        const date = new Date(
-            Number(y),
-            Number(m) - 1,
-            Number(d)
-        );
+        const year = Number(yearText);
+        const month = Number(monthText);
+        const day = Number(dayText);
 
-        // 存在しない日付は無効
+        // 月・日の範囲を確認
         if (
-            date.getFullYear() !== Number(y) ||
-            date.getMonth() !== Number(m) - 1 ||
-            date.getDate() !== Number(d)
+            year < 1 ||
+            month < 1 ||
+            month > 12 ||
+            day < 1 ||
+            day > 31
+        ) {
+            return;
+        }
+
+        // 実在する日付か確認
+        const date = new Date(0);
+        date.setHours(0, 0, 0, 0);
+        date.setFullYear(year, month - 1, day);
+
+        if (
+            date.getFullYear() !== year ||
+            date.getMonth() !== month - 1 ||
+            date.getDate() !== day
+        ) {
+            return;
+        }
+
+        // 未来の日付は無効
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (date > today) {
+            return;
+        }
+
+        // GASへの送信形式：YYYY-MM-DD
+        hidden.value =
+            `${yearText}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    }
+
+    // 月・日の入力欄から離れたときだけ1桁をゼロ埋め
+    function normalizePart(input, max, label) {
+        if (input.value === "") {
+            updateDate();
+            return;
+        }
+
+        const number = Number(input.value);
+
+        if (
+            !Number.isInteger(number) ||
+            number < 1 ||
+            number > max
         ) {
             hidden.value = "";
+
+            alert(`${label}は1～${max}で入力してください。`);
+
+            input.value = "";
+            input.focus();
+
             return;
         }
 
-        hidden.value =
-            `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-    };
+        input.value = String(number).padStart(2, "0");
 
-    year.addEventListener("change", updateDate);
-    month.addEventListener("change", updateDate);
-    day.addEventListener("change", updateDate);
+        updateDate();
+    }
+
+    monthInput.addEventListener("blur", () => {
+        normalizePart(monthInput, 12, "月");
+    });
+
+    dayInput.addEventListener("blur", () => {
+        normalizePart(dayInput, 31, "日");
+    });
+
+    yearInput.addEventListener("blur", updateDate);
 }
 
 function showCustomerForm() {
