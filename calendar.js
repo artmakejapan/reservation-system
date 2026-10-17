@@ -8,6 +8,89 @@ let businessHours = [];
 let holidays = [];
 let treatmentSlots = {};
 
+// ======================================
+// 電話・LINE固定ボタンの表示切り替え
+// ======================================
+
+function updateCalendarContactButtons() {
+
+const contactButtons =
+    document.getElementById("calendarContactButtons");
+
+const calendarSection =
+    document.getElementById("calendarSection");
+
+const customerSection =
+    document.getElementById("customerSection");
+
+const confirmSection =
+    document.getElementById("confirmSection");
+
+if (
+    !contactButtons ||
+    !calendarSection ||
+    !customerSection ||
+    !confirmSection
+) {
+    return;
+}
+
+// カレンダーが非表示ならボタンも非表示
+if (getComputedStyle(calendarSection).display === "none") {
+    contactButtons.style.display = "none";
+    return;
+}
+
+// 予約確認画面が表示されていたら非表示
+if (getComputedStyle(confirmSection).display !== "none") {
+    contactButtons.style.display = "none";
+    return;
+}
+
+const calendarRect =
+    calendarSection.getBoundingClientRect();
+
+// カレンダー・時間選択エリアが画面外なら非表示
+if (
+    calendarRect.bottom <= 0 ||
+    calendarRect.top >= window.innerHeight
+) {
+    contactButtons.style.display = "none";
+    return;
+}
+
+// お客様情報の画面が表示されている場合
+if (getComputedStyle(customerSection).display !== "none") {
+
+    const customerTop =
+        customerSection.getBoundingClientRect().top;
+
+    // お客様情報の入力画面に進んだら非表示
+    if (customerTop < window.innerHeight * 0.75) {
+        contactButtons.style.display = "none";
+        return;
+    }
+}
+
+// カレンダー・時間選択エリアでは表示
+contactButtons.style.display = "flex";
+
+}
+
+// スクロール・画面サイズ変更時に表示状態を更新
+window.addEventListener(
+"scroll",
+updateCalendarContactButtons,
+{ passive: true }
+);
+
+window.addEventListener(
+"resize",
+updateCalendarContactButtons
+);
+
+
+
 async function loadReservations() {
 
     const response = await fetch(
@@ -1013,15 +1096,13 @@ function showCustomerForm() {
 
     const form = document.getElementById("customerForm");
 
-    // 電話・LINEの固定ボタンを非表示
-const contactButtons =
-    document.getElementById("calendarContactButtons");
+    // お客様情報の画面を表示
+section.style.display = "block";
 
-if (contactButtons) {
-    contactButtons.style.display = "none";
-}
-
-    section.style.display = "block";
+// 電話・LINEボタンの表示状態を更新
+requestAnimationFrame(() => {
+    updateCalendarContactButtons();
+});
 
     if (reservationData.visit === "再診") {
 
@@ -1586,6 +1667,14 @@ function showConfirm() {
     const area = document.getElementById("confirmArea");
 
     section.style.display = "block";
+
+    // 確認画面では電話・LINEボタンを非表示
+const contactButtons =
+    document.getElementById("calendarContactButtons");
+
+if (contactButtons) {
+    contactButtons.style.display = "none";
+}
 
     // ==========================
     // 再診

@@ -255,14 +255,15 @@ if (contactButtons) {
 
 // お客様情報・確認画面は非表示
 document.getElementById("customerSection").style.display = "none";
-
-        // お客様情報・確認画面はまだ非表示
-        document.getElementById("customerSection").style.display = "none";
-
-        document.getElementById("confirmSection").style.display = "none";
+document.getElementById("confirmSection").style.display = "none";
 
         // カレンダー生成
 generateCalendar(reservationData);
+
+// カレンダー表示後にボタンの状態を更新
+requestAnimationFrame(() => {
+    updateCalendarContactButtons();
+});
 
 // カレンダーが表示されたあとにスクロール
 requestAnimationFrame(() => {
