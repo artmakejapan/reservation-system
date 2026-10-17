@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="utf-8">
@@ -6,16 +7,17 @@
 <title>よくある質問｜アートメイク</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 /* =========================================================
    ARTMAKE Manami / よくある質問
+   フォント・文字サイズ・文字色を重要事項ページに合わせる
    ========================================================= */
 :root{
   --gold:#bd9d5f;
   --red:#A64B4B;
-  --text:#333;
+  --text:#202020;
   --line:#d9d9d9;
   --bg:#fff;
   --bg-open:#fcfcfc;
@@ -39,7 +41,12 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size:15px;
+  font-weight:400;
+  line-height:2.15;
+  letter-spacing:.045em;
+  -webkit-font-smoothing:antialiased;
 }
 
 /* 上下のゴールドの帯 */
@@ -52,6 +59,7 @@ body{
 .brand{
   margin:0 0 20px;
   text-align:center;
+  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
   font-size:12px;
   font-weight:500;
   letter-spacing:.32em;
@@ -76,9 +84,11 @@ body{
   justify-content:center;
   gap:20px;
   margin:0 0 48px;
+  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
   font-size:clamp(20px,5vw,26px);
-  font-weight:500;
+  font-weight:400;
   letter-spacing:.2em;
+  color:var(--text);
 }
 
 .faq-title::before,
@@ -109,9 +119,12 @@ summary{
   align-items:flex-start;
   gap:14px;
   padding:22px 8px;
-  font-size:clamp(15px,4vw,17px);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size:17px;
+  font-weight:400;
   line-height:1.7;
   letter-spacing:.04em;
+  color:var(--text);
 }
 
 summary::-webkit-details-marker{
@@ -152,9 +165,12 @@ details[open] summary::before{
 .answer{
   margin:0;
   padding:0 8px 24px 30px;
-  font-size:clamp(14px,3.8vw,16px);
-  line-height:2;
-  letter-spacing:.03em;
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size:15px;
+  font-weight:400;
+  line-height:2.12;
+  letter-spacing:.045em;
+  color:var(--text);
 }
 
 details[open] .answer{
@@ -196,6 +212,22 @@ details[open] .answer{
   details[open] .answer{animation:none}
   summary::before{transition:none}
 }
+
+/* スマートフォン */
+@media(max-width:600px){
+  body{
+    font-size:16px;
+  }
+
+  .answer{
+    font-size:16px;
+    line-height:2.05;
+  }
+
+  summary{
+    font-size:16px;
+  }
+}
 </style>
 
 </head>
@@ -213,6 +245,7 @@ details[open] .answer{
   <div class="faq-list">
 
 <!-- 1. 料金 -->
+
 <details>
   <summary><span>Q.料金はいくらですか？</span></summary>
   <p class="answer">
@@ -222,6 +255,7 @@ details[open] .answer{
 </details>
 
 <!-- 2. 痛み -->
+
 <details>
   <summary><span>Q.痛みはありますか？</span></summary>
   <p class="answer">
@@ -230,6 +264,7 @@ details[open] .answer{
 </details>
 
 <!-- 3. 施術回数 -->
+
 <details>
   <summary><span>Q.何回で完成しますか？</span></summary>
   <p class="answer">
@@ -238,6 +273,7 @@ details[open] .answer{
 </details>
 
 <!-- 4. 持続期間 -->
+
 <details>
   <summary><span>Q.どのくらい持続しますか？</span></summary>
   <p class="answer">
@@ -246,6 +282,7 @@ details[open] .answer{
 </details>
 
 <!-- 5. ダウンタイム -->
+
 <details>
   <summary><span>Q.ダウンタイムはありますか？</span></summary>
   <p class="answer">
@@ -254,6 +291,7 @@ details[open] .answer{
 </details>
 
 <!-- 6. 修正 -->
+
 <details>
   <summary><span>Q.施術後の修正はできますか？</span></summary>
   <p class="answer">
@@ -262,6 +300,7 @@ details[open] .answer{
 </details>
 
 <!-- 7. 2回目 -->
+
 <details>
   <summary><span>Q.2回目はいつ受けられますか？</span></summary>
   <p class="answer">
@@ -270,6 +309,7 @@ details[open] .answer{
 </details>
 
 <!-- 8. メンテナンス -->
+
 <details>
   <summary><span>Q.メンテナンスは必要ですか？</span></summary>
   <p class="answer">
@@ -278,6 +318,7 @@ details[open] .answer{
 </details>
 
 <!-- 9. 所要時間 -->
+
 <details>
   <summary><span>Q.施術時間はどのくらいですか？</span></summary>
   <p class="answer">
@@ -286,6 +327,7 @@ details[open] .answer{
 </details>
 
 <!-- 10. 妊娠・授乳 -->
+
 <details>
   <summary><span>Q.妊娠中・授乳中でも受けられますか？</span></summary>
   <p class="answer">
@@ -294,6 +336,7 @@ details[open] .answer{
 </details>
 
 <!-- 11. アレルギー -->
+
 <details>
   <summary><span>Q.アレルギーがあっても受けられますか？</span></summary>
   <p class="answer">
@@ -302,6 +345,7 @@ details[open] .answer{
 </details>
 
 <!-- 12. 眉毛が少ない -->
+
 <details>
   <summary><span>Q.眉毛が少なくても施術できますか？</span></summary>
   <p class="answer">
@@ -310,6 +354,7 @@ details[open] .answer{
 </details>
 
 <!-- 13. パッチテスト -->
+
 <details>
   <summary><span>Q.パッチテストはできますか？</span></summary>
   <p class="answer">
@@ -318,6 +363,7 @@ details[open] .answer{
 </details>
 
 <!-- 14. ヘルペス -->
+
 <details>
   <summary><span>Q.ヘルペスがあっても施術できますか？</span></summary>
   <p class="answer">
@@ -326,6 +372,7 @@ details[open] .answer{
 </details>
 
 <!-- 15. 来院時のメイク -->
+
 <details>
   <summary><span>Q.メイクをして行ってもいいですか？</span></summary>
   <p class="answer">
@@ -334,6 +381,7 @@ details[open] .answer{
 </details>
 
 <!-- 16. 入浴・運動 -->
+
 <details>
   <summary><span>Q.施術後、入浴や運動はできますか？</span></summary>
   <p class="answer">
@@ -342,6 +390,7 @@ details[open] .answer{
 </details>
 
 <!-- 17. 施術後のメイク -->
+
 <details>
   <summary><span>Q.施術後、いつからメイクできますか？</span></summary>
   <p class="answer">
@@ -350,6 +399,7 @@ details[open] .answer{
 </details>
 
 <!-- 18. その他の美容施術 -->
+
 <details>
   <summary><span>Q.ほかの美容施術で注意することはありますか？</span></summary>
   <p class="answer">
@@ -363,6 +413,7 @@ details[open] .answer{
 </details>
 
 <!-- 19. 他院のアートメイク -->
+
 <details>
   <summary><span>Q.他院のアートメイクが残っていても施術できますか？</span></summary>
   <p class="answer">
@@ -371,6 +422,7 @@ details[open] .answer{
 </details>
 
 <!-- 20. リップ施術後の食事 -->
+
 <details>
   <summary><span>Q.リップ施術後の食事で気をつけることはありますか？</span></summary>
   <p class="answer">
