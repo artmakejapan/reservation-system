@@ -1,45 +1,38 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>よくある質問｜アートメイク</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
-
 <style>
 /* =========================================================
    ARTMAKE Manami / よくある質問
+   重要事項ページと文字設定を統一
    ========================================================= */
-:root{
-  --gold:#bd9d5f;
-  --red:#A64B4B;
-  --text:#333;
-  --line:#d9d9d9;
-  --bg:#fff;
-  --bg-open:#fcfcfc;
-}
 
-/* ダークモード */
-@media (prefers-color-scheme: dark){
-  :root{
-    --red:#d98a8a;
-    --text:#e6e1d6;
-    --line:#4a4a4a;
-    --bg:#1c1b19;
-    --bg-open:#22211e;
-  }
+:root{
+  --gold:#C99732;
+  --gold-dark:#A87923;
+  --red:#B85C5C;
+  --text:#202020;
+  --line:#F1F2F4;
+  --bg:#fff;
+  --bg-open:#fff;
 }
 
 /* ベース */
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size:15px;
+  font-weight:400;
+  line-height:2.15;
+  letter-spacing:.045em;
+  -webkit-font-smoothing:antialiased;
 }
 
 /* 上下のゴールドの帯 */
@@ -52,10 +45,11 @@ body{
 .brand{
   margin:0 0 20px;
   text-align:center;
+  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
   font-size:12px;
-  font-weight:500;
-  letter-spacing:.32em;
-  padding-left:.32em;
+  font-weight:400;
+  letter-spacing:.16em;
+  padding-left:.16em;
   color:var(--text);
 }
 
@@ -76,9 +70,12 @@ body{
   justify-content:center;
   gap:20px;
   margin:0 0 48px;
-  font-size:clamp(20px,5vw,26px);
-  font-weight:500;
-  letter-spacing:.2em;
+  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  font-size:clamp(22px,5vw,29px);
+  font-weight:400;
+  letter-spacing:.09em;
+  line-height:1.7;
+  color:var(--text);
 }
 
 .faq-title::before,
@@ -86,7 +83,8 @@ body{
   content:"";
   width:clamp(28px,8vw,56px);
   height:1px;
-  background:var(--text);
+  background:var(--gold);
+  flex:none;
 }
 
 /* 質問と答え */
@@ -109,9 +107,12 @@ summary{
   align-items:flex-start;
   gap:14px;
   padding:22px 8px;
-  font-size:clamp(15px,4vw,17px);
-  line-height:1.7;
-  letter-spacing:.04em;
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size:16px;
+  font-weight:600;
+  line-height:1.8;
+  letter-spacing:.045em;
+  color:var(--text);
 }
 
 summary::-webkit-details-marker{
@@ -126,7 +127,7 @@ summary span{
 
 summary:hover,
 details[open] summary{
-  color:var(--gold);
+  color:var(--gold-dark);
 }
 
 summary:focus-visible{
@@ -138,7 +139,7 @@ summary:focus-visible{
 summary::before{
   content:"";
   flex:none;
-  margin-top:.65em;
+  margin-top:.72em;
   border-style:solid;
   border-width:5px 0 5px 8px;
   border-color:transparent transparent transparent currentColor;
@@ -149,27 +150,17 @@ details[open] summary::before{
   transform:rotate(-90deg);
 }
 
+/* 回答 */
 .answer{
   margin:0;
   padding:0 8px 24px 30px;
-  font-size:clamp(14px,3.8vw,16px);
-  line-height:2;
-  letter-spacing:.03em;
-}
-
-details[open] .answer{
-  animation:open .25s ease;
-}
-
-@keyframes open{
-  from{
-    opacity:0;
-    transform:translateY(-4px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size:15px;
+  font-weight:400;
+  line-height:2.12;
+  letter-spacing:.045em;
+  color:var(--text);
+  overflow-wrap:anywhere;
 }
 
 /* キャンペーンの赤字 */
@@ -177,233 +168,86 @@ details[open] .answer{
   display:block;
   margin-top:10px;
   color:var(--red);
-  font-weight:500;
+  font-weight:600;
 }
 
 /* 最後の一文 */
 .faq-ending{
   margin:56px 0 0;
   text-align:center;
-  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
-  font-size:min(14px,calc((100vw - 40px)/28));
+  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+  font-size:14px;
+  font-weight:400;
   line-height:2.3;
+  letter-spacing:.045em;
   color:var(--red);
-  white-space:nowrap;
+  white-space:normal;
+}
+
+/* スマートフォン */
+@media(max-width:600px){
+  body{
+    font-size:16px;
+    line-height:2.05;
+  }
+
+  .band{
+    height:32px;
+  }
+
+  .faq{
+    padding:42px 18px 54px;
+  }
+
+  .brand{
+    font-size:11px;
+    line-height:1.5;
+  }
+
+  .faq-title{
+    font-size:clamp(21px,6vw,27px);
+    line-height:1.6;
+    gap:12px;
+    margin-bottom:35px;
+  }
+
+  .faq-title::before,
+  .faq-title::after{
+    width:clamp(20px,7vw,36px);
+  }
+
+  summary{
+    padding:19px 5px;
+    gap:10px;
+    font-size:16px;
+    line-height:1.8;
+  }
+
+  .answer{
+    padding:0 5px 22px 25px;
+    font-size:16px;
+    line-height:2.05;
+  }
+
+  .faq-ending{
+    margin-top:42px;
+    font-size:13px;
+    line-height:2.1;
+  }
+
+  .brand-bottom{
+    margin-top:32px;
+  }
 }
 
 /* 動きを減らす設定 */
-@media (prefers-reduced-motion: reduce){
-  details[open] .answer{animation:none}
-  summary::before{transition:none}
+@media(prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
+
+  summary::before{
+    transition:none;
+  }
 }
 </style>
-
-</head>
-
-<body>
-
-<div class="band" aria-hidden="true"></div>
-
-<section class="faq">
-
-  <p class="brand">ARTMAKE MANAMI</p>
-
-  <h2 class="faq-title">よくある質問</h2>
-
-  <div class="faq-list">
-
-<!-- 1. 料金 -->
-<details>
-  <summary><span>Q.料金はいくらですか？</span></summary>
-  <p class="answer">
-    A.通常料金は、眉・リップともに初回55,000円、2回目45,000円です。当院で施術を受けた方のメンテナンスは、1年以内33,000円、1年以降44,000円です（すべて税込）。
-    <span class="campaign">現在キャンペーン中！初回は眉38,500円、リップ33,000円（税込）です。</span>
-  </p>
-</details>
-
-<!-- 2. 痛み -->
-<details>
-  <summary><span>Q.痛みはありますか？</span></summary>
-  <p class="answer">
-    A.麻酔を使用し、できるだけ痛みを抑えながら施術します。痛みには個人差がありますので、つらいときは遠慮なくお声がけください。
-  </p>
-</details>
-
-<!-- 3. 施術回数 -->
-<details>
-  <summary><span>Q.何回で完成しますか？</span></summary>
-  <p class="answer">
-    A.色の定着には個人差がありますが、通常は2〜3回、リップは3〜5回程度の施術を重ねて仕上げていきます。1回目の施術後は、色が薄くなったり、一部が抜けたりすることがあります。2回目以降の施術で色や形を調整していきます。
-  </p>
-</details>
-
-<!-- 4. 持続期間 -->
-<details>
-  <summary><span>Q.どのくらい持続しますか？</span></summary>
-  <p class="answer">
-    A.一般的に1〜3年ほどかけて、少しずつ薄くなっていきます。色の残り方には個人差があり、色が広がったり、眉の毛並みがぼやけたりすることもあります。完全に消えるとは限らないため、きれいな状態を保つために、当院では1年を目安にメンテナンスをおすすめしています。
-  </p>
-</details>
-
-<!-- 5. ダウンタイム -->
-<details>
-  <summary><span>Q.ダウンタイムはありますか？</span></summary>
-  <p class="answer">
-    A.施術後は赤みや腫れ、痛みなどが出ることがあり、落ち着くまで約1週間が目安です。施術直後は色が濃く見えたり、一時的に色ムラや皮むけが起こったりすることもあります。リップは内出血により赤黒く見える場合がありますが、2〜3日ほどで落ち着くのが目安です。大切な予定がある方は、日程に余裕をもってご予約ください。強い痛みや腫れの悪化、膿などがある場合は、早めにご連絡ください。
-  </p>
-</details>
-
-<!-- 6. 修正 -->
-<details>
-  <summary><span>Q.施術後の修正はできますか？</span></summary>
-  <p class="answer">
-    A.施術後の返金や無償での修正は行っておりません。また、施術後のデザイン変更は難しいため、デザインや色について気になる点やご希望がございましたら、施術前にお気軽にご相談ください。
-  </p>
-</details>
-
-<!-- 7. 2回目 -->
-<details>
-  <summary><span>Q.2回目はいつ受けられますか？</span></summary>
-  <p class="answer">
-    A.1回目から2〜3か月後が目安です。肌の回復のため、最短でも4週間以上あけてください。肌の状態によっては、さらに期間をあけていただく場合があります。
-  </p>
-</details>
-
-<!-- 8. メンテナンス -->
-<details>
-  <summary><span>Q.メンテナンスは必要ですか？</span></summary>
-  <p class="answer">
-    A.基本の仕上がりが整ったあとは、1年を目安にメンテナンス（リタッチ）をおすすめしています。色の残り方には個人差がありますので、薄くなってきたと感じたらご相談ください。
-  </p>
-</details>
-
-<!-- 9. 所要時間 -->
-<details>
-  <summary><span>Q.施術時間はどのくらいですか？</span></summary>
-  <p class="answer">
-    A.眉・リップともに、1時間半〜2時間程度が目安です。施術内容や肌の状態によって前後する場合がありますので、お時間に余裕をもってお越しください。
-  </p>
-</details>
-
-<!-- 10. 妊娠・授乳 -->
-<details>
-  <summary><span>Q.妊娠中・授乳中でも受けられますか？</span></summary>
-  <p class="answer">
-    A.妊娠中、または妊娠の可能性がある方は、原則として施術をお受けいただけません。安定期で主治医の許可がある場合は、事前にご相談ください。授乳中の方も施術前に確認が必要ですので、必ず事前にお知らせください。
-  </p>
-</details>
-
-<!-- 11. アレルギー -->
-<details>
-  <summary><span>Q.アレルギーがあっても受けられますか？</span></summary>
-  <p class="answer">
-    A.アレルギーの種類や症状によっては、施術をお受けいただけない場合があります。持病がある方や、通院・治療中の方、お薬を使用中の方は、事前にお知らせください。詳しくは「アートメイクの重要事項」をご確認ください。
-  </p>
-</details>
-
-<!-- 12. 眉毛が少ない -->
-<details>
-  <summary><span>Q.眉毛が少なくても施術できますか？</span></summary>
-  <p class="answer">
-    A.眉毛が少ない方や、薄くなってきた方も施術できます。眉の状態や骨格に合わせてデザインをご提案しますので、まずはお気軽にご相談ください。
-  </p>
-</details>
-
-<!-- 13. パッチテスト -->
-<details>
-  <summary><span>Q.パッチテストはできますか？</span></summary>
-  <p class="answer">
-    A.施術前にパッチテスト（試し打ち）ができます。テストの1週間後に、テストした部分の写真をお送りいただき、肌の反応を確認します。なお、テストで異常がなくても、施術後に肌トラブルが起こる可能性があります。ご希望の方は事前にご連絡ください（別途費用がかかります）。
-  </p>
-</details>
-
-<!-- 14. ヘルペス -->
-<details>
-  <summary><span>Q.ヘルペスがあっても施術できますか？</span></summary>
-  <p class="answer">
-    A.過去にヘルペスになったことがある方は、施術をきっかけに再発する場合がありますので、必ず事前にお知らせください。症状が出ている間は施術をお受けいただけず、完全に治まってからの施術となります。必要に応じて、お薬についてご相談いただけます。施術後に水ぶくれやピリピリした症状が出た場合は、早めにご連絡ください。
-  </p>
-</details>
-
-<!-- 15. 来院時のメイク -->
-<details>
-  <summary><span>Q.メイクをして行ってもいいですか？</span></summary>
-  <p class="answer">
-    A.眉は、普段どおりの眉メイクでお越しください。デザインの参考になります。リップは口紅やティントリップを落とし、唇を保湿してお越しください。
-  </p>
-</details>
-
-<!-- 16. 入浴・運動 -->
-<details>
-  <summary><span>Q.施術後、入浴や運動はできますか？</span></summary>
-  <p class="answer">
-    A.施術後1週間〜10日程度は、激しい運動・サウナ・ホットヨガ・長時間の入浴・温泉・プール・海水浴をお控えください。感染予防と色素の定着のため、多量の飲酒や紫外線も避けてください。
-  </p>
-</details>
-
-<!-- 17. 施術後のメイク -->
-<details>
-  <summary><span>Q.施術後、いつからメイクできますか？</span></summary>
-  <p class="answer">
-    A.眉メイクは、肌の状態が落ち着いてから再開してください。リップの口紅やカラーリップは、施術後1週間はお控えください。詳しいケア方法は、施術後のご案内に沿ってお過ごしください。
-  </p>
-</details>
-
-<!-- 18. その他の美容施術 -->
-<details>
-  <summary><span>Q.ほかの美容施術で注意することはありますか？</span></summary>
-  <p class="answer">
-    A.美容施術の内容によって、必要な間隔が異なります。<br><br>
-    ・眉のボトックス：1〜2週間程度あけてください<br>
-    ・眉のブリーチ：施術日の1週間以上前にお済ませください<br>
-    ・レーザー・ピーリングなど：施術の前後1か月はお控えください<br>
-    ・その他の美容施術やマッサージ：施術後2週間はお控えください<br><br>
-    ヒアルロン酸注入・整形・レチノール配合化粧品の使用がある方は、事前にお知らせください。内容によっては当日施術をお受けいただけない場合があります。
-  </p>
-</details>
-
-<!-- 19. 他院のアートメイク -->
-<details>
-  <summary><span>Q.他院のアートメイクが残っていても施術できますか？</span></summary>
-  <p class="answer">
-    A.他院のアートメイクが残っている方も施術可能です。残っている色やデザインによっては、ご希望の仕上がりにならない場合もありますが、現在の状態を確認したうえで、お一人おひとりに合った方法をご提案します。まずはお気軽にご相談ください。
-  </p>
-</details>
-
-<!-- 20. リップ施術後の食事 -->
-<details>
-  <summary><span>Q.リップ施術後の食事で気をつけることはありますか？</span></summary>
-  <p class="answer">
-    A.お食事は可能ですが、施術後の唇はデリケートな状態です。飲み物はストローを使用し、熱い飲食物・香辛料・色の濃い飲食物はお控えください。また、施術後しばらくは生ものにもご注意ください。飲食後は唇をやさしく拭き取り、保湿して清潔に保ちましょう。
-  </p>
-</details>
-
-  </div>
-
-  <p class="faq-ending">ご不明な点がございましたら、お気軽にご相談ください。</p>
-
-  <p class="brand brand-bottom">ARTMAKE MANAMI</p>
-
-</section>
-
-<div class="band" aria-hidden="true"></div>
-
-<script>
-/* 質問を1つ開くと、ほかの質問は自動で閉じます */
-document.addEventListener('DOMContentLoaded', function () {
-  var items = document.querySelectorAll('.faq details');
-
-  items.forEach(function (d) {
-    d.addEventListener('toggle', function () {
-      if (!d.open) return;
-
-      items.forEach(function (other) {
-        if (other !== d) other.open = false;
-      });
-    });
-  });
-});
-</script>
-
-</body>
-</html>
