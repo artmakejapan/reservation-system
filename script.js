@@ -247,10 +247,11 @@ const contactButtons =
 
 // カレンダーを表示
 calendarSection.style.display = "block";
+calendarDateSelected = false;
 
-// 電話・LINEボタンを表示
+// カレンダーを開いただけではボタンを表示しない
 if (contactButtons) {
-    contactButtons.style.display = "flex";
+    contactButtons.style.display = "none";
 }
 
 // お客様情報・確認画面は非表示

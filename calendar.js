@@ -8,6 +8,9 @@ let businessHours = [];
 let holidays = [];
 let treatmentSlots = {};
 
+// 日付が選択されたかどうか
+let calendarDateSelected = false;
+
 // ======================================
 // 電話・LINE固定ボタンの表示切り替え
 // ======================================
@@ -37,6 +40,12 @@ if (
 
 // カレンダーが非表示ならボタンも非表示
 if (getComputedStyle(calendarSection).display === "none") {
+    contactButtons.style.display = "none";
+    return;
+}
+
+// 日付を選択するまではボタンを表示しない
+if (!calendarDateSelected) {
     contactButtons.style.display = "none";
     return;
 }
@@ -717,7 +726,12 @@ else{
 
                 selectedDate = btn.dataset.date;
 
-        showTimes(data);
+// 日付を選択したので電話・LINEボタンを表示可能にする
+calendarDateSelected = true;
+
+updateCalendarContactButtons();
+
+showTimes(data);
 
         // 時間表示の一番下が見える位置までスクロール
 setTimeout(() => {
