@@ -256,8 +256,6 @@ if (contactButtons) {
 // お客様情報・確認画面は非表示
 document.getElementById("customerSection").style.display = "none";
 
-document.getElementById("confirmSection").style.display = "none";
-
         // お客様情報・確認画面はまだ非表示
         document.getElementById("customerSection").style.display = "none";
 
