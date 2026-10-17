@@ -1007,11 +1007,63 @@ function setupDateSelects(hiddenId, prefix) {
     yearInput.addEventListener("blur", updateDate);
 }
 
+// ======================================
+// カレンダーに戻る
+// ======================================
+
+function returnToCalendar() {
+
+    // お客様情報・確認画面を非表示
+    document.getElementById("customerSection").style.display = "none";
+    document.getElementById("confirmSection").style.display = "none";
+
+    // カレンダーを表示
+    document.getElementById("calendarSection").style.display = "block";
+
+    // 電話・LINEボタンを再表示
+    const contactButtons =
+        document.getElementById("calendarContactButtons");
+
+    if (contactButtons) {
+        contactButtons.style.display = "flex";
+    }
+
+    // 選択済みの時間をリセット
+    selectedTime = null;
+
+    // カレンダー付近へスクロール
+    const calendarSection =
+        document.getElementById("calendarSection");
+
+    const top =
+        calendarSection.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+        top: Math.max(0, top),
+        behavior: "smooth"
+    });
+}
+
 function showCustomerForm() {
 
     const section = document.getElementById("customerSection");
 
     const form = document.getElementById("customerForm");
+
+        // 「カレンダーに戻る」ボタンの動作設定（重複登録を防止）
+form.onclick = function (event) {
+    if (event.target.closest(".back-to-calendar")) {
+        returnToCalendar();
+    }
+};
+
+    // 電話・LINEの固定ボタンを非表示
+const contactButtons =
+    document.getElementById("calendarContactButtons");
+
+if (contactButtons) {
+    contactButtons.style.display = "none";
+}
 
     section.style.display = "block";
 
@@ -1033,6 +1085,10 @@ function showCustomerForm() {
 <label>氏名（フルネーム・漢字） <span style="color:red;">*</span></label>
 <input type="text" id="customerName">
 </div>
+
+<button type="button" class="back-to-calendar">
+← カレンダーに戻る
+</button>
 
 <button class="next-form">
 確認画面へ
@@ -1263,6 +1319,10 @@ placeholder="既往歴・服薬中のお薬をご入力ください。
         <span>重要事項を確認し、内容を理解・了承しました。</span>
     </label>
 </div>
+
+<button type="button" class="back-to-calendar">
+← カレンダーに戻る
+</button>
 
 <button class="next-form">
 

@@ -235,11 +235,28 @@ updateSelectedMenuDisplay();
 
         };
 
-        // カレンダー表示
-        const calendarSection =
-            document.getElementById("calendarSection");
+        // ================================
+// カレンダー表示・固定ボタン表示
+// ================================
 
-        calendarSection.style.display = "block";
+const calendarSection =
+    document.getElementById("calendarSection");
+
+const contactButtons =
+    document.getElementById("calendarContactButtons");
+
+// カレンダーを表示
+calendarSection.style.display = "block";
+
+// 電話・LINEボタンを表示
+if (contactButtons) {
+    contactButtons.style.display = "flex";
+}
+
+// お客様情報・確認画面は非表示
+document.getElementById("customerSection").style.display = "none";
+
+document.getElementById("confirmSection").style.display = "none";
 
         // お客様情報・確認画面はまだ非表示
         document.getElementById("customerSection").style.display = "none";
