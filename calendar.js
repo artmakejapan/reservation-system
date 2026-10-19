@@ -903,7 +903,7 @@ function createDateSelects(hiddenId, prefix) {
                 aria-label="年"
                 autocomplete="off"
             >
-            <span>/</span>
+            
             <input
                 type="text"
                 id="${prefix}Month"
@@ -914,7 +914,7 @@ function createDateSelects(hiddenId, prefix) {
                 aria-label="月"
                 autocomplete="off"
             >
-            <span>/</span>
+            
             <input
                 type="text"
                 id="${prefix}Day"
