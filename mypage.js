@@ -298,6 +298,17 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        if (target === "notice") {
+            window.location.href =
+        "https://reservation-system-2r3.pages.dev/notice";
+            return;
+        }
+
+        if (target === "faq") {
+            window.location.href = "faq.html";
+            return;
+        }
+
     });
 
 });
