@@ -821,9 +821,14 @@ function showTimes(data){
     timeArea.innerHTML="";
 
     timeArea.innerHTML+=`
-        <h4 style="margin-top:20px;">
-            ${selectedDate}
-        </h4>
+        <div class="selected-date-heading" style="margin-top:20px; display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+            <h4 style="margin:0;">
+                ${selectedDate}
+            </h4>
+            <span style="font-size:12px; color:#8f8175; font-weight:400; white-space:nowrap;">
+                日時をタップしWEB予約
+            </span>
+        </div>
     `;
 
 // その日の候補時間（営業日・休診日・2メニュールール適用済み）
