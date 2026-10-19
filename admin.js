@@ -14,6 +14,66 @@ const ADMIN_BASE_URL =
     "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
 
 
+// ==================================================
+// 通信ヘルパー
+// ==================================================
+
+// 公開情報の取得（営業時間・休診日・メニュー）
+async function fetchPublic(action) {
+
+    const response =
+        await fetch(ADMIN_BASE_URL + "?action=" + action);
+
+    return await response.json();
+
+}
+
+// 個人情報の取得（管理者トークン必須）
+async function fetchAdminList(action) {
+
+    const response =
+        await fetch(
+            ADMIN_BASE_URL +
+            "?action=" + action +
+            "&adminToken=" + encodeURIComponent(window.adminToken || "")
+        );
+
+    const result = await response.json();
+
+    if (!Array.isArray(result)) {
+        throw new Error("AUTH");
+    }
+
+    return result;
+
+}
+
+// 管理者操作の送信
+async function postAdmin(body) {
+
+    const response =
+        await fetch(ADMIN_BASE_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(body)
+        });
+
+    return await response.json();
+
+}
+
+function showLoginAgain() {
+
+    window.adminToken = "";
+
+    document.getElementById("adminArea").style.display = "none";
+    document.getElementById("loginArea").style.display = "block";
+
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // ================================
@@ -36,27 +96,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
 
-                const response =
-                    await fetch(ADMIN_BASE_URL, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "text/plain;charset=utf-8"
-                        },
-                        body: JSON.stringify({
-                            action: "verifyAdmin",
-                            password: password
-                        })
-                    });
-
-                const result =
-                    await response.json();
+                const result = await postAdmin({
+                    action: "verifyAdmin",
+                    password: password
+                });
 
                 if (result.result === true) {
 
                     // 管理者トークンを保持（以降の管理操作で使用）
                     window.adminToken = result.token || "";
 
-                    loadReservations();
+                    document.getElementById("adminPassword").value = "";
+
+                    await loadReservations();
 
                 } else {
 
@@ -206,51 +258,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadReservations() {
 
+    try {
+
+        // 個人情報（管理者トークンが必要）
+        window.reservationList =
+            await fetchAdminList("getReservationList");
+
+        window.customerHistoryList =
+            await fetchAdminList("customersearch");
+
+        window.lineUsers =
+            await fetchAdminList("lineusers");
+
+        // 公開情報
+        treatmentMenus =
+            await fetchPublic("treatments");
+
+        window.businessHours =
+            await fetchPublic("businesshours");
+
+        window.holidays =
+            await fetchPublic("holidays");
+
+    } catch (error) {
+
+        console.error("管理画面の読み込みエラー:", error);
+
+        if (error && error.message === "AUTH") {
+
+            alert("ログインの有効期限が切れました。もう一度ログインしてください。");
+
+            showLoginAgain();
+
+        } else {
+
+            alert("データを読み込めませんでした。通信環境をご確認のうえ、もう一度お試しください。");
+
+        }
+
+        return;
+
+    }
+
     document.getElementById("loginArea").style.display = "none";
     document.getElementById("adminArea").style.display = "block";
 
-    const reservationResponse =
-        await fetch(ADMIN_BASE_URL + "?action=getReservationList");
-
-window.reservationList =
-    await reservationResponse.json();
-
-const customerHistoryResponse =
-    await fetch(
-        ADMIN_BASE_URL + "?action=customersearch"
-    );
-
-window.customerHistoryList =
-    await customerHistoryResponse.json();
-
-const treatmentResponse =
-    await fetch(ADMIN_BASE_URL + "?action=treatments");
-
-treatmentMenus =
-    await treatmentResponse.json();
-
-const businessResponse =
-    await fetch(ADMIN_BASE_URL + "?action=businesshours");
-
-window.businessHours =
-    await businessResponse.json();
-
-const holidayResponse =
-    await fetch(ADMIN_BASE_URL + "?action=holidays");
-
-window.holidays =
-    await holidayResponse.json();
-
-const lineUserResponse =
-    await fetch(ADMIN_BASE_URL + "?action=lineusers");
-
-window.lineUsers =
-    await lineUserResponse.json();
-
-buildCustomerSearchList();
-buildLineUserOptions();
-buildNewMenuOptions();
-renderReservations();
+    buildCustomerSearchList();
+    buildLineUserOptions();
+    buildNewMenuOptions();
+    renderReservations();
 
 }
 
@@ -517,10 +573,10 @@ function handleNewCustomerSelection() {
 
     selectedNewCustomer = customer.source;
 
-applyCustomerToNewForm({
-    ...customer.source,
-    lineUserId: customer.lineUserId
-});
+    applyCustomerToNewForm({
+        ...customer.source,
+        lineUserId: customer.lineUserId
+    });
 
 }
 
@@ -744,10 +800,11 @@ function updateNewTimeOptions(
 
     }
 
+    // 初診は「first」、それ以外（再診）は「repeat」
     const sourceTimes =
-        visit === "再診"
-            ? business.repeat
-            : business.first;
+        visit === "初診"
+            ? business.first
+            : business.repeat;
 
     let times =
         String(sourceTimes || "")
@@ -1066,17 +1123,8 @@ async function submitNewReservation() {
 
     try {
 
-        const response =
-            await fetch(ADMIN_BASE_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-                body: JSON.stringify(newData)
-            });
-
         const result =
-            await response.json();
+            await postAdmin(newData);
 
         if (result.result === "success") {
 
@@ -1236,12 +1284,12 @@ function renderReservations() {
 
 
     const today =
-    new Date().toLocaleDateString(
-        "sv-SE",
-        {
-            timeZone: "Asia/Tokyo"
-        }
-    );
+        new Date().toLocaleDateString(
+            "sv-SE",
+            {
+                timeZone: "Asia/Tokyo"
+            }
+        );
 
 
     const area =
@@ -1407,14 +1455,14 @@ function createReservationCard(item) {
             <div>
                 <strong>▫️予約日</strong><br>
                 <div class="time-box">
-                ${item.date}
+                ${escapeHtml(item.date)}
                 </div>
             </div>
 
             <div>
                 <strong>▫️開始時間</strong><br>
                 <div class="time-box">
-                    ${item.time}
+                    ${escapeHtml(item.time)}
                 </div>
             </div>
 
@@ -1445,13 +1493,13 @@ function createReservationCard(item) {
             : `
                 <button
                     class="editButton"
-                    data-id="${item.id}">
+                    data-id="${escapeHtml(item.id)}">
                     変更
                 </button>
 
                 <button
                     class="cancelButton"
-                    data-id="${item.id}">
+                    data-id="${escapeHtml(item.id)}">
                     キャンセル
                 </button>
             `
@@ -1483,53 +1531,53 @@ function openEditForm(reservation) {
     document.getElementById("editName").value =
         reservation.name || "";
 
-        const editLineUser =
-    document.getElementById("editLineUser");
+    const editLineUser =
+        document.getElementById("editLineUser");
 
-if (editLineUser) {
+    if (editLineUser) {
 
-    const lineUserId =
-        String(reservation.lineUserId || "").trim();
+        const lineUserId =
+            String(reservation.lineUserId || "").trim();
 
-    // LINE_Usersに存在するか確認
-    const exists =
-        [...editLineUser.options]
-            .some(option =>
-                option.value === lineUserId
-            );
+        // LINE_Usersに存在するか確認
+        const exists =
+            [...editLineUser.options]
+                .some(option =>
+                    option.value === lineUserId
+                );
 
-    // LINE_Usersには存在しないが、
-    // Reservationsに過去のLINE IDが保存されている場合
-    const alreadyAdded =
-        [...editLineUser.options]
-            .some(option =>
-                option.value === lineUserId &&
-                option.textContent === "過去予約のLINEアカウント"
-            );
+        // LINE_Usersには存在しないが、
+        // Reservationsに過去のLINE IDが保存されている場合
+        const alreadyAdded =
+            [...editLineUser.options]
+                .some(option =>
+                    option.value === lineUserId &&
+                    option.textContent === "過去予約のLINEアカウント"
+                );
 
-    if (
-        lineUserId &&
-        !exists &&
-        !alreadyAdded
-    ) {
+        if (
+            lineUserId &&
+            !exists &&
+            !alreadyAdded
+        ) {
 
-        const option =
-            document.createElement("option");
+            const option =
+                document.createElement("option");
 
-        option.value =
+            option.value =
+                lineUserId;
+
+            option.textContent =
+                "過去予約のLINEアカウント";
+
+            editLineUser.appendChild(option);
+
+        }
+
+        editLineUser.value =
             lineUserId;
 
-        option.textContent =
-            "過去予約のLINEアカウント";
-
-        editLineUser.appendChild(option);
-
     }
-
-    editLineUser.value =
-        lineUserId;
-
-}
 
 
     document.getElementById("editDate").value =
@@ -1600,87 +1648,87 @@ if (editLineUser) {
     document.getElementById("editReferrer").value =
         reservation.referrer || "";
 
-// ================================
-// 施術歴
-// ================================
+    // ================================
+    // 施術歴
+    // ================================
 
-const historySelector =
-    document.getElementById("editHistorySelector");
+    const historySelector =
+        document.getElementById("editHistorySelector");
 
-const historySelected =
-    document.getElementById("editHistorySelected");
+    const historySelected =
+        document.getElementById("editHistorySelected");
 
-historySelected.innerHTML = "";
-
-
-// 既存の施術歴を復元
-const existingHistories = [
-    {
-        name: "眉",
-        history: reservation.eyebrowHistory,
-        date: reservation.eyebrowHistoryDate
-    },
-    {
-        name: "アイライン",
-        history: reservation.eyelineHistory,
-        date: reservation.eyelineHistoryDate
-    },
-    {
-        name: "リップ",
-        history: reservation.lipHistory,
-        date: reservation.lipHistoryDate
-    },
-    {
-        name: "ヘアライン",
-        history: reservation.hairlineHistory,
-        date: reservation.hairlineHistoryDate
-    },
-    {
-        name: "その他",
-        history: reservation.otherHistory,
-        date: reservation.otherHistoryDate
-    }
-];
-
-existingHistories.forEach(item => {
-
-    if (item.history === "あり") {
-
-        addHistoryItem(
-            item.name,
-            item.date || ""
-        );
-
-    }
-
-});
+    historySelected.innerHTML = "";
 
 
-// プルダウンから追加
-historySelector.onchange = () => {
+    // 既存の施術歴を復元
+    const existingHistories = [
+        {
+            name: "眉",
+            history: reservation.eyebrowHistory,
+            date: reservation.eyebrowHistoryDate
+        },
+        {
+            name: "アイライン",
+            history: reservation.eyelineHistory,
+            date: reservation.eyelineHistoryDate
+        },
+        {
+            name: "リップ",
+            history: reservation.lipHistory,
+            date: reservation.lipHistoryDate
+        },
+        {
+            name: "ヘアライン",
+            history: reservation.hairlineHistory,
+            date: reservation.hairlineHistoryDate
+        },
+        {
+            name: "その他",
+            history: reservation.otherHistory,
+            date: reservation.otherHistoryDate
+        }
+    ];
 
-    const value =
-        historySelector.value;
+    existingHistories.forEach(item => {
 
-    if (!value) return;
+        if (item.history === "あり") {
 
-    // すでに追加されていたら何もしない
-    const exists =
-        [...historySelected.querySelectorAll(".history-item")]
-            .some(item =>
-                item.dataset.history === value
+            addHistoryItem(
+                item.name,
+                item.date || ""
             );
 
-    if (!exists) {
+        }
 
-        addHistoryItem(value, "");
+    });
 
-    }
 
-    // 選択を初期状態に戻す
-    historySelector.value = "";
+    // プルダウンから追加
+    historySelector.onchange = () => {
 
-};
+        const value =
+            historySelector.value;
+
+        if (!value) return;
+
+        // すでに追加されていたら何もしない
+        const exists =
+            [...historySelected.querySelectorAll(".history-item")]
+                .some(item =>
+                    item.dataset.history === value
+                );
+
+        if (!exists) {
+
+            addHistoryItem(value, "");
+
+        }
+
+        // 選択を初期状態に戻す
+        historySelector.value = "";
+
+    };
 
     document.getElementById("editMedicalHistory").value =
         reservation.medicalHistory || "";
@@ -1909,76 +1957,77 @@ async function saveEdit() {
     }
 
 
-    const baseUrl =
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
-
-
     // ================================
     // 保存
     // ================================
 
-    const response =
-        await fetch(baseUrl, {
+    const saveButton =
+        document.getElementById("saveEditButton");
 
-            method: "POST",
+    saveButton.disabled = true;
 
-            headers: {
-                "Content-Type": "text/plain"
-            },
+    try {
 
-            body: JSON.stringify(newData)
-
-        });
+        const result =
+            await postAdmin(newData);
 
 
-    const result =
-        await response.json();
+        // ================================
+        // 保存成功
+        // ================================
+
+        if (result.result === "success") {
+
+            const dateChanged =
+                oldDate !== newData.date;
+
+            const timeChanged =
+                oldTime !== newData.time;
 
 
-    // ================================
-    // 保存成功
-    // ================================
+            if (dateChanged || timeChanged) {
 
-    if (result.result === "success") {
+                alert(
+                    "予約を変更しました。\n\n" +
+                    "予約日時が変更されたため、お客様へLINE通知を送信しました。"
+                );
 
-        const dateChanged =
-            oldDate !== newData.date;
+            } else {
 
-        const timeChanged =
-            oldTime !== newData.time;
+                alert("予約内容を変更しました。");
+
+            }
 
 
-        if (dateChanged || timeChanged) {
+            document
+                .getElementById("editArea")
+                .style.display = "none";
 
-            alert(
-                "予約を変更しました。\n\n" +
-                "予約日時が変更されたため、お客様へLINE通知を送信しました。"
-            );
+
+            editingReservation = null;
+
+
+            await loadReservations();
+
 
         } else {
 
-            alert("予約内容を変更しました。");
+            alert(
+                result.message ||
+                "変更できませんでした。"
+            );
 
         }
 
+    } catch (error) {
 
-        document
-            .getElementById("editArea")
-            .style.display = "none";
+        console.error("予約変更エラー:", error);
 
+        alert("変更できませんでした。通信環境をご確認ください。");
 
-        editingReservation = null;
+    } finally {
 
-
-        await loadReservations();
-
-
-    } else {
-
-        alert(
-            result.message ||
-            "変更できませんでした。"
-        );
+        saveButton.disabled = false;
 
     }
 
@@ -1995,21 +2044,10 @@ async function cancelReservation(id) {
         return;
     }
 
+    try {
 
-    const baseUrl =
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
-
-
-    const response =
-        await fetch(baseUrl, {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "text/plain"
-            },
-
-            body: JSON.stringify({
+        const result =
+            await postAdmin({
 
                 action: "cancel",
 
@@ -2017,27 +2055,29 @@ async function cancelReservation(id) {
 
                 reservationId: id
 
-            })
-
-        });
+            });
 
 
-    const result =
-        await response.json();
+        if (result.result === "success") {
 
+            alert("キャンセルしました。");
 
-    if (result.result === "success") {
+            await loadReservations();
 
-        alert("キャンセルしました。");
+        } else {
 
-        loadReservations();
+            alert(
+                result.message ||
+                "キャンセルできませんでした。"
+            );
 
-    } else {
+        }
 
-        alert(
-            result.message ||
-            "キャンセルできませんでした。"
-        );
+    } catch (error) {
+
+        console.error("キャンセルエラー:", error);
+
+        alert("キャンセルできませんでした。通信環境をご確認ください。");
 
     }
 
@@ -2125,10 +2165,11 @@ function updateEditTimeOptions(
     }
 
 
+    // 初診は「first」、それ以外（再診）は「repeat」
     const sourceTimes =
-        visit === "再診"
-            ? business.repeat
-            : business.first;
+        visit === "初診"
+            ? business.first
+            : business.repeat;
 
 
     let times =
@@ -2173,7 +2214,7 @@ function updateEditTimeOptions(
 
 function escapeHtml(value) {
 
-    return String(value || "")
+    return String(value === null || value === undefined ? "" : value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -2266,41 +2307,6 @@ function getHistoryData() {
 }
 
 // ==================================================
-// 施術歴日の表示・非表示
-// ==================================================
-
-function updateHistoryDateVisibility(
-    historyElement,
-    dateElement
-) {
-
-    if (!historyElement || !dateElement) return;
-
-    if (historyElement.value === "あり") {
-
-        dateElement.style.display = "block";
-
-        if (dateElement.previousElementSibling) {
-            dateElement.previousElementSibling.style.display = "block";
-        }
-
-    } else {
-
-        dateElement.style.display = "none";
-
-        if (dateElement.previousElementSibling) {
-            dateElement.previousElementSibling.style.display = "none";
-        }
-
-        if (historyElement.value === "なし") {
-            dateElement.value = "";
-        }
-
-    }
-
-}
-
-// ==================================================
 // 施術歴項目追加
 // ==================================================
 
@@ -2348,4 +2354,3 @@ function addHistoryItem(name, dateValue = "") {
     container.appendChild(item);
 
 }
-

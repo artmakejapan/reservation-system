@@ -1,7 +1,11 @@
 // ======================================
 // Calendar.js
 // アートメイクまなみ予約システム
+// Ver1.1（安全性修正版）
 // ======================================
+
+const GAS_URL =
+    "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec";
 
 let reservedSlots = [];
 let businessHours = [];
@@ -17,124 +21,100 @@ let calendarDateSelected = false;
 
 function updateCalendarContactButtons() {
 
-const contactButtons =
-    document.getElementById("calendarContactButtons");
+    const contactButtons =
+        document.getElementById("calendarContactButtons");
 
-const calendarSection =
-    document.getElementById("calendarSection");
+    const calendarSection =
+        document.getElementById("calendarSection");
 
-const customerSection =
-    document.getElementById("customerSection");
+    const customerSection =
+        document.getElementById("customerSection");
 
-const confirmSection =
-    document.getElementById("confirmSection");
+    const confirmSection =
+        document.getElementById("confirmSection");
 
-if (
-    !contactButtons ||
-    !calendarSection ||
-    !customerSection ||
-    !confirmSection
-) {
-    return;
-}
+    if (
+        !contactButtons ||
+        !calendarSection ||
+        !customerSection ||
+        !confirmSection
+    ) {
+        return;
+    }
 
-// カレンダーが非表示ならボタンも非表示
-if (getComputedStyle(calendarSection).display === "none") {
-    contactButtons.style.display = "none";
-    return;
-}
-
-// 日付を選択するまではボタンを表示しない
-if (!calendarDateSelected) {
-    contactButtons.style.display = "none";
-    return;
-}
-
-// 予約確認画面が表示されていたら非表示
-if (getComputedStyle(confirmSection).display !== "none") {
-    contactButtons.style.display = "none";
-    return;
-}
-
-const calendarRect =
-    calendarSection.getBoundingClientRect();
-
-// カレンダー・時間選択エリアが画面外なら非表示
-if (
-    calendarRect.bottom <= 0 ||
-    calendarRect.top >= window.innerHeight
-) {
-    contactButtons.style.display = "none";
-    return;
-}
-
-// お客様情報の画面が表示されている場合
-if (getComputedStyle(customerSection).display !== "none") {
-
-    const customerTop =
-        customerSection.getBoundingClientRect().top;
-
-    // お客様情報の入力画面に進んだら非表示
-    if (customerTop < window.innerHeight * 0.75) {
+    // カレンダーが非表示ならボタンも非表示
+    if (getComputedStyle(calendarSection).display === "none") {
         contactButtons.style.display = "none";
         return;
     }
-}
 
-// カレンダー・時間選択エリアでは表示
-contactButtons.style.display = "flex";
+    // 日付を選択するまではボタンを表示しない
+    if (!calendarDateSelected) {
+        contactButtons.style.display = "none";
+        return;
+    }
+
+    // 予約確認画面が表示されていたら非表示
+    if (getComputedStyle(confirmSection).display !== "none") {
+        contactButtons.style.display = "none";
+        return;
+    }
+
+    const calendarRect =
+        calendarSection.getBoundingClientRect();
+
+    // カレンダー・時間選択エリアが画面外なら非表示
+    if (
+        calendarRect.bottom <= 0 ||
+        calendarRect.top >= window.innerHeight
+    ) {
+        contactButtons.style.display = "none";
+        return;
+    }
+
+    // お客様情報の画面が表示されている場合
+    if (getComputedStyle(customerSection).display !== "none") {
+
+        const customerTop =
+            customerSection.getBoundingClientRect().top;
+
+        // お客様情報の入力画面に進んだら非表示
+        if (customerTop < window.innerHeight * 0.75) {
+            contactButtons.style.display = "none";
+            return;
+        }
+    }
+
+    // カレンダー・時間選択エリアでは表示
+    contactButtons.style.display = "flex";
 
 }
 
 // スクロール・画面サイズ変更時に表示状態を更新
 window.addEventListener(
-"scroll",
-updateCalendarContactButtons,
-{ passive: true }
+    "scroll",
+    updateCalendarContactButtons,
+    { passive: true }
 );
 
 window.addEventListener(
-"resize",
-updateCalendarContactButtons
+    "resize",
+    updateCalendarContactButtons
 );
 
 
-
+// 予約状況だけを最新にする（予約エラー後などに使用）
 async function loadReservations() {
 
-    const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=reservations"
-    );
+    const response = await fetch(GAS_URL + "?action=reservations");
 
     reservedSlots = await response.json();
 
 }
 
-async function loadBusinessHours() {
-
-    const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=businesshours"
-    );
-
-    businessHours = await response.json();
-
-}
-
-async function loadHolidays() {
-
-    const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=holidays"
-    );
-
-    holidays = await response.json();
-
-}
-
 async function loadInitialData() {
 
-    const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec?action=init"
-    );
+    const response = await fetch(GAS_URL + "?action=init");
 
     const data = await response.json();
 
@@ -266,7 +246,11 @@ async function loadInitialData() {
 let customerData = {};
 let selectedTime = null;
 let selectedDate = null;
+
+// 月送りがずれないよう、表示月は必ず「1日」で持つ
 let currentDate = new Date();
+currentDate.setDate(1);
+
 const baseDate = new Date();
 
 baseDate.setDate(1);
@@ -290,24 +274,19 @@ function createLocalDate(date, time) {
 
 }
 
-function getRequiredSlots(){
+function getRequiredSlots() {
 
     let total = 0;
 
-
-    reservationData.menus.forEach(menu=>{
-
+    reservationData.menus.forEach(menu => {
 
         total += treatmentSlots[menu] || 1;
 
-
     });
-
 
     return total;
 
 }
-
 
 
 // ================================================
@@ -370,8 +349,9 @@ function getDayTimes(dateString, visit) {
         ? row.first
         : row.repeat;
 
+    // サーバー側と同じく「,」「、」の両方で区切る
     return String(source || "")
-        .split(",")
+        .split(/[,、]/)
         .map(t => t.trim())
         .filter(Boolean);
 
@@ -423,80 +403,63 @@ function getReservableTimes(dateString, visit) {
 }
 
 
-
 function canReserve(date, time) {
 
     const requiredSlots = getRequiredSlots();
 
-
     // 必要時間（分）
     const duration = requiredSlots * 120;
 
-
     const start =
-    createLocalDate(date, time);
-
+        createLocalDate(date, time);
 
     const end =
-    new Date(start);
+        new Date(start);
 
     end.setMinutes(
         end.getMinutes() + duration
     );
 
-
     // 既存予約チェック
 
-    for(let i = 0; i < reservedSlots.length; i++){
-
+    for (let i = 0; i < reservedSlots.length; i++) {
 
         const item = reservedSlots[i];
 
-
-        if(item.date !== date){
+        if (item.date !== date) {
 
             continue;
 
         }
 
-
         const bookedStart =
-        createLocalDate(date, item.time);
-
+            createLocalDate(date, item.time);
 
         const bookedDuration =
-        item.slotCount ? item.slotCount * 120 : 120;
-
+            item.slotCount ? item.slotCount * 120 : 120;
 
         const bookedEnd =
-        new Date(bookedStart);
-
+            new Date(bookedStart);
 
         bookedEnd.setMinutes(
             bookedEnd.getMinutes()
             + bookedDuration
         );
 
-
-
         // 時間が重なっているか
 
-        if(
+        if (
             start < bookedEnd &&
             end > bookedStart
-        ){
+        ) {
 
             return false;
 
         }
 
-
     }
 
-
-
     return true;
-
 
 }
 
@@ -551,127 +514,98 @@ function drawCalendar(date, data) {
             <div>土</div>
     `;
 
-    for(let i=0;i<firstDay.getDay();i++){
+    for (let i = 0; i < firstDay.getDay(); i++) {
 
         html += `<div></div>`;
 
     }
 
-   for (let d = 1; d <= lastDay.getDate(); d++) {
+    for (let d = 1; d <= lastDay.getDate(); d++) {
 
-    const date = new Date(year, month, d);
+        const date = new Date(year, month, d);
 
-    const day = date.getDay();
+        const day = date.getDay();
 
-    // 今日の日付（時刻は0:00にする）
-const today = new Date();
+        // 今日の日付（時刻は0:00にする）
+        const today = new Date();
 
-today.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
 
-date.setHours(0, 0, 0, 0);
+        date.setHours(0, 0, 0, 0);
 
-// 翌日以降のみ予約可能
-const tomorrow = new Date(today);
+        // 翌日以降のみ予約可能
+        const tomorrow = new Date(today);
 
-tomorrow.setDate(today.getDate() + 1);
+        tomorrow.setDate(today.getDate() + 1);
 
-const future = date >= tomorrow;
+        const future = date >= tomorrow;
 
-const dateString =
-    `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+        const dateString =
+            `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 
-const holiday = holidays.includes(dateString);
+        const holiday = holidays.includes(dateString);
 
-// 営業曜日・休診日判定（ルールは RESERVATION_RULES に一元化）
-const reservable =
-    RESERVATION_RULES.openDays.includes(day) &&
-    !holiday;
+        // 営業曜日・休診日判定（ルールは RESERVATION_RULES に一元化）
+        const reservable =
+            RESERVATION_RULES.openDays.includes(day) &&
+            !holiday;
 
-// この日の営業時間（初診/再診別）
-const dayTimes = getDayTimes(dateString, data.visit);
+        // この日の営業時間（初診/再診別）
+        const dayTimes = getDayTimes(dateString, data.visit);
 
-// 2メニューの開始時間ルールを適用した候補
-const times = filterTwoMenuRule(dayTimes, date);
+        // 2メニューの開始時間ルールを適用した候補
+        const times = filterTwoMenuRule(dayTimes, date);
 
-// ================================================
-// カレンダー色分け用：実質枠数を計算
-// ================================================
+        // ================================================
+        // カレンダー色分け用：実質枠数を計算
+        // ================================================
 
-// 初診は3枠、再診は4枠
-const maxSlots =
-    RESERVATION_RULES.maxSlots[data.visit] || 4;
+        // 初診は3枠、再診は4枠
+        const maxSlots =
+            RESERVATION_RULES.maxSlots[data.visit] || 4;
 
-// 各実質枠の代表開始時間
-const slotTimes =
-    RESERVATION_RULES.slotTimes[data.visit] || [];
+        // 各実質枠の代表開始時間
+        const slotTimes =
+            RESERVATION_RULES.slotTimes[data.visit] || [];
 
-// 実質枠ごとの空き状況を確認
-// （times には 2メニュールール適用済み）
-let remain = 0;
+        // 実質枠ごとの空き状況を確認
+        // （times には 2メニュールール適用済み）
+        let remain = 0;
 
-slotTimes.forEach(time => {
+        slotTimes.forEach(time => {
 
-    if (
-        times.includes(time) &&
-        canReserve(dateString, time)
-    ) {
-        remain++;
-    }
+            if (
+                times.includes(time) &&
+                canReserve(dateString, time)
+            ) {
+                remain++;
+            }
 
-});
+        });
 
-// 念のため上限を超えないようにする
-remain = Math.min(remain, maxSlots);
+        // 念のため上限を超えないようにする
+        remain = Math.min(remain, maxSlots);
 
-const full =
-reservable &&
-future &&
-times.length > 0 &&
-remain === 0;
-
-
-if(reservable && future && !full){
-
-    let colorClass = "";
-
-// ================================================
-// 残り枠の色分け
-// ================================================
-
-if (data.visit === "初診") {
-
-    // 初診
-    // 残り1枠 → 赤
-    if (remain === 1) {
-        colorClass = "one-left";
-
-    // 残り2枠 → 黄色
-    } else if (remain === 2) {
-        colorClass = "two-left";
-    }
-
-    // 残り3枠以上 → colorClassなし
-    // → 通常のベージュ
-
-} else {
-
-    // 再診
-// 残り1枠 → 赤
-if (remain === 1) {
-    colorClass = "one-left";
-
-// 残り2枠 → 黄色
-} else if (remain === 2) {
-    colorClass = "two-left";
-}
-
-// 残り3〜4枠 → colorClassなし
-// → 元のベージュ
-}
+        const full =
+            reservable &&
+            future &&
+            times.length > 0 &&
+            remain === 0;
 
 
+        if (reservable && future && !full) {
 
-    html+=`
+            let colorClass = "";
+
+            // 残り枠の色分け
+            // 残り1枠 → 赤 / 残り2枠 → 黄色 / それ以上 → 通常のベージュ
+            if (remain === 1) {
+                colorClass = "one-left";
+            } else if (remain === 2) {
+                colorClass = "two-left";
+            }
+
+            html += `
     <button
     class="day-button ${colorClass}"
     data-date="${dateString}">
@@ -679,11 +613,11 @@ if (remain === 1) {
     </button>
     `;
 
-}
+        }
 
-else if(full){
+        else if (full) {
 
-    html += `
+            html += `
     <button
         class="day-button full"
         disabled>
@@ -691,10 +625,10 @@ else if(full){
     </button>
 `;
 
-}
-else{
+        }
+        else {
 
-    html+=`
+            html += `
     <button
     class="day-button"
     disabled>
@@ -702,9 +636,9 @@ else{
     </button>
     `;
 
-}
+        }
 
-}
+    }
 
     html += `</div>`;
 
@@ -712,47 +646,47 @@ else{
 
     timeArea.innerHTML = "";
 
-    document.querySelectorAll(".day-button:not(:disabled)").forEach(btn=>{
+    document.querySelectorAll(".day-button:not(:disabled)").forEach(btn => {
 
-    btn.addEventListener("click",()=>{
+        btn.addEventListener("click", () => {
 
-        document.querySelectorAll(".day-button").forEach(item=>{
+            document.querySelectorAll(".day-button").forEach(item => {
 
-            item.classList.remove("selected");
+                item.classList.remove("selected");
+
+            });
+
+            btn.classList.add("selected");
+
+            selectedDate = btn.dataset.date;
+
+            // 日付を選択したので電話・LINEボタンを表示可能にする
+            calendarDateSelected = true;
+
+            updateCalendarContactButtons();
+
+            showTimes(data);
+
+            // 時間表示の一番下が見える位置までスクロール
+            setTimeout(() => {
+                const timeArea = document.getElementById("timeArea");
+
+                const bottom =
+                    timeArea.getBoundingClientRect().bottom +
+                    window.scrollY;
+
+                const target =
+                    bottom - window.innerHeight + 40;
+
+                window.scrollTo({
+                    top: Math.max(0, target),
+                    behavior: "smooth"
+                });
+            }, 100);
 
         });
 
-        btn.classList.add("selected");
-
-                selectedDate = btn.dataset.date;
-
-// 日付を選択したので電話・LINEボタンを表示可能にする
-calendarDateSelected = true;
-
-updateCalendarContactButtons();
-
-showTimes(data);
-
-        // 時間表示の一番下が見える位置までスクロール
-setTimeout(() => {
-    const timeArea = document.getElementById("timeArea");
-
-    const bottom =
-        timeArea.getBoundingClientRect().bottom +
-        window.scrollY;
-
-    const target =
-    bottom - window.innerHeight + 40;
-
-    window.scrollTo({
-        top: Math.max(0, target),
-        behavior: "smooth"
     });
-}, 100);
-
-    });
-
-});
 
 }
 
@@ -764,63 +698,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("prevMonth").addEventListener("click", () => {
 
-       const prev = new Date(currentDate);
+        // 必ず「月の1日」で計算する（31日などで月が飛ばないように）
+        const prev = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth() - 1,
+            1
+        );
 
-prev.setMonth(prev.getMonth() - 1);
+        if (
+            prev.getFullYear() < baseDate.getFullYear() ||
+            (
+                prev.getFullYear() === baseDate.getFullYear() &&
+                prev.getMonth() < baseDate.getMonth()
+            )
+        ) {
+            return;
+        }
 
-if (
-    prev.getFullYear() < baseDate.getFullYear() ||
-    (
-        prev.getFullYear() === baseDate.getFullYear() &&
-        prev.getMonth() < baseDate.getMonth()
-    )
-){
-    return;
-}
+        currentDate = prev;
 
-currentDate = prev;
-
-drawCalendar(currentDate, reservationData);
+        drawCalendar(currentDate, reservationData);
 
     });
 
     document.getElementById("nextMonth").addEventListener("click", () => {
 
-       const next = new Date(currentDate);
+        const next = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth() + 1,
+            1
+        );
 
-next.setMonth(next.getMonth() + 1);
+        // 表示できるのは、今月から2か月先まで
+        const limit = new Date(
+            baseDate.getFullYear(),
+            baseDate.getMonth() + 2,
+            1
+        );
 
-const limit = new Date(baseDate);
+        if (
+            next.getFullYear() > limit.getFullYear() ||
+            (
+                next.getFullYear() === limit.getFullYear() &&
+                next.getMonth() > limit.getMonth()
+            )
+        ) {
+            return;
+        }
 
-limit.setMonth(limit.getMonth() + 2);
+        currentDate = next;
 
-if (
-    next.getFullYear() > limit.getFullYear() ||
-    (
-        next.getFullYear() === limit.getFullYear() &&
-        next.getMonth() > limit.getMonth()
-    )
-){
-    return;
-}
-
-currentDate = next;
-
-drawCalendar(currentDate, reservationData);
+        drawCalendar(currentDate, reservationData);
 
     });
 
 });
 
-function showTimes(data){
+function showTimes(data) {
 
-    const timeArea=document.getElementById("timeArea");
+    const timeArea = document.getElementById("timeArea");
 
-    const date = createLocalDate(selectedDate, "00:00");
+    timeArea.innerHTML = "";
 
-    timeArea.innerHTML="";
-
-    timeArea.innerHTML+=`
+    timeArea.innerHTML += `
         <div class="selected-date-heading" style="margin-top:20px; display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;">
             <h4 style="margin:0;">
                 ${selectedDate}
@@ -831,14 +771,14 @@ function showTimes(data){
         </div>
     `;
 
-// その日の候補時間（営業日・休診日・2メニュールール適用済み）
-let availableTimes =
-    getReservableTimes(selectedDate, data.visit)
-        .filter(time => canReserve(selectedDate, time));
+    // その日の候補時間（営業日・休診日・2メニュールール適用済み）
+    let availableTimes =
+        getReservableTimes(selectedDate, data.visit)
+            .filter(time => canReserve(selectedDate, time));
 
-if (availableTimes.length === 0) {
+    if (availableTimes.length === 0) {
 
-    timeArea.innerHTML += `
+        timeArea.innerHTML += `
 
         <p style="margin-top:20px;color:#c00;font-weight:bold;">
 
@@ -848,27 +788,27 @@ if (availableTimes.length === 0) {
 
     `;
 
-    return;
+        return;
 
-}
+    }
 
     // 時間表示
-const earlyTimes = availableTimes.filter(time => time < "16:15");
-const lateTimes = availableTimes.filter(time => time >= "16:15");
+    const earlyTimes = availableTimes.filter(time => time < "16:15");
+    const lateTimes = availableTimes.filter(time => time >= "16:15");
 
-// 16:15より前は今まで通り1つずつ表示
-earlyTimes.forEach(time => {
-    timeArea.innerHTML += `
+    // 16:15より前は今まで通り1つずつ表示
+    earlyTimes.forEach(time => {
+        timeArea.innerHTML += `
         <button class="time-button" data-time="${time}">
             ${time}
         </button>
     `;
-});
+    });
 
-// 16:15以降は1つの枠にまとめて縦並び
-if (lateTimes.length > 0) {
+    // 16:15以降は1つの枠にまとめて縦並び
+    if (lateTimes.length > 0) {
 
-    timeArea.innerHTML += `
+        timeArea.innerHTML += `
         <div class="late-time-group">
             ${lateTimes.map(time => `
                 <button class="time-button late-time-button" data-time="${time}">
@@ -877,40 +817,40 @@ if (lateTimes.length > 0) {
             `).join("")}
         </div>
     `;
-}
-
-document.querySelectorAll(".time-button").forEach(btn => {
-
-    btn.addEventListener("click", () => {
-
-        document.querySelectorAll(".time-button").forEach(item => {
-
-            item.classList.remove("selected");
-
-        });
-
-        btn.classList.add("selected");
-
-        selectedTime = btn.dataset.time;
-
-showCustomerForm();
-
-setTimeout(() => {
-    const section = document.getElementById("customerSection");
-
-    if (section) {
-        const top = section.getBoundingClientRect().top + window.scrollY;
-
-        window.scrollTo({
-            top: top,
-            behavior: "smooth"
-        });
     }
-}, 300);
+
+    document.querySelectorAll(".time-button").forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+            document.querySelectorAll(".time-button").forEach(item => {
+
+                item.classList.remove("selected");
+
+            });
+
+            btn.classList.add("selected");
+
+            selectedTime = btn.dataset.time;
+
+            showCustomerForm();
+
+            setTimeout(() => {
+                const section = document.getElementById("customerSection");
+
+                if (section) {
+                    const top = section.getBoundingClientRect().top + window.scrollY;
+
+                    window.scrollTo({
+                        top: top,
+                        behavior: "smooth"
+                    });
+                }
+            }, 300);
+
+        });
 
     });
-
-});
 
 }
 
@@ -1032,9 +972,9 @@ function setupDateSelects(hiddenId, prefix) {
         const month = Number(monthText);
         const day = Number(dayText);
 
-        // 月・日の範囲を確認
+        // 年・月・日の範囲を確認（年は1900年以降）
         if (
-            year < 1 ||
+            year < 1900 ||
             month < 1 ||
             month > 12 ||
             day < 1 ||
@@ -1116,16 +1056,16 @@ function showCustomerForm() {
     const form = document.getElementById("customerForm");
 
     // お客様情報の画面を表示
-section.style.display = "block";
+    section.style.display = "block";
 
-// 電話・LINEボタンの表示状態を更新
-requestAnimationFrame(() => {
-    updateCalendarContactButtons();
-});
+    // 電話・LINEボタンの表示状態を更新
+    requestAnimationFrame(() => {
+        updateCalendarContactButtons();
+    });
 
     if (reservationData.visit === "再診") {
 
-    form.innerHTML = `
+        form.innerHTML = `
 
 <div class="form-group">
 <label>予約日</label>
@@ -1148,27 +1088,27 @@ requestAnimationFrame(() => {
 
 `;
 
-    document.querySelector(".next-form").addEventListener("click", () => {
+        document.querySelector(".next-form").addEventListener("click", () => {
 
-        const name = document.getElementById("customerName").value.trim();
+            const name = document.getElementById("customerName").value.trim();
 
-        if (name === "") {
-            alert("お名前を入力してください。");
-            return;
-        }
+            if (name === "") {
+                alert("お名前を入力してください。");
+                return;
+            }
 
-        customerData = {
-            name: name
-        };
+            customerData = {
+                name: name
+            };
 
-        showConfirm();
+            showConfirm();
 
-    });
+        });
 
-    return;
-}
+        return;
+    }
 
-form.innerHTML = `
+    form.innerHTML = `
 
 <div class="form-group">
 <label>予約日</label>
@@ -1380,303 +1320,303 @@ placeholder="既往歴・服薬中のお薬をご入力ください。
 
 `;
 
-// 初診のみ：重要事項の了承チェックに応じて確認ボタンを切り替える
-const importantAgreedCheckbox = document.getElementById("importantAgreed");
-const initialConfirmButton = form.querySelector(".next-form");
+    // 初診のみ：重要事項の了承チェックに応じて確認ボタンを切り替える
+    const importantAgreedCheckbox = document.getElementById("importantAgreed");
+    const initialConfirmButton = form.querySelector(".next-form");
 
-function updateImportantConfirmButton() {
-    const agreed = importantAgreedCheckbox.checked;
-    initialConfirmButton.disabled = !agreed;
-    initialConfirmButton.classList.toggle("important-confirm-disabled", !agreed);
-    initialConfirmButton.setAttribute("aria-disabled", String(!agreed));
-}
+    function updateImportantConfirmButton() {
+        const agreed = importantAgreedCheckbox.checked;
+        initialConfirmButton.disabled = !agreed;
+        initialConfirmButton.classList.toggle("important-confirm-disabled", !agreed);
+        initialConfirmButton.setAttribute("aria-disabled", String(!agreed));
+    }
 
-importantAgreedCheckbox.addEventListener("change", updateImportantConfirmButton);
-updateImportantConfirmButton();
+    importantAgreedCheckbox.addEventListener("change", updateImportantConfirmButton);
+    updateImportantConfirmButton();
 
-setupDateSelects("customerBirthDate", "customerBirth");
-setupDateSelects("eyebrowHistoryDate", "eyebrowHistory");
-setupDateSelects("eyelineHistoryDate", "eyelineHistory");
-setupDateSelects("lipHistoryDate", "lipHistory");
-setupDateSelects("hairlineHistoryDate", "hairlineHistory");
-setupDateSelects("otherHistoryDate", "otherHistory");
+    setupDateSelects("customerBirthDate", "customerBirth");
+    setupDateSelects("eyebrowHistoryDate", "eyebrowHistory");
+    setupDateSelects("eyelineHistoryDate", "eyelineHistory");
+    setupDateSelects("lipHistoryDate", "lipHistory");
+    setupDateSelects("hairlineHistoryDate", "hairlineHistory");
+    setupDateSelects("otherHistoryDate", "otherHistory");
 
-const historyChecks =
-    document.querySelectorAll('input[name="historyType"]');
+    const historyChecks =
+        document.querySelectorAll('input[name="historyType"]');
 
-const noHistory =
-    document.getElementById("noHistory");
+    const noHistory =
+        document.getElementById("noHistory");
 
-const historyDetailArea =
-    document.getElementById("historyDetailArea");
+    const historyDetailArea =
+        document.getElementById("historyDetailArea");
 
-const historyGroups = {
-    "眉": document.getElementById("eyebrowHistoryGroup"),
-    "アイライン": document.getElementById("eyelineHistoryGroup"),
-    "リップ": document.getElementById("lipHistoryGroup"),
-    "ヘアライン": document.getElementById("hairlineHistoryGroup"),
-    "その他": document.getElementById("otherHistoryGroup")
-};
+    const historyGroups = {
+        "眉": document.getElementById("eyebrowHistoryGroup"),
+        "アイライン": document.getElementById("eyelineHistoryGroup"),
+        "リップ": document.getElementById("lipHistoryGroup"),
+        "ヘアライン": document.getElementById("hairlineHistoryGroup"),
+        "その他": document.getElementById("otherHistoryGroup")
+    };
 
-historyChecks.forEach(check => {
+    historyChecks.forEach(check => {
 
-    check.addEventListener("change", () => {
+        check.addEventListener("change", () => {
 
-        const group = historyGroups[check.value];
+            const group = historyGroups[check.value];
 
-        if (check.checked) {
+            if (check.checked) {
 
-            noHistory.checked = false;
+                noHistory.checked = false;
 
-            historyDetailArea.style.display = "block";
+                historyDetailArea.style.display = "block";
 
-            if (group) {
-                group.style.display = "block";
+                if (group) {
+                    group.style.display = "block";
+                }
+
+            } else {
+
+                if (group) {
+
+                    group.style.display = "none";
+
+                    group.querySelectorAll("input, select").forEach(element => {
+                        element.value = "";
+                    });
+
+                }
+
+                const hasHistory =
+                    [...historyChecks].some(item => item.checked);
+
+                if (!hasHistory) {
+                    historyDetailArea.style.display = "none";
+                    noHistory.checked = true;
+                }
+
             }
 
-        } else {
+        });
 
-            if (group) {
+    });
+
+    // 初期状態は「なし」
+    noHistory.checked = true;
+    historyDetailArea.style.display = "none";
+
+    noHistory.addEventListener("change", () => {
+
+        if (noHistory.checked) {
+
+            historyChecks.forEach(check => {
+
+                check.checked = false;
+
+            });
+
+            Object.values(historyGroups).forEach(group => {
 
                 group.style.display = "none";
 
                 group.querySelectorAll("input, select").forEach(element => {
-                element.value = "";
-             });
+                    element.value = "";
+                });
 
-            }
+            });
 
-            const hasHistory =
-                [...historyChecks].some(item => item.checked);
-
-              if (!hasHistory) {
-                 historyDetailArea.style.display = "none";
-                 noHistory.checked = true;
-            }
+            historyDetailArea.style.display = "none";
 
         }
 
     });
 
-});
+    document.querySelector(".next-form").addEventListener("click", () => {
 
-// 初期状態は「なし」
-noHistory.checked = true;
-historyDetailArea.style.display = "none";
+        // 初診のみ：重要事項への同意がなければ確認画面に進めない
+        const importantAgreed = document.getElementById("importantAgreed");
+        if (!importantAgreed || !importantAgreed.checked) {
+            alert("重要事項をご確認のうえ、了承のチェックを入れてください。");
+            if (importantAgreed) importantAgreed.focus();
+            return;
+        }
 
-noHistory.addEventListener("change", () => {
+        const name = document.getElementById("customerName").value.trim();
 
-    if (noHistory.checked) {
+        const gender = document.querySelector('input[name="gender"]:checked');
 
-        historyChecks.forEach(check => {
+        const birthDate = document.getElementById("customerBirthDate").value;
 
-            check.checked = false;
+        const referrer = document.getElementById("customerReferrer").value.trim();
 
-        });
+        const tel = document.getElementById("customerTel").value.trim();
 
-        Object.values(historyGroups).forEach(group => {
+        if (name === "") {
 
-            group.style.display = "none";
+            alert("お名前を入力してください。");
 
-            group.querySelectorAll("input, select").forEach(element => {
-                 element.value = "";
-           });
+            return;
 
-        });
+        }
 
-        historyDetailArea.style.display = "none";
+        if (!gender) {
 
-    }
+            alert("性別を選択してください。");
 
-});
+            return;
 
-document.querySelector(".next-form").addEventListener("click", () => {
+        }
 
-// 初診のみ：重要事項への同意がなければ確認画面に進めない
-const importantAgreed = document.getElementById("importantAgreed");
-if (!importantAgreed || !importantAgreed.checked) {
-    alert("重要事項をご確認のうえ、了承のチェックを入れてください。");
-    if (importantAgreed) importantAgreed.focus();
-    return;
-}
+        if (birthDate === "") {
 
-const name = document.getElementById("customerName").value.trim();
+            alert("生年月日を正しく入力してください。");
 
-const gender = document.querySelector('input[name="gender"]:checked');
+            return;
 
-const birthDate = document.getElementById("customerBirthDate").value;
+        }
 
-const referrer = document.getElementById("customerReferrer").value.trim();
+        if (tel === "") {
 
-const tel = document.getElementById("customerTel").value.trim();
+            alert("電話番号を入力してください。");
 
-    if (name === "") {
+            return;
 
-        alert("お名前を入力してください。");
+        }
 
-        return;
+        const selectedHistories = [
+            ...document.querySelectorAll(
+                'input[name="historyType"]:checked'
+            )
+        ].map(input => input.value);
 
-    }
+        const history = selectedHistories.length > 0
+            ? "あり"
+            : "なし";
 
-    if (!gender) {
+        const eyebrowHistory =
+            selectedHistories.includes("眉") ? "あり" : "";
 
-    alert("性別を選択してください。");
+        const eyebrowHistoryDate =
+            document.getElementById("eyebrowHistoryDate").value;
 
-    return;
+        const eyelineHistory =
+            selectedHistories.includes("アイライン") ? "あり" : "";
 
-}
+        const eyelineHistoryDate =
+            document.getElementById("eyelineHistoryDate").value;
 
-if (birthDate === "") {
+        const lipHistory =
+            selectedHistories.includes("リップ") ? "あり" : "";
 
-    alert("生年月日を選択してください。");
+        const lipHistoryDate =
+            document.getElementById("lipHistoryDate").value;
 
-    return;
+        const hairlineHistory =
+            selectedHistories.includes("ヘアライン") ? "あり" : "";
 
-}
+        const hairlineHistoryDate =
+            document.getElementById("hairlineHistoryDate").value;
 
-    if (tel === "") {
+        const otherHistory =
+            selectedHistories.includes("その他")
+                ? document.getElementById("otherHistory").value.trim()
+                : "";
 
-        alert("電話番号を入力してください。");
+        const otherHistoryDate =
+            document.getElementById("otherHistoryDate").value;
 
-        return;
 
-    }
+        // ==========================
+        // 入力チェック
+        // ==========================
 
-    const selectedHistories = [
-    ...document.querySelectorAll(
-        'input[name="historyType"]:checked'
-    )
-].map(input => input.value);
+        if (selectedHistories.includes("眉") && eyebrowHistoryDate === "") {
 
-const history = selectedHistories.length > 0
-    ? "あり"
-    : "なし";
+            alert("眉の施術歴日を正しく入力してください。");
+            return;
 
-const eyebrowHistory =
-    selectedHistories.includes("眉") ? "あり" : "";
+        }
 
-const eyebrowHistoryDate =
-    document.getElementById("eyebrowHistoryDate").value;
+        if (
+            selectedHistories.includes("アイライン") &&
+            eyelineHistoryDate === ""
+        ) {
 
-const eyelineHistory =
-    selectedHistories.includes("アイライン") ? "あり" : "";
+            alert("アイラインの施術歴日を正しく入力してください。");
+            return;
 
-const eyelineHistoryDate =
-    document.getElementById("eyelineHistoryDate").value;
+        }
 
-const lipHistory =
-    selectedHistories.includes("リップ") ? "あり" : "";
+        if (
+            selectedHistories.includes("リップ") &&
+            lipHistoryDate === ""
+        ) {
 
-const lipHistoryDate =
-    document.getElementById("lipHistoryDate").value;
+            alert("リップの施術歴日を正しく入力してください。");
+            return;
 
-const hairlineHistory =
-    selectedHistories.includes("ヘアライン") ? "あり" : "";
+        }
 
-const hairlineHistoryDate =
-    document.getElementById("hairlineHistoryDate").value;
+        if (
+            selectedHistories.includes("ヘアライン") &&
+            hairlineHistoryDate === ""
+        ) {
 
-const otherHistory =
-    selectedHistories.includes("その他")
-        ? document.getElementById("otherHistory").value.trim()
-        : "";
+            alert("ヘアラインの施術歴日を正しく入力してください。");
+            return;
 
-const otherHistoryDate =
-    document.getElementById("otherHistoryDate").value;
+        }
 
+        if (
+            selectedHistories.includes("その他") &&
+            otherHistory === ""
+        ) {
 
-// ==========================
-// 入力チェック
-// ==========================
+            alert("その他の施術内容を入力してください。");
+            return;
 
-if (selectedHistories.includes("眉") && eyebrowHistoryDate === "") {
+        }
 
-    alert("眉の施術歴日を選択してください。");
-    return;
+        if (
+            selectedHistories.includes("その他") &&
+            otherHistoryDate === ""
+        ) {
 
-}
+            alert("その他の施術歴日を正しく入力してください。");
+            return;
 
-if (
-    selectedHistories.includes("アイライン") &&
-    eyelineHistoryDate === ""
-) {
+        }
 
-    alert("アイラインの施術歴日を選択してください。");
-    return;
+        customerData = {
 
-}
+            name,
+            gender: gender.value,
+            birthDate,
+            referrer,
+            tel,
+            history,
 
-if (
-    selectedHistories.includes("リップ") &&
-    lipHistoryDate === ""
-) {
+            eyebrowHistory,
+            eyebrowHistoryDate,
 
-    alert("リップの施術歴日を選択してください。");
-    return;
+            eyelineHistory,
+            eyelineHistoryDate,
 
-}
+            lipHistory,
+            lipHistoryDate,
 
-if (
-    selectedHistories.includes("ヘアライン") &&
-    hairlineHistoryDate === ""
-) {
+            hairlineHistory,
+            hairlineHistoryDate,
 
-    alert("ヘアラインの施術歴日を選択してください。");
-    return;
+            otherHistory,
+            otherHistoryDate,
+            medicalHistory: document.getElementById("medicalHistory").value.trim(),
+            pregnancy: document.querySelector('input[name="pregnancy"]:checked').value
 
-}
+        };
 
-if (
-    selectedHistories.includes("その他") &&
-    otherHistory === ""
-) {
+        showConfirm();
 
-    alert("その他の施術内容を入力してください。");
-    return;
-
-}
-
-if (
-    selectedHistories.includes("その他") &&
-    otherHistoryDate === ""
-) {
-
-    alert("その他の施術歴日を選択してください。");
-    return;
-
-}
-
-customerData = {
-
-    name,
-    gender: gender.value,
-    birthDate,
-    referrer,
-    tel,
-    history,
-
-eyebrowHistory,
-eyebrowHistoryDate,
-
-eyelineHistory,
-eyelineHistoryDate,
-
-lipHistory,
-lipHistoryDate,
-
-hairlineHistory,
-hairlineHistoryDate,
-
-otherHistory,
-otherHistoryDate,
-    medicalHistory: document.getElementById("medicalHistory").value.trim(),
-    pregnancy: document.querySelector('input[name="pregnancy"]:checked').value
-
-};
-
-    showConfirm();
-
-});
+    });
 
 }
 
@@ -1688,12 +1628,12 @@ function showConfirm() {
     section.style.display = "block";
 
     // 確認画面では電話・LINEボタンを非表示
-const contactButtons =
-    document.getElementById("calendarContactButtons");
+    const contactButtons =
+        document.getElementById("calendarContactButtons");
 
-if (contactButtons) {
-    contactButtons.style.display = "none";
-}
+    if (contactButtons) {
+        contactButtons.style.display = "none";
+    }
 
     // ==========================
     // 再診
@@ -1706,7 +1646,7 @@ if (contactButtons) {
 
 <div class="confirm-item">
 <span class="label">施術メニュー</span>
-<span class="value">${reservationData.menus.join("・")}</span>
+<span class="value">${reservationData.menus.map(escapeHtml).join("・")}</span>
 </div>
 
 <div class="confirm-item">
@@ -1733,29 +1673,29 @@ if (contactButtons) {
 `;
 
         customerData.gender = "";
-customerData.birthDate = "";
-customerData.referrer = "";
-customerData.tel = "";
+        customerData.birthDate = "";
+        customerData.referrer = "";
+        customerData.tel = "";
 
-customerData.history = "";
+        customerData.history = "";
 
-customerData.eyebrowHistory = "";
-customerData.eyebrowHistoryDate = "";
+        customerData.eyebrowHistory = "";
+        customerData.eyebrowHistoryDate = "";
 
-customerData.eyelineHistory = "";
-customerData.eyelineHistoryDate = "";
+        customerData.eyelineHistory = "";
+        customerData.eyelineHistoryDate = "";
 
-customerData.lipHistory = "";
-customerData.lipHistoryDate = "";
+        customerData.lipHistory = "";
+        customerData.lipHistoryDate = "";
 
-customerData.hairlineHistory = "";
-customerData.hairlineHistoryDate = "";
+        customerData.hairlineHistory = "";
+        customerData.hairlineHistoryDate = "";
 
-customerData.otherHistory = "";
-customerData.otherHistoryDate = "";
+        customerData.otherHistory = "";
+        customerData.otherHistoryDate = "";
 
-customerData.medicalHistory = "";
-customerData.pregnancy = "";
+        customerData.medicalHistory = "";
+        customerData.pregnancy = "";
 
     }
 
@@ -1771,7 +1711,7 @@ customerData.pregnancy = "";
 
 <div class="confirm-item">
 <span class="label">施術メニュー</span>
-<span class="value">${reservationData.menus.join("・")}</span>
+<span class="value">${reservationData.menus.map(escapeHtml).join("・")}</span>
 </div>
 
 <div class="confirm-item">
@@ -1900,66 +1840,74 @@ ${customerData.otherHistory ? `
     }
 
     // 「予約内容確認」の見出しを画面上部に移動
-requestAnimationFrame(() => {
-    const title = section.querySelector(".confirm-title");
+    requestAnimationFrame(() => {
+        const title = section.querySelector(".confirm-title");
 
-    if (!title) return;
+        if (!title) return;
 
-    const top = title.getBoundingClientRect().top + window.scrollY;
+        const top = title.getBoundingClientRect().top + window.scrollY;
 
-    window.scrollTo({
-        top: Math.max(0, top),
-        behavior: "smooth"
+        window.scrollTo({
+            top: Math.max(0, top),
+            behavior: "smooth"
+        });
     });
-});
 
-        document.getElementById("reserveButton").addEventListener("click", async () => {
+    document.getElementById("reserveButton").addEventListener("click", async () => {
 
-    // LINE情報の取得確認
-    if (!liffReady || !lineUserId) {
-        alert("LINE情報の取得中です。少し待ってからもう一度お試しください。");
-        return;
-    }
+        // LINE情報の取得確認
+        if (!liffReady || !lineUserId) {
+            alert("LINE情報の取得中です。少し待ってからもう一度お試しください。");
+            return;
+        }
 
-    const reserveButton = document.getElementById("reserveButton");
+        const reserveButton = document.getElementById("reserveButton");
 
-    const data = {
+        // 二重送信を防ぐ
+        if (reserveButton.disabled) return;
 
-    date: selectedDate,
-    time: selectedTime,
-    visit: reservationData.visit,
-    menu1: reservationData.menus[0] || "",
-    menu2: reservationData.menus[1] || "",
-    name: customerData.name,
+        const isRevisit = reservationData.visit === "再診";
 
-    gender: reservationData.visit === "再診" ? "" : customerData.gender,
-    age: reservationData.visit === "再診" ? "" : calcAgeFromBirth(customerData.birthDate),
-    birthDate: reservationData.visit === "再診" ? "" : customerData.birthDate,
-    referrer: reservationData.visit === "再診" ? "" : customerData.referrer,
-    tel: reservationData.visit === "再診" ? "" : customerData.tel,
-    history: reservationData.visit === "再診" ? "" : customerData.history,
+        const data = {
 
-eyebrowHistory: reservationData.visit === "再診" ? "" : customerData.eyebrowHistory,
-eyebrowHistoryDate: reservationData.visit === "再診" ? "" : customerData.eyebrowHistoryDate,
+            date: selectedDate,
+            time: selectedTime,
+            visit: reservationData.visit,
+            menu1: reservationData.menus[0] || "",
+            menu2: reservationData.menus[1] || "",
+            name: customerData.name,
 
-eyelineHistory: reservationData.visit === "再診" ? "" : customerData.eyelineHistory,
-eyelineHistoryDate: reservationData.visit === "再診" ? "" : customerData.eyelineHistoryDate,
+            gender: isRevisit ? "" : customerData.gender,
+            age: isRevisit ? "" : calcAgeFromBirth(customerData.birthDate),
+            birthDate: isRevisit ? "" : customerData.birthDate,
+            referrer: isRevisit ? "" : customerData.referrer,
+            tel: isRevisit ? "" : customerData.tel,
+            history: isRevisit ? "" : customerData.history,
 
-lipHistory: reservationData.visit === "再診" ? "" : customerData.lipHistory,
-lipHistoryDate: reservationData.visit === "再診" ? "" : customerData.lipHistoryDate,
+            eyebrowHistory: isRevisit ? "" : customerData.eyebrowHistory,
+            eyebrowHistoryDate: isRevisit ? "" : customerData.eyebrowHistoryDate,
 
-hairlineHistory: reservationData.visit === "再診" ? "" : customerData.hairlineHistory,
-hairlineHistoryDate: reservationData.visit === "再診" ? "" : customerData.hairlineHistoryDate,
+            eyelineHistory: isRevisit ? "" : customerData.eyelineHistory,
+            eyelineHistoryDate: isRevisit ? "" : customerData.eyelineHistoryDate,
 
-otherHistory: reservationData.visit === "再診" ? "" : customerData.otherHistory,
-otherHistoryDate: reservationData.visit === "再診" ? "" : customerData.otherHistoryDate,
+            lipHistory: isRevisit ? "" : customerData.lipHistory,
+            lipHistoryDate: isRevisit ? "" : customerData.lipHistoryDate,
 
-medicalHistory: reservationData.visit === "再診" ? "" : customerData.medicalHistory,
-pregnancy: reservationData.visit === "再診" ? "" : customerData.pregnancy
+            hairlineHistory: isRevisit ? "" : customerData.hairlineHistory,
+            hairlineHistoryDate: isRevisit ? "" : customerData.hairlineHistoryDate,
 
-};
+            otherHistory: isRevisit ? "" : customerData.otherHistory,
+            otherHistoryDate: isRevisit ? "" : customerData.otherHistoryDate,
+
+            medicalHistory: isRevisit ? "" : customerData.medicalHistory,
+            pregnancy: isRevisit ? "" : customerData.pregnancy
+
+        };
 
         data.lineUserId = lineUserId;
+
+        // 予約が完了したかどうか（完了したらボタンは戻さない）
+        let completed = false;
 
         try {
 
@@ -1968,7 +1916,7 @@ pregnancy: reservationData.visit === "再診" ? "" : customerData.pregnancy
             reserveButton.textContent = "送信中...";
 
             const response = await fetch(
-                "https://script.google.com/macros/s/AKfycbwfESEqxmljBjSHMP56ufwb0eA9y9FbwRXcFZXWNsU577Fu_BOYg1zpAb5CYfZxnamF/exec",
+                GAS_URL,
                 {
                     method: "POST",
                     headers: {
@@ -1980,25 +1928,33 @@ pregnancy: reservationData.visit === "再診" ? "" : customerData.pregnancy
 
             const text = await response.text();
 
+            let result;
 
-let result;
+            try {
 
-try {
+                result = JSON.parse(text);
 
-    result = JSON.parse(text);
+            } catch (e) {
 
-} catch(e) {
+                console.error("返答エラー:", text);
 
-    alert("返答エラー\n" + text);
-    return;
+                alert("通信エラーが発生しました。しばらくしてからもう一度お試しください。");
 
-}
+                return;
+
+            }
 
             if (result.result === "success") {
 
-                reserveButton.disabled = true;
+                completed = true;
+
                 reserveButton.classList.remove("loading");
                 reserveButton.textContent = "予約完了";
+
+                const completeText =
+                    result.notification === "failed"
+                        ? "ご予約を承りました。<br>LINEへの送信に失敗した可能性があります。<br>お手数ですが、LINEトークよりご確認ください。"
+                        : "LINEへ予約内容を送信しました。";
 
                 document.getElementById("confirmSection").innerHTML = `
 
@@ -2015,7 +1971,7 @@ try {
 <p class="complete-emoji">✨</p>
 
 <p class="complete-text">
-LINEへ予約内容を送信しました。
+${completeText}
 </p>
 
 </div>
@@ -2024,11 +1980,38 @@ LINEへ予約内容を送信しました。
 
             } else {
 
-                reserveButton.disabled = false;
-                reserveButton.classList.remove("loading");
-                reserveButton.textContent = "予約を確定する";
+                alert("保存エラー：" + (result.message || "予約を完了できませんでした。"));
 
-                alert("保存エラー：" + result.message);
+                // 他の方に先に取られた場合は、空き状況を最新にして
+                // 日時の選び直しへ戻す
+                if (String(result.message || "").includes("別の日時")) {
+
+                    try {
+                        await loadReservations();
+                    } catch (e) {
+                        console.error("空き状況の再取得エラー:", e);
+                    }
+
+                    document.getElementById("confirmSection").style.display = "none";
+                    document.getElementById("customerSection").style.display = "none";
+
+                    selectedTime = null;
+
+                    drawCalendar(currentDate, reservationData);
+
+                    updateCalendarContactButtons();
+
+                    const calendarSection =
+                        document.getElementById("calendarSection");
+
+                    if (calendarSection) {
+                        calendarSection.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+                    }
+
+                }
 
             }
 
@@ -2036,10 +2019,22 @@ LINEへ予約内容を送信しました。
 
             console.error(err);
 
-            alert(err.stack || err);
+            alert("通信に失敗しました。電波の良い場所で、もう一度お試しください。");
 
-            reserveButton.disabled = false;
-            reserveButton.textContent = "予約を確定する";
+        } finally {
+
+            // 完了以外のときは、必ずボタンを元に戻す
+            if (!completed) {
+
+                const button = document.getElementById("reserveButton");
+
+                if (button) {
+                    button.disabled = false;
+                    button.classList.remove("loading");
+                    button.textContent = "予約を確定する";
+                }
+
+            }
 
         }
 
