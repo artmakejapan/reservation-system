@@ -766,7 +766,7 @@ function showTimes(data) {
                 ${selectedDate}
             </h4>
             <span style="font-size:12px; color:#8f8175; font-weight:400; white-space:nowrap;">
-                日時を選択してそのままWEB予約へ
+                日時を選択し、WEB予約へ
             </span>
         </div>
     `;
