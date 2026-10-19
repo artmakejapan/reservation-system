@@ -446,6 +446,20 @@ async function updateSideMenuWelcome() {
 
             }
 
+            // 重要事項確認
+            if (target === "notice") {
+
+                window.location.href = "notice";
+
+            }
+
+            // よくある質問
+            if (target === "faq") {
+
+                window.location.href = "faq.html";
+
+            }
+
         });
 
     });
