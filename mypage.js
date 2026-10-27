@@ -21,27 +21,38 @@ async function initMyPage() {
         }
 
 
-        const profile = await liff.getProfile(); 
-const lineUserId = profile.userId; 
+const profile = await liff.getProfile();
 
-document.getElementById("userName").textContent = 
+// LINEのIDトークンを取得
+const idToken = liff.getIDToken();
+
+if (!idToken) {
+    throw new Error("本人確認用のトークンを取得できませんでした。");
+}
+
+document.getElementById("userName").textContent =
     `${profile.displayName} 様`;
 
 const welcome = document.getElementById("sideMenuWelcome");
+
 if (welcome) {
     welcome.textContent = `ようこそ ${profile.displayName}様`;
 }
 
 
-        // GASから予約情報取得
-        const response = await fetch(
-            GAS_URL +
-            "?action=mypage&lineUserId=" +
-            encodeURIComponent(lineUserId)
-        );
+// GASへ本人確認用のIDトークンを送信
+const response = await fetch(GAS_URL, {
+    method: "POST",
+    headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+        action: "mypage",
+        idToken: idToken
+    })
+});
 
-
-        const data = await response.json();
+const data = await response.json();
 
 
         if (data.result !== "success") {
