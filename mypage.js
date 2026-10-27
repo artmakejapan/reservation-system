@@ -21,86 +21,53 @@ async function initMyPage() {
         }
 
 
-const profile = await liff.getProfile();
+        const profile = await liff.getProfile(); 
+const lineUserId = profile.userId; 
 
-// LINEのIDトークンを取得
-const idToken = liff.getIDToken();
-
-if (!idToken) {
-    throw new Error("本人確認用のトークンを取得できませんでした。");
-}
-
-document.getElementById("userName").textContent =
+document.getElementById("userName").textContent = 
     `${profile.displayName} 様`;
 
 const welcome = document.getElementById("sideMenuWelcome");
-
 if (welcome) {
     welcome.textContent = `ようこそ ${profile.displayName}様`;
 }
 
 
-// GASへ本人確認用のIDトークンを送信
-const response = await fetch(GAS_URL, {
-    method: "POST",
-    headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify({
-        action: "mypage",
-        idToken: idToken
-    })
-});
-
-const responseText = await response.text();
-
-console.log("GAS応答ステータス:", response.status);
-console.log("GAS応答内容:", responseText);
-
-let data;
-
-try {
-data = JSON.parse(responseText);
-} catch (error) {
-throw new Error("GASからJSON以外の応答が返ってきました。");
-}
-
-if (data.result !== "success") {
-throw new Error(data.message || "データ取得に失敗しました。");
-}
-
-displayReservation(data.reservations);
-displayHistory(data.reservations);
+        // GASから予約情報取得
+        const response = await fetch(
+            GAS_URL +
+            "?action=mypage&lineUserId=" +
+            encodeURIComponent(lineUserId)
+        );
 
 
-} catch (error) {
+        const data = await response.json();
 
-    console.error("マイページ取得エラー:", error);
 
-    const message =
-        error && error.message
-            ? error.message
-            : String(error);
+        if (data.result !== "success") {
 
-    console.error("エラー詳細:", message);
+            throw new Error("データ取得に失敗しました。");
 
-    const reservationArea =
-        document.getElementById("reservationArea");
+        }
 
-    const historyArea =
-        document.getElementById("historyArea");
 
-    if (reservationArea) {
-        reservationArea.textContent =
-            "予約情報を取得できませんでした。";
+        displayReservation(data.reservations);
+
+
+        displayHistory(data.reservations);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("reservationArea").textContent =
+            "データを取得できませんでした。";
+
+        document.getElementById("historyArea").textContent =
+            "データを取得できませんでした。";
+
     }
-
-    if (historyArea) {
-        historyArea.textContent =
-            "施術歴を取得できませんでした。";
-    }
-
-}
 
 }
 
