@@ -52,20 +52,26 @@ const response = await fetch(GAS_URL, {
     })
 });
 
-const data = await response.json();
+const responseText = await response.text();
 
+console.log("GAS応答ステータス:", response.status);
+console.log("GAS応答内容:", responseText);
 
-        if (data.result !== "success") {
+let data;
 
-            throw new Error("データ取得に失敗しました。");
+try {
+data = JSON.parse(responseText);
+} catch (error) {
+throw new Error("GASからJSON以外の応答が返ってきました。");
+}
 
-        }
+if (data.result !== "success") {
+throw new Error(data.message || "データ取得に失敗しました。");
+}
 
+displayReservation(data.reservations);
+displayHistory(data.reservations);
 
-        displayReservation(data.reservations);
-
-
-        displayHistory(data.reservations);
 
 
     } catch (error) {
