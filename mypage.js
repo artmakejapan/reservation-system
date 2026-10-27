@@ -73,18 +73,34 @@ displayReservation(data.reservations);
 displayHistory(data.reservations);
 
 
+} catch (error) {
 
-    } catch (error) {
+    console.error("マイページ取得エラー:", error);
 
-        console.error(error);
+    const message =
+        error && error.message
+            ? error.message
+            : String(error);
 
-        document.getElementById("reservationArea").textContent =
-            "データを取得できませんでした。";
+    console.error("エラー詳細:", message);
 
-        document.getElementById("historyArea").textContent =
-            "データを取得できませんでした。";
+    const reservationArea =
+        document.getElementById("reservationArea");
 
+    const historyArea =
+        document.getElementById("historyArea");
+
+    if (reservationArea) {
+        reservationArea.textContent =
+            "予約情報を取得できませんでした。";
     }
+
+    if (historyArea) {
+        historyArea.textContent =
+            "施術歴を取得できませんでした。";
+    }
+
+}
 
 }
 
