@@ -106,7 +106,7 @@ window.addEventListener(
 // 予約状況だけを最新にする（予約エラー後などに使用）
 async function loadReservations() {
 
-    const response = await fetch(GAS_URL + "?action=reservations");
+    const response = await fetch(GAS_URL + "?action=reservations", { cache: "no-store" });
 
     reservedSlots = await response.json();
 
@@ -114,7 +114,7 @@ async function loadReservations() {
 
 async function loadInitialData() {
 
-    const response = await fetch(GAS_URL + "?action=init");
+    const response = await fetch(GAS_URL + "?action=init", { cache: "no-store" });
 
     const data = await response.json();
 
@@ -149,7 +149,12 @@ async function loadInitialData() {
 
     // メニュー表示（カテゴリーごとのアコーディオン）
     const menuList = document.getElementById("menuList");
+
+    // 要素が無いページでも落ちないようにガード
+    if (!menuList) return;
+    
     menuList.innerHTML = "";
+
 
     const enabledTreatments = treatmentData
         .filter(item => item.enabled)
@@ -491,6 +496,16 @@ function generateCalendar(data) {
 
 function drawCalendar(date, data) {
 
+    // 月を移動・再描画したときに前回の選択が残らないようにする
+    selectedTime = null;
+
+    // 日付を選び直したら、お客様情報・確認画面は閉じる
+    const customerSection = document.getElementById("customerSection");
+    const confirmSection = document.getElementById("confirmSection");
+
+    if (customerSection) customerSection.style.display = "none";
+    if (confirmSection) confirmSection.style.display = "none";
+
     const title = document.getElementById("calendarTitle");
     const calendar = document.getElementById("calendar");
     const timeArea = document.getElementById("timeArea");
@@ -520,25 +535,23 @@ function drawCalendar(date, data) {
 
     }
 
+    // ループ内で毎回計算していた「今日・明日」を1回だけ計算する
+    const todayBase = new Date();
+    todayBase.setHours(0, 0, 0, 0);
+
+    const tomorrowBase = new Date(todayBase);
+    tomorrowBase.setDate(todayBase.getDate() + 1);
+
     for (let d = 1; d <= lastDay.getDate(); d++) {
 
         const date = new Date(year, month, d);
 
         const day = date.getDay();
 
-        // 今日の日付（時刻は0:00にする）
-        const today = new Date();
-
-        today.setHours(0, 0, 0, 0);
-
         date.setHours(0, 0, 0, 0);
 
-        // 翌日以降のみ予約可能
-        const tomorrow = new Date(today);
-
-        tomorrow.setDate(today.getDate() + 1);
-
-        const future = date >= tomorrow;
+        // 翌日以降のみ予約可能（today/tomorrow はループの外で1回だけ計算）
+        const future = date >= tomorrowBase;
 
         const dateString =
             `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
@@ -1303,7 +1316,7 @@ placeholder="既往歴・服薬中のお薬をご入力ください。
     <h4 class="important-confirm-title">重要事項のご確認</h4>
     <p class="important-confirm-description">ご予約前に、アートメイクの重要事項を必ずご確認ください。</p>
     <a class="important-confirm-link"
-       href="https://reservation-system-2r3.pages.dev/notice"
+       href="notice"
        target="_blank"
        rel="noopener noreferrer">重要事項を確認する ↗</a>
     <label class="important-confirm-check">

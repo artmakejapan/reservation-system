@@ -19,10 +19,27 @@ const ADMIN_BASE_URL =
 // ==================================================
 
 // 公開情報の取得（営業時間・休診日・メニュー）
+// "YYYY-MM-DD" を必ず「日本時間のローカル日付」として解釈する
+// （new Date("2026-04-01") は UTC 扱いになり、曜日が1日ずれることがある）
+function parseLocalDate(value) {
+
+    const parts = String(value || "").split("-").map(Number);
+
+    if (parts.length !== 3 || parts.some(n => !Number.isFinite(n))) {
+        return new Date(NaN);
+    }
+
+    return new Date(parts[0], parts[1] - 1, parts[2], 0, 0, 0, 0);
+
+}
+
 async function fetchPublic(action) {
 
     const response =
-        await fetch(ADMIN_BASE_URL + "?action=" + action);
+        await fetch(
+            ADMIN_BASE_URL + "?action=" + action,
+            { cache: "no-store" }
+        );
 
     return await response.json();
 
@@ -35,7 +52,8 @@ async function fetchAdminList(action) {
         await fetch(
             ADMIN_BASE_URL +
             "?action=" + action +
-            "&adminToken=" + encodeURIComponent(window.adminToken || "")
+            "&adminToken=" + encodeURIComponent(window.adminToken || ""),
+            { cache: "no-store" }
         );
 
     const result = await response.json();
@@ -260,25 +278,31 @@ async function loadReservations() {
 
     try {
 
-        // 個人情報（管理者トークンが必要）
-        window.reservationList =
-            await fetchAdminList("getReservationList");
+        // 個人情報（管理者トークンが必要）＋公開情報を「同時」に取得する
+        // （1本ずつ待つと6往復ぶん遅くなるため Promise.all にまとめる）
+        const [
+            reservationList,
+            customerHistoryList,
+            lineUsers,
+            treatments,
+            businessHours,
+            holidays
+        ] = await Promise.all([
+            fetchAdminList("getReservationList"),
+            fetchAdminList("customersearch"),
+            fetchAdminList("lineusers"),
+            fetchPublic("treatments"),
+            fetchPublic("businesshours"),
+            fetchPublic("holidays")
+        ]);
 
-        window.customerHistoryList =
-            await fetchAdminList("customersearch");
+        window.reservationList = reservationList;
+        window.customerHistoryList = customerHistoryList;
+        window.lineUsers = lineUsers;
 
-        window.lineUsers =
-            await fetchAdminList("lineusers");
-
-        // 公開情報
-        treatmentMenus =
-            await fetchPublic("treatments");
-
-        window.businessHours =
-            await fetchPublic("businesshours");
-
-        window.holidays =
-            await fetchPublic("holidays");
+        treatmentMenus = treatments;
+        window.businessHours = businessHours;
+        window.holidays = holidays;
 
     } catch (error) {
 
@@ -768,7 +792,7 @@ function updateNewTimeOptions(
     }
 
     const day =
-        new Date(date + "T00:00:00").getDay();
+        parseLocalDate(date).getDay();
 
     const weekdayMap = {
         0: "日",
@@ -2123,7 +2147,7 @@ function updateEditTimeOptions(
 
 
     const day =
-        new Date(date + "T00:00:00").getDay();
+        parseLocalDate(date).getDay();
 
 
     const weekdayMap = {
