@@ -73,15 +73,15 @@ a{color:inherit}
   font-size:clamp(27px,5.5vw,42px);
   letter-spacing:.11em;
   line-height:1.7;
-  margin:23px 0 12px;
+  margin:0 0 12px;
 }
-.eyebrow{color:var(--red);font:14px Georgia,serif;letter-spacing:.24em;margin:0 0 0}
+.eyebrow{color:var(--ink);font:18px Georgia,serif;letter-spacing:.24em;margin:0 0 0}
 .hero .intro{color:var(--red-dark);font-size:13px;line-height:2.4;display:table;margin:0 auto;text-align:left}
 .hero .hero-note{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:var(--ink);font-size:13px;line-height:2.2;margin:36px 0 0;text-align:center}
 
 /* 画像の下の白いブロック（導入文） */
 .lead{text-align:left;padding:0 0 6px;background:#fff}
-.lead .intro{color:var(--ink);font-size:15px;line-height:2.4;display:table;margin:0 auto;text-align:center}
+.lead .intro{color:var(--ink);font-size:13px;line-height:2.4;display:table;margin:0 auto;text-align:center}
 .lead .intro .ph{display:inline-block}
 .lead .intro .sent{display:block}
 .lead .intro .sent + .sent{margin-top:1.6em}
@@ -131,20 +131,20 @@ a{color:inherit}
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  min-height:100px;
-  padding:14px 8px;
+  min-height:124px;
+  padding:18px 10px;
   border:1px solid var(--gold);
   background:var(--gold);
   color:#fff;
   font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
-  font-size:14px;
+  font-size:17px;
   font-weight:400;
   line-height:1.6;
   letter-spacing:.025em;
   text-decoration:none;
   transition:background .16s ease,color .16s ease;
 }
-.navbtn small{font:9px Georgia,serif;letter-spacing:.09em;color:#fff;margin-top:8px}
+.navbtn small{font:10px Georgia,serif;letter-spacing:.09em;color:#fff;margin-top:10px}
 .navbtn:hover,.navbtn:focus-visible,.navbtn:active,.navbtn.is-selected{
   background:var(--gold-dark);border-color:var(--gold-dark);color:#fff;
 }
@@ -228,12 +228,12 @@ footer{
 
   .hero{padding-top:55px;padding-bottom:59px}
   .hero .brand{font-size:11px;line-height:1.5}
-  .hero h1{font-size:clamp(25px,6.4vw,34px);line-height:1.45;margin:44px 0 17px}
-  .hero .eyebrow{font-size:13px;line-height:1.5;margin-bottom:0}
+  .hero h1{font-size:clamp(25px,6.4vw,34px);line-height:1.45;margin:0 0 17px}
+  .hero .eyebrow{font-size:15px;line-height:1.5;margin-bottom:0}
   .hero .intro{font-size:13px;line-height:1.65}
   .hero .hero-note{font-size:11px;line-height:1.9;margin-top:30px}
   .lead{padding-top:0}
-  .lead .intro{font-size:16px;line-height:1.65}
+  .lead .intro{font-size:14px;line-height:1.8}
 
   .contents{padding-top:11px;padding-bottom:0}
   .contents-box{padding:10px 10px 13px}
@@ -243,9 +243,9 @@ footer{
   .contents-box .grid{margin-top:0;gap:7px}
   .navbtn{
     min-width:0;
-    min-height:58px;
-    padding:6px 2px;
-    font-size:12.5px;
+    min-height:78px;
+    padding:8px 4px;
+    font-size:14.5px;
     line-height:1.4;
     letter-spacing:0;
     overflow-wrap:anywhere;
@@ -253,7 +253,7 @@ footer{
   }
   .navbtn small{
     max-width:100%;
-    font-size:9px;
+    font-size:9.5px;
     letter-spacing:0;
     line-height:1.25;
     margin-top:3px;
@@ -272,7 +272,7 @@ footer{
   .ending{font-size:min(14px,calc((100vw - 40px)/28))}
 }
 @media(max-width:360px){
-  .navbtn{min-height:61px;font-size:10.5px}
+  .navbtn{min-height:76px;font-size:13px}
 }
 
 /* ---------- 読みやすさの調整 ---------- */
@@ -328,10 +328,8 @@ footer{
 <body>
 <header class="hero">
   <div class="wrap">
-    <div class="brand">アートメイクを受けられる方へ</div>
     <h1>アートメイクの重要事項</h1>
     <div class="eyebrow">IMPORTANT MATTERS</div>
-    <p class="hero-note">安心して施術を受けていただくために、<br>リスクや注意点、施術後のお手入れをまとめています。</p>
   </div>
 </header>
 <div class="lead wrap">
@@ -495,11 +493,7 @@ footer{
       <h3 class="procedure-subhead">ダウンタイムについて</h3>
       <p class="item">ダウンタイムは約1週間が目安です。ただし、感染予防のための各種制限は1週間〜10日程度続けてください。</p>
       <p class="item">期間中は、赤み・腫れ・熱感・痛みなどが出ることがございます。</p>
-<img
-  src="images/brow-downtime.png"
-  alt="眉アートメイクのダウンタイムの経過"
-  class="downtime-image"
->
+<div class="downtime-image" style="border:1px dashed #BD9D5F;padding:42px 12px;text-align:center;font-size:13px;color:#A88B55;background:#FBF7EC">（眉アートメイクのダウンタイムの経過の画像：images/brow-downtime.png）</div>
       <p class="item">一時的に色が濃く見えたり、薄く見えたりすることがございますが、通常の経過です。</p>
       <p class="item">色素の定着過程で、一時的に色ムラが出る場合がございます。</p>
       <p class="item">最終的な色素の定着率は、30〜50％程度が目安です（部位や肌質により異なります）。</p>
@@ -564,11 +558,7 @@ footer{
       <h3 class="procedure-subhead">ダウンタイムについて</h3>
       <p class="item">ダウンタイムは約1週間が目安です。ただし、感染予防のための各種制限は1週間〜10日程度続けてください。</p>
       <p class="item">期間中は、赤み・腫れ・熱感・痛みなどが出ることがございます。</p>
-<img
-  src="images/lip-downtime.png"
-  alt="リップアートメイクのダウンタイムの経過"
-  class="downtime-image"
->
+<div class="downtime-image" style="border:1px dashed #BD9D5F;padding:42px 12px;text-align:center;font-size:13px;color:#A88B55;background:#FBF7EC">（リップアートメイクのダウンタイムの経過の画像：images/lip-downtime.png）</div>
       <p class="item">一時的に色が濃く見えたり、薄く見えたりすることがございますが、通常の経過です。</p>
       <p class="item">色素の定着過程で、一時的に色ムラが出る場合がございます。</p>
       <p class="item">最終的な色素の定着率は、30〜50％程度が目安です（部位や肌質により異なります）。</p>
