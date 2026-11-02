@@ -501,13 +501,6 @@ function drawCalendar(date, data) {
        selectedDate = null;
        calendarDateSelected = false;
 
-    // 電話・LINE固定ボタンを非表示にする
-      const contactButtons = document.getElementById("calendarContactButtons");
-
-      if (contactButtons) {
-          contactButtons.style.display = "none";
-    }
-
     // 日付を選び直したら、お客様情報・確認画面は閉じる
     const customerSection = document.getElementById("customerSection");
     const confirmSection = document.getElementById("confirmSection");
