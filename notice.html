@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>アートメイクの重要事項｜ARTMAKE Manami</title>
+<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>アートメイクの重要事項｜ARTMAKE</title>
 <style>
 /* =========================================================
    ARTMAKE Manami / アートメイクの重要事項
@@ -40,15 +40,13 @@ a{color:inherit}
 .wrap{width:min(880px,calc(100% - 44px));margin:auto}
 
 /* ---------- ファーストビュー ---------- */
+.top{position:relative;isolation:isolate;overflow:hidden;background:#fff}
 .hero{
   position:relative;
-  isolation:isolate;
-  overflow:hidden;
   padding:99px 0 48px;
   text-align:center;
-  background:#fff;
 }
-.hero::before{
+.top::before{
   content:"";
   position:absolute;
   inset:0;
@@ -80,7 +78,7 @@ a{color:inherit}
 .hero .hero-note{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:var(--ink);font-size:13px;line-height:2.2;margin:36px 0 0;text-align:center}
 
 /* 画像の下の白いブロック（導入文） */
-.lead{text-align:left;padding:0 0 28px;background:#fff}
+.lead{position:relative;z-index:1;text-align:left;padding:0 0 28px}
 .lead .intro{color:var(--ink);font-size:13px;line-height:2.4;display:table;margin:0 auto;text-align:center}
 .lead .intro .ph{display:inline-block}
 .lead .intro .sent{display:block}
@@ -126,6 +124,7 @@ a{color:inherit}
 
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .contents-box .grid{margin-top:0}
+.nav-hint{margin:0 0 14px;font-size:13px;line-height:1.8;text-align:center;color:var(--ink)}
 .navbtn{
   display:flex;
   flex-direction:column;
@@ -199,7 +198,7 @@ a{color:inherit}
 .article p.opening-description{color:var(--ink)}
 
 .back{text-align:center;font-size:12px;padding:17px 0 31px}
-.back a{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid var(--gold);padding:8px 30px;font-size:13px;line-height:1.6;transition:background .16s ease,color .16s ease}
+.back a{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid var(--gold);padding:13px 46px;font-size:15px;line-height:1.6;transition:background .16s ease,color .16s ease}
 .back a + a{margin-left:10px}
 .back a:hover,.back a:focus-visible,.back a:active{background:var(--gold);color:#fff}
 
@@ -241,6 +240,7 @@ footer{
   .toc-list-title{font-size:17px;line-height:1.45;margin-bottom:5px}
   .toc-entry{font-size:14px;line-height:1.45;padding:4px 0}
   .contents-box .grid{margin-top:0;gap:7px}
+  .nav-hint{margin-bottom:10px;font-size:12.5px}
   .navbtn{
     min-width:0;
     min-height:78px;
@@ -320,12 +320,13 @@ footer{
 </style>
 <style>
 /* 背景画像データ（長いので最後にまとめています。触らなくて大丈夫です） */
-.hero::before{
+.top::before{
   background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjY1MCIgdmlld0JveD0iMCAwIDE0NDAgNjUwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJzaWxrIiB4MT0iMCIgeTE9IjAiIHgyPSIwLjIiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9Ii4yOCIgc3RvcC1jb2xvcj0iI2YxZjFmMSIvPjxzdG9wIG9mZnNldD0iLjQ3IiBzdG9wLWNvbG9yPSIjZDlkYWRkIi8+PHN0b3Agb2Zmc2V0PSIuNTgiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9Ii43OCIgc3RvcC1jb2xvcj0iI2VkZWRlZSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJmb2xkIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmZmIi8+PHN0b3Agb2Zmc2V0PSIuMzYiIHN0b3AtY29sb3I9IiNlNGU1ZTciLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iI2ZmZiIvPjxzdG9wIG9mZnNldD0iLjgyIiBzdG9wLWNvbG9yPSIjZjBmMGYxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjE0NDAiIGhlaWdodD0iNjUwIiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTS0xMDAgMTQ1IEMxNTAgLTIwIDM3MCAyNTAgNjY1IDEyMCBTMTE3MCAtMTAgMTU1MCAxMzUgTDE1NTAgNDA1IEMxMTkwIDI1MCAxMDEwIDQ1MCA3MjUgMzMwIFMyMTUgMjc1IC0xMDAgNDIwWiIgZmlsbD0idXJsKCNzaWxrKSIgb3BhY2l0eT0iLjYyIi8+PHBhdGggZD0iTS05MCAzMjAgQzIxMCAxMzUgMzYwIDQxMCA3MTAgMjgwIFMxMTkwIDIxMCAxNTQwIDM1MCBMMTU0MCA2MTAgQzEyMjAgNDIwIDk4MCA1ODUgNjc1IDQ4NSBTMTgwIDQ1NSAtOTAgNTkwWiIgZmlsbD0idXJsKCNmb2xkKSIgb3BhY2l0eT0iLjUyIi8+PHBhdGggZD0iTS03MCAxNjUgQzI0MCAxMCAzODUgMjQ1IDY3MCAxNDUgUzExMjAgMjAgMTUwMCAxODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxOCIgb3BhY2l0eT0iLjc4Ii8+PHBhdGggZD0iTS03MCAzOTAgQzIzMCAyMzUgNDMwIDQ3MCA3NDAgMzUwIFMxMTkwIDI3NSAxNTIwIDQxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEzIiBvcGFjaXR5PSIuNjgiLz48L3N2Zz4=");
 }
 </style>
 </head>
 <body>
+<div class="top">
 <header class="hero">
   <div class="wrap">
     <h1>アートメイクの重要事項</h1>
@@ -338,9 +339,11 @@ footer{
     <span class="sent"><span class="ph">「共通重要事項」は</span><span class="ph"><strong>全員の方が対象です。</strong></span><br><span class="ph">ご希望の施術の項目とあわせて、</span><br><span class="ph">ご予約の前に</span><span class="ph">必ずお読みください。</span></span>
   </p>
 </div>
+</div>
 <main>
   <section class="contents wrap" id="contents">
     <div class="contents-box">
+      <p class="nav-hint">ボタンをタップすると、その項目へ移動します。</p>
       <nav aria-label="重要事項の目次" class="grid">
         <a class="navbtn" href="#common">共通重要事項<small>COMMON INFORMATION</small></a>
         <a class="navbtn" href="#brow">眉アートメイク<small>EYEBROWS</small></a>
@@ -692,7 +695,7 @@ footer{
     ご不明な点がございましたら、お気軽にご相談ください。<br>以上の内容をご理解・ご了承のうえ、<br>ご予約をお願いいたします。
   </div>
 </main>
-<footer>ARTMAKE Manami
+<footer>ARTMAKE MANAMI
 </footer>
 <script>document.addEventListener('DOMContentLoaded',function(){
   const buttons=Array.from(document.querySelectorAll('.navbtn'));
