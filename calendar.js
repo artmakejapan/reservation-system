@@ -742,11 +742,11 @@ document.addEventListener("DOMContentLoaded", () => {
             1
         );
 
-        // 表示できるのは、今月から2か月先まで
-        const limit = new Date(
-            baseDate.getFullYear(),
-            baseDate.getMonth() + 2,
-            1
+        // 表示できるのは、今月から翌月まで
+         const limit = new Date(
+               baseDate.getFullYear(),
+               baseDate.getMonth() + 1,
+               1
         );
 
         if (
