@@ -44,7 +44,7 @@ a{color:inherit}
   position:relative;
   isolation:isolate;
   overflow:hidden;
-  padding:99px 0 9px;
+  padding:80px 0 36px;
   text-align:center;
   background:#fff;
 }
@@ -75,18 +75,21 @@ a{color:inherit}
   line-height:1.7;
   margin:0 0 12px;
 }
-.eyebrow{color:var(--ink);font:15px Georgia,serif;letter-spacing:.24em;margin:0 0 49px}
-.intro{color:var(--ink);font-size:13px;line-height:2.4;margin:0}
-.intro .ph{display:inline-block}
-.intro .sent{display:block}
-.intro strong{font-weight:600;color:var(--red)}
+.eyebrow{color:var(--ink);font:15px Georgia,serif;letter-spacing:.24em;margin:0}
+
+/* 画像の下の白いブロック（導入文） */
+.lead{text-align:left;padding:28px 0 6px;background:#fff}
+.lead .intro{color:var(--ink);font-size:13px;line-height:2.4;max-width:740px;margin:0 auto}
+.lead .intro .ph{display:inline-block}
+.lead .intro .sent{display:block}
+.lead .intro strong{font-weight:600;color:var(--red)}
 
 /* ---------- 目次 ---------- */
-.contents{padding:13px 0 20px;text-align:center}
+.contents{padding:13px 0 0;text-align:center}
 .contents-box{
   max-width:740px;
   margin:auto;
-  padding:24px 35px 38px;
+  padding:24px 35px 26px;
   background:#fff;
   border:1px solid var(--line);
 }
@@ -149,7 +152,7 @@ a{color:inherit}
 
 /* ---------- 各セクション ---------- */
 .group{padding:87px 0 37px;border-top:1px solid var(--line);background:#fff;scroll-margin-top:12px}
-#common{padding-top:25px}
+#common{padding-top:14px}
 #common>h2{color:var(--red)}
 .section-kicker{text-align:center;font:11px Georgia,serif;letter-spacing:.22em;color:var(--ink)}
 .group h2{
@@ -163,6 +166,7 @@ a{color:inherit}
   margin:12px 15px 15px;
 }
 .gold-rule{width:38px;height:1px;background:var(--gold);margin:0 auto 51px}
+#common .gold-rule{margin-bottom:34px}
 
 /* ---------- 本文 ---------- */
 .article{max-width:740px;margin:0 auto 41px;padding:0 22px}
@@ -219,13 +223,14 @@ footer{
   .wrap{width:calc(100% - 28px)}
   body{font-size:16px}
 
-  .hero{padding-top:55px;padding-bottom:43px}
+  .hero{padding-top:55px;padding-bottom:28px}
   .hero .brand{font-size:11px;line-height:1.5}
   .hero h1{font-size:clamp(25px,6.4vw,34px);line-height:1.45;margin:0 0 17px}
-  .hero .eyebrow{font-size:13px;line-height:1.5;margin-bottom:66px}
-  .hero .intro{font-size:13px;line-height:1.65}
+  .hero .eyebrow{font-size:13px;line-height:1.5;margin-bottom:0}
+  .lead{padding-top:20px}
+  .lead .intro{font-size:13px;line-height:1.65}
 
-  .contents{padding-top:11px;padding-bottom:16px}
+  .contents{padding-top:11px;padding-bottom:0}
   .contents-box{padding:10px 10px 13px}
   .toc-list{padding:10px 13px 8px;margin:0 0 9px}
   .toc-list-title{font-size:17px;line-height:1.45;margin-bottom:5px}
@@ -250,10 +255,11 @@ footer{
     overflow-wrap:anywhere;
     text-align:center;
   }
-  #common{padding-top:22px}
+  #common{padding-top:14px}
 
   .group{padding:66px 0 27px}
   .gold-rule{margin-bottom:35px}
+  #common .gold-rule{margin-bottom:34px}
   .article{padding:0 23px;margin-bottom:34px}
   .article h3{font-size:17px;margin-top:35px}
   .article p{line-height:2.05}
@@ -319,13 +325,14 @@ footer{
   <div class="wrap">
     <h1>アートメイクの重要事項</h1>
     <div class="eyebrow">IMPORTANT MATTERS</div>
-    <p class="intro">
-      <span class="sent"><span class="ph">アートメイクは医療行為です。</span></span>
-      <span class="sent"><span class="ph">安心して施術を受けていただくために、</span><span class="ph">リスクや注意点、</span><span class="ph">施術後のお手入れを</span><span class="ph">まとめています。</span></span>
-      <span class="sent"><span class="ph">共通重要事項は</span><span class="ph"><strong>全員の方が、</strong></span><span class="ph">ご希望の施術の項目とあわせて、</span><span class="ph">ご予約の前に</span><span class="ph">必ずお読みください。</span></span>
-    </p>
   </div>
 </header>
+<div class="lead wrap">
+  <p class="intro">
+    <span class="sent"><span class="ph">安心して施術を受けていただくために、</span><span class="ph">リスクや注意点、</span><span class="ph">施術後のお手入れを</span><span class="ph">まとめています。</span></span>
+    <span class="sent"><span class="ph">共通重要事項は</span><span class="ph"><strong>全員の方が、</strong></span><span class="ph">ご希望の施術の項目とあわせて、</span><span class="ph">ご予約の前に</span><span class="ph">必ずお読みください。</span></span>
+  </p>
+</div>
 <main>
   <section class="contents wrap" id="contents">
     <div class="contents-box">
