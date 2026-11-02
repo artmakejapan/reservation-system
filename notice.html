@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>アートメイクの重要事項｜ARTMAKE</title>
+<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>アートメイクの重要事項｜ARTMAKE Manami</title>
 <style>
-/* =========================================================
-   ARTMAKE Manami / アートメイクの重要事項
-   色
-     --gold         #C99732  ゴールド（見出し・ボタン）
-     --gold-dark    #A87923  ゴールド（ボタンを押したとき）
-     --red          #B85C5C  赤（ご予約前の案内・共通重要事項）
-     --red-dark     #A64B4B  赤（共通重要事項ボタン）
-     --red-darker   #913D3D  赤（共通重要事項ボタンを押したとき）
-     --ink          #202020  本文の文字色
-     --line         #F1F2F4  罫線
-   ========================================================= */
 :root{
   --gold:#BD9D5F;
   --red:#B85C5C;
@@ -39,7 +28,6 @@ body{
 a{color:inherit}
 .wrap{width:min(880px,calc(100% - 44px));margin:auto}
 
-/* ---------- ファーストビュー ---------- */
 .top{position:relative;isolation:isolate;overflow:hidden;background:#fff}
 .hero{
   position:relative;
@@ -77,7 +65,6 @@ a{color:inherit}
 .hero .intro{color:var(--red-dark);font-size:13px;line-height:2.4;display:table;margin:0 auto;text-align:left}
 .hero .hero-note{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:var(--ink);font-size:13px;line-height:2.2;margin:36px 0 0;text-align:center}
 
-/* 画像の下の白いブロック（導入文） */
 .lead{position:relative;z-index:1;text-align:left;padding:0 0 28px}
 .lead .intro{color:var(--ink);font-size:13px;line-height:2.4;display:table;margin:0 auto;text-align:center}
 .lead .intro .ph{display:inline-block}
@@ -85,7 +72,6 @@ a{color:inherit}
 .lead .intro .sent + .sent{margin-top:1.6em}
 .lead .intro strong{font-weight:600;color:var(--red)}
 
-/* ---------- 目次 ---------- */
 .contents{padding:13px 0 0;text-align:center}
 .contents-box{
   max-width:740px;
@@ -152,7 +138,6 @@ a{color:inherit}
   background:var(--red-darker);border-color:var(--red-darker);
 }
 
-/* ---------- 各セクション ---------- */
 .group{padding:87px 0 37px;border-top:1px solid var(--line);background:#fff;scroll-margin-top:12px}
 #common{padding-top:14px}
 #common>h2{color:var(--red)}
@@ -170,7 +155,6 @@ a{color:inherit}
 .gold-rule{width:38px;height:1px;background:var(--gold);margin:0 auto 51px}
 #common .gold-rule{margin-bottom:34px}
 
-/* ---------- 本文 ---------- */
 .article{max-width:740px;margin:0 auto 41px;padding:0 22px}
 .article h3{
   font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
@@ -184,7 +168,6 @@ a{color:inherit}
 }
 .article .procedure-subhead:first-of-type{margin-top:19px}
 .article p{margin:0 0 12px;line-height:2.12;overflow-wrap:anywhere}
-/* ダウンタイム画像：スマホ対応 */
 .downtime-image {
   display: block;
   width: 100%;
@@ -220,7 +203,6 @@ footer{
   background:#fff;
 }
 
-/* ---------- スマートフォン ---------- */
 @media(max-width:600px){
   .wrap{width:calc(100% - 28px)}
   body{font-size:16px}
@@ -275,7 +257,6 @@ footer{
   .navbtn{min-height:76px;font-size:13px}
 }
 
-/* ---------- 読みやすさの調整 ---------- */
 .article .item:not(.note):not(.plain)::before{
   content:"";display:inline-block;width:.45em;height:.45em;
   border:1px solid var(--gold);
@@ -319,13 +300,26 @@ footer{
 }
 </style>
 <style>
-/* 背景画像データ（長いので最後にまとめています。触らなくて大丈夫です） */
 .top::before{
   background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjY1MCIgdmlld0JveD0iMCAwIDE0NDAgNjUwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJzaWxrIiB4MT0iMCIgeTE9IjAiIHgyPSIwLjIiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9Ii4yOCIgc3RvcC1jb2xvcj0iI2YxZjFmMSIvPjxzdG9wIG9mZnNldD0iLjQ3IiBzdG9wLWNvbG9yPSIjZDlkYWRkIi8+PHN0b3Agb2Zmc2V0PSIuNTgiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9Ii43OCIgc3RvcC1jb2xvcj0iI2VkZWRlZSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJmb2xkIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmZmIi8+PHN0b3Agb2Zmc2V0PSIuMzYiIHN0b3AtY29sb3I9IiNlNGU1ZTciLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iI2ZmZiIvPjxzdG9wIG9mZnNldD0iLjgyIiBzdG9wLWNvbG9yPSIjZjBmMGYxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjE0NDAiIGhlaWdodD0iNjUwIiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTS0xMDAgMTQ1IEMxNTAgLTIwIDM3MCAyNTAgNjY1IDEyMCBTMTE3MCAtMTAgMTU1MCAxMzUgTDE1NTAgNDA1IEMxMTkwIDI1MCAxMDEwIDQ1MCA3MjUgMzMwIFMyMTUgMjc1IC0xMDAgNDIwWiIgZmlsbD0idXJsKCNzaWxrKSIgb3BhY2l0eT0iLjYyIi8+PHBhdGggZD0iTS05MCAzMjAgQzIxMCAxMzUgMzYwIDQxMCA3MTAgMjgwIFMxMTkwIDIxMCAxNTQwIDM1MCBMMTU0MCA2MTAgQzEyMjAgNDIwIDk4MCA1ODUgNjc1IDQ4NSBTMTgwIDQ1NSAtOTAgNTkwWiIgZmlsbD0idXJsKCNmb2xkKSIgb3BhY2l0eT0iLjUyIi8+PHBhdGggZD0iTS03MCAxNjUgQzI0MCAxMCAzODUgMjQ1IDY3MCAxNDUgUzExMjAgMjAgMTUwMCAxODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxOCIgb3BhY2l0eT0iLjc4Ii8+PHBhdGggZD0iTS03MCAzOTAgQzIzMCAyMzUgNDMwIDQ3MCA3NDAgMzUwIFMxMTkwIDI3NSAxNTIwIDQxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEzIiBvcGFjaXR5PSIuNjgiLz48L3N2Zz4=");
+}
+/* スマホ：背景を拡大して「必ずお読みください」の下まで模様が届くように */
+@media(max-width:600px){
+  .top::before{
+    background-size:auto 175%;
+    background-position:50% 40%;
+    background-repeat:no-repeat;
+  }
+}
+/* トップバー */
+.topbar{background:var(--gold);height:36px}
+@media(max-width:600px){
+  .topbar{height:28px}
 }
 </style>
 </head>
 <body>
+<div class="topbar"></div>
 <div class="top">
 <header class="hero">
   <div class="wrap">
@@ -695,7 +689,7 @@ footer{
     ご不明な点がございましたら、お気軽にご相談ください。<br>以上の内容をご理解・ご了承のうえ、<br>ご予約をお願いいたします。
   </div>
 </main>
-<footer>ARTMAKE MANAMI
+<footer>ARTMAKE Manami
 </footer>
 <script>document.addEventListener('DOMContentLoaded',function(){
   const buttons=Array.from(document.querySelectorAll('.navbtn'));
