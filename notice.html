@@ -76,12 +76,16 @@ a{color:inherit}
   margin:0 0 12px;
 }
 .eyebrow{color:var(--ink);font:15px Georgia,serif;letter-spacing:.24em;margin:0}
+.hero-kicker{font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;color:var(--ink);font-size:15px;letter-spacing:.18em;line-height:1.6;margin:0 0 40px}
 
+.hero-lead{color:var(--ink);font-size:13px;line-height:2.2;margin:40px 0 0}
+.hero-lead .ph{display:inline-block}
 /* 画像の下の白いブロック（導入文） */
-.lead{text-align:left;padding:28px 0 6px;background:#fff}
+.lead{text-align:center;padding:28px 0 6px;background:#fff}
 .lead .intro{color:var(--ink);font-size:13px;line-height:2.4;max-width:740px;margin:0 auto}
 .lead .intro .ph{display:inline-block}
 .lead .intro .sent{display:block}
+.lead .intro .sent + .sent{margin-top:1.6em}
 .lead .intro strong{font-weight:600;color:var(--red)}
 
 /* ---------- 目次 ---------- */
@@ -227,6 +231,8 @@ footer{
   .hero .brand{font-size:11px;line-height:1.5}
   .hero h1{font-size:clamp(25px,6.4vw,34px);line-height:1.45;margin:0 0 17px}
   .hero .eyebrow{font-size:13px;line-height:1.5;margin-bottom:0}
+  .hero-kicker{font-size:13px;margin-bottom:30px}
+  .hero-lead{font-size:13px;line-height:1.8;margin-top:30px}
   .lead{padding-top:20px}
   .lead .intro{font-size:13px;line-height:1.65}
 
@@ -323,14 +329,16 @@ footer{
 <body>
 <header class="hero">
   <div class="wrap">
+    <p class="hero-kicker">アートメイクを受けられる方へ</p>
     <h1>アートメイクの重要事項</h1>
     <div class="eyebrow">IMPORTANT MATTERS</div>
+    <p class="hero-lead"><span class="ph">安心して施術を受けていただくために、</span><span class="ph">リスクや注意点、</span><span class="ph">施術後のお手入れを</span><span class="ph">まとめています。</span></p>
   </div>
 </header>
 <div class="lead wrap">
   <p class="intro">
-    <span class="sent"><span class="ph">安心して施術を受けていただくために、</span><span class="ph">リスクや注意点、</span><span class="ph">施術後のお手入れを</span><span class="ph">まとめています。</span></span>
-    <span class="sent"><span class="ph">共通重要事項は</span><span class="ph"><strong>全員の方が、</strong></span><span class="ph">ご希望の施術の項目とあわせて、</span><span class="ph">ご予約の前に</span><span class="ph">必ずお読みください。</span></span>
+    
+    <span class="sent"><span class="ph">「共通重要事項」は</span><span class="ph"><strong>全員の方が対象です。</strong></span><br><span class="ph">ご希望の施術の項目とあわせて、</span><br><span class="ph">ご予約の前に</span><span class="ph">必ずお読みください。</span></span>
   </p>
 </div>
 <main>
