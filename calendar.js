@@ -42,6 +42,12 @@ function updateCalendarContactButtons() {
         return;
     }
 
+    // 再診では電話・LINE固定ボタンを表示しない
+    if (!reservationData || reservationData.visit !== "初診") {
+        contactButtons.style.display = "none";
+        return;
+    }
+
     // カレンダーが非表示ならボタンも非表示
     if (getComputedStyle(calendarSection).display === "none") {
         contactButtons.style.display = "none";
