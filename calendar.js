@@ -496,8 +496,17 @@ function generateCalendar(data) {
 
 function drawCalendar(date, data) {
 
-    // 月を移動・再描画したときに前回の選択が残らないようにする
-    selectedTime = null;
+    // 月を移動・再描画したときに前回の選択をリセット
+       selectedTime = null;
+       selectedDate = null;
+       calendarDateSelected = false;
+
+    // 電話・LINE固定ボタンを非表示にする
+      const contactButtons = document.getElementById("calendarContactButtons");
+
+      if (contactButtons) {
+          contactButtons.style.display = "none";
+    }
 
     // 日付を選び直したら、お客様情報・確認画面は閉じる
     const customerSection = document.getElementById("customerSection");
@@ -701,6 +710,45 @@ function drawCalendar(date, data) {
 
     });
 
+        updateMonthButtons();
+
+}
+
+// =========================
+// 月送りボタンの表示制御
+// =========================
+
+function updateMonthButtons() {
+
+    const prevButton = document.getElementById("prevMonth");
+    const nextButton = document.getElementById("nextMonth");
+
+    if (!prevButton || !nextButton) return;
+
+    // 前月へ移動できるか
+    const canGoPrev =
+        currentDate.getFullYear() > baseDate.getFullYear() ||
+        (
+            currentDate.getFullYear() === baseDate.getFullYear() &&
+            currentDate.getMonth() > baseDate.getMonth()
+        );
+
+    // 翌月へ移動できるか（現在の設定では翌月まで）
+    const limit = new Date(
+        baseDate.getFullYear(),
+        baseDate.getMonth() + 1,
+        1
+    );
+
+    const canGoNext =
+        currentDate.getFullYear() < limit.getFullYear() ||
+        (
+            currentDate.getFullYear() === limit.getFullYear() &&
+            currentDate.getMonth() < limit.getMonth()
+        );
+
+    prevButton.style.visibility = canGoPrev ? "visible" : "hidden";
+    nextButton.style.visibility = canGoNext ? "visible" : "hidden";
 }
 
 // =========================
