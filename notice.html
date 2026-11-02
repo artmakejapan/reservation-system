@@ -303,18 +303,12 @@ footer{
 .top::before{
   background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjY1MCIgdmlld0JveD0iMCAwIDE0NDAgNjUwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJzaWxrIiB4MT0iMCIgeTE9IjAiIHgyPSIwLjIiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9Ii4yOCIgc3RvcC1jb2xvcj0iI2YxZjFmMSIvPjxzdG9wIG9mZnNldD0iLjQ3IiBzdG9wLWNvbG9yPSIjZDlkYWRkIi8+PHN0b3Agb2Zmc2V0PSIuNTgiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9Ii43OCIgc3RvcC1jb2xvcj0iI2VkZWRlZSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJmb2xkIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmZmIi8+PHN0b3Agb2Zmc2V0PSIuMzYiIHN0b3AtY29sb3I9IiNlNGU1ZTciLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iI2ZmZiIvPjxzdG9wIG9mZnNldD0iLjgyIiBzdG9wLWNvbG9yPSIjZjBmMGYxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjE0NDAiIGhlaWdodD0iNjUwIiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTS0xMDAgMTQ1IEMxNTAgLTIwIDM3MCAyNTAgNjY1IDEyMCBTMTE3MCAtMTAgMTU1MCAxMzUgTDE1NTAgNDA1IEMxMTkwIDI1MCAxMDEwIDQ1MCA3MjUgMzMwIFMyMTUgMjc1IC0xMDAgNDIwWiIgZmlsbD0idXJsKCNzaWxrKSIgb3BhY2l0eT0iLjYyIi8+PHBhdGggZD0iTS05MCAzMjAgQzIxMCAxMzUgMzYwIDQxMCA3MTAgMjgwIFMxMTkwIDIxMCAxNTQwIDM1MCBMMTU0MCA2MTAgQzEyMjAgNDIwIDk4MCA1ODUgNjc1IDQ4NSBTMTgwIDQ1NSAtOTAgNTkwWiIgZmlsbD0idXJsKCNmb2xkKSIgb3BhY2l0eT0iLjUyIi8+PHBhdGggZD0iTS03MCAxNjUgQzI0MCAxMCAzODUgMjQ1IDY3MCAxNDUgUzExMjAgMjAgMTUwMCAxODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxOCIgb3BhY2l0eT0iLjc4Ii8+PHBhdGggZD0iTS03MCAzOTAgQzIzMCAyMzUgNDMwIDQ3MCA3NDAgMzUwIFMxMTkwIDI3NSAxNTIwIDQxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEzIiBvcGFjaXR5PSIuNjgiLz48L3N2Zz4=");
 }
-/* スマホ：背景を拡大して「必ずお読みください」の下まで模様が届くように */
-@media(max-width:600px){
-  .top::before{
-    background-size:auto 175%;
-    background-position:50% 40%;
-    background-repeat:no-repeat;
-  }
-}
 /* トップバー */
-.topbar{background:var(--gold);height:36px}
+.topbar{background:var(--gold);height:48px}
+.hero{padding:74px 0}
 @media(max-width:600px){
-  .topbar{height:28px}
+  .topbar{height:38px}
+  .hero{padding:57px 0}
 }
 </style>
 </head>
@@ -327,12 +321,12 @@ footer{
     <div class="eyebrow">IMPORTANT MATTERS</div>
   </div>
 </header>
+</div>
 <div class="lead wrap">
   <p class="intro">
     
     <span class="sent"><span class="ph">「共通重要事項」は</span><span class="ph"><strong>全員の方が対象です。</strong></span><br><span class="ph">ご希望の施術の項目とあわせて、</span><br><span class="ph">ご予約の前に</span><span class="ph">必ずお読みください。</span></span>
   </p>
-</div>
 </div>
 <main>
   <section class="contents wrap" id="contents">
