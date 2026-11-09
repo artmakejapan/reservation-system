@@ -56,8 +56,22 @@ body{
   color:var(--text);
 }
 
-.brand-bottom{
-  margin:40px 0 0;
+/* 下の帯の中のサロン名 */
+.band-footer{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.brand-footer{
+  margin:0;
+  padding-left:.32em;
+  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  font-size:12px;
+  font-weight:500;
+  line-height:1;
+  letter-spacing:.32em;
+  color:#fff;
 }
 
 /* 全体の幅・見出し */
@@ -230,10 +244,10 @@ details[open] .answer{
 .faq-ending{
   margin:28px 0 0;
   text-align:center;
-  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
   font-size:min(14px,calc((100vw - 40px)/28));
   line-height:2.3;
-  color:var(--red);
+  color:var(--text);
   white-space:nowrap;
 }
 
@@ -474,11 +488,11 @@ details[open] .answer{
 
   <p class="faq-ending">ご不明な点がございましたら、お気軽にご相談ください。</p>
 
-  <p class="brand brand-bottom">ARTMAKE MANAMI</p>
-
 </section>
 
-<div class="band" aria-hidden="true"></div>
+<div class="band band-footer">
+  <p class="brand-footer">ARTMAKE MANAMI</p>
+</div>
 
 <script>
 /* 質問を1つ開くと、ほかの質問は自動で閉じます */
